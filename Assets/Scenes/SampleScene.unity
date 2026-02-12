@@ -323,7 +323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2297840510793569743}
-  offset: {x: 0, y: 3.5, z: -5.5}
+  offset: {x: 0, y: 5, z: -5.5}
+  cameraSensitivity: 1
 --- !u!1 &2073323967
 GameObject:
   m_ObjectHideFlags: 0
