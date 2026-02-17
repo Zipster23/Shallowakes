@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // move the player based on input
         movement.Move(input.MovementInput);
     }
 }
