@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float turnSpeed = 10f;
 
+    public float CurrentSpeed { get; private set; }
+
     private Transform camTransform;
 
     private void Awake()
@@ -36,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
         // consolidate direcetion + input into one vector
         Vector3 moveDirection = (camForward * forwardInput) + (camRight * horizontalInput);
+        
+        CurrentSpeed = moveDirection.magnitude;
 
         // if the player has a move direction (is pressing the movement keys)
         if (moveDirection.magnitude > 0.1f)
