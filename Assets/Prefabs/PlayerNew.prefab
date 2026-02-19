@@ -1398,10 +1398,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.075
-  m_Height: 0.65
+  m_Radius: 0.060582466
+  m_Height: 0.6185965
   m_Direction: 1
-  m_Center: {x: 0, y: -0.04, z: -0.03}
+  m_Center: {x: 3.9821854e-10, y: 0.032177735, z: -0.0058644065}
 --- !u!114 &1968148702746168617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2074,7 @@ Transform:
   - {fileID: 2565963001834478732}
   - {fileID: 1657607528069499092}
   - {fileID: 2842308920693649567}
+  - {fileID: 4669907717142723898}
   m_Father: {fileID: 4608807101369128729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8086117744650710808
@@ -2171,6 +2172,126 @@ Transform:
   m_Children:
   - {fileID: 1998599526396923176}
   m_Father: {fileID: 6967682571474628704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8267647281920824696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6091847858714389838}
+  - component: {fileID: 7702422007305973424}
+  - component: {fileID: 2823709987790226355}
+  m_Layer: 0
+  m_Name: Katana
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6091847858714389838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267647281920824696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.25521573, y: -0.75940424, z: 0.4939276, w: -0.33794332}
+  m_LocalPosition: {x: -0.0010879998, y: 0.00016600036, z: 0.00009099973}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4669907717142723898}
+  m_LocalEulerAnglesHint: {x: 35.288, y: -249.66501, z: -62.112}
+--- !u!33 &7702422007305973424
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267647281920824696}
+  m_Mesh: {fileID: -5013318801414598979, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+--- !u!23 &2823709987790226355
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267647281920824696}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -7098651001535982362, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  - {fileID: -8972159664241765242, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  - {fileID: 8614846732142236234, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  - {fileID: -862707463936585597, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  - {fileID: 1746921823764811932, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  - {fileID: 5338856913226042251, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8411373630838178468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4669907717142723898}
+  m_Layer: 0
+  m_Name: KatanaCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4669907717142723898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8411373630838178468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6091847858714389838}
+  m_Father: {fileID: 8976182386652955014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8445014647067698871
 GameObject:

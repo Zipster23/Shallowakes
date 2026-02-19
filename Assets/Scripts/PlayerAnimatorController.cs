@@ -23,6 +23,11 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             animator.SetTrigger("Attack");
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            animator.SetTrigger("ThrustAttack");
+        }
     }
 }
 
