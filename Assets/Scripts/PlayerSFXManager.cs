@@ -6,11 +6,6 @@ public class PlayerSFXManager : MonoBehaviour
 {
     [SerializeField] private AudioSource katanaSFX;
 
-    private void Start()
-    {
-        katanaSFX = GameObject.FindGameObjectWithTag("Weapon").GetComponent<AudioSource>();
-    }
-
     public void playKatanaSFX()
     {
         katanaSFX.Play();
