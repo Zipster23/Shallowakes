@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<PlayerInputHandler>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // move the player based on input
         movement.Move(input.MovementInput);

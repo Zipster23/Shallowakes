@@ -11,50 +11,41 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform camTransform;
 
+    private Rigidbody rb;
+
     private void Awake()
     {
         camTransform = Camera.main.transform;
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Move(Vector2 input)
     {
-        // if theres no camera don't move
         if (camTransform == null) return;
 
         float horizontalInput = input.x;
         float forwardInput = input.y;
 
-        // references to camera direction
         Vector3 camForward = camTransform.forward;
         Vector3 camRight = camTransform.right;
 
-        // Used to prevent the player from flying by looking up
         camForward.y = 0;
         camRight.y = 0;
 
-        // prevent the player from moving faster diagonally
         camForward.Normalize();
         camRight.Normalize();
 
-        // consolidate direcetion + input into one vector
         Vector3 moveDirection = (camForward * forwardInput) + (camRight * horizontalInput);
-        
+
         CurrentSpeed = moveDirection.magnitude;
 
-        // if the player has a move direction (is pressing the movement keys)
         if (moveDirection.magnitude > 0.1f)
         {
-            // transform the player based on move direction and relative to the world, not the players transform
-            // this allows the player to mvoe with respect to camera
-            // THIS IS THE LINE TO CHANGE TO Rigidbody.MovePosition to prevent jitters.
-            // BUT Antonio figure this part out please.
-            transform.Translate(moveDirection.normalized * speed * Time.deltaTime, Space.World);
+            Vector3 targetPosition = rb.position + moveDirection.normalized * speed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
 
-            // Gets the direction in which the player is moving
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-
-            // Rotates player in that direction
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime));
         }
     }
 }
