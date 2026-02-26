@@ -6,6 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float turnSpeed = 10f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private LayerMask groundLayer; // Set this in Inspector
+    [SerializeField] private Transform groundCheck; // Create an empty child object at player's feet
+
+    private int jumpsRemaining;
+    private int maxJumps = 2; // Allow for double jump
+    private bool isGrounded;
 
     public float CurrentSpeed { get; private set; }
 
@@ -17,6 +24,29 @@ public class PlayerMovement : MonoBehaviour
     {
         camTransform = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        // Check if we are touching the ground
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.25f, groundLayer);
+
+        if (isGrounded)
+        {
+            jumpsRemaining = maxJumps;
+        }
+    }
+
+    public void Jump()
+    {
+        if (jumpsRemaining > 0)
+        {
+            // Reset vertical velocity so the second jump always feels consistent
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpsRemaining--;
+        }
     }
 
     public void Move(Vector2 input)

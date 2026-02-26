@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool attackInput;
     public bool thrustInput;
     public bool parryInput;
+    public bool jumpInput;
 
     private void Update()
     {
@@ -22,6 +23,9 @@ public class PlayerInputHandler : MonoBehaviour
         thrustInput = Input.GetKeyDown(KeyCode.Mouse1);
 
         parryInput = Input.GetKeyDown(KeyCode.F);
+
+        // Jump Input
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
     }
 }
 

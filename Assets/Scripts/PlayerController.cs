@@ -21,7 +21,13 @@ public class PlayerController : MonoBehaviour
     {
         // move the player based on input
         movement.Move(input.MovementInput);
-        if(input.MovementInput != Vector2.zero)
+
+        if (input.jumpInput)
+        {
+            movement.Jump();
+        }
+
+        if (input.MovementInput != Vector2.zero)
         {
             controller.PlayMovementAnimation(true);
         } else

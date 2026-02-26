@@ -15,7 +15,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
     }
 
-
+    // Add a jump animation
     
     public void PlayAttackAnimation()
     {
