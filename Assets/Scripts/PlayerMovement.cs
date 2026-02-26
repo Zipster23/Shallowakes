@@ -41,11 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.magnitude > 0.1f)
         {
-            Vector3 targetPosition = rb.position + moveDirection.normalized * speed * Time.fixedDeltaTime;
+            Vector3 targetPosition = rb.position + moveDirection.normalized * speed * Time.deltaTime;
             rb.MovePosition(targetPosition);
 
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime));
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
         }
     }
 }
