@@ -21,8 +21,15 @@ public class PlayerController : MonoBehaviour
     {
         // move the player based on input
         movement.Move(input.MovementInput);
+        if(input.MovementInput != Vector2.zero)
+        {
+            controller.PlayMovementAnimation(true);
+        } else
+        {
+            controller.PlayMovementAnimation(false);
+        }
 
-        if(input.parryInput)
+        if (input.parryInput)
         {
             controller.PlayParryAnimation();
         }

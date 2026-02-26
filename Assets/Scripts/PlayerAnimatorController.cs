@@ -9,6 +9,13 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
+    public void PlayMovementAnimation(bool isMoving)
+    {
+        animator.SetBool("isMoving", isMoving);
+    }
+
+
     
     public void PlayAttackAnimation()
     {
