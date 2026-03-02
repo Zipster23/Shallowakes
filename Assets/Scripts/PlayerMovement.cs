@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
             // Reset vertical velocity so the second jump always feels consistent
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-            if (jumpsRemaining < maxJumps - 1)
+            if (jumpsRemaining == maxJumps - 1)
             {
                 rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
             }
