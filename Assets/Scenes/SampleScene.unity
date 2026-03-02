@@ -1296,6 +1296,22 @@ PrefabInstance:
       propertyPath: swordTipTrail
       value: 
       objectReference: {fileID: 2108811440}
+    - target: {fileID: 1149432906299964578, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: katanaAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: d6464e2d13aedc44386a0eb4b8feea86, type: 3}
+    - target: {fileID: 1149432906299964578, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: katanaDeflectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 9731eb91e3139124a8ba8b3a539ecf07, type: 3}
+    - target: {fileID: 1149432906299964578, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: katanaDeflectVolume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294388620662280692, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4344144616288427628, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_CollisionDetection
       value: 1

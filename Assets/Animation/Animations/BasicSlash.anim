@@ -133511,7 +133511,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.5
-    functionName: playKatanaSFX
+    functionName: playKatanaAttackSFX
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
