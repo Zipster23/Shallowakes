@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private PlayerInputHandler input;
     private PlayerAnimatorController controller;
 
+    public Transform attackPoint;
+
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -42,14 +45,32 @@ public class PlayerController : MonoBehaviour
 
         if (input.attackInput)
         {
-            controller.PlayAttackAnimation();
+            controller.PlayAttackAnimation(); 
+            Attack();
         }
         else if(input.thrustInput)
         {
             controller.PlayThrustAnimation();
+            Attack();
         }
 
     }
+
+
+
+
+    private void Attack()
+    {
+
+        // Detect all enemies in range of the attack
+
+
+        // Damage them
+
+    }
+
+
+
 }
 
 
