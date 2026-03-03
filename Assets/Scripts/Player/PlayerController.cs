@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour
         // Damage them
         foreach(Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
+            Debug.Log("Hit " + gameObject.name);
         }
     }
 
