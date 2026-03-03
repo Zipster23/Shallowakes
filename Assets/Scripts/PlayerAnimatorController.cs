@@ -4,30 +4,32 @@ using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
     Animator animator;
-    PlayerMovement movement;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        movement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
+    public void PlayMovementAnimation(bool isMoving)
     {
-        // Update movement animation
-        float speed = movement.CurrentSpeed;
-        animator.SetFloat("Speed", speed);
+        animator.SetBool("isMoving", isMoving);
+    }
 
-        // Attack input
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            animator.SetTrigger("Attack");
-        }
+    // Add a jump animation
+    
+    public void PlayAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            animator.SetTrigger("ThrustAttack");
-        }
+    public void PlayThrustAnimation()
+    {
+        animator.SetTrigger("Thrust");
+    }
+
+    public void PlayParryAnimation()
+    {
+        animator.SetTrigger("Parry");
     }
 }
 

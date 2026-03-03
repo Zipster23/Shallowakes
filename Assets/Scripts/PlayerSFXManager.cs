@@ -5,9 +5,17 @@ using UnityEngine;
 public class PlayerSFXManager : MonoBehaviour
 {
     [SerializeField] private AudioSource katanaSFX;
+    [SerializeField] private AudioClip katanaAttackSFX;
+    [SerializeField] private AudioClip katanaDeflectSFX;
+    [SerializeField] private float katanaDeflectVolume = 0.7f;
 
-    public void playKatanaSFX()
+    public void playKatanaAttackSFX()
     {
-        katanaSFX.Play();
+        katanaSFX.PlayOneShot(katanaAttackSFX);
+    }
+
+    public void playKatanaDeflectSFX()
+    {
+        katanaSFX.PlayOneShot(katanaDeflectSFX, katanaDeflectVolume);
     }
 }
