@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if we are touching the ground
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.25f, groundLayer);
-
+        
         if (isGrounded)
         {
             jumpsRemaining = maxJumps;

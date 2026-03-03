@@ -31,5 +31,6 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetTrigger("Parry");
     }
+    
 }
 

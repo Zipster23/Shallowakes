@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimatorController controller;
 
     public Transform attackPoint;
+    public LayerMask enemyLayers;
+
+    public float attackRange = 0.5f;
+    public int attackDamage = 25;
+
 
 
     private void Awake()
@@ -20,7 +25,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<PlayerAnimatorController>();
     }
 
-    private void Update()
+    public void Update()
     {
         // move the player based on input
         movement.Move(input.MovementInput);
@@ -58,16 +63,30 @@ public class PlayerController : MonoBehaviour
 
 
 
-
+    // Method to detect collisions
     private void Attack()
     {
-
         // Detect all enemies in range of the attack
-
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
         // Damage them
-
+        foreach(Collider enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        }
     }
+
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+
 
 
 

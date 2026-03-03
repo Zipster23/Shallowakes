@@ -920,7 +920,7 @@ Transform:
   m_GameObject: {fileID: 3920259952494337271}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.024, z: 0.125}
+  m_LocalPosition: {x: 0, y: 0.024, z: 0.248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -951,7 +951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4089063432137828746}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.27009305, y: -0.00000003313379, z: -0.0000000092946495, w: 0.96283424}
+  m_LocalRotation: {x: -0.27009305, y: 0.00000003313378, z: 0.000000009294646, w: 0.96283424}
   m_LocalPosition: {x: 0, y: -0.0000004470348, z: -0.0000010728836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1976,6 +1976,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9399d25ad2acf4bbaf39977acc5442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1307416966856408297}
+  attackRange: 2.3
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!95 &6392412578872829650
 Animator:
   serializedVersion: 5
@@ -2022,7 +2027,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &2760438854505889007
 MonoBehaviour:
@@ -3147,7 +3152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8229543696574638540}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2975588, y: -0.00000001642699, z: -0.0000000051199103, w: 0.9547035}
+  m_LocalRotation: {x: -0.2975588, y: 0.000000016426995, z: 0.000000005119912, w: 0.9547035}
   m_LocalPosition: {x: 0, y: -0.0000004470348, z: -0.0000010728836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
