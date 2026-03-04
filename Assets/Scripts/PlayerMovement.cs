@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
+    [SerializeField] public float speed = 10f;
+    [SerializeField] public float sprintScalar = 1.5f;
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float jumpForce = 350f;
     [SerializeField] private float doubleJumpForce = 500f;
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Move(Vector2 input)
+    public void Move(Vector2 input, bool isSprinting)
     {
         if (camTransform == null) return;
 
@@ -82,7 +83,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.magnitude > 0.1f)
         {
-            Vector3 targetPosition = rb.position + moveDirection.normalized * speed * Time.deltaTime;
+            Vector3 targetPosition;
+            
+            targetPosition = moveDirection.normalized * speed * Time.deltaTime;
+
+            if (isSprinting) 
+            {
+                targetPosition *= sprintScalar;
+            }
+            
+            targetPosition += rb.position;
+
             rb.MovePosition(targetPosition);
 
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);

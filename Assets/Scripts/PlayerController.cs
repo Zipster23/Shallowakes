@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // move the player based on input
-        movement.Move(input.MovementInput);
+        movement.Move(input.MovementInput, input.sprintInput);
 
         if (input.jumpInput)
         {
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
         if (input.MovementInput != Vector2.zero)
         {
-            controller.PlayMovementAnimation(true);
+            controller.PlayMovementAnimation(true, input.sprintInput);
         } else
         {
             controller.PlayMovementAnimation(false);
