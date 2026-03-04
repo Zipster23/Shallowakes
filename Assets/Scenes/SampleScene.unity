@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.29755884, y: 0.000000032853986, z: 0.000000010239822, w: 0.9547035}
+  m_LocalRotation: {x: -0.29755884, y: -0.000000032853983, z: -0.000000010239821, w: 0.9547035}
   m_LocalPosition: {x: 0, y: 0.9499998, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -562,18 +562,22 @@ PrefabInstance:
     - target: {fileID: 348822704326651395, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: hitEffect
       value: 
-      objectReference: {fileID: 198090597041805642, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
+      objectReference: {fileID: 3642160410948286680, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
+    - target: {fileID: 1149432906299964578, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: katanaHitSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: c2c9dbf4287e31949b2a2e19af5566a4, type: 3}
     - target: {fileID: 1307416966856408297, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.248
       objectReference: {fileID: 0}
     - target: {fileID: 3263354816890556078, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000003313378
+      value: -0.00000003313379
       objectReference: {fileID: 0}
     - target: {fileID: 3263354816890556078, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000009294646
+      value: -0.0000000092946495
       objectReference: {fileID: 0}
     - target: {fileID: 4344144616288427628, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_Constraints
@@ -593,11 +597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6066588534386876833, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016426995
+      value: -0.00000001642699
       objectReference: {fileID: 0}
     - target: {fileID: 6066588534386876833, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000005119912
+      value: -0.0000000051199103
       objectReference: {fileID: 0}
     - target: {fileID: 6275844723260860746, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_Name
