@@ -29,6 +29,7 @@ public class PlayerVFXManager : MonoBehaviour
 
     public void PlayHitEffect(Vector3 position)
     {
-        Instantiate(hitEffect, position, Quaternion.identity);
+        ParticleSystem effect = Instantiate(hitEffect, position, Quaternion.identity);
+        Destroy(effect.gameObject, effect.main.duration);
     }
 }
