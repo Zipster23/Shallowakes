@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -10,11 +11,18 @@ public class PlayerController : MonoBehaviour
     private PlayerInputHandler input;
     private PlayerAnimatorController controller;
 
+    // Collisions
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
     public float attackRange = 0.5f;
     public int attackDamage = 25;
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
+
+    // Collision VFX and SFX
+    private PlayerVFXManager vfx;
+    private PlayerSFXManager sfx;
 
 
 
@@ -23,6 +31,9 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         input = GetComponent<PlayerInputHandler>();
         controller = GetComponent<PlayerAnimatorController>();
+
+        vfx = GetComponent<PlayerVFXManager>();
+        sfx = GetComponent<PlayerSFXManager>();
     }
 
     public void Update()
@@ -48,15 +59,18 @@ public class PlayerController : MonoBehaviour
             controller.PlayParryAnimation();
         }
 
-        if (input.attackInput)
+        if(Time.time >= nextAttackTime)
         {
-            controller.PlayAttackAnimation(); 
-            Attack();
-        }
-        else if(input.thrustInput)
-        {
-            controller.PlayThrustAnimation();
-            Attack();
+            if (input.attackInput)
+            {
+                controller.PlayAttackAnimation(); 
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            else if(input.thrustInput)
+            {
+                controller.PlayThrustAnimation();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
 
     }
@@ -64,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
 
     // Method to detect collisions
-    private void Attack()
+    public void Attack()
     {
         // Detect all enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -73,19 +87,13 @@ public class PlayerController : MonoBehaviour
         foreach(Collider enemy in hitEnemies)
         {
             enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
-            Debug.Log("Hit " + gameObject.name);
+            vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
+            sfx.playKatanaHitSFX();
+            Debug.Log("Hit " + enemy.name);
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        if(attackPoint == null)
-        {
-            return;
-        }
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
 
 
 

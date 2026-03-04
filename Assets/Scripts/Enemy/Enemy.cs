@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
+    public Animator enemyAnimator;
     public int maxHealth = 100;
     private int currentHealth;
 
@@ -18,9 +18,16 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
 
+        // Make it so that the enemy can't be hit when dead
+        if(currentHealth <= 0)
+        {
+            return;
+        }
+
         currentHealth -= damage;
 
         // Play hurt animation
+        enemyAnimator.SetTrigger("Hurt");
 
         if(currentHealth <= 0)
         {
@@ -32,9 +39,10 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         // Die animation
+        enemyAnimator.SetBool("IsDead", true);
 
-
-        // Disable enemy
+        // Disable enemy 
+        this.enabled = false;
     }
 
 }
