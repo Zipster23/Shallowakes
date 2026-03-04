@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
             controller.PlayMovementAnimation(true, input.sprintInput);
         } else
         {
-            controller.PlayMovementAnimation(false);
+            controller.PlayMovementAnimation(false, false);
         }
 
         if (input.parryInput)

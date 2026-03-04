@@ -12,14 +12,14 @@ public class PlayerAnimatorController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
     }
 
-    public void PlayMovementAnimation(bool isMoving, bool isSprinting = false)
+    public void PlayMovementAnimation(bool isMoving, bool isSprinting)
     {
         animator.SetBool("isMoving", isMoving);
         
         if (isSprinting) {
-            animator.SetFloat("Sprint", movement.sprintScalar);
+            animator.SetFloat("SprintScalar", movement.sprintScalar);
         } else {
-            animator.SetFloat("Sprint", 1.0f);
+            animator.SetFloat("SprintScalar", 1.0f);
         }
         
     }
