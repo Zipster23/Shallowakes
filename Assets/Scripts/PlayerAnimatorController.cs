@@ -17,7 +17,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
         
         if (isSprinting) {
-            animator.SetFloat("SprintScalar", movement.sprintScalar);
+            animator.SetFloat("SprintScalar", movement.SpeedScale);
         } else {
             animator.SetFloat("SprintScalar", 1.0f);
         }
