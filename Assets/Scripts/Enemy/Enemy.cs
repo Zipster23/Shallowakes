@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public Animator enemyAnimator;
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
 
     void Start()
     {
