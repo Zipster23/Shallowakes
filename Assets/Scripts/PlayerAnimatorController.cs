@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
-    Animator animator;
     PlayerMovement movement;
+    Animator animator;
 
     void Start()
     {
@@ -12,22 +12,37 @@ public class PlayerAnimatorController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
+    public void PlayMovementAnimation(bool isMoving, bool isSprinting)
     {
-        // Update movement animation
-        float speed = movement.CurrentSpeed;
-        animator.SetFloat("Speed", speed);
-
-        // Attack input
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            animator.SetTrigger("Attack");
+        animator.SetBool("isMoving", isMoving);
+        
+        if (isSprinting) {
+            animator.SetFloat("SprintScalar", movement.SpeedScale);
+        } else {
+            animator.SetFloat("SprintScalar", 1.0f);
         }
+        
+    }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            animator.SetTrigger("ThrustAttack");
-        }
+    // Add a jump animation
+    
+    public void PlayAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    public void PlayThrustAnimation()
+    {
+        animator.SetTrigger("Thrust");
+    }
+
+    public void PlayParryAnimation()
+    {
+        animator.SetTrigger("Parry");
+    }
+    public void PlayerJumping()
+    {
+        animator.SetTrigger("Jumping");
     }
 }
 
