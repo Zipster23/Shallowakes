@@ -6159,15 +6159,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1968148702746168617, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: jumpForce
-      value: 350
+      value: 575
       objectReference: {fileID: 0}
     - target: {fileID: 1968148702746168617, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 729266680}
     - target: {fileID: 1968148702746168617, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: doubleJumpForce
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968148702746168617, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968148702746168617, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: doubleJumpPropulsionForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4294388620662280692, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_audioClip

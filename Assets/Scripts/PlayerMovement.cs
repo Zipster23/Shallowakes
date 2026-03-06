@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Values with "SerializeField" are set in the inspector (with some having default values)
     // Speed values for the player's base speed and the scale by which sprinting is faster
     [SerializeField] public float baseSpeed = 10f;
     [SerializeField] public float sprintScalar = 1.5f;
@@ -13,30 +12,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float jumpForce = 350f;
     [SerializeField] private float doubleJumpForce = 500f;
-    [SerializeField] private LayerMask groundLayer; // Set this in Inspector
-    [SerializeField] private Transform groundCheck; // Create an empty child object at player's feet
-    [SerializeField] private bool debugMode = false; // Enables developer view of data
+
+    // The strength of the horizontal propulsion during a double jump
+    [SerializeField] private float doubleJumpPropulsionForce = 15f;
+
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private bool debugMode = false;
+
+    // Air control settings to define the window of influence after a double jump
+    [SerializeField] private float doubleJumpControlDuration = 0.3f;
+    private float airControlTimer = 0f;
+    private Vector3 lockedAirDirection;
+
+    // Friction setting to stop the "sliding on ice" feel when landing or stopping
+    [SerializeField] private float groundDeceleration = 15f;
 
     // Value to determine how smoothly the speed transitions between moving and stopping
     [SerializeField] private float animationSmoothSpeed = 10f;
 
-    // Max speed sprint to be set upon Awake
+    // Max speed values calculated based on base speed
     private float maxBaseSpeed;
     private float maxSprintSpeed;
 
     // Variables to be used for jumping logic
     private int jumpsRemaining;
-    private int maxJumps = 2; // Allow for double jump
+    private int maxJumps = 2;
     private bool isGrounded;
 
-    // Variable to track the actual smoothed speed value (e.g., 0 to 10, or up to 15)
+    // Variables to track speed and scale for animations
     public float CurrentSpeed { get; private set; }
-
-    // Variable to track the current scale of the speed proportional to the base speed (e.g., 0 to 1.0, or up to 1.5)
     public float SpeedScale { get; private set; }
 
     private Transform camTransform;
-
     private Rigidbody rb;
 
     private void Awake()
@@ -46,36 +54,63 @@ public class PlayerMovement : MonoBehaviour
 
         maxBaseSpeed = baseSpeed;
         maxSprintSpeed = baseSpeed * sprintScalar;
+
+        // Ensure the Rigidbody doesn't rotate itself via physics collisions
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     private void Update()
     {
         // Check if we are touching the ground
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.05f, groundLayer);
+        bool wasGrounded = isGrounded;
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
 
         if (isGrounded)
         {
-            jumpsRemaining = maxJumps;
+            airControlTimer = 0;
+
+            // If we just landed this frame, snap horizontal velocity to zero to prevent sliding
+            if (!wasGrounded)
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
+                // ONLY reset jumps the moment the player touches the ground, not every frame
+                jumpsRemaining = maxJumps;
+            }
+        }
+
+        // Countdown the air control window
+        if (airControlTimer > 0)
+        {
+            airControlTimer -= Time.deltaTime;
         }
     }
 
     public void Jump()
     {
+        if (jumpsRemaining <= 0) return;
+
+        bool isDoubleJump = !isGrounded;
         jumpsRemaining--;
 
-        if (jumpsRemaining > 0)
-        {
-            // Reset vertical velocity so the second jump always feels consistent
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        // Reset vertical velocity so the jump force feels consistent
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-            if (jumpsRemaining == maxJumps - 1)
+        if (isDoubleJump)
+        {
+            rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+
+            if (lockedAirDirection.magnitude > 0.1f)
             {
-                rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+                // Instant propulsion boost
+                rb.AddForce(lockedAirDirection * doubleJumpPropulsionForce, ForceMode.VelocityChange);
             }
-            else
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
+
+            airControlTimer = doubleJumpControlDuration;
+        }
+        else
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -83,65 +118,76 @@ public class PlayerMovement : MonoBehaviour
     {
         if (camTransform == null) return;
 
-        // Get the horizontal and vertical inputs
-        float horizontalInput = input.x;
-        float forwardInput = input.y;
-
-        // Determine the camera's forward and right directions
         Vector3 camForward = camTransform.forward;
         Vector3 camRight = camTransform.right;
-
-        // Flatten the camera vectors so the player doesn't move up or down based on camera pitch
         camForward.y = 0;
         camRight.y = 0;
-
         camForward.Normalize();
         camRight.Normalize();
 
-        // Calculate the direction the player should move based on input and camera angle
-        Vector3 moveDirection = (camForward * forwardInput) + (camRight * horizontalInput);
-
+        Vector3 moveDirection = (camForward * input.y) + (camRight * input.x);
         moveDirection = moveDirection.normalized;
 
-        // Determine the target physical speed based on input and base speed
         float targetSpeed = moveDirection.magnitude * baseSpeed;
-
-        // Use the max sprint speed if the player is currently holding the sprint button
         if (isSprinting && moveDirection.magnitude > 0.1f)
         {
             targetSpeed = moveDirection.magnitude * maxSprintSpeed;
         }
 
-        // Smoothly transition the CurrentSpeed value towards the target physical speed over time
         CurrentSpeed = Mathf.Lerp(CurrentSpeed, targetSpeed, Time.deltaTime * animationSmoothSpeed);
-
-        if (debugMode) Debug.Log(CurrentSpeed);
-
-        // Calculate the scale of the current speed proportional to the base speed
         SpeedScale = CurrentSpeed / baseSpeed;
 
-        // Only apply physical movement and rotation if there is actual input
-        if (moveDirection.magnitude > 0.1f)
+        if (isGrounded)
         {
-            Vector3 targetPosition;
-
-            // Calculate the physical distance to move this frame
-            targetPosition = moveDirection * baseSpeed * Time.deltaTime;
-
-            // Apply the sprint multiplier to the physical movement if sprinting
-            if (isSprinting)
+            ApplyGroundedMovement(moveDirection, isSprinting);
+        }
+        else
+        {
+            if (moveDirection.magnitude > 0.1f && airControlTimer > 0)
             {
-                targetPosition *= SpeedScale;
+                lockedAirDirection = moveDirection;
             }
 
-            // Add the current position to get the final destination
-            targetPosition += rb.position;
+            ApplyAirborneMovement(moveDirection, isSprinting);
+        }
+    }
 
-            // Move the Rigidbody to the new position
-            rb.MovePosition(targetPosition);
+    private void ApplyGroundedMovement(Vector3 moveDirection, bool isSprinting)
+    {
+        if (moveDirection.magnitude > 0.1f)
+        {
+            Vector3 targetPosition = moveDirection * baseSpeed * Time.deltaTime;
+            if (isSprinting) targetPosition *= SpeedScale;
 
-            // Calculate the rotation to face the movement direction and smoothly rotate towards it
+            rb.MovePosition(rb.position + targetPosition);
+
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
+
+            lockedAirDirection = moveDirection;
+        }
+        else
+        {
+            // Stop horizontal sliding when there is no input on the ground
+            Vector3 horizontalVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(-horizontalVel * groundDeceleration, ForceMode.Acceleration);
+
+            lockedAirDirection = Vector3.zero;
+        }
+    }
+
+    private void ApplyAirborneMovement(Vector3 moveDirection, bool isSprinting)
+    {
+        Vector3 activeDirection = (airControlTimer > 0 && moveDirection.magnitude > 0.1f) ? moveDirection : lockedAirDirection;
+
+        if (activeDirection.magnitude > 0.1f)
+        {
+            Vector3 targetPosition = activeDirection * baseSpeed * Time.deltaTime;
+            if (isSprinting) targetPosition *= SpeedScale;
+
+            rb.MovePosition(rb.position + targetPosition);
+
+            Quaternion targetRotation = Quaternion.LookRotation(activeDirection);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
         }
     }
