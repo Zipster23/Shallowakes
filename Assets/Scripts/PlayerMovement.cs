@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Variables to be used for jumping logic
     private int jumpsRemaining;
     private int maxJumps = 2;
-    private bool isGrounded;
+    public bool isGrounded { get; private set; }
 
     // Variables to track speed and scale for animations
     public float CurrentSpeed { get; private set; }

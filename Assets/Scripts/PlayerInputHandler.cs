@@ -18,7 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
             Input.GetAxis("Vertical")
         );
 
-        // Attack input
+        // Attack inputs
         attackInput = Input.GetKeyDown(KeyCode.Mouse0);
 
         thrustInput = Input.GetKeyDown(KeyCode.Mouse1);
@@ -32,4 +32,3 @@ public class PlayerInputHandler : MonoBehaviour
         sprintInput = Input.GetKey(KeyCode.LeftShift);
     }
 }
-
