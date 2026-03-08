@@ -64,12 +64,10 @@ public class PlayerController : MonoBehaviour
             if (input.attackInput)
             {
                 controller.PlayAttackAnimation(); 
-                nextAttackTime = Time.time + 1f / attackRate;
             }
             else if(input.thrustInput)
             {
                 controller.PlayThrustAnimation();
-                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
 
@@ -91,6 +89,15 @@ public class PlayerController : MonoBehaviour
             sfx.playKatanaHitSFX();
             Debug.Log("Hit " + enemy.name);
         }
+    }
+
+
+
+
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
 

@@ -1878,6 +1878,7 @@ GameObject:
   - component: {fileID: 2760438854505889007}
   - component: {fileID: 1149432906299964578}
   - component: {fileID: 348822704326651395}
+  - component: {fileID: 9077709025066702530}
   m_Layer: 7
   m_Name: PlayerNew
   m_TagString: Player
@@ -2076,6 +2077,20 @@ MonoBehaviour:
   swordTrail2: {fileID: 946262572875127515}
   parrySparks: {fileID: 3770255258451639938}
   hitEffect: {fileID: 3642160410948286680, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
+--- !u!114 &9077709025066702530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275844723260860746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915a2b3916ffc9f409916600d7008e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  currentHealth: 0
 --- !u!1 &6423807275505409425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2309,7 @@ Transform:
   m_GameObject: {fileID: 6891708779882017086}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21390367, y: -0, z: -0, w: 0.9768548}
-  m_LocalPosition: {x: 0, y: 7.13, z: -6}
+  m_LocalPosition: {x: 0, y: 7.130001, z: -5.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3353,7 +3368,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30

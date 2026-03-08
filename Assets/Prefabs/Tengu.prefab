@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3165420901587852055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9016353595084523727}
+  m_Layer: 6
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9016353595084523727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165420901587852055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.2, z: 3.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5553510191825822702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5841886413046708483
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,7 +5404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.62
+      value: 17.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5654,6 +5685,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9016353595084523727}
     - targetCorrespondingSourceObject: {fileID: -229113793236118474, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
       insertIndex: 0
       addedObject: {fileID: 9094481567105504584}
@@ -5772,9 +5806,16 @@ MonoBehaviour:
   currentState: 0
   player: {fileID: 0}
   chaseRange: 15
+  moveSpeed: 10
+  attackPoint: {fileID: 9016353595084523727}
   attackRange: 3
-  moveSpeed: 7
-  timeBetweenAttacks: 2
+  attackDamage: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  timeBetweenAttacks: 1.5
+  repositionDistance: 12
+  repositionTime: 1.5
 --- !u!114 &7903891018583126115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5787,10 +5828,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec3d01c39621e4b4383f627559970631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  katanaSFX: {fileID: 0}
-  katanaAttackSFX: {fileID: 0}
-  katanaDeflectSFX: {fileID: 0}
-  katanaHitSFX: {fileID: 0}
+  katanaSFX: {fileID: 5153741406828485165}
+  katanaAttackSFX: {fileID: 8300000, guid: d6464e2d13aedc44386a0eb4b8feea86, type: 3}
+  katanaDeflectSFX: {fileID: 8300000, guid: 9731eb91e3139124a8ba8b3a539ecf07, type: 3}
+  katanaHitSFX: {fileID: 8300000, guid: c2c9dbf4287e31949b2a2e19af5566a4, type: 3}
   katanaDeflectVolume: 0.7
 --- !u!114 &5328840721501948552
 MonoBehaviour:
@@ -5804,7 +5845,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28270768bcf06ed46a9351412b3fb723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordTrail1: {fileID: 0}
-  swordTrail2: {fileID: 0}
-  parrySparks: {fileID: 0}
-  hitEffect: {fileID: 0}
+  swordTrail1: {fileID: 2863768310018951466}
+  swordTrail2: {fileID: 880320263703954783}
+  parrySparks: {fileID: 7330056825531462615}
+  hitEffect: {fileID: 3642160410948286680, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
+--- !u!4 &5553510191825822702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
+  m_PrefabInstance: {fileID: 5375241206894117893}
+  m_PrefabAsset: {fileID: 0}
