@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     // Value to determine how smoothly the speed transitions between moving and stopping
     [SerializeField] private float animationSmoothSpeed = 10f;
+    
+    [SerializeField] private float dashPower = 0.5f;
+    [SerializeField] private float dashTime = 0.5f;
 
     // Max speed values calculated based on base speed
     private float maxBaseSpeed;
@@ -46,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform camTransform;
     private Rigidbody rb;
+
 
     private void Awake()
     {
@@ -190,5 +194,25 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(activeDirection);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
         }
+    }
+
+
+    // Added, to be reviewed
+    public void DashOutput()
+    {
+        StartCoroutine(Dash());
+    }
+
+    public IEnumerator Dash()
+    {
+       float startTime = Time.time;
+
+        // Note for Antonio to fix the dash direction when using rb.MovePosition
+       while(Time.time < startTime + dashTime)
+       {
+        Vector3 targetPosition = Vector3.forward * dashPower * Time.deltaTime;
+        rb.MovePosition(rb.position + targetPosition);
+        yield return null;
+       }
     }
 }

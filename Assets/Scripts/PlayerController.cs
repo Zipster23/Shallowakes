@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.PlayThrustAnimation();
         }
+        if (input.dashInput)
+        {
+            movement.DashOutput();
+        }
     }
 }
 

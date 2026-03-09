@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool parryInput;
     public bool jumpInput;
     public bool sprintInput;
+    public bool dashInput;
 
     private void Update()
     {
@@ -30,5 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         // Sprint Input
         sprintInput = Input.GetKey(KeyCode.LeftShift);
+
+        dashInput = Input.GetKeyDown(KeyCode.RightShift);
     }
 }
