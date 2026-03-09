@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -783,8 +783,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 996081199}
     - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: attackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
       propertyPath: attackDamage
-      value: 40
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: repositionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5069321123640539476, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
       propertyPath: m_Name
@@ -829,6 +845,10 @@ PrefabInstance:
     - target: {fileID: 5553510191825822702, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016353595084523727, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
