@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RIGGE.005|IdleAnimation
+      name: StandingIdle
       takeName: RIGGE.005|IdleAnimation
       internalID: 1053630879735340314
       firstFrame: 0
