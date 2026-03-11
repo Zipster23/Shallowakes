@@ -48,7 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.PlayThrustAnimation();
         }
-
+        
+        if (input.jumpInput) {
+            controller.PlayJumpingAnimation();
+        }
     }
 }
 
