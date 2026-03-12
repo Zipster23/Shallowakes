@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool thrustInput;
     public bool parryInput;
     public bool jumpInput;
+    public bool sprintInput;
+    public bool dashInput;
 
     private void Update()
     {
@@ -17,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
             Input.GetAxis("Vertical")
         );
 
-        // Attack input
+        // Attack inputs
         attackInput = Input.GetKeyDown(KeyCode.Mouse0);
 
         thrustInput = Input.GetKeyDown(KeyCode.Mouse1);
@@ -26,6 +28,10 @@ public class PlayerInputHandler : MonoBehaviour
 
         // Jump Input
         jumpInput = Input.GetKeyDown(KeyCode.Space);
+
+        // Sprint Input
+        sprintInput = Input.GetKey(KeyCode.LeftShift);
+
+        dashInput = Input.GetKeyDown(KeyCode.RightShift);
     }
 }
-
