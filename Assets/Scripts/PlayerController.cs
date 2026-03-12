@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         if (input.jumpInput)
         {
             movement.Jump();
+            controller.PlayJumpingAnimation();
         }
 
         // ADDED CHECK: Only play movement animation if moving AND on the ground
