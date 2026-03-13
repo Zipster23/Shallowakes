@@ -13,6 +13,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 350f;
     [SerializeField] private float doubleJumpForce = 500f;
 
+    [Header("Segmented Dash Settings")]
+    [SerializeField] private float dashDistance = 8f;
+    [SerializeField] private float segmentSpeed = 40f;
+    [SerializeField] private float maxSlopeAngle = 45f;
+    [SerializeField] private int maxSegments = 4; // Point 1 to 2, 2 to 3, 3 to 4, etc.
+    [SerializeField] public float temporaryScalar = 1f;
+    private bool isDashing = false;
+
     // The strength of the horizontal propulsion during a double jump
     [SerializeField] private float doubleJumpPropulsionForce = 15f;
 
@@ -30,9 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Value to determine how smoothly the speed transitions between moving and stopping
     [SerializeField] private float animationSmoothSpeed = 10f;
-    
-    [SerializeField] private float dashPower = 0.5f;
-    [SerializeField] private float dashTime = 0.5f;
 
     // Max speed values calculated based on base speed
     private float maxBaseSpeed;
@@ -143,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            ApplyGroundedMovement(moveDirection, isSprinting);
+            ApplyGroundedMovement(moveDirection, isSprinting, isDashing);
         }
         else
         {
@@ -156,8 +161,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ApplyGroundedMovement(Vector3 moveDirection, bool isSprinting)
+    private void ApplyGroundedMovement(Vector3 moveDirection, bool isSprinting, bool isDashing)
     {
+        // Ends the Method if the player is dashing
+        if (isDashing)
+        {
+            return;
+        }
+
         if (moveDirection.magnitude > 0.1f)
         {
             Vector3 targetPosition = moveDirection * baseSpeed * Time.deltaTime;
@@ -196,23 +207,104 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    // Added, to be reviewed
-    public void DashOutput()
+    public void DashOutput(Vector2 input)
     {
-        StartCoroutine(Dash());
+        if (!isDashing) StartCoroutine(ExecuteSegmentedDash(input));
     }
 
-    public IEnumerator Dash()
+    private IEnumerator ExecuteSegmentedDash(Vector2 input)
     {
-       float startTime = Time.time;
+        isDashing = true;
 
-        // Note for Antonio to fix the dash direction when using rb.MovePosition
-       while(Time.time < startTime + dashTime)
-       {
-        Vector3 targetPosition = Vector3.forward * dashPower * Time.deltaTime;
-        rb.MovePosition(rb.position + targetPosition);
-        yield return null;
-       }
+        // Prepare physics for manual movement
+        Vector3 originalVelocity = rb.velocity;
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+
+        // Determine initial direction based on camera and input
+        Vector3 currentDir = (Vector3.ProjectOnPlane(camTransform.forward, Vector3.up) * input.y +
+                             Vector3.ProjectOnPlane(camTransform.right, Vector3.up) * input.x).normalized;
+
+        if (currentDir.sqrMagnitude < 0.01f) currentDir = transform.forward;
+
+        float remainingDist = dashDistance;
+        int currentSegment = 0;
+
+        // THE LADDER LOOP: Process one segment at a time
+        while (remainingDist > 0.05f && currentSegment < maxSegments)
+        {
+            currentSegment++;
+            Vector3 startPos = rb.position;
+            Vector3 targetPos;
+            bool hitWall = false;
+
+            // Raycast from current position to find the next "Node" in the ladder
+            // Offset slightly up (0.5f) to ensure we don't clip into flat floors
+            if (Physics.Raycast(startPos + Vector3.up * 0.1f, currentDir, out RaycastHit hit, remainingDist, groundLayer))
+            
+                float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
+
+                if (slopeAngle <= maxSlopeAngle)
+                {
+                    // Valid Slope: Point 2 is the hit point
+                    targetPos = hit.point + Vector3.up * temporaryScalar;
+
+                    // Move to this segment's end point
+                    yield return StartCoroutine(MoveToPoint(startPos, targetPos));
+
+                    // Update math for next segment
+                    float distTraveled = Vector3.Distance(startPos, targetPos);
+                    remainingDist -= distTraveled;
+
+                    // Calculate new direction for the next segment (along the slope)
+                    currentDir = Vector3.ProjectOnPlane(currentDir, hit.normal).normalized;
+                }
+                else
+                {
+                    // Steep Wall: Stop here
+                    targetPos = hit.point - (currentDir * 0.2f); // Slight buffer
+                    yield return StartCoroutine(MoveToPoint(startPos, targetPos));
+                    remainingDist = 0;
+                    hitWall = true;
+                }
+            }
+            else
+            {
+                // No obstacle: Move the full remaining distance
+                targetPos = startPos + (currentDir * remainingDist);
+                yield return StartCoroutine(MoveToPoint(startPos, targetPos));
+                remainingDist = 0;
+            }
+
+            if (hitWall) break;
+        }
+
+        // Restore physics
+        rb.useGravity = true;
+        rb.velocity = Vector3.zero;
+        isDashing = false;
+    }
+
+    // This handles the actual movement for a single segment
+    private IEnumerator MoveToPoint(Vector3 from, Vector3 to)
+    {
+        float distance = Vector3.Distance(from, to);
+        if (distance <= 0f) yield break;
+
+        float elapsed = 0f;
+        float duration = distance / segmentSpeed;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Move physics body
+            rb.MovePosition(Vector3.Lerp(from, to, t));
+            yield return null;
+        }
+
+        // Ensure we land exactly at the segment node
+        rb.MovePosition(to);
     }
 }

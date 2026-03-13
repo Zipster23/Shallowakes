@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         }
         if (input.dashInput)
         {
-            movement.DashOutput();
+            movement.DashOutput(input.MovementInput);
         }
     }
 }
