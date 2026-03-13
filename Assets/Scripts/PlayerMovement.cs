@@ -241,7 +241,8 @@ public class PlayerMovement : MonoBehaviour
             // Raycast from current position to find the next "Node" in the ladder
             // Offset slightly up (0.5f) to ensure we don't clip into flat floors
             if (Physics.Raycast(startPos + Vector3.up * 0.1f, currentDir, out RaycastHit hit, remainingDist, groundLayer))
-            
+            {
+
                 float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
 
                 if (slopeAngle <= maxSlopeAngle)
