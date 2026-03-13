@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 targetPos;
             bool hitWall = false;
 
-            // Raycast from current position to find the next "Node" in the ladder
+            // Raycast from current position to find the next segment in the ladder
             // Offset slightly up (0.5f) to ensure we don't clip into flat floors
             if (Physics.Raycast(startPos + Vector3.up * 0.1f, currentDir, out RaycastHit hit, remainingDist, groundLayer))
             {
