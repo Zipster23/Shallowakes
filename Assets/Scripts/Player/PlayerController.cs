@@ -57,22 +57,23 @@ public class PlayerController : MonoBehaviour
             controller.PlayMovementAnimation(false, false);
         }
 
-        if (input.parryInput)
+        /* if (input.parryInput)
         {
             controller.PlayParryAnimation();
         }
+        */
 
-        if(Time.time >= nextAttackTime)
+        
+        if (input.attackInput)
         {
-            if (input.attackInput)
-            {
                 controller.PlayAttackAnimation(); 
-            }
-            else if(input.thrustInput)
-            {
-                controller.PlayThrustAnimation();
-            }
         }
+        else if(input.thrustInput)
+        {
+                controller.PlayThrustAnimation();
+        }    
+        
+        
 
         if (input.dashInput)
         {
