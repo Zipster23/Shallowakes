@@ -46,14 +46,12 @@ public class PlayerController : MonoBehaviour
             movement.Jump();
         }
 
-        // ADDED CHECK: Only play movement animation if moving AND on the ground
-        if (input.MovementInput != Vector2.zero && movement.isGrounded)
+        if (input.MovementInput != Vector2.zero)
         {
             controller.PlayMovementAnimation(true, input.sprintInput);
-        }
+        } 
         else
         {
-            // If the player stops moving, OR if they are in the air, stop the run animation
             controller.PlayMovementAnimation(false, false);
         }
 
@@ -72,9 +70,11 @@ public class PlayerController : MonoBehaviour
         {
                 controller.PlayThrustAnimation();
         }    
-        
-        
 
+        if (input.jumpInput) {
+            controller.PlayJumpingAnimation();
+        }
+        
         if (input.dashInput)
         {
             movement.DashOutput();

@@ -102,7 +102,7 @@ public class PlayerParry : MonoBehaviour
         parryCooldownTimer = parryCooldown; // start the cooldown so the player can't spam parry
 
         // play the parry VFX and SFX
-        vfx.EmitSparkParticles();
+        vfx.EmitParryParticles();
         sfx.playKatanaDeflectSFX();
 
         // tell the Tengu it got parried
