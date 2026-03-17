@@ -15,7 +15,8 @@ public class TenguAI : MonoBehaviour
         Attack,     // in attack range, swinging at the player
         Parry,      // parrying the player's attack
         Reposition, // backing off or strafing after an attack
-        Enraged     // enraged state - faster/stronger
+        Enraged,    // enraged state - faster/stronger
+        IsParried   // briefly stunned after getting parried by the player
     }
 
     [Header("States")]
@@ -44,13 +45,16 @@ public class TenguAI : MonoBehaviour
 
     [Header("Attack")]
     public Transform attackPoint;           // empty GameObject positioned in front of Tengu
-    public float attackRange = 3f;        // how close the player needs to be for Tengu to attack
+    public float attackRange = 3f;          // how close the player needs to be for Tengu to attack
     public int attackDamage = 100;          // how much damage each hit deals
     public LayerMask playerLayer;           // used to detect only the player in the attack overlap sphere
 
     public float timeBetweenAttacks = 1.5f; // how long the Tengu waits between attacks
     private float attackTimer = 0f;         // counts down to the next attack
     private bool isAttacking = false;       // prevents the Tengu from moving or switching states mid-attack
+
+    public bool isAttackActive = false;    // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
+    public float parryStunDuration = 1f;    // how long the Tengu is stunned for after getting parried
 
 
     // --- REPOSITION --- //
@@ -116,6 +120,9 @@ public class TenguAI : MonoBehaviour
                 break;
             case TenguState.Enraged:
                 HandleEnraged();
+                break;
+            case TenguState.IsParried:
+                HandleIsParried();
                 break;
 
         }
@@ -271,6 +278,17 @@ public class TenguAI : MonoBehaviour
 
 
 
+    private void HandleIsParried()
+    {
+        
+        // stop moving while stunned
+        animator.SetBool("IsMoving", false);
+
+    }
+
+
+
+
     private void HandleEnraged()
     {
         
@@ -297,6 +315,12 @@ public class TenguAI : MonoBehaviour
             return;
         }
 
+        // don't deal damage to the player if parried
+        if(currentState == TenguState.IsParried)
+        {
+            return;
+        }
+
         // create a sphere at the attack point and detect every collider on the player layer inside of it
         Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
 
@@ -315,6 +339,53 @@ public class TenguAI : MonoBehaviour
             // debug
             Debug.Log("Tengu hit Player!");
         }
+
+        // attack has landed so it can no longer be parried
+        isAttackActive = false;
+
+    }
+
+
+    // called by Animation Event at the start of the Tengu's attack swing
+    // tells the parry system that the weapon is now active and can be parried
+    public void EnableWeaponCollider()
+    {
+
+        isAttackActive = true;
+
+    }
+
+
+    // called by Animation Event at the end of the Tengu's attack swing
+    // tells the parry system that the weapon is no longer active and cannot be parried
+    public void DisableWeaponCollider()
+    {
+
+        isAttackActive = false;
+
+    }
+
+
+    // called by PlayerParry script when the player successfully parries the Tengu's attack
+    public void GetParried()
+    {
+        
+        isAttacking = false;                // cancel the current attack
+        isAttackActive = false;             // weapon is no longer active
+        animator.ResetTrigger("Attack");    // cancel the attack trigger
+        animator.Play("Idle");              // snap back to idle animation 
+        StartCoroutine(ParryStun());        // start the stun for getting parried
+
+    }
+
+
+    // called after Tengu gets parried in GetParried(), waits for parryStunDuration seconds, then sends Tengu back to Idle
+    private IEnumerator ParryStun()
+    {
+        
+        currentState = TenguState.IsParried;                    // enter the parried state
+        yield return new WaitForSeconds(parryStunDuration);     // wait for stun to finish
+        currentState = TenguState.Idle;                         // go back to Idle state
 
     }
 
