@@ -40,7 +40,7 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetTrigger("Parry");
     }
-    public void PlayerJumping()
+    public void PlayJumpingAnimation()
     {
         animator.SetTrigger("Jumping");
     }

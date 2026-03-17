@@ -10,6 +10,7 @@ public class PlayerVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem hitEffect;
     
 
+
     public void StartSwingEffects()
     {
         swordTrail1.emitting = true;
@@ -22,7 +23,7 @@ public class PlayerVFXManager : MonoBehaviour
         swordTrail2.emitting = false;
     }
 
-    public void EmitSparkParticles()
+    public void EmitParryParticles()
     {
         parrySparks.Play();
     } 
