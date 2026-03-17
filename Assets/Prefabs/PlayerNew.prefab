@@ -1057,6 +1057,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3198833758193755064}
+  - {fileID: 3098603680332024847}
   - {fileID: 7444486940007001243}
   - {fileID: 7492967281194685841}
   m_Father: {fileID: 0}
@@ -1110,6 +1111,8 @@ MonoBehaviour:
   doubleJumpControlDuration: 0.3
   groundDeceleration: 15
   animationSmoothSpeed: 10
+  dashPower: 0.5
+  dashTime: 0.5
 --- !u!114 &337876844340065256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1130,7 @@ MonoBehaviour:
   parryInput: 0
   jumpInput: 0
   sprintInput: 0
+  dashInput: 0
 --- !u!114 &4420157012936499812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,6 +1143,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9399d25ad2acf4bbaf39977acc5442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackRange: 0.5
+  attackDamage: 25
+  attackRate: 2
 --- !u!95 &6392412578872829650
 Animator:
   serializedVersion: 5
@@ -1214,6 +1225,7 @@ MonoBehaviour:
   katanaSFX: {fileID: 4294388620662280692}
   katanaAttackSFX: {fileID: 8300000, guid: d6464e2d13aedc44386a0eb4b8feea86, type: 3}
   katanaDeflectSFX: {fileID: 8300000, guid: 9731eb91e3139124a8ba8b3a539ecf07, type: 3}
+  katanaHitSFX: {fileID: 0}
   katanaDeflectVolume: 0.7
 --- !u!114 &348822704326651395
 MonoBehaviour:
@@ -1230,6 +1242,7 @@ MonoBehaviour:
   swordTrail1: {fileID: 1057917194141401741}
   swordTrail2: {fileID: 946262572875127515}
   parrySparks: {fileID: 870719514331494227}
+  hitEffect: {fileID: 0}
 --- !u!1 &6286429696126074376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1702,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3098603680332024847}
   - {fileID: 6790460977962526619}
   m_Father: {fileID: 6639773865483553091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1717,15 +1729,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8061329585833727354}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.0956556, z: -0.0023020066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.0956557, z: -0.0023020066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4854582400688043379}
   - {fileID: 1262664305729026864}
   - {fileID: 3416132557985742748}
-  m_Father: {fileID: 7444486940007001243}
+  m_Father: {fileID: 6639773865483553091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8088016983558661700
 GameObject:
