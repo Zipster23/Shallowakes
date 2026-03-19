@@ -53,8 +53,12 @@ public class TenguAI : MonoBehaviour
     private float attackTimer = 0f;         // counts down to the next attack
     private bool isAttacking = false;       // prevents the Tengu from moving or switching states mid-attack
 
-    public bool isAttackActive = false;    // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
-    public float parryStunDuration = 1f;    // how long the Tengu is stunned for after getting parried
+    public bool isAttackActive = false;     // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
+    public float parryStunDuration = 2f;    // how long the Tengu is stunned for after getting parried
+
+    public int parryChance = 85;            // percentage chance the Tengu will parry the player's attack (0-100)
+    public Transform playerTransform;       // reference to the player's transform for distance check
+    public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
 
 
     // --- REPOSITION --- //
@@ -273,6 +277,17 @@ public class TenguAI : MonoBehaviour
     private void HandleParry()
     {
         
+        // stop moving while parrying
+        animator.SetBool("IsMoving", false);
+
+        // check if the parry animation has finished
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        
+        if(stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 1f)
+        {
+            currentState = TenguState.Idle;
+        }
+
     }
 
 
@@ -308,7 +323,7 @@ public class TenguAI : MonoBehaviour
     // this function is called by an Animation Event at the frame the naginata connects with the player 
     public void Attack()
     {
-
+    
         // if the Tengu is repositioning, it can't attack
         if(currentState == TenguState.Reposition)
         {
@@ -317,6 +332,12 @@ public class TenguAI : MonoBehaviour
 
         // don't deal damage to the player if parried
         if(currentState == TenguState.IsParried)
+        {
+            return;
+        }
+
+        // don't deal damage while parrying
+        if(currentState == TenguState.Parry)
         {
             return;
         }
@@ -346,6 +367,8 @@ public class TenguAI : MonoBehaviour
     }
 
 
+
+
     // called by Animation Event at the start of the Tengu's attack swing
     // tells the parry system that the weapon is now active and can be parried
     public void EnableWeaponCollider()
@@ -356,6 +379,8 @@ public class TenguAI : MonoBehaviour
     }
 
 
+
+
     // called by Animation Event at the end of the Tengu's attack swing
     // tells the parry system that the weapon is no longer active and cannot be parried
     public void DisableWeaponCollider()
@@ -364,6 +389,8 @@ public class TenguAI : MonoBehaviour
         isAttackActive = false;
 
     }
+
+
 
 
     // called by PlayerParry script when the player successfully parries the Tengu's attack
@@ -377,6 +404,55 @@ public class TenguAI : MonoBehaviour
         StartCoroutine(ParryStun());        // start the stun for getting parried
 
     }
+
+
+
+
+    // called by the player's Attack() animation event - checks if the Tengu decides to parry
+    // returns true if Tengu parried, false if not
+    public bool CheckTenguParry()
+    { 
+        
+        // dont parry if already parrying
+        if(currentState == TenguState.Parry)
+        {
+            return false;
+        }
+        
+        // calculate distance to player
+        float distance = Vector3.Distance(transform.position, player.position);
+        
+        // only parry if player is within range
+        if(distance > tenguParryRange)
+        {
+            return false;
+        }
+        
+        // roll a random num between 0 and 100
+        int parryRoll = Random.Range(0,100);
+        
+        // if roll is within parry chance, parry the attack
+        if(parryRoll < parryChance)
+        {
+            currentState = TenguState.Parry;
+
+            // play parry animation & visual feedback
+            animator.SetTrigger("Parry");
+            vfx.EmitSparkParticles();
+            sfx.playKatanaDeflectSFX();
+
+            // start the player stun
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            StartCoroutine(playerHealth.GetParried());
+            Debug.Log("Tengu parried player attack");
+            return true;
+        }
+
+        return false;
+
+    }
+
+
 
 
     // called after Tengu gets parried in GetParried(), waits for parryStunDuration seconds, then sends Tengu back to Idle
@@ -421,6 +497,8 @@ public class TenguAI : MonoBehaviour
         }
 
     }
+
+
 
 
     // calculates the world position the Tengu should move to when repositioning

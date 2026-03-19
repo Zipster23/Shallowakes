@@ -18,6 +18,11 @@ public class PlayerHealth : MonoBehaviour
     private Animator animator;  // controls which animations play on the player
 
 
+    // --- TENGU PARRY --- //
+    [Header("Tengu Parry Logic")]
+    public float parryStunDuration = 0.5f;   // how long the player is frozen when their attack gets parried
+
+
 
 
     // --- SETUP ---
@@ -57,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
 
 
 
-    // --- DEATH ---
+    // --- DEATH --- //
 
     private void Die()
     {
@@ -72,6 +77,31 @@ public class PlayerHealth : MonoBehaviour
 
         // disable this script since we don't need health when the player dies
         this.enabled = false;
+    }
+
+
+
+
+    // --- TENGU PARRY LOGIC --- //
+    
+    // called by TenguAI when the Tengu successfully parries the player's attack
+    public IEnumerator GetParried()
+    {
+        
+        // disable player controller so they can't move or attack
+        GetComponent<PlayerController>().enabled = false;
+
+        // snap back to idle animation
+        animator.Play("Idle");
+
+        // wait for stun duration
+        yield return new WaitForSeconds(parryStunDuration);
+
+        // re-enable player controller so the player can move and attack after the stun
+        PlayerController playerController = GetComponent<PlayerController>();
+        playerController.isBusy = false;
+        playerController.enabled = true;
+
     }
 
 

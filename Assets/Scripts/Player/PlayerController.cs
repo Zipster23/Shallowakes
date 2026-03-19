@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float attackRange = 0.5f;
     public int attackDamage = 25;
     public float attackRate = 2f;
-    private float nextAttackTime = 0f;
+    public bool isBusy = false;
 
     // Collision VFX and SFX
     private PlayerVFXManager vfx;
@@ -61,15 +61,25 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        
-        if (input.attackInput)
+
+
+
+        if(!isBusy)
         {
+            if (input.attackInput)
+            {
+                isBusy = true;
                 controller.PlayAttackAnimation(); 
-        }
-        else if(input.thrustInput)
-        {
+            }
+            else if(input.thrustInput)
+            {
+                isBusy = true;
                 controller.PlayThrustAnimation();
-        }    
+            }   
+        } 
+
+
+
 
         if (input.jumpInput) {
             controller.PlayJumpingAnimation();
@@ -87,17 +97,28 @@ public class PlayerController : MonoBehaviour
     // Method to detect collisions
     public void Attack()
     {
+
         // Detect all enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
+        
         // Damage them
         foreach(Collider enemy in hitEnemies)
         {
+
+            // check if Tengu parries this attack first
+            TenguAI tenguAI = FindObjectOfType<TenguAI>();
+            if(tenguAI != null && tenguAI.CheckTenguParry())
+            {
+                return; // Tengu parried, cancel the attack
+            }
+
             enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
             vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
             sfx.playKatanaHitSFX();
             Debug.Log("Hit " + enemy.name);
         }
+
+        isBusy = false;
     }
 
 

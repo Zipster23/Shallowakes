@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -190,6 +190,22 @@ PrefabInstance:
     - target: {fileID: 3263354816890556078, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747602871101361391, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747602871101361391, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747602871101361391, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747602871101361391, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4945093750813213239, guid: ab68d8373f9d1e84ba384d4210e2b54e, type: 3}
       propertyPath: m_Height
@@ -775,6 +791,10 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
+      propertyPath: parryStunDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5069321123640539476, guid: 3850602ed8e1617489b5bcb054de0b75, type: 3}
       propertyPath: m_Name
       value: Tengu
@@ -887,7 +907,7 @@ PrefabInstance:
     - target: {fileID: 1918139111895793463, guid: 2e202009a1af8ac4b90a1e55da90a89c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 812678142}
     - target: {fileID: 1918139111895793463, guid: 2e202009a1af8ac4b90a1e55da90a89c, type: 3}
       propertyPath: attackDamage
       value: 5
