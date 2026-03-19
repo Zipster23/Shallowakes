@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
+    PlayerMovement movement;
     Animator animator;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        movement = GetComponent<PlayerMovement>();
     }
 
-    public void PlayMovementAnimation(bool isMoving)
+    public void PlayMovementAnimation(bool isMoving, bool isSprinting)
     {
         animator.SetBool("isMoving", isMoving);
+        
+        if (isSprinting) {
+            animator.SetFloat("SprintScalar", movement.SpeedScale);
+        } else {
+            animator.SetFloat("SprintScalar", 1.0f);
+        }
+        
     }
 
     // Add a jump animation
@@ -30,6 +39,10 @@ public class PlayerAnimatorController : MonoBehaviour
     public void PlayParryAnimation()
     {
         animator.SetTrigger("Parry");
+    }
+    public void PlayerJumping()
+    {
+        animator.SetTrigger("Jumping");
     }
 }
 

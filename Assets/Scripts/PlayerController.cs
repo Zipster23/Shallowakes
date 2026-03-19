@@ -20,19 +20,22 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // move the player based on input
-        movement.Move(input.MovementInput);
+        movement.Move(input.MovementInput, input.sprintInput);
 
         if (input.jumpInput)
         {
             movement.Jump();
         }
 
-        if (input.MovementInput != Vector2.zero)
+        // ADDED CHECK: Only play movement animation if moving AND on the ground
+        if (input.MovementInput != Vector2.zero && movement.isGrounded)
         {
-            controller.PlayMovementAnimation(true);
-        } else
+            controller.PlayMovementAnimation(true, input.sprintInput);
+        }
+        else
         {
-            controller.PlayMovementAnimation(false);
+            // If the player stops moving, OR if they are in the air, stop the run animation
+            controller.PlayMovementAnimation(false, false);
         }
 
         if (input.parryInput)
@@ -44,11 +47,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.PlayAttackAnimation();
         }
-        else if(input.thrustInput)
+        else if (input.thrustInput)
         {
             controller.PlayThrustAnimation();
         }
-
     }
 }
 
