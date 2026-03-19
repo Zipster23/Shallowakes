@@ -412,7 +412,7 @@ public class TenguAI : MonoBehaviour
     // returns true if Tengu parried, false if not
     public bool CheckTenguParry()
     { 
-        
+    
         // dont parry if already parrying
         if(currentState == TenguState.Parry)
         {

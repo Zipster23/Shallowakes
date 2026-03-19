@@ -5814,6 +5814,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   timeBetweenAttacks: 1.5
+  isAttackActive: 0
+  parryStunDuration: 2
+  parryChance: 85
+  playerTransform: {fileID: 0}
+  tenguParryRange: 3
   repositionDistance: 12
   repositionTime: 1
 --- !u!114 &7903891018583126115
