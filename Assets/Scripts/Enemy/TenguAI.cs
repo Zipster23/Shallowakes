@@ -180,7 +180,7 @@ public class TenguAI : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
 
             // keep the same Y position so the Tengu doesn't go into the ground or air
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
             animator.SetBool("IsMoving", true);     // play run animation
         }
