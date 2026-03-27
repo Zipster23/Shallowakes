@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public float attackRange = 0.5f;
     public int attackDamage = 25;
-    public float attackRate = 2f;
     public bool isBusy = false;
 
     // Collision VFX and SFX
