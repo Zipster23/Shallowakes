@@ -75,6 +75,9 @@ public class PlayerHealth : MonoBehaviour
         // disable the player movement script so the player can't move after dying
         GetComponent<PlayerMovement>().enabled = false;
 
+        // disable the player input script so the player can't do anything
+        GetComponent<PlayerInputHandler>().enabled = false;
+
         // disable this script since we don't need health when the player dies
         this.enabled = false;
     }

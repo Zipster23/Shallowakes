@@ -96,6 +96,12 @@ public class PlayerController : MonoBehaviour
     // Method to detect collisions
     public void Attack()
     {
+        
+        // doesn't do anything if the player is dead
+        if(GetComponent<PlayerHealth>().currentHealth <= 0)
+        {
+            return;
+        }
 
         // Detect all enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
