@@ -32,6 +32,6 @@ public class PlayerInputHandler : MonoBehaviour
         // Sprint Input
         sprintInput = Input.GetKey(KeyCode.LeftShift);
 
-        dashInput = Input.GetKeyDown(KeyCode.RightShift);
+        dashInput = Input.GetKeyDown(KeyCode.Q);
     }
 }
