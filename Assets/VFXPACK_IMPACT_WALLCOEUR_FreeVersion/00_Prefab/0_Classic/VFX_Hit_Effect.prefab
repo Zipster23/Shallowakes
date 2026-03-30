@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 3642160410948286680}
   - component: {fileID: 3889521147320697831}
   m_Layer: 0
-  m_Name: VFX_Blood_01
+  m_Name: VFX_Hit_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

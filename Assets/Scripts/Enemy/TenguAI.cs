@@ -501,10 +501,10 @@ public class TenguAI : MonoBehaviour
         // 0 = stay and attack again
         // 1 = back up
         // 2 = strafe left/right
-        int roll = Random.Range(0, 3);
+        int roll = Random.Range(0, 5);
 
         // only reposition if the roll isn't 0
-        if(roll != 0)
+        if(roll == 1)
         {
             dashStarted = false;                            // reset before new dash
             repositionTarget = GetRepositionTarget(roll);   // calculate where to move after the random roll (back or strafe)

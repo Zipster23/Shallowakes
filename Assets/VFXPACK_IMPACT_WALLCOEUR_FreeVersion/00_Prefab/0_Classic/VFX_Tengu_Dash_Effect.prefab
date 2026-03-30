@@ -4910,7 +4910,7 @@ GameObject:
   - component: {fileID: 1375353507806458937}
   - component: {fileID: 3669992012848718768}
   m_Layer: 0
-  m_Name: VFX_Blood_02
+  m_Name: VFX_Tengu_Dash_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

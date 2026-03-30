@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
         if (input.dashInput)
         {
             movement.DashOutput(input.MovementInput);
+            vfx.PlayDashEffect(transform.position + Vector3.up * 1f, transform);
+            sfx.PlayDashSFX();
         }
 
     }
