@@ -68,6 +68,8 @@ public class TenguAI : MonoBehaviour
     public float repositionTime = 1.5f;     // how long the Tengu spends repositioning before chasing again
     private float repositionTimer = 0f;     // counts down the reposition duration
     private Vector3 repositionTarget;       // The position the Tengu is moving towards when repositioning
+    public float dashSpeed = 40f;           // the speed of the tengu after Repositioning
+    private bool dashStarted = false;       // prevents VFX and SFX from playing every frame during the dash
 
 
 
@@ -253,7 +255,15 @@ public class TenguAI : MonoBehaviour
         // If the Tengu hasn't reached the target position, keep moving towards it while playing running animation
         if(distanceToTarget > 0.5f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, repositionTarget, moveSpeed * Time.deltaTime);
+            // play VFX and SFX only once at the start of the dash
+            if(!dashStarted)
+            {
+                dashStarted = true;
+                vfx.PlayDashEffect(transform.position + Vector3.up * 2f, transform);
+                sfx.PlayDashSFX();
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, repositionTarget, dashSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         // Else, the Tengu has reached the target position, so stop moving and playing the running animation
@@ -265,6 +275,7 @@ public class TenguAI : MonoBehaviour
         // when the reposition timer runs out, go back to chasing the player
         if(repositionTimer <= 0f)
         {
+            dashStarted = false;    // reset for next dash
             animator.SetBool("IsMoving", false);
             currentState = TenguState.Chase;
         }
@@ -399,6 +410,7 @@ public class TenguAI : MonoBehaviour
         
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
+        StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
         StartCoroutine(ParryStun());        // start the stun for getting parried
@@ -440,6 +452,9 @@ public class TenguAI : MonoBehaviour
             animator.SetTrigger("Parry");
             vfx.EmitSparkParticles();
             sfx.playKatanaDeflectSFX();
+
+            // let the Tengu attack after parrying
+            attackTimer = 0f;
 
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
@@ -486,11 +501,12 @@ public class TenguAI : MonoBehaviour
         // 0 = stay and attack again
         // 1 = back up
         // 2 = strafe left/right
-        int roll = Random.Range(0, 3);
+        int roll = Random.Range(0, 5);
 
         // only reposition if the roll isn't 0
-        if(roll != 0)
+        if(roll == 1)
         {
+            dashStarted = false;                            // reset before new dash
             repositionTarget = GetRepositionTarget(roll);   // calculate where to move after the random roll (back or strafe)
             repositionTimer = repositionTime;               // reset the reposition timer
             currentState = TenguState.Reposition;           // switch to the Reposition state

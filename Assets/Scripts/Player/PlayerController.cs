@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public float attackRange = 0.5f;
     public int attackDamage = 25;
-    public float attackRate = 2f;
     public bool isBusy = false;
 
     // Collision VFX and SFX
@@ -88,6 +87,8 @@ public class PlayerController : MonoBehaviour
         if (input.dashInput)
         {
             movement.DashOutput(input.MovementInput);
+            vfx.PlayDashEffect(transform.position + Vector3.up * 1f, transform);
+            sfx.PlayDashSFX();
         }
 
     }
@@ -97,6 +98,12 @@ public class PlayerController : MonoBehaviour
     // Method to detect collisions
     public void Attack()
     {
+        
+        // doesn't do anything if the player is dead
+        if(GetComponent<PlayerHealth>().currentHealth <= 0)
+        {
+            return;
+        }
 
         // Detect all enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
