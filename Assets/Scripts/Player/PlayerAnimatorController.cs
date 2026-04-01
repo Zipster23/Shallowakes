@@ -44,5 +44,10 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetTrigger("Jumping");
     }
+
+    public void PlayDashAnimation()
+    {
+        animator.SetTrigger("Dash");
+    }
 }
 

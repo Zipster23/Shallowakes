@@ -82,12 +82,13 @@ public class PlayerController : MonoBehaviour
 
         if (input.jumpInput) {
             controller.PlayJumpingAnimation();
-        }
+        }   
         
         if (input.dashInput)
         {
+            controller.PlayDashAnimation();
             movement.DashOutput(input.MovementInput);
-            vfx.PlayDashEffect(transform.position + Vector3.up * 1f, transform);
+            vfx.PlayDashEffect(transform.position + Vector3.up * 0.5f, transform);
             sfx.PlayDashSFX();
         }
 
