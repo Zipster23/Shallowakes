@@ -42,7 +42,8 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetBool("IsDead", true);
 
         // Disable enemy 
-        this.enabled = false;
+        GetComponent<TenguAI>().enabled = false;
+        GetComponent<Enemy>().enabled = false;
     }
 
 }
