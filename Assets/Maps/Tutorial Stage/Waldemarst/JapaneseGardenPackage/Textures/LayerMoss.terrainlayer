@@ -7,15 +7,15 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LayerMoss
-  m_DiffuseTexture: {fileID: 2800000, guid: bb29b1945cd794751b284973b49e12a2, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: ef82a3fb98dc183a28253903aae8dd51, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: 1140f497dea9f4d23adc7af929881d75, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: b506c16cfe2e0469c91aeadc4f953378, type: 3}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 9, y: 9}
+  m_TileSize: {x: 25, y: 12.5}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
-  m_NormalScale: 1
+  m_NormalScale: -1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
