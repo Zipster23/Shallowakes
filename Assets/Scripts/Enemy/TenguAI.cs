@@ -76,10 +76,11 @@ public class TenguAI : MonoBehaviour
     // --- ENRAGED --- //
 
     [Header("Enraged")]
-    public float enragedSpeedMultiplier = 1.5f;
-    public float enragedAttackSpeedMultiplier = 1.5f;
-    public float enragedDashSpeedMultiplier = 1.5f;
-    private bool isEnraged = false;
+    public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
+    public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
+    public float enragedDashSpeedMultiplier = 1.5f;     // how much faster the Tengu dashes while enraged
+    private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
+    public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
 
 
@@ -330,8 +331,11 @@ public class TenguAI : MonoBehaviour
         // stop moving while enraged animation plays
         animator.SetBool("IsMoving", false);
 
+        // gets what's currently playing on Animator Base Layer
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
+
         // wait for enraged animation to finish before going back to chasing
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        // if the Enraged animation is playing & if the Enraged animation has fully played, go back to chasing
         if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
         {
             currentState = TenguState.Chase;
@@ -595,25 +599,66 @@ public class TenguAI : MonoBehaviour
     public void EnterEnragedMode()
     {
         
+        // if already enraged, return so that the Tengu can't enrage multiple times
         if(isEnraged)
         {
             return;
         }
 
-        isEnraged = true;
+        // flag that Tengu is enraged so this can't trigger again
+        isEnraged = true; 
+
+        // stop any coroutines so they can't interfere with the enrage animation
         StopAllCoroutines();
+
+        // boost all stats by their corresponding enraged multipliers
         moveSpeed *= enragedSpeedMultiplier;
         timeBetweenAttacks /= enragedAttackSpeedMultiplier;
         dashSpeed *= enragedDashSpeedMultiplier;
+
+        // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
         vfx.PlayEnragedEffect(transform.position + Vector3.up * 1.5f, transform, 7f);
+
+        // start the screen shake for the duration of the enraged animation
+        StartCoroutine(ShakeDuringEnraged(7f));
+
+        // switch to enraged state so HandleEnraged() runs every frame
         currentState = TenguState.Enraged;
         Debug.Log("Tengu is now enraged!");
 
     }
     
 
+
+    
+    // continuously shakes the screen for the duration of the enrage animation by firing multiple impulses in succession
+    private IEnumerator ShakeDuringEnraged(float duration)
+    {
+        // elapsed time
+        float elapsed = 0f;
+
+        // keep shaking until the full duration of the animation has finished playing
+        while(elapsed < duration)
+        {
+            // generate a random direction for the shake each time
+            // multiplying by 2f controls how violent the shake is
+            Vector3 randomVelocity = new Vector3
+            (
+                Random.Range(-0.5f, 0.5f),
+                Random.Range(-0.5f, 0.5f),
+                0           
+            ) * 2f; 
+
+            // fire the impulse with the random velocity
+            impulseSource.GenerateImpulseWithVelocity(randomVelocity);
+
+            // add 0.3s to elapsed and wait 0.3s before firing again
+            elapsed += 0.3f;
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
 
 
 
