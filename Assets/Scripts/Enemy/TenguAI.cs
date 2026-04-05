@@ -80,7 +80,6 @@ public class TenguAI : MonoBehaviour
     public float enragedAttackSpeedMultiplier = 1.5f;
     public float enragedDashSpeedMultiplier = 1.5f;
     private bool isEnraged = false;
-    public CinemachineImpulseSource impulseSource;
 
 
 
@@ -609,7 +608,6 @@ public class TenguAI : MonoBehaviour
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
         vfx.PlayEnragedEffect(transform.position + Vector3.up * 1.5f, transform, 7f);
-        impulseSource.GenerateImpulse();
         currentState = TenguState.Enraged;
         Debug.Log("Tengu is now enraged!");
 
