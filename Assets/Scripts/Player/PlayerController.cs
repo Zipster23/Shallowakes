@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     // Method to detect collisions
     public void Attack()
     {
-        
+
         // doesn't do anything if the player is dead
         if(GetComponent<PlayerHealth>().currentHealth <= 0)
         {
@@ -113,8 +113,16 @@ public class PlayerController : MonoBehaviour
         foreach(Collider enemy in hitEnemies)
         {
 
-            // check if Tengu parries this attack first
             TenguAI tenguAI = FindObjectOfType<TenguAI>();
+
+            // don't do anything if Tengu is in enraged animation
+            if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+            {
+                isBusy = false;
+                return;
+            }
+
+            // check if Tengu parries this attack first
             if(tenguAI != null && tenguAI.CheckTenguParry())
             {
                 return; // Tengu parried, cancel the attack

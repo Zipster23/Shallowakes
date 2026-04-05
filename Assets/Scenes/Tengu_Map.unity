@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13519943, g: 0.14640886, b: 0.14289108, a: 1}
+  m_IndirectSpecularColor: {r: 0.1351994, g: 0.14640886, b: 0.14289108, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -577,7 +577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966884247}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.33044982, y: -4e-45, z: -1e-45, w: 0.9438236}
+  m_LocalRotation: {x: -0.33044982, y: 4e-45, z: 1e-45, w: 0.9438236}
   m_LocalPosition: {x: -1100.8058, y: 528.8717, z: -199.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1206,11 +1206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000016395974
+      value: -0.000000016395974
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000052183893
+      value: 0.0000000052183893
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1233,6 +1233,10 @@ PrefabInstance:
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: attackDamage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
@@ -1242,7 +1246,7 @@ PrefabInstance:
       objectReference: {fileID: 5940529053743077331, guid: 7c6d9bb9c8994364dbe5ba2e32dd4d13, type: 3}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
-      value: 1000000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
@@ -1298,11 +1302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6044417593333557980, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -1e-45
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 6044417593333557980, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 6044417593333557980, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1338,6 +1342,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1333801031}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: parryChance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: impulseSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: playerLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -1345,6 +1357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tengu
       objectReference: {fileID: 0}
+    - target: {fileID: 5328840721501948552, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: enragedEffect
+      value: 
+      objectReference: {fileID: 1375353507806458937, guid: 21cd533acf9e7ab4abc798bef56f0da8, type: 3}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1101.9899
@@ -1385,6 +1401,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6205098252534814106, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903891018583126115, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: enragedSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 26e4461fe9c99194195ef49d8e1d3c37, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

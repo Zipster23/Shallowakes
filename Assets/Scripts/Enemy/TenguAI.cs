@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class TenguAI : MonoBehaviour
@@ -70,6 +71,16 @@ public class TenguAI : MonoBehaviour
     private Vector3 repositionTarget;       // The position the Tengu is moving towards when repositioning
     public float dashSpeed = 40f;           // the speed of the tengu after Repositioning
     private bool dashStarted = false;       // prevents VFX and SFX from playing every frame during the dash
+
+
+    // --- ENRAGED --- //
+
+    [Header("Enraged")]
+    public float enragedSpeedMultiplier = 1.5f;
+    public float enragedAttackSpeedMultiplier = 1.5f;
+    public float enragedDashSpeedMultiplier = 1.5f;
+    private bool isEnraged = false;
+    public CinemachineImpulseSource impulseSource;
 
 
 
@@ -317,7 +328,16 @@ public class TenguAI : MonoBehaviour
 
     private void HandleEnraged()
     {
-        
+        // stop moving while enraged animation plays
+        animator.SetBool("IsMoving", false);
+
+        // wait for enraged animation to finish before going back to chasing
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
+        {
+            currentState = TenguState.Chase;
+        }
+
     }
 
 
@@ -424,6 +444,12 @@ public class TenguAI : MonoBehaviour
     // returns true if Tengu parried, false if not
     public bool CheckTenguParry()
     { 
+        
+        // don't parry if the Tengu is playing the enraged animation
+        if(currentState == TenguState.Enraged)
+        {
+            return false;
+        }
     
         // dont parry if already parrying
         if(currentState == TenguState.Parry)
@@ -560,6 +586,34 @@ public class TenguAI : MonoBehaviour
         }
     }
 
+
+
+
+    // -------------------------
+    // ENRAGED LOGIC
+    // -------------------------
+
+    public void EnterEnragedMode()
+    {
+        
+        if(isEnraged)
+        {
+            return;
+        }
+
+        isEnraged = true;
+        StopAllCoroutines();
+        moveSpeed *= enragedSpeedMultiplier;
+        timeBetweenAttacks /= enragedAttackSpeedMultiplier;
+        dashSpeed *= enragedDashSpeedMultiplier;
+        animator.SetTrigger("Enraged");
+        sfx.PlayEnragedSFX();
+        vfx.PlayEnragedEffect(transform.position + Vector3.up * 1.5f, transform, 7f);
+        impulseSource.GenerateImpulse();
+        currentState = TenguState.Enraged;
+        Debug.Log("Tengu is now enraged!");
+
+    }
     
 
 

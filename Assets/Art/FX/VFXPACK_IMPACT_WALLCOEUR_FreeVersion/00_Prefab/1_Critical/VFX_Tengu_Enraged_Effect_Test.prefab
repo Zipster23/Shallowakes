@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6845850144125539351}
   - component: {fileID: 4266774299334487008}
   m_Layer: 0
-  m_Name: VFX_Critical_01
+  m_Name: VFX_Tengu_Enraged_Effect_Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -289,7 +289,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 9
       minScalar: 10
       maxCurve:
         serializedVersion: 2

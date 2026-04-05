@@ -9,6 +9,7 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem parrySparks;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
+    [SerializeField] private ParticleSystem enragedEffect;
     
 
     public void StartSwingEffects()
@@ -39,5 +40,12 @@ public class TenguVFXManager : MonoBehaviour
         ParticleSystem effect = Instantiate(dashEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent); // attach to the tengu so that the effect follows
         Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlayEnragedEffect(Vector3 position, Transform parent, float duration)
+    {
+        ParticleSystem effect = Instantiate(enragedEffect, position, Quaternion.identity);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, duration);
     }
 }

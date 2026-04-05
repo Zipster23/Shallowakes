@@ -9,6 +9,7 @@ public class TenguSFXManager : MonoBehaviour
     [SerializeField] private AudioClip katanaDeflectSFX;
     [SerializeField] private AudioClip katanaHitSFX;
     [SerializeField] private AudioClip dashSFX;
+    [SerializeField] private AudioClip enragedSFX;
     [SerializeField] private float katanaDeflectVolume = 0.7f;
 
     public void playKatanaAttackSFX()
@@ -29,5 +30,10 @@ public class TenguSFXManager : MonoBehaviour
     public void PlayDashSFX()
     {
         katanaSFX.PlayOneShot(dashSFX);
+    }
+
+    public void PlayEnragedSFX()
+    {
+        katanaSFX.PlayOneShot(enragedSFX);
     }
 }
