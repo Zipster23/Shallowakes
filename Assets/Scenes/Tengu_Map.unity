@@ -1536,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 1333801031}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: parryChance
-      value: 50
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: impulseSource
@@ -1600,7 +1600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6205098252534814106, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7903891018583126115, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: enragedSFX

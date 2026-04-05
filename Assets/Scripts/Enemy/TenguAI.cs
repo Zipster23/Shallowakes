@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TenguAI : MonoBehaviour
@@ -17,7 +18,8 @@ public class TenguAI : MonoBehaviour
         Parry,      // parrying the player's attack
         Reposition, // backing off or strafing after an attack
         Enraged,    // enraged state - faster/stronger
-        IsParried   // briefly stunned after getting parried by the player
+        IsParried,  // briefly stunned after getting parried by the player
+        DashSlash
     }
 
     [Header("States")]
@@ -83,6 +85,16 @@ public class TenguAI : MonoBehaviour
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
 
+    // --- ABILITIES --- //
+
+    [Header("Dash-Slash Ability")]
+    public float dashSlashRange = 20f;      // distance at which Tengu triggers dash slash
+    public float dashSlashSpeed = 80f;      // how fast the Tengu moves during dash slash
+    public float dashSlashWindUp = 0.25f;    // how long the Tengu pauses before performing dash slash
+    private bool dashSlashStarted = false; 
+    private bool isDashSlashing = false;
+
+
 
 
     // --- SETUP --- //
@@ -140,6 +152,9 @@ public class TenguAI : MonoBehaviour
                 break;
             case TenguState.IsParried:
                 HandleIsParried();
+                break;
+            case TenguState.DashSlash:
+                HandleDashSlash();
                 break;
 
         }
@@ -208,6 +223,13 @@ public class TenguAI : MonoBehaviour
             animator.SetBool("IsMoving", false);    // make run animation stops playing
             attackTimer = 0f; // set timer to 0 so the Tengu attacks immediately instead of waiting
             currentState = TenguState.Attack;   // switch to Attack state
+        }
+
+        // if player is too far away, do a dash slash instead of a regular chase
+        if(distanceToPlayer > dashSlashRange)
+        {
+            currentState = TenguState.DashSlash;
+            return;
         }
 
     }
@@ -288,7 +310,16 @@ public class TenguAI : MonoBehaviour
         {
             dashStarted = false;    // reset for next dash
             animator.SetBool("IsMoving", false);
-            currentState = TenguState.Chase;
+            
+            int roll = Random.Range(0,2);
+            if(roll == 0)
+            {
+                currentState = TenguState.DashSlash;
+            }
+            else
+            {
+                currentState = TenguState.Chase;
+            }
         }
 
     }
@@ -339,6 +370,50 @@ public class TenguAI : MonoBehaviour
         if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
         {
             currentState = TenguState.Chase;
+        }
+
+    }
+
+
+
+
+    private void HandleDashSlash()
+    {
+        
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        if(distanceToPlayer <= attackRange)
+        {
+            dashSlashStarted = false;
+            isDashSlashing = false;
+            currentState = TenguState.Attack;
+            return;
+        }
+
+        if(!isDashSlashing && !dashSlashStarted)
+        {
+            dashSlashStarted = true;
+            animator.SetBool("IsMoving", false);
+            StartCoroutine(DashSlashWindUp());
+        }
+
+        if(isDashSlashing)
+        {
+            
+            transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            animator.SetBool("IsMoving", true);
+
+            if(distanceToPlayer <= attackRange)
+            {
+                isDashSlashing = false;
+                dashSlashStarted = false;
+                animator.SetBool("IsMoving", false);
+                attackTimer = 0f;
+                currentState = TenguState.Attack;
+            }
+
         }
 
     }
@@ -527,13 +602,13 @@ public class TenguAI : MonoBehaviour
         isAttacking = false;
 
         // randomly pick what to do next:
-        // 0 = stay and attack again
-        // 1 = back up
-        // 2 = strafe left/right
+        // 0, 1, 2 = stay and attack again
+        // 3 = back up
+        // 4 = strafe left/right
         int roll = Random.Range(0, 5);
 
         // only reposition if the roll isn't 0
-        if(roll == 1)
+        if(roll == 3 || roll == 4)
         {
             dashStarted = false;                            // reset before new dash
             repositionTarget = GetRepositionTarget(roll);   // calculate where to move after the random roll (back or strafe)
@@ -550,8 +625,8 @@ public class TenguAI : MonoBehaviour
     private Vector3 GetRepositionTarget(int roll)
     {
 
-        // if the roll was a 1 (back up)
-        if(roll == 1)
+        // if the roll was a 3 (back up)
+        if(roll == 3)
         {
             // calculates the direction that's directly away from the player
             Vector3 dirAway = (transform.position - player.position).normalized;
@@ -564,7 +639,7 @@ public class TenguAI : MonoBehaviour
 
             return target;
         }
-        // if the roll was a 2 (strafe left/right)
+        // if the roll was a 4 (strafe left/right)
         else
         {
             // calculates the direction that's directly towards the player
@@ -660,6 +735,20 @@ public class TenguAI : MonoBehaviour
         }
     }
 
+
+
+
+    // -------------------------
+    // DASH SLASH LOGIC
+    // -------------------------
+
+    private IEnumerator DashSlashWindUp()
+    {
+        
+        yield return new WaitForSeconds(dashSlashWindUp);
+        isDashSlashing = true;
+
+    }
 
 
 
