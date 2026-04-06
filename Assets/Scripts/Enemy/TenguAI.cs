@@ -404,6 +404,7 @@ public class TenguAI : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             animator.SetBool("IsMoving", true);
+            animator.SetTrigger("DashSlash");
 
             if(distanceToPlayer <= attackRange)
             {
@@ -694,7 +695,7 @@ public class TenguAI : MonoBehaviour
         // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
-        vfx.PlayEnragedEffect(transform.position + Vector3.up * 1.5f, transform, 7f);
+        vfx.PlayEnragedEffect(transform.position, transform, 7f);
 
         // start the screen shake for the duration of the enraged animation
         StartCoroutine(ShakeDuringEnraged(7f));

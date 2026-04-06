@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1351994, g: 0.14640886, b: 0.14289108, a: 1}
+  m_IndirectSpecularColor: {r: 0.13519943, g: 0.14640886, b: 0.14289108, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1362,11 +1362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000016176498
+      value: 0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000058634884
+      value: 0.0000000058634884
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1402,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 5940529053743077331, guid: 7c6d9bb9c8994364dbe5ba2e32dd4d13, type: 3}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
-      value: 100000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4547165869371836594, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_FollowOffset.y
@@ -1536,12 +1536,16 @@ PrefabInstance:
       objectReference: {fileID: 1333801031}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: parryChance
-      value: 85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: impulseSource
       value: 
       objectReference: {fileID: 966884253}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: dashSlashSpeed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: freeLookCamera
       value: 
@@ -1557,7 +1561,7 @@ PrefabInstance:
     - target: {fileID: 5328840721501948552, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: enragedEffect
       value: 
-      objectReference: {fileID: 1375353507806458937, guid: 21cd533acf9e7ab4abc798bef56f0da8, type: 3}
+      objectReference: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1101.9899
