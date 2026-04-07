@@ -9,7 +9,8 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem parrySparks;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
-    [SerializeField] private ParticleSystem enragedEffect;
+    [SerializeField] private ParticleSystem magicCircleEffect;
+    [SerializeField] private ParticleSystem redCloudEffect;
     
 
     public void StartSwingEffects()
@@ -42,9 +43,16 @@ public class TenguVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void PlayEnragedEffect(Vector3 position, Transform parent, float duration)
+    public void PlayMagicCircleEffect(Vector3 position, Transform parent, float duration)
     {
-        ParticleSystem effect = Instantiate(enragedEffect, position, Quaternion.identity);
+        ParticleSystem effect = Instantiate(magicCircleEffect, position, Quaternion.identity);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, duration);
+    }
+
+    public void PlayRedCloudEffect(Vector3 position, Transform parent, float duration)
+    {
+        ParticleSystem effect = Instantiate(redCloudEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, duration);
     }

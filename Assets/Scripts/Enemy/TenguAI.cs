@@ -59,7 +59,6 @@ public class TenguAI : MonoBehaviour
     public bool isAttackActive = false;     // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
     public float parryStunDuration = 2f;    // how long the Tengu is stunned for after getting parried
 
-    public int parryChance = 85;            // percentage chance the Tengu will parry the player's attack (0-100)
     public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
 
 
@@ -70,14 +69,9 @@ public class TenguAI : MonoBehaviour
     public int normalDodgeChance = 25;      // dodge chance in normal mode
     public int enragedParryChance = 20;     // parry chance in enraged mode
     public int enragedDodgeChance = 65;     // dodge chance in enraged mode    
-
-
-    // --- REPOSITION --- //
-
-    [Header("Reposition")]
     public float dodgeDistance = 12f;  // how far the Tengu moves when repositioning
     private Vector3 dodgeTarget;       // The position the Tengu is moving towards when repositioning
-    public float dashSpeed = 40f;           // the speed of the tengu after Repositioning
+    public float dodgeSpeed = 40f;           // the speed of the tengu after Repositioning
     private bool dodgeStarted = false;       // prevents VFX and SFX from playing every frame during the dash
 
 
@@ -86,7 +80,7 @@ public class TenguAI : MonoBehaviour
     [Header("Enraged")]
     public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
     public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
-    public float enragedDashSpeedMultiplier = 1.5f;     // how much faster the Tengu dashes while enraged
+    public float enragedDodgeSpeedMultiplier = 1.5f;     // how much faster the Tengu dashes while enraged
     private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
@@ -304,7 +298,7 @@ public class TenguAI : MonoBehaviour
                 sfx.PlayDodgeSFX();
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dashSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dodgeSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         // Else, the Tengu has reached the target position, so stop moving and playing the running animation
@@ -702,12 +696,13 @@ public class TenguAI : MonoBehaviour
         // boost all stats by their corresponding enraged multipliers
         moveSpeed *= enragedSpeedMultiplier;
         timeBetweenAttacks /= enragedAttackSpeedMultiplier;
-        dashSpeed *= enragedDashSpeedMultiplier;
+        dodgeSpeed *= enragedDodgeSpeedMultiplier;
 
         // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
-        vfx.PlayEnragedEffect(transform.position, transform, 7f);
+        vfx.PlayMagicCircleEffect(transform.position, transform, 7f);
+        vfx.PlayRedCloudEffect(transform.position, transform, 3f);
 
         // start the screen shake for the duration of the enraged animation
         StartCoroutine(ShakeDuringEnraged(7f));
