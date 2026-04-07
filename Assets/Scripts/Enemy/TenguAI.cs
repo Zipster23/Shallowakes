@@ -701,8 +701,8 @@ public class TenguAI : MonoBehaviour
         // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
-        vfx.PlayMagicCircleEffect(transform.position, transform, 7f);
-        vfx.PlayRedCloudEffect(transform.position, transform, 3f);
+        vfx.PlayMagicCircleEffect(transform.position, transform);
+        vfx.PlayRedCloudEffect(transform.position, transform);
 
         // start the screen shake for the duration of the enraged animation
         StartCoroutine(ShakeDuringEnraged(7f));
