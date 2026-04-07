@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13457021, g: 0.14601669, b: 0.14273709, a: 1}
+  m_IndirectSpecularColor: {r: 0.13457021, g: 0.14601669, b: 0.14273721, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,124 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &3199564
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 109356, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Goju_46m
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1073.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -240.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95340216
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.30170253
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -35.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 490046, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2147f45de884d0f41bfbf5e4f10ce163, type: 3}
+--- !u!1001 &95615788
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 121694, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Goju_55m
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1101.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -251.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437940, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308914, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8cbead2f6ed70d48bef46da5f2dbb8c, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70515be744e52c04aa0a51f7796342dc, type: 3}
 --- !u!114 &126595771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
@@ -5179,6 +5297,63 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5013318801414598979, guid: ef66df5e4ad06114aa872d9a6464f841, type: 3}
+--- !u!1001 &410351645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 146922, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Tahoto_14m (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1145.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -203.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9965007
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.08358533
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -9.589
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
 --- !u!1 &427068515
 GameObject:
   m_ObjectHideFlags: 0
@@ -6002,6 +6177,120 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1147597344
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 151334, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Goju_36m (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1135.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -231.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88550234
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.46463493
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 55.373
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+--- !u!1001 &1169218819
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 151334, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Goju_36m
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1067.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -208.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9971995
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.07478784
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -8.578
+      objectReference: {fileID: 0}
+    - target: {fileID: 444932, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5e6d0e40893ffd4ba0d8b502ead116b, type: 3}
 --- !u!1 &1263310886
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,6 +6934,63 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1001 &1983307832
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 146922, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_Name
+      value: Pagoda_Tahoto_14m
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1074.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 527.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -183
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9075168
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4200159
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 49.671
+      objectReference: {fileID: 0}
+    - target: {fileID: 426846, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b45e4fc099d1bff48928c498e876bd2d, type: 3}
 --- !u!1001 &2036089131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6733,7 +7079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411646084901399552, guid: ac49632e974c66e49be1c8bc43f0408e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1110.11
+      value: -1092.9
       objectReference: {fileID: 0}
     - target: {fileID: 411646084901399552, guid: ac49632e974c66e49be1c8bc43f0408e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6741,7 +7087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411646084901399552, guid: ac49632e974c66e49be1c8bc43f0408e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -234.92
+      value: 35.8
       objectReference: {fileID: 0}
     - target: {fileID: 411646084901399552, guid: ac49632e974c66e49be1c8bc43f0408e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6904,3 +7250,9 @@ SceneRoots:
   - {fileID: 1776427560}
   - {fileID: 1754645776}
   - {fileID: 1778662264}
+  - {fileID: 95615788}
+  - {fileID: 1983307832}
+  - {fileID: 1169218819}
+  - {fileID: 3199564}
+  - {fileID: 1147597344}
+  - {fileID: 410351645}
