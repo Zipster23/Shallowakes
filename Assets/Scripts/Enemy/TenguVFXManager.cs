@@ -35,7 +35,7 @@ public class TenguVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void PlayDashEffect(Vector3 position, Transform parent)
+    public void PlayDodgeEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(dashEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent); // attach to the tengu so that the effect follows

@@ -27,7 +27,7 @@ public class TenguSFXManager : MonoBehaviour
         katanaSFX.PlayOneShot(katanaHitSFX);
     }
 
-    public void PlayDashSFX()
+    public void PlayDodgeSFX()
     {
         katanaSFX.PlayOneShot(dashSFX);
     }

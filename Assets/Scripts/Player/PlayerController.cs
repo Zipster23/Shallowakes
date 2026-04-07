@@ -123,8 +123,9 @@ public class PlayerController : MonoBehaviour
             }
 
             // check if Tengu parries this attack first
-            if(tenguAI != null && tenguAI.CheckTenguParry())
+            if(tenguAI != null && tenguAI.CheckTenguResponse())
             {
+                isBusy = false;
                 return; // Tengu parried, cancel the attack
             }
 
