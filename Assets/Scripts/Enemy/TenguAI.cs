@@ -70,6 +70,7 @@ public class TenguAI : MonoBehaviour
     public float repositionDistance = 12f;  // how far the Tengu moves when repositioning
     public float repositionTime = 1.5f;     // how long the Tengu spends repositioning before chasing again
     private float repositionTimer = 0f;     // counts down the reposition duration
+    public float repositionWaitTime = 1.5f; // how long to wait after attacking before repositioning
     private Vector3 repositionTarget;       // The position the Tengu is moving towards when repositioning
     public float dashSpeed = 40f;           // the speed of the tengu after Repositioning
     private bool dashStarted = false;       // prevents VFX and SFX from playing every frame during the dash
@@ -239,7 +240,7 @@ public class TenguAI : MonoBehaviour
 
     private void HandleAttack()
     {
-
+        
         // calculate how far away the player is
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -252,13 +253,21 @@ public class TenguAI : MonoBehaviour
             currentState = TenguState.Chase;
             return;
         }
-
+        
         // count down the timer every frame
         attackTimer -= Time.deltaTime;
 
         // only trigger an attack if the timer hit 0 and the Tengu isn't already mid-attack
         if(attackTimer <= 0f && !isAttacking)
         {
+
+            // double check if player is still in range before attacking
+            if(distanceToPlayer > attackRange)
+            {
+                currentState = TenguState.Chase;
+                return; 
+            }
+            
             animator.SetTrigger("Attack");      // trigger the attack animation
             
             attackTimer = timeBetweenAttacks;   // reset the timer so Tengu waits before attacking again
@@ -381,43 +390,34 @@ public class TenguAI : MonoBehaviour
     {
         
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // always face the player
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
+        // if already close enough, just chase
         if(distanceToPlayer <= attackRange)
         {
             dashSlashStarted = false;
             isDashSlashing = false;
-            currentState = TenguState.Attack;
+            currentState = TenguState.Chase;
             return;
         }
 
-        if(!isDashSlashing && !dashSlashStarted)
+        // start the dash slash animation once
+        if(!dashSlashStarted)
         {
             dashSlashStarted = true;
             animator.SetBool("IsMoving", false);
-            StartCoroutine(DashSlashWindUp());
+            animator.SetTrigger("DashSlash"); // make sure this matches your animator parameter name
         }
 
-        if(isDashSlashing)
-        {
-            
-            transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            animator.SetBool("IsMoving", true);
-            animator.SetTrigger("DashSlash");
-
-            if(distanceToPlayer <= attackRange)
-            {
-                isDashSlashing = false;
-                dashSlashStarted = false;
-                animator.SetBool("IsMoving", false);
-                attackTimer = 0f;
-                currentState = TenguState.Attack;
-            }
-
-        }
+        // move towards player during the animation
+        transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
+
+    
 
 
 
@@ -597,17 +597,17 @@ public class TenguAI : MonoBehaviour
     {
         
         // wait for attack animation to finish before repositioning
-        yield return new WaitForSeconds(timeBetweenAttacks);
+        yield return new WaitForSeconds(repositionWaitTime);
 
         // attack is finished, so clear the flag so a new attack can trigger
         isAttacking = false;
-
+        
         // randomly pick what to do next:
         // 0, 1, 2 = stay and attack again
         // 3 = back up
         // 4 = strafe left/right
         int roll = Random.Range(0, 5);
-
+        
         // only reposition if the roll isn't 0
         if(roll == 3 || roll == 4)
         {
@@ -615,6 +615,7 @@ public class TenguAI : MonoBehaviour
             repositionTarget = GetRepositionTarget(roll);   // calculate where to move after the random roll (back or strafe)
             repositionTimer = repositionTime;               // reset the reposition timer
             currentState = TenguState.Reposition;           // switch to the Reposition state
+            yield break;                                    // stop the coroutine here, HandleReposition takes over
         }
 
     }

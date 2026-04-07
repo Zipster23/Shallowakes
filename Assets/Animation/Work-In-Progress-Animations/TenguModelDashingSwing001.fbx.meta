@@ -57,8 +57,29 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: Attack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2496749
+        functionName: EnableWeaponCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.2549505
         functionName: StartSwingEffects
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.43942004
+        functionName: Attack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -71,8 +92,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0
-        functionName: Attack
+      - time: 0.5383615
+        functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
