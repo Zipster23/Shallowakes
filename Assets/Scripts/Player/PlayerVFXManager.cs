@@ -41,4 +41,6 @@ public class PlayerVFXManager : MonoBehaviour
         effect.transform.SetParent(parent); // attach to the player so that the effect follows
         Destroy(effect.gameObject, effect.main.duration);
     }
+
+    
 }

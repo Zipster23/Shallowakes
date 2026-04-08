@@ -24,10 +24,23 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        // make it so that Tengu cannot be damaged during enraged animation
+        TenguAI tenguAI = GetComponent<TenguAI>();
+        if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+        {
+            return;
+        }
+
         currentHealth -= damage;
 
         // Play hurt animation
         enemyAnimator.SetTrigger("Hurt");
+
+        // check if tengu should enter enraged mode
+        if(currentHealth <= 20)
+        {
+            GetComponent<TenguAI>()?.EnterEnragedMode();
+        }
 
         if(currentHealth <= 0)
         {
