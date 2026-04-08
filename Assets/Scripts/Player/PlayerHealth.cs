@@ -78,6 +78,8 @@ public class PlayerHealth : MonoBehaviour
         // disable the player input script so the player can't do anything
         GetComponent<PlayerInputHandler>().enabled = false;
 
+        GetComponent<PlayerParry>().enabled = false;
+
         // disable this script since we don't need health when the player dies
         this.enabled = false;
     }

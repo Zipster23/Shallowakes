@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TenguAI : MonoBehaviour
@@ -14,9 +16,10 @@ public class TenguAI : MonoBehaviour
         Chase,      // running towards the player
         Attack,     // in attack range, swinging at the player
         Parry,      // parrying the player's attack
-        Reposition, // backing off or strafing after an attack
+        Dodge, // backing off or strafing after an attack
         Enraged,    // enraged state - faster/stronger
-        IsParried   // briefly stunned after getting parried by the player
+        IsParried,  // briefly stunned after getting parried by the player
+        DashSlash
     }
 
     [Header("States")]
@@ -56,20 +59,38 @@ public class TenguAI : MonoBehaviour
     public bool isAttackActive = false;     // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
     public float parryStunDuration = 2f;    // how long the Tengu is stunned for after getting parried
 
-    public int parryChance = 85;            // percentage chance the Tengu will parry the player's attack (0-100)
-    public Transform playerTransform;       // reference to the player's transform for distance check
     public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
 
 
-    // --- REPOSITION --- //
+    // --- RESPONSE CHANCES --- //
 
-    [Header("Reposition")]
-    public float repositionDistance = 12f;  // how far the Tengu moves when repositioning
-    public float repositionTime = 1.5f;     // how long the Tengu spends repositioning before chasing again
-    private float repositionTimer = 0f;     // counts down the reposition duration
-    private Vector3 repositionTarget;       // The position the Tengu is moving towards when repositioning
-    public float dashSpeed = 40f;           // the speed of the tengu after Repositioning
-    private bool dashStarted = false;       // prevents VFX and SFX from playing every frame during the dash
+    [Header("Response Chances")]
+    public int normalParryChance = 60;      // parry chance in normal mode
+    public int normalDodgeChance = 25;      // dodge chance in normal mode
+    public int enragedParryChance = 20;     // parry chance in enraged mode
+    public int enragedDodgeChance = 65;     // dodge chance in enraged mode    
+    public float dodgeDistance = 12f;  // how far the Tengu moves when repositioning
+    private Vector3 dodgeTarget;       // The position the Tengu is moving towards when repositioning
+    public float dodgeSpeed = 40f;           // the speed of the tengu after Repositioning
+    private bool dodgeStarted = false;       // prevents VFX and SFX from playing every frame during the dash
+
+
+    // --- ENRAGED --- //
+
+    [Header("Enraged")]
+    public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
+    public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
+    public float enragedDodgeSpeedMultiplier = 1.5f;     // how much faster the Tengu dashes while enraged
+    private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
+    public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
+
+
+    // --- ABILITIES --- //
+
+    [Header("Dash-Slash Ability")]
+    public float dashSlashRange = 20f;      // distance at which Tengu triggers dash slash
+    public float dashSlashSpeed = 80f;      // how fast the Tengu moves during dash slash
+    private bool dashSlashStarted = false; 
 
 
 
@@ -121,14 +142,17 @@ public class TenguAI : MonoBehaviour
             case TenguState.Parry:
                 HandleParry();
                 break;
-            case TenguState.Reposition:
-                HandleReposition();
+            case TenguState.Dodge:
+                HandleDodge();
                 break;
             case TenguState.Enraged:
                 HandleEnraged();
                 break;
             case TenguState.IsParried:
                 HandleIsParried();
+                break;
+            case TenguState.DashSlash:
+                HandleDashSlash();
                 break;
 
         }
@@ -199,6 +223,13 @@ public class TenguAI : MonoBehaviour
             currentState = TenguState.Attack;   // switch to Attack state
         }
 
+        // if player is too far away, do a dash slash instead of a regular chase
+        if(distanceToPlayer > dashSlashRange)
+        {
+            currentState = TenguState.DashSlash;
+            return;
+        }
+
     }
 
 
@@ -206,7 +237,7 @@ public class TenguAI : MonoBehaviour
 
     private void HandleAttack()
     {
-
+        
         // calculate how far away the player is
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -219,21 +250,27 @@ public class TenguAI : MonoBehaviour
             currentState = TenguState.Chase;
             return;
         }
-
+        
         // count down the timer every frame
         attackTimer -= Time.deltaTime;
 
         // only trigger an attack if the timer hit 0 and the Tengu isn't already mid-attack
         if(attackTimer <= 0f && !isAttacking)
         {
+
+            // double check if player is still in range before attacking
+            if(distanceToPlayer > attackRange)
+            {
+                currentState = TenguState.Chase;
+                return; 
+            }
+            
             animator.SetTrigger("Attack");      // trigger the attack animation
             
             attackTimer = timeBetweenAttacks;   // reset the timer so Tengu waits before attacking again
 
             isAttacking = true;                 // flag that we're mid attack so it doesn't get interrupted
 
-            // start waiting for the attack to finish, then decide whether to reposition
-            StartCoroutine(RepositionAfterAttack());    
         }
 
     }
@@ -241,43 +278,45 @@ public class TenguAI : MonoBehaviour
 
 
 
-    private void HandleReposition()
+    private void HandleDodge()
     {
-        
-        repositionTimer -= Time.deltaTime;  // count down the reposition timer every frame
 
         // always face the player while repositioning
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         // calculate how far we are from the position the Tengu is trying to reposition to
-        float distanceToTarget = Vector3.Distance(transform.position, repositionTarget);
+        float distanceToTarget = Vector3.Distance(transform.position, dodgeTarget);
 
         // If the Tengu hasn't reached the target position, keep moving towards it while playing running animation
         if(distanceToTarget > 0.5f)
         {
             // play VFX and SFX only once at the start of the dash
-            if(!dashStarted)
+            if(!dodgeStarted)
             {
-                dashStarted = true;
-                vfx.PlayDashEffect(transform.position + Vector3.up * 2f, transform);
-                sfx.PlayDashSFX();
+                dodgeStarted = true;
+                vfx.PlayDodgeEffect(transform.position + Vector3.up * 2f, transform);
+                sfx.PlayDodgeSFX();
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, repositionTarget, dashSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dodgeSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         // Else, the Tengu has reached the target position, so stop moving and playing the running animation
         else
         {
+            // reached dodge target, decide what to do next
+            dodgeStarted = false;
             animator.SetBool("IsMoving", false);
-        }
 
-        // when the reposition timer runs out, go back to chasing the player
-        if(repositionTimer <= 0f)
-        {
-            dashStarted = false;    // reset for next dash
-            animator.SetBool("IsMoving", false);
-            currentState = TenguState.Chase;
+            int roll = Random.Range(0, 2);
+            if(roll == 0)
+            {
+                currentState = TenguState.DashSlash;
+            }
+            else
+            {
+                currentState = TenguState.Chase;
+            }
         }
 
     }
@@ -317,8 +356,56 @@ public class TenguAI : MonoBehaviour
 
     private void HandleEnraged()
     {
-        
+        // stop moving while enraged animation plays
+        animator.SetBool("IsMoving", false);
+
+        // gets what's currently playing on Animator Base Layer
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
+
+        // wait for enraged animation to finish before going back to chasing
+        // if the Enraged animation is playing & if the Enraged animation has fully played, go back to chasing
+        if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
+        {
+            currentState = TenguState.Chase;
+        }
+
     }
+
+
+
+
+    private void HandleDashSlash()
+    {
+        
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // always face the player
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        // if already close enough, just chase
+        if(distanceToPlayer <= attackRange)
+        {
+            dashSlashStarted = false;
+            attackTimer = 0f;
+            currentState = TenguState.Chase;
+            return;
+        }
+
+        // start the dash slash animation once
+        if(!dashSlashStarted)
+        {
+            dashSlashStarted = true;
+            animator.SetBool("IsMoving", false);
+            animator.SetTrigger("DashSlash"); // make sure this matches your animator parameter name
+        }
+
+        // move towards player during the animation
+        transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+    }
+
+    
 
 
 
@@ -336,7 +423,7 @@ public class TenguAI : MonoBehaviour
     {
     
         // if the Tengu is repositioning, it can't attack
-        if(currentState == TenguState.Reposition)
+        if(currentState == TenguState.Dodge)
         {
             return;
         }
@@ -403,6 +490,17 @@ public class TenguAI : MonoBehaviour
 
 
 
+    // called by Animation Event at the end of the Tengu's attack animation
+    // sets isAttacking to false so the Tengu is able to attack again
+    public void OnAttackEnd()
+    {
+
+        isAttacking = false;
+
+    }
+
+
+
 
     // called by PlayerParry script when the player successfully parries the Tengu's attack
     public void GetParried()
@@ -420,10 +518,36 @@ public class TenguAI : MonoBehaviour
 
 
 
-    // called by the player's Attack() animation event - checks if the Tengu decides to parry
-    // returns true if Tengu parried, false if not
-    public bool CheckTenguParry()
+    // called by the player's Attack() animation event - checks if the Tengu decides to parry or dodge player attack
+    // returns true if Tengu parried/dodged, false if not
+    public bool CheckTenguResponse()
     { 
+
+        int currentParryChance;
+        if(isEnraged)
+        {
+            currentParryChance = enragedParryChance;
+        }
+        else
+        {
+            currentParryChance = normalParryChance;
+        }
+
+        int currentDodgeChance;
+        if(isEnraged)
+        {
+            currentDodgeChance = enragedDodgeChance;
+        }
+        else
+        {
+            currentDodgeChance = normalDodgeChance;
+        }
+        
+        // don't respond if the Tengu is playing the enraged animation
+        if(currentState == TenguState.Enraged)
+        {
+            return false;
+        }
     
         // dont parry if already parrying
         if(currentState == TenguState.Parry)
@@ -434,17 +558,17 @@ public class TenguAI : MonoBehaviour
         // calculate distance to player
         float distance = Vector3.Distance(transform.position, player.position);
         
-        // only parry if player is within range
+        // only respond if player is within range
         if(distance > tenguParryRange)
         {
             return false;
         }
         
         // roll a random num between 0 and 100
-        int parryRoll = Random.Range(0,100);
+        int responseRoll = Random.Range(0,100);
         
-        // if roll is within parry chance, parry the attack
-        if(parryRoll < parryChance)
+        // 0-59 = parry (60% chance)
+        if(responseRoll < currentParryChance)
         {
             currentState = TenguState.Parry;
 
@@ -462,7 +586,19 @@ public class TenguAI : MonoBehaviour
             Debug.Log("Tengu parried player attack");
             return true;
         }
+        // 60-84 = dodge (25% chance)
+        else if(responseRoll < currentParryChance + currentDodgeChance)
+        {
+            // pick a random dodge direction
+            int dodgeRoll = Random.Range(3,5);
+            dodgeTarget = GetDodgeTarget(dodgeRoll);;
+            dodgeStarted = false;
+            currentState = TenguState.Dodge;
+            Debug.Log("Tengu dodged player attack");
+            return true;
+        }
 
+        // 85-99 = gets hit (15% chance)
         return false;
 
     }
@@ -487,55 +623,30 @@ public class TenguAI : MonoBehaviour
     // REPOSITION LOGIC
     // -------------------------
 
-    // waits for the attack animation to finish, then randomly decides whether to reposition
-    private IEnumerator RepositionAfterAttack()
-    {
-        
-        // wait for attack animation to finish before repositioning
-        yield return new WaitForSeconds(timeBetweenAttacks);
-
-        // attack is finished, so clear the flag so a new attack can trigger
-        isAttacking = false;
-
-        // randomly pick what to do next:
-        // 0 = stay and attack again
-        // 1 = back up
-        // 2 = strafe left/right
-        int roll = Random.Range(0, 5);
-
-        // only reposition if the roll isn't 0
-        if(roll == 1)
-        {
-            dashStarted = false;                            // reset before new dash
-            repositionTarget = GetRepositionTarget(roll);   // calculate where to move after the random roll (back or strafe)
-            repositionTimer = repositionTime;               // reset the reposition timer
-            currentState = TenguState.Reposition;           // switch to the Reposition state
-        }
-
-    }
+    
 
 
 
 
     // calculates the world position the Tengu should move to when repositioning
-    private Vector3 GetRepositionTarget(int roll)
+    private Vector3 GetDodgeTarget(int roll)
     {
 
-        // if the roll was a 1 (back up)
-        if(roll == 1)
+        // if the roll was a 3 (back up)
+        if(roll == 3)
         {
             // calculates the direction that's directly away from the player
             Vector3 dirAway = (transform.position - player.position).normalized;
 
             // move a certain distance away from the current position
-            Vector3 target = transform.position + dirAway * repositionDistance;
+            Vector3 target = transform.position + dirAway * dodgeDistance;
 
             // keep the same Y position so the Tengu doesn't go into the ground or air
             target.y = transform.position.y;
 
             return target;
         }
-        // if the roll was a 2 (strafe left/right)
+        // if the roll was a 4 (strafe left/right)
         else
         {
             // calculates the direction that's directly towards the player
@@ -551,7 +662,7 @@ public class TenguAI : MonoBehaviour
             }
 
             // move sideways from the current position
-            Vector3 target = transform.position + sideways * repositionDistance;
+            Vector3 target = transform.position + sideways * dodgeDistance;
 
             // keep the same Y position so the Tengu doesn't go into the ground or air
             target.y = transform.position.y;
@@ -560,10 +671,82 @@ public class TenguAI : MonoBehaviour
         }
     }
 
+
+
+
+    // -------------------------
+    // ENRAGED LOGIC
+    // -------------------------
+
+    public void EnterEnragedMode()
+    {
+        
+        // if already enraged, return so that the Tengu can't enrage multiple times
+        if(isEnraged)
+        {
+            return;
+        }
+
+        // flag that Tengu is enraged so this can't trigger again
+        isEnraged = true; 
+
+        // stop any coroutines so they can't interfere with the enrage animation
+        StopAllCoroutines();
+
+        // boost all stats by their corresponding enraged multipliers
+        moveSpeed *= enragedSpeedMultiplier;
+        timeBetweenAttacks /= enragedAttackSpeedMultiplier;
+        dodgeSpeed *= enragedDodgeSpeedMultiplier;
+
+        // play animation, sfx, and vfx
+        animator.SetTrigger("Enraged");
+        sfx.PlayEnragedSFX();
+        vfx.PlayMagicCircleEffect(transform.position, transform, 7f);
+        vfx.PlayRedCloudEffect(transform.position, transform, 3f);
+
+        // start the screen shake for the duration of the enraged animation
+        StartCoroutine(ShakeDuringEnraged(7f));
+
+        // switch to enraged state so HandleEnraged() runs every frame
+        currentState = TenguState.Enraged;
+        Debug.Log("Tengu is now enraged!");
+
+    }
     
 
 
+    
+    // continuously shakes the screen for the duration of the enrage animation by firing multiple impulses in succession
+    private IEnumerator ShakeDuringEnraged(float duration)
+    {
+        // elapsed time
+        float elapsed = 0f;
 
+        // keep shaking until the full duration of the animation has finished playing
+        while(elapsed < duration)
+        {
+            // generate a random direction for the shake each time
+            // multiplying by 2f controls how violent the shake is
+            Vector3 randomVelocity = new Vector3
+            (
+                Random.Range(-0.5f, 0.5f),
+                Random.Range(-0.5f, 0.5f),
+                0           
+            ) * 2f; 
+
+            // fire the impulse with the random velocity
+            impulseSource.GenerateImpulseWithVelocity(randomVelocity);
+
+            // add 0.3s to elapsed and wait 0.3s before firing again
+            elapsed += 0.3f;
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+
+
+
+   
 
 
 
