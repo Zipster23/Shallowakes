@@ -294,7 +294,7 @@ public class TenguAI : MonoBehaviour
             if(!dodgeStarted)
             {
                 dodgeStarted = true;
-                vfx.PlayDodgeEffect(transform.position + Vector3.up * 2f, transform);
+                vfx.PlayDodgeEffect(transform.position, transform);
                 sfx.PlayDodgeSFX();
             }
 
