@@ -5135,12 +5135,19 @@ MonoBehaviour:
   timeBetweenAttacks: 0.4
   isAttackActive: 0
   parryStunDuration: 1.3
-  parryChance: 85
-  playerTransform: {fileID: 0}
   tenguParryRange: 5.5
-  repositionDistance: 12
-  repositionTime: 1
-  dashSpeed: 30
+  normalParryChance: 0
+  normalDodgeChance: 0
+  enragedParryChance: 25
+  enragedDodgeChance: 70
+  dodgeDistance: 12
+  dodgeSpeed: 40
+  enragedSpeedMultiplier: 1.5
+  enragedAttackSpeedMultiplier: 1.5
+  enragedDodgeSpeedMultiplier: 1.5
+  impulseSource: {fileID: 0}
+  dashSlashRange: 20
+  dashSlashSpeed: 80
 --- !u!114 &7903891018583126115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5158,6 +5165,7 @@ MonoBehaviour:
   katanaDeflectSFX: {fileID: 8300000, guid: 9731eb91e3139124a8ba8b3a539ecf07, type: 3}
   katanaHitSFX: {fileID: 8300000, guid: c2c9dbf4287e31949b2a2e19af5566a4, type: 3}
   dashSFX: {fileID: 8300000, guid: 41c925da46e75914f93731959c3a3f4c, type: 3}
+  enragedSFX: {fileID: 8300000, guid: 26e4461fe9c99194195ef49d8e1d3c37, type: 3}
   katanaDeflectVolume: 0.7
 --- !u!114 &5328840721501948552
 MonoBehaviour:
@@ -5176,6 +5184,8 @@ MonoBehaviour:
   parrySparks: {fileID: 6930989546855064793}
   hitEffect: {fileID: 3642160410948286680, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
   dashEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
+  magicCircleEffect: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  redCloudEffect: {fileID: 4593184484909914550, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
 --- !u!1 &7066017051461603540
 GameObject:
   m_ObjectHideFlags: 0

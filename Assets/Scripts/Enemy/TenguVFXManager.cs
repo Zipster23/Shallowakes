@@ -43,17 +43,17 @@ public class TenguVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void PlayMagicCircleEffect(Vector3 position, Transform parent, float duration)
+    public void PlayMagicCircleEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(magicCircleEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent);
-        Destroy(effect.gameObject, duration);
+        Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void PlayRedCloudEffect(Vector3 position, Transform parent, float duration)
+    public void PlayRedCloudEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(redCloudEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent);
-        Destroy(effect.gameObject, duration);
+        Destroy(effect.gameObject, effect.main.duration);
     }
 }
