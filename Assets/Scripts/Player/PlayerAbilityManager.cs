@@ -19,6 +19,8 @@ public class PlayerAbilityManager : MonoBehaviour
 
     private void Update()
     {
+
+        /*
         // Glide Ability Activation
         if(inputHandler.glideInput && !movement.isGrounded)
         {
@@ -30,6 +32,7 @@ public class PlayerAbilityManager : MonoBehaviour
         {
             
         }
+        */
     }
 
 }
