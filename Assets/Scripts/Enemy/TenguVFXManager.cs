@@ -11,6 +11,7 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem dashEffect;
     [SerializeField] private ParticleSystem magicCircleEffect;
     [SerializeField] private ParticleSystem redCloudEffect;
+    [SerializeField] private ParticleSystem slashChargeUpEffect;
     [SerializeField] private ParticleSystem slashEffect;
     
 
@@ -54,6 +55,13 @@ public class TenguVFXManager : MonoBehaviour
     public void PlayRedCloudEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(redCloudEffect, position, Quaternion.identity);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlaySlashChargeUpEffect(Vector3 position, Transform parent)
+    {
+        ParticleSystem effect = Instantiate(slashChargeUpEffect, position, slashEffect.transform.rotation);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, effect.main.duration);
     }

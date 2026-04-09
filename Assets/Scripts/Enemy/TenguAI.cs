@@ -90,7 +90,7 @@ public class TenguAI : MonoBehaviour
     [Header("Dash-Slash Ability")]
     public float dashSlashRange = 20f;      // distance at which Tengu triggers dash slash
     public float dashSlashSpeed = 80f;      // how fast the Tengu moves during dash slash
-    private bool dashSlashStarted = false; 
+    private bool isDashSlashing = false;
 
 
 
@@ -377,31 +377,11 @@ public class TenguAI : MonoBehaviour
     private void HandleDashSlash()
     {
         
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // always face the player
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-
-        // if already close enough, just chase
-        if(distanceToPlayer <= attackRange)
+        // Only start the sequence if we aren't already in the middle of it
+        if (!isDashSlashing)
         {
-            dashSlashStarted = false;
-            attackTimer = 0f;
-            currentState = TenguState.Attack;
-            return;
+            StartCoroutine(DashSlashSequence());
         }
-
-        // start the dash slash animation once
-        if(!dashSlashStarted)
-        {
-            dashSlashStarted = true;
-            animator.SetBool("IsMoving", false);
-            animator.SetTrigger("DashSlash"); // make sure this matches your animator parameter name
-        }
-
-        // move towards player during the animation
-        transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
 
@@ -455,8 +435,6 @@ public class TenguAI : MonoBehaviour
             // play the hit sound effect
             sfx.playKatanaHitSFX();
 
-            // debug
-            Debug.Log("Tengu hit Player!");
         }
 
         // attack has landed so it can no longer be parried
@@ -503,7 +481,9 @@ public class TenguAI : MonoBehaviour
 
     public void OnDashSlashEffect()
     {
-        vfx.PlaySlashEffect(transform.position + Vector3.up * 2f, transform);
+        // Spawns the slash at the player's height but at the Tengu's forward position
+        Vector3 spawnPos = transform.position + (transform.forward * 2f) + (Vector3.up * 2f);
+        vfx.PlaySlashEffect(spawnPos, transform);
     }
 
 
@@ -590,7 +570,6 @@ public class TenguAI : MonoBehaviour
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             StartCoroutine(playerHealth.GetParried());
-            Debug.Log("Tengu parried player attack");
             return true;
         }
         // 60-84 = dodge (25% chance)
@@ -601,7 +580,6 @@ public class TenguAI : MonoBehaviour
             dodgeTarget = GetDodgeTarget(dodgeRoll);;
             dodgeStarted = false;
             currentState = TenguState.Dodge;
-            Debug.Log("Tengu dodged player attack");
             return true;
         }
 
@@ -711,7 +689,6 @@ public class TenguAI : MonoBehaviour
 
         // switch to enraged state so HandleEnraged() runs every frame
         currentState = TenguState.Enraged;
-        Debug.Log("Tengu is now enraged!");
 
     }
     
@@ -749,6 +726,50 @@ public class TenguAI : MonoBehaviour
 
 
    
+
+   private IEnumerator DashSlashSequence()
+    {
+        isDashSlashing = true;
+        vfx.PlaySlashChargeUpEffect(transform.position + Vector3.up * 1f, transform);
+        animator.SetTrigger("DashSlash");
+
+        // Wait until the animator is actually playing the DashSlash state
+        // (Sometimes triggers take a frame to transition)
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"));
+
+        // 2. The "Charge Up" Phase
+        // Instead of 0.5s, we wait until the animation is 30% done (0.3f)
+        // This scales automatically if you change the speed to 2.2 or 5.0!
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
+        {
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            yield return null;
+        }
+
+        // 3. The Dash Phase
+        animator.speed = 0; // Freeze at the 30% mark (the "lunge" pose)
+
+        while (Vector3.Distance(transform.position, player.position) > attackRange)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            yield return null;
+        }
+
+        // 4. The Slash Phase
+        animator.speed = 2.2f; // Fast speed for the swing
+    
+        // Wait until the animation is almost finished before handing control back
+        // This prevents the state machine from switching back to "Walk" 
+        // while the speed is still 2.2
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+
+        // RESET global speed for all other animations
+        animator.speed = 1.0f; 
+        
+        isDashSlashing = false;
+        currentState = TenguState.Attack;
+    }
 
 
 
