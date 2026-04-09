@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SKib
+  m_Name: FireFly
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -67,7 +67,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -79,6 +79,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.63, g: 0.7, b: 0.72, a: 1}
-    - _EmissionColor: {r: 0.90588236, g: 0.04705884, b: 0.6837433, a: 0}
+    - _Color: {r: 0.9716981, g: 0.92018145, b: 0.114587024, a: 1}
+    - _EmissionColor: {r: 4.431555, g: 3.2470934, b: 0.31355336, a: 1}
   m_BuildTextureStacks: []
