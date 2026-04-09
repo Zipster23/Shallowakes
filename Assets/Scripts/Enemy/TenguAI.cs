@@ -16,7 +16,7 @@ public class TenguAI : MonoBehaviour
         Chase,      // running towards the player
         Attack,     // in attack range, swinging at the player
         Parry,      // parrying the player's attack
-        Dodge, // backing off or strafing after an attack
+        Dodge,      // backing off or strafing after an attack
         Enraged,    // enraged state - faster/stronger
         IsParried,  // briefly stunned after getting parried by the player
         DashSlash
@@ -387,7 +387,7 @@ public class TenguAI : MonoBehaviour
         {
             dashSlashStarted = false;
             attackTimer = 0f;
-            currentState = TenguState.Chase;
+            currentState = TenguState.Attack;
             return;
         }
 
@@ -497,6 +497,13 @@ public class TenguAI : MonoBehaviour
 
         isAttacking = false;
 
+    }
+
+
+
+    public void OnDashSlashEffect()
+    {
+        vfx.PlaySlashEffect(transform.position + Vector3.up * 2f, transform);
     }
 
 
@@ -620,13 +627,8 @@ public class TenguAI : MonoBehaviour
 
 
     // -------------------------
-    // REPOSITION LOGIC
+    // DODGE LOGIC
     // -------------------------
-
-    
-
-
-
 
     // calculates the world position the Tengu should move to when repositioning
     private Vector3 GetDodgeTarget(int roll)
