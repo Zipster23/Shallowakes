@@ -730,43 +730,37 @@ public class TenguAI : MonoBehaviour
    private IEnumerator DashSlashSequence()
     {
         isDashSlashing = true;
-        vfx.PlaySlashChargeUpEffect(transform.position + Vector3.up * 1f, transform);
         animator.SetTrigger("DashSlash");
 
-        // Wait until the animator is actually playing the DashSlash state
-        // (Sometimes triggers take a frame to transition)
+        // 1. Sync with the Animator
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"));
 
-        // 2. The "Charge Up" Phase
-        // Instead of 0.5s, we wait until the animation is 30% done (0.3f)
-        // This scales automatically if you change the speed to 2.2 or 5.0!
+        // 2. WIND-UP: Play naturally until the "Lunge" starts (e.g., 30% of animation)
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
         {
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             yield return null;
         }
 
-        // 3. The Dash Phase
-        animator.speed = 0; // Freeze at the 30% mark (the "lunge" pose)
+        // 3. THE STRETCHED DASH: 
+        // Freeze the animation on the "dashing" frame
+        animator.speed = 0; 
 
+        // Move until we are within attack range
         while (Vector3.Distance(transform.position, player.position) > attackRange)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
-        // 4. The Slash Phase
-        animator.speed = 2.2f; // Fast speed for the swing
-    
-        // Wait until the animation is almost finished before handing control back
-        // This prevents the state machine from switching back to "Walk" 
-        // while the speed is still 2.2
+        // 4. THE IMPACT: Resume the animation to play the actual slash
+        // We set it back to 1.0 (or 2.2 if you want the swing itself to stay fast)
+        animator.speed = 1.0f; 
+
+        // Wait for the animation to finish so we don't snap into a walk mid-swing
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
 
-        // RESET global speed for all other animations
-        animator.speed = 1.0f; 
-        
         isDashSlashing = false;
         currentState = TenguState.Attack;
     }
