@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    
+
     // --- HEALTH ---
 
     [Header("Health")]
     public int maxHealth = 100; // the maximum health the player can have
     public int currentHealth;   // the player's current health
 
-
     // --- REFERENCES
-    
+
     [Header("References")]
     private Animator animator;  // controls which animations play on the player
 
@@ -40,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        
         // if the player is already dead, don't do anything
         if(currentHealth <= 0)
         {

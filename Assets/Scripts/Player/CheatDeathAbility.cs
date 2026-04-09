@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class CheatDeathAbility : MonoBehaviour
 {
+    public bool canCheatDeath = true;
 
+    private void Activate()
+    {
+        if (canCheatDeath)
+        {
+            
+        }
+    }
 }
