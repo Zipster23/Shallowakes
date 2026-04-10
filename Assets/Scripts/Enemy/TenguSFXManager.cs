@@ -5,6 +5,8 @@ using UnityEngine;
 public class TenguSFXManager : MonoBehaviour
 {
     [SerializeField] private AudioSource katanaSFX;
+    [SerializeField] private AudioSource tenguSFX;
+
     [SerializeField] private AudioClip katanaAttackSFX;
     [SerializeField] private AudioClip katanaDeflectSFX;
     [SerializeField] private AudioClip katanaHitSFX;
@@ -29,11 +31,11 @@ public class TenguSFXManager : MonoBehaviour
 
     public void PlayDodgeSFX()
     {
-        katanaSFX.PlayOneShot(dashSFX);
+        tenguSFX.PlayOneShot(dashSFX);
     }
 
     public void PlayEnragedSFX()
     {
-        katanaSFX.PlayOneShot(enragedSFX);
+        tenguSFX.PlayOneShot(enragedSFX);
     }
 }
