@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool jumpInput;
     public bool sprintInput;
     public bool dashInput;
+    public bool glideInput;
 
     private void Update()
     {
@@ -32,6 +33,10 @@ public class PlayerInputHandler : MonoBehaviour
         // Sprint Input
         sprintInput = Input.GetKey(KeyCode.LeftShift);
 
+        // Dash Input
         dashInput = Input.GetKeyDown(KeyCode.Q);
+
+        // Glide Input
+        glideInput = Input.GetKey(KeyCode.G);
     }
 }

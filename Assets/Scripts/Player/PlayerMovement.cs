@@ -21,6 +21,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float temporaryScalar = 1f;
     private bool isDashing = false;
 
+    [Header("Glide Settings")]
+    // terminal velocity is the constant fall speed the player reaches after ~1 second of gliding
+    // drag coefficient k is derived from it: at terminal velocity, drag = gravity, so k = g / vt
+    // this means you only need to set glideTerminalVelocity in the inspector ? k is calculated automatically
+    [SerializeField] private float glideTerminalVelocity = 3f;      // the constant downward speed the player settles into after ~1 second of gliding
+    [SerializeField] private float glideHorizontalSpeed = 8f;       // the target horizontal speed the player steers toward while gliding
+    [SerializeField] private float glideTurnSpeed = 3f;             // how quickly the player can steer their glide direction (higher = snappier turns)
+    [SerializeField] private float glideHorizontalDrag = 2f;        // drag coefficient applied horizontally so momentum bleeds off when changing direction
+
+    // TODO: replace glideCooldownTimer with a reference to the global cooldown system when implemented
+    // e.g. if (GlobalCooldownManager.CanUse(AbilityType.Glide)) { ... }
+    [SerializeField] public float glideCooldown = 2f;   // how long the player must wait before gliding again after releasing the glide
+    private float glideCooldownTimer = 0f;              // counts down every frame, player can glide again when it hits 0
+
+    private Vector3 glideDirection = Vector3.zero;          // current horizontal steering direction, lerped over time so turning bleeds momentum
+    public bool isGliding { get; private set; } = false;   // true while the player is actively gliding
+
     // The strength of the horizontal propulsion during a double jump
     [SerializeField] private float doubleJumpPropulsionForce = 15f;
 
@@ -92,6 +109,18 @@ public class PlayerMovement : MonoBehaviour
         if (airControlTimer > 0)
         {
             airControlTimer -= Time.deltaTime;
+        }
+
+        // Tick down glide cooldown
+        if (glideCooldownTimer > 0)
+        {
+            glideCooldownTimer -= Time.deltaTime;
+        }
+
+        // Cancel glide if the player lands
+        if (isGrounded && isGliding)
+        {
+            ExitGlide();
         }
     }
 
@@ -205,6 +234,81 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(activeDirection);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
         }
+    }
+
+    // --- GLIDE --- //
+
+    // called every frame by PlayerController while the player holds G in the air
+    public void Glide(Vector2 input)
+    {
+        // can't glide if grounded, dashing, or waiting on cooldown
+        if (isGrounded || isDashing || glideCooldownTimer > 0) return;
+
+        // on the first frame of glide, disable gravity so we can manually control descent
+        // seed glideDirection from lockedAirDirection so the player doesn't snap on entry
+        if (!isGliding)
+        {
+            isGliding = true;
+            rb.useGravity = false;
+            glideDirection = lockedAirDirection.magnitude > 0.1f ? lockedAirDirection : transform.forward;
+        }
+
+
+        // --- VERTICAL: drag-based terminal velocity --- //
+
+        // derive drag coefficient k from terminal velocity: at vt, drag = gravity, so k = g / vt
+        // applying F_drag = -k * vy each frame causes vy to converge on -vt exponentially
+        // with k tuned to vt, the player reaches ~63% of terminal velocity in 1/k seconds (~1s)
+        float gravity = Mathf.Abs(Physics.gravity.y);
+        float k = gravity / glideTerminalVelocity;
+        float dragForceVertical = -k * rb.velocity.y;   // opposes current vertical velocity
+        rb.AddForce(Vector3.up * dragForceVertical, ForceMode.Acceleration);
+
+        // also apply gravity manually so descent actually starts
+        rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+
+
+        // --- HORIZONTAL: steering with momentum bleed --- //
+
+        // build the input direction from camera space the same way Move() does
+        Vector3 camForward = Vector3.ProjectOnPlane(camTransform.forward, Vector3.up).normalized;
+        Vector3 camRight = Vector3.ProjectOnPlane(camTransform.right, Vector3.up).normalized;
+        Vector3 inputDir = (camForward * input.y + camRight * input.x).normalized;
+
+        // if there's directional input, steer glideDirection toward it gradually
+        // Slerp preserves magnitude and bleeds the turn over glideTurnSpeed seconds
+        if (inputDir.magnitude > 0.1f)
+        {
+            glideDirection = Vector3.Slerp(glideDirection, inputDir, glideTurnSpeed * Time.deltaTime);
+        }
+
+        // apply horizontal drag to bleed off momentum that no longer aligns with glideDirection
+        // this is what makes sharp turns feel like the player has to fight their existing velocity
+        Vector3 horizontalVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(-horizontalVel * glideHorizontalDrag, ForceMode.Acceleration);
+
+        // accelerate toward the target glide speed in the current steering direction
+        rb.AddForce(glideDirection * glideHorizontalSpeed, ForceMode.Acceleration);
+
+        // face the player toward the current glide direction
+        if (glideDirection.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(glideDirection);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
+        }
+    }
+
+    // called when the player releases G or lands on the ground
+    public void ExitGlide()
+    {
+        if (!isGliding) return;
+
+        isGliding = false;
+        rb.useGravity = true;   // restore normal gravity
+
+        // start the cooldown so the player can't immediately re-enter glide
+        // TODO: notify global cooldown manager here instead
+        glideCooldownTimer = glideCooldown;
     }
 
     public void DashOutput(Vector2 input)
