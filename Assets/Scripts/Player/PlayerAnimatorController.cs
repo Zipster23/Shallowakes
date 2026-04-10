@@ -4,22 +4,23 @@ using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
     PlayerMovement movement;
-    Animator animator;
+    Animator playerAnimator;
+    Animator koAnimator;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
     }
 
     public void PlayMovementAnimation(bool isMoving, bool isSprinting)
     {
-        animator.SetBool("isMoving", isMoving);
+        playerAnimator.SetBool("isMoving", isMoving);
         
         if (isSprinting) {
-            animator.SetFloat("SprintScalar", movement.SpeedScale);
+            playerAnimator.SetFloat("SprintScalar", movement.SpeedScale);
         } else {
-            animator.SetFloat("SprintScalar", 1.0f);
+            playerAnimator.SetFloat("SprintScalar", 1.0f);
         }
         
     }
@@ -28,26 +29,31 @@ public class PlayerAnimatorController : MonoBehaviour
     
     public void PlayAttackAnimation()
     {
-        animator.SetTrigger("Attack");
+        playerAnimator.SetTrigger("Attack");
     }
 
     public void PlayThrustAnimation()
     {
-        animator.SetTrigger("Thrust");
+        playerAnimator.SetTrigger("Thrust");
     }
 
     public void PlayParryAnimation()
     {
-        animator.SetTrigger("Parry");
+        playerAnimator.SetTrigger("Parry");
     }
     public void PlayJumpingAnimation()
     {
-        animator.SetTrigger("Jumping");
+        playerAnimator.SetTrigger("Jumping");
     }
 
     public void PlayDashAnimation()
     {
-        animator.SetTrigger("Dash");
+        playerAnimator.SetTrigger("Dash");
+    }
+
+    public void PlayReviveAnimation()
+    {
+        koAnimator.SetTrigger("CheatingDeath");
     }
 }
 

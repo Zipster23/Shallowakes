@@ -9,6 +9,7 @@ public class PlayerVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem parrySparks;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
+    [SerializeField] private ParticleSystem reviveEffect;
     
 
 
@@ -42,5 +43,9 @@ public class PlayerVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
+    public void PlayReviveParticles()
+    {
+
+    }
     
 }

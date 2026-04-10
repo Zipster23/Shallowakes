@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -21,8 +22,11 @@ public class PlayerHealth : MonoBehaviour
     [Header("Tengu Parry Logic")]
     public float parryStunDuration = 0.5f;   // how long the player is frozen when their attack gets parried
 
+    // Event that activates upon death
+    UnityEvent deathEvent;
 
-
+    // Cheat Death Ability Direct Reference
+    [SerializeField] private CheatDeathAbility cheatDeathAbility;
 
     // --- SETUP ---
 
@@ -30,6 +34,13 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;              // set current health to max when the game starts
         animator = GetComponent<Animator>();    // grab the Animator component on this GameObject
+        cheatDeathAbility = GetComponent<CheatDeathAbility>(); // get the cheatDeathAbility component
+
+        if (deathEvent == null) {
+            deathEvent = new UnityEvent();
+        }
+
+        deathEvent.AddListener(cheatDeathAbility.Activate);
     }
 
 
@@ -64,22 +75,27 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        // play the death animation
-        animator.SetBool("IsDead", true);
+        deathEvent.Invoke();
 
-        // disable the player controller so the player can't attack after dying
-        GetComponent<PlayerController>().enabled = false;
+        if(currentHealth <= 0)
+        {
+            // play the death animation
+            animator.SetBool("IsDead", true);
 
-        // disable the player movement script so the player can't move after dying
-        GetComponent<PlayerMovement>().enabled = false;
+            // disable the player controller so the player can't attack after dying
+            GetComponent<PlayerController>().enabled = false;
 
-        // disable the player input script so the player can't do anything
-        GetComponent<PlayerInputHandler>().enabled = false;
+            // disable the player movement script so the player can't move after dying
+            GetComponent<PlayerMovement>().enabled = false;
 
-        GetComponent<PlayerParry>().enabled = false;
+            // disable the player input script so the player can't do anything
+            GetComponent<PlayerInputHandler>().enabled = false;
 
-        // disable this script since we don't need health when the player dies
-        this.enabled = false;
+            GetComponent<PlayerParry>().enabled = false;
+
+            // disable this script since we don't need health when the player dies
+            this.enabled = false;
+        }
     }
 
 
