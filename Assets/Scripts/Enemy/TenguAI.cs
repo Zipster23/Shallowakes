@@ -732,17 +732,16 @@ public class TenguAI : MonoBehaviour
         isDashSlashing = true;
         animator.SetTrigger("DashSlash");
 
-        // 1. Sync with the Animator
+        // Sync with the Animator
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"));
 
-        // 2. WIND-UP: Play naturally until the "Lunge" starts (e.g., 30% of animation)
+        // WIND-UP: Play naturally until the "Lunge" starts (e.g., 30% of animation)
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
         {
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             yield return null;
         }
 
-        // 3. THE STRETCHED DASH: 
         // Freeze the animation on the "dashing" frame
         animator.speed = 0; 
 
@@ -754,7 +753,7 @@ public class TenguAI : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        // 4. THE IMPACT: Resume the animation to play the actual slash
+        // Resume the animation to play the actual slash
         // We set it back to 1.0 (or 2.2 if you want the swing itself to stay fast)
         animator.speed = 1.0f; 
 
