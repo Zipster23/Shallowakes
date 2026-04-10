@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (input.MovementInput != Vector2.zero)
         {
             controller.PlayMovementAnimation(true, input.sprintInput);
-        } 
+        }
         else
         {
             controller.PlayMovementAnimation(false, false);
@@ -63,27 +63,28 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if(!isBusy)
+        if (!isBusy)
         {
             if (input.attackInput)
             {
                 isBusy = true;
-                controller.PlayAttackAnimation(); 
+                controller.PlayAttackAnimation();
             }
-            else if(input.thrustInput)
+            else if (input.thrustInput)
             {
                 isBusy = true;
                 controller.PlayThrustAnimation();
-            }   
-        } 
+            }
+        }
 
 
 
 
-        if (input.jumpInput) {
+        if (input.jumpInput)
+        {
             controller.PlayJumpingAnimation();
-        }   
-        
+        }
+
         if (input.dashInput)
         {
             controller.PlayDashAnimation();
@@ -91,6 +92,19 @@ public class PlayerController : MonoBehaviour
             vfx.PlayDashEffect(transform.position + Vector3.up * 0.5f, transform);
             sfx.PlayDashSFX();
         }
+
+        // hold G while airborne to enter glide, release G or land to exit
+        if (input.glideInput && !movement.isGrounded)
+        {
+            movement.Glide(input.MovementInput);
+        }
+        else if (movement.isGliding)
+        {
+            movement.ExitGlide();
+        }
+
+        // keep the animator in sync with the current glide state every frame
+        //controller.UpdateGlideAnimation(movement.isGliding);
 
     }
 
@@ -101,29 +115,29 @@ public class PlayerController : MonoBehaviour
     {
 
         // doesn't do anything if the player is dead
-        if(GetComponent<PlayerHealth>().currentHealth <= 0)
+        if (GetComponent<PlayerHealth>().currentHealth <= 0)
         {
             return;
         }
 
         // Detect all enemies in range of the attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        
+
         // Damage them
-        foreach(Collider enemy in hitEnemies)
+        foreach (Collider enemy in hitEnemies)
         {
 
             TenguAI tenguAI = FindObjectOfType<TenguAI>();
 
             // don't do anything if Tengu is in enraged animation
-            if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+            if (tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
             {
                 isBusy = false;
                 return;
             }
 
             // check if Tengu parries this attack first
-            if(tenguAI != null && tenguAI.CheckTenguResponse())
+            if (tenguAI != null && tenguAI.CheckTenguResponse())
             {
                 isBusy = false;
                 return; // Tengu parried, cancel the attack
@@ -154,5 +168,3 @@ public class PlayerController : MonoBehaviour
 
 
 }
-
-
