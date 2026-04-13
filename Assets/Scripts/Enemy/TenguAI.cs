@@ -495,6 +495,8 @@ public class TenguAI : MonoBehaviour
         
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
+        isDashSlashing = false;             // reset dash slash flag
+        animator.SetFloat("DashSlashSpeed", 1f);  // unfreeze animation in case it was frozen
         StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
@@ -727,39 +729,58 @@ public class TenguAI : MonoBehaviour
 
    
 
-   private IEnumerator DashSlashSequence()
+    private IEnumerator DashSlashSequence()
     {
+        // flag that the dash slash is in progress so HandleDashSlash doesn't restart it
         isDashSlashing = true;
+
+        // trigger the dash slash animation in the Animator
         animator.SetTrigger("DashSlash");
 
-        // Sync with the Animator
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"));
-
-        // WIND-UP: Play naturally until the "Lunge" starts (e.g., 30% of animation)
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
+        // wait until the Animator has actually transitioned into the DashSlash state
+        // we check every frame until IsName("DashSlash") returns true
+        while(!animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"))
         {
+            yield return null;
+        }
+
+        // let the first 30% of the animation play naturally
+        // this is the charge up stance before the dash
+        // normalizedTime goes from 0 to 1 as the animation plays, so 0.3 = 30% through
+        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
+        {
+            // keep facing the player during the stance
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             yield return null;
         }
 
-        // Freeze the animation on the "dashing" frame
-        animator.speed = 0; 
+        // freeze the dash slash animation by setting its speed to 0
+        // this pauses it on the dash pose while we move the Tengu forward
+        // DashSlashSpeed is a float parameter in the Animator that controls only this animation's speed
+        animator.SetFloat("DashSlashSpeed", 0f);
 
-        // Move until we are within attack range
-        while (Vector3.Distance(transform.position, player.position) > attackRange)
+        // move towards the player while the animation is frozen
+        // keep moving every frame until the Tengu is within attack range
+        while(Vector3.Distance(transform.position, player.position) > attackRange)
         {
+            // move towards the player at dashSlashSpeed
             transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
+            // keep facing the player while dashing
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
-        // Resume the animation to play the actual slash
-        // We set it back to 1.0 (or 2.2 if you want the swing itself to stay fast)
-        animator.speed = 1.0f; 
+        // resume the animation at normal speed to play the actual slash
+        animator.SetFloat("DashSlashSpeed", 1f);
 
-        // Wait for the animation to finish so we don't snap into a walk mid-swing
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+        // wait for the animation to reach 95% before switching states
+        // this prevents snapping into a different animation mid-slash
+        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
+        {
+            yield return null;
+        }
 
+        // dash slash is done, reset the flag and go back to Attack state
         isDashSlashing = false;
         currentState = TenguState.Attack;
     }
