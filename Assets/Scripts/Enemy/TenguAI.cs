@@ -19,7 +19,8 @@ public class TenguAI : MonoBehaviour
         Dodge,      // backing off or strafing after an attack
         Enraged,    // enraged state - faster/stronger
         IsParried,  // briefly stunned after getting parried by the player
-        DashSlash
+        DashSlash,
+        ComboAttack // uninterruptible 3 hit combo, player must parry all 3 slashes
     }
 
     [Header("States")]
@@ -69,10 +70,10 @@ public class TenguAI : MonoBehaviour
     public int normalDodgeChance = 25;      // dodge chance in normal mode
     public int enragedParryChance = 20;     // parry chance in enraged mode
     public int enragedDodgeChance = 65;     // dodge chance in enraged mode    
-    public float dodgeDistance = 12f;  // how far the Tengu moves when repositioning
-    private Vector3 dodgeTarget;       // The position the Tengu is moving towards when repositioning
-    public float dodgeSpeed = 40f;           // the speed of the tengu after Repositioning
-    private bool dodgeStarted = false;       // prevents VFX and SFX from playing every frame during the dash
+    public float dodgeDistance = 12f;       // how far the Tengu moves when repositioning
+    private Vector3 dodgeTarget;            // The position the Tengu is moving towards when repositioning
+    public float dodgeSpeed = 40f;          // the speed of the tengu after Repositioning
+    private bool dodgeStarted = false;      // prevents VFX and SFX from playing every frame during the dash
 
 
     // --- ENRAGED --- //
@@ -80,7 +81,7 @@ public class TenguAI : MonoBehaviour
     [Header("Enraged")]
     public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
     public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
-    public float enragedDodgeSpeedMultiplier = 1.5f;     // how much faster the Tengu dashes while enraged
+    public float enragedDodgeSpeedMultiplier = 1.5f;    // how much faster the Tengu dashes while enraged
     private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
@@ -91,6 +92,11 @@ public class TenguAI : MonoBehaviour
     public float dashSlashRange = 20f;      // distance at which Tengu triggers dash slash
     public float dashSlashSpeed = 80f;      // how fast the Tengu moves during dash slash
     private bool isDashSlashing = false;
+
+    [Header("Combo-Attack Ability")]
+    public bool isDoingCombo = false;       // true while combo is active, blocks player attacks
+    private int comboSlashCount = 0;        // tracks which slash we're on (1,2, or 3)
+    public int comboChance = 30;            // percentage chance of doing combo instead of regular attack
 
 
 
@@ -153,6 +159,9 @@ public class TenguAI : MonoBehaviour
                 break;
             case TenguState.DashSlash:
                 HandleDashSlash();
+                break;
+            case TenguState.ComboAttack:
+                HandleComboAttack();
                 break;
 
         }
@@ -382,6 +391,17 @@ public class TenguAI : MonoBehaviour
         {
             StartCoroutine(DashSlashSequence());
         }
+
+    }
+
+
+
+
+    private void HandleComboAttack()
+    {
+        
+        // stop moving during combo
+        animator.SetBool("IsMoving", false);
 
     }
 
