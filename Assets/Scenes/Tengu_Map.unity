@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756602, b: 0.32591167, a: 1}
+  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756846, b: 0.32591167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2810,7 +2810,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.2004717, g: 0.52012974, b: 0.8018868, a: 1}
+  m_Color: {r: 0.46764863, g: 0.63332236, b: 0.8773585, a: 1}
   m_Intensity: 1.76
   m_Range: 10
   m_SpotAngle: 30
@@ -2850,7 +2850,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -3011,7 +3011,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966884247}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -8876,7 +8876,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: 9d924868776d54642881a48ba3f76742, type: 2}
   isGlobal: 1
   blendDistance: 0
-  weight: 0.495
+  weight: 1
   priority: 0
 --- !u!4 &1318746566
 Transform:
@@ -9938,7 +9938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9950,11 +9950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016176498
+      value: -0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000058634884
+      value: 0.0000000058634884
       objectReference: {fileID: 0}
     - target: {fileID: 1874941865884970352, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10086,6 +10086,10 @@ PrefabInstance:
       propertyPath: playerLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 3812521817298297780, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c1f8d468691b436aabd136ac2c2c218, type: 2}
     - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_Name
       value: Tengu
@@ -15143,7 +15147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1813975909}
-  - component: {fileID: 1813975910}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -15231,23 +15234,6 @@ Transform:
   - {fileID: 1130652868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813975910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813975908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: df2a6cd313fe3e448b9777ba05d355c6, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!1001 &1880321866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16252,7 +16238,6 @@ SceneRoots:
   - {fileID: 1754645776}
   - {fileID: 1983307832}
   - {fileID: 1602312644}
-  - {fileID: 1318746566}
   - {fileID: 152390557}
   - {fileID: 966861141}
   - {fileID: 1551825063}
@@ -16261,3 +16246,4 @@ SceneRoots:
   - {fileID: 1332587516}
   - {fileID: 974809753}
   - {fileID: 974423611}
+  - {fileID: 1318746566}
