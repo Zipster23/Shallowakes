@@ -1,5 +1,6 @@
 {
     "m_Dictionary": {
+<<<<<<< Updated upstream
         "m_DictionaryValues": [
             {
                 "type": "UnityEngine.ProBuilder.SemVer, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -27,5 +28,8 @@
                 "value": "{\"m_Value\":\"ProBuilderLog.txt\"}"
             }
         ]
+=======
+        "m_DictionaryValues": []
+>>>>>>> Stashed changes
     }
 }
