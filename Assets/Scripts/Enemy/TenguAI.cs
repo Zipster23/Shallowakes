@@ -453,7 +453,7 @@ public class TenguAI : MonoBehaviour
             vfx.PlayHitEffect(playerHit.transform.position + Vector3.up * 2f);
 
             // play the hit sound effect
-            sfx.playKatanaHitSFX();
+            sfx.PlayNaginataHitSFX();
 
         }
 
@@ -584,7 +584,7 @@ public class TenguAI : MonoBehaviour
             // play parry animation & visual feedback
             animator.SetTrigger("Parry");
             vfx.EmitSparkParticles();
-            sfx.playKatanaDeflectSFX();
+            sfx.PlayNaginataDeflectSFX();
 
             // let the Tengu attack after parrying
             attackTimer = 0f;
@@ -704,7 +704,7 @@ public class TenguAI : MonoBehaviour
         animator.SetTrigger("Enraged");
         sfx.PlayEnragedSFX();
         vfx.PlayMagicCircleEffect(transform.position, transform);
-        vfx.PlayRedCloudEffect(transform.position, transform);
+        vfx.PlayRedRayEffect(transform.position, transform);
 
         // start the screen shake for the duration of the enraged animation
         StartCoroutine(ShakeDuringEnraged(7f));
