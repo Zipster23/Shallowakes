@@ -57,6 +57,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.012396694
+        functionName: playKatanaAttackSFX
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.11358024
         functionName: StartSwingEffects
         data: 
@@ -72,6 +79,13 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.23449613
+        functionName: StopSwingEffects
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.48091602
         functionName: StopSwingEffects
         data: 
         objectReferenceParameter: {instanceID: 0}

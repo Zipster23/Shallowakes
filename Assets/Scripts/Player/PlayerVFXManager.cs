@@ -6,6 +6,7 @@ public class PlayerVFXManager : MonoBehaviour
 {
     [SerializeField] private TrailRenderer swordTrail1;
     [SerializeField] private TrailRenderer swordTrail2;
+    [SerializeField] private ParticleSystem swingBurst;
     [SerializeField] private ParticleSystem parrySparks;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
@@ -16,6 +17,7 @@ public class PlayerVFXManager : MonoBehaviour
     {
         swordTrail1.emitting = true;
         swordTrail2.emitting = true;
+        swingBurst.Play();
     }
 
     public void StopSwingEffects()

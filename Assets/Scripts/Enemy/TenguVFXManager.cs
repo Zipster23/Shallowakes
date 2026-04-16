@@ -9,6 +9,7 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private TrailRenderer naginataTrail1;
     [SerializeField] private TrailRenderer naginataTrail2;
     [SerializeField] private ParticleSystem parrySparks;
+    [SerializeField] private ParticleSystem swingBurst;
 
     [Header("Misc VFX")]
     [SerializeField] private ParticleSystem hitEffect;
@@ -27,6 +28,7 @@ public class TenguVFXManager : MonoBehaviour
     {
         naginataTrail1.emitting = true;
         naginataTrail2.emitting = true;
+        swingBurst.Play();
     }
 
     public void StopSwingEffects()
