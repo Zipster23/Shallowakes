@@ -97,6 +97,7 @@ public class TenguAI : MonoBehaviour
     public bool isDoingCombo = false;       // true while combo is active, blocks player attacks
     private int comboSlashCount = 0;        // tracks which slash we're on (1,2, or 3)
     public int comboChance = 30;            // percentage chance of doing combo instead of regular attack
+    private bool comboSlashParried = false; // tracks if current slash was parried
 
 
 
@@ -273,6 +274,19 @@ public class TenguAI : MonoBehaviour
                 currentState = TenguState.Chase;
                 return; 
             }
+
+            // roll for combo attack
+            int comboRoll = Random.Range(0,100);
+            if(comboRoll < comboChance && !isDoingCombo)
+            {
+                // start combo
+                isDoingCombo = true;
+                comboSlashCount = 0;
+                isAttacking = true;
+                animator.SetTrigger("ComboAtack");
+                currentState = TenguState.ComboAttack;
+                return;
+            }
             
             animator.SetTrigger("Attack");      // trigger the attack animation
             
@@ -403,6 +417,9 @@ public class TenguAI : MonoBehaviour
         // stop moving during combo
         animator.SetBool("IsMoving", false);
 
+        // always face the player during combo
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
     }
 
     
@@ -516,6 +533,9 @@ public class TenguAI : MonoBehaviour
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
         isDashSlashing = false;             // reset dash slash flag
+        isDoingCombo = false;               // reset combo
+        comboSlashCount = 0;                // reset combo-slash count
+        comboSlashParried = false;          // reset combo-slash parry flag
         animator.SetFloat("DashSlashSpeed", 1f);  // unfreeze animation in case it was frozen
         StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
@@ -550,6 +570,32 @@ public class TenguAI : MonoBehaviour
         else
         {
             currentDodgeChance = normalDodgeChance;
+        }
+
+        // during combo-attack, only check if player parried - don't stun Tengu
+        if(isDoingCombo)
+        {
+
+            float comboDistance = Vector3.Distance(transform.position, player.position);
+            if(comboDistance > tenguParryRange)
+            {
+                return false;
+            }
+
+            int comboRoll = Random.Range(0,100);
+            int currentParry = isEnraged ? enragedParryChance : normalParryChance;
+
+            if(comboRoll < currentParry)
+            {
+                comboSlashParried = true;
+                vfx.EmitSparkParticles();
+                sfx.PlayNaginataDeflectSFX();
+                StartCoroutine(player.GetComponent<PlayerHealth>().GetParried());
+                return true;
+            }
+
+            return false;
+
         }
         
         // don't respond if the Tengu is playing the enraged animation
@@ -811,55 +857,103 @@ public class TenguAI : MonoBehaviour
 
 
     // -------------------------
-    // COMBO-ATTACK LOGIC
+    // COMBO-SLASH LOGIC
     // -------------------------
 
-    // called by Animation event on Combo animation (first slash)
-    public void OnComboSlash1()
+    public void OnComboSlash1
     {
-        
+
+        comboSlashCount = 1;
         TeleportToPlayer();
+
+        // check if player parried, if not deal damage
+        if(!comboSlashParried)
+        {
+            Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+            foreach(Collider playerHit in hitPlayers)
+            {
+                playerHit.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+                vfx.PlayHitEffect(playerHit.transform.position + Vector3.up * 2f);
+                sfx.PlayNaginataHitSFX();
+            }
+        }
+
+        // reset parried flag for next slash
+        comboSlashParried = false;
 
     }
 
-    // called by Animation event on Combo animation (second slash)
-    public void OnComboSlash2()
+    public void OnComboSlash2
     {
-        
+
+        comboSlashCount = 2;
         TeleportToPlayer();
+
+        // check if player parried, if not deal damage
+        if(!comboSlashParried)
+        {
+            Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+            foreach(Collider playerHit in hitPlayers)
+            {
+                playerHit.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+                vfx.PlayHitEffect(playerHit.transform.position + Vector3.up * 2f);
+                sfx.PlayNaginataHitSFX();
+            }
+        }
+
+        // reset parried flag for next slash
+        comboSlashParried = false;
 
     }
 
-    // called by Animation event on Combo animation (second slash)
-    public void OnComboSlash3()
+    public void OnComboSlash3
     {
-        
+
+        comboSlashCount = 3;
         TeleportToPlayer();
 
-        // after third slash, combo is done
+        // check if player parried, if not deal damage
+        if(!comboSlashParried)
+        {
+            Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+            foreach(Collider playerHit in hitPlayers)
+            {
+                playerHit.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+                vfx.PlayHitEffect(playerHit.transform.position + Vector3.up * 2f);
+                sfx.PlayNaginataHitSFX();
+            }
+        }
+
+        // reset parried flag for next slash
+        comboSlashParried = false;
+
+        // combo is done
         isDoingCombo = false;
         comboSlashCount = 0;
+        isAttacking = false;
+        currentState = TenguState.Idle;
 
     }
 
 
 
 
-    // teleports the Tengu directly in front of the player
     private void TeleportToPlayer()
     {
-        
-        // position slightly in front of the player facing them
+
+        // position Tengu directly in front of player
         Vector3 teleportPos = player.position - (player.forward * attackRange);
-        teleportPos.y =  transform.position.y;
+        teleportPos.y = transform.position.y;
         transform.position = teleportPos;
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
-        // play dash VFX and SFX
+        // play dash vfx & sfx
         vfx.PlayDodgeEffect(transform.position + Vector3.up * 1f, transform);
         sfx.PlayDodgeSFX();
 
     }
+
+
 
 
 
