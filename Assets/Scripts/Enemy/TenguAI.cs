@@ -747,7 +747,9 @@ public class TenguAI : MonoBehaviour
 
 
 
-   
+    // -------------------------
+    // DASH-SLASH LOGIC
+    // -------------------------
 
     private IEnumerator DashSlashSequence()
     {
@@ -806,6 +808,58 @@ public class TenguAI : MonoBehaviour
     }
 
 
+
+
+    // -------------------------
+    // COMBO-ATTACK LOGIC
+    // -------------------------
+
+    // called by Animation event on Combo animation (first slash)
+    public void OnComboSlash1()
+    {
+        
+        TeleportToPlayer();
+
+    }
+
+    // called by Animation event on Combo animation (second slash)
+    public void OnComboSlash2()
+    {
+        
+        TeleportToPlayer();
+
+    }
+
+    // called by Animation event on Combo animation (second slash)
+    public void OnComboSlash3()
+    {
+        
+        TeleportToPlayer();
+
+        // after third slash, combo is done
+        isDoingCombo = false;
+        comboSlashCount = 0;
+
+    }
+
+
+
+
+    // teleports the Tengu directly in front of the player
+    private void TeleportToPlayer()
+    {
+        
+        // position slightly in front of the player facing them
+        Vector3 teleportPos = player.position - (player.forward * attackRange);
+        teleportPos.y =  transform.position.y;
+        transform.position = teleportPos;
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        // play dash VFX and SFX
+        vfx.PlayDodgeEffect(transform.position + Vector3.up * 1f, transform);
+        sfx.PlayDodgeSFX();
+
+    }
 
 
 
