@@ -4,40 +4,36 @@ using UnityEngine;
 
 public class TenguSFXManager : MonoBehaviour
 {
-
-    [Header("Naginata SFX")]
-    [SerializeField] private AudioSource naginataSFX;
-    [SerializeField] private AudioClip naginataAttackSFX;
-    [SerializeField] private AudioClip naginataDeflectSFX;
-    [SerializeField] private AudioClip naginataHitSFX;
-    [SerializeField] private float naginataDeflectVolume = 0.7f;
-
-    [Header("Misc SFX")]
+    [SerializeField] private AudioSource katanaSFX;
+    [SerializeField] private AudioClip katanaAttackSFX;
+    [SerializeField] private AudioClip katanaDeflectSFX;
+    [SerializeField] private AudioClip katanaHitSFX;
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip enragedSFX;
+    [SerializeField] private float katanaDeflectVolume = 0.7f;
 
-    public void PlayNaginataAttackSFX()
+    public void playKatanaAttackSFX()
     {
-        naginataSFX.PlayOneShot(naginataAttackSFX);
+        katanaSFX.PlayOneShot(katanaAttackSFX);
     }
 
-    public void PlayNaginataDeflectSFX()
+    public void playKatanaDeflectSFX()
     {
-        naginataSFX.PlayOneShot(naginataDeflectSFX, naginataDeflectVolume);
+        katanaSFX.PlayOneShot(katanaDeflectSFX, katanaDeflectVolume);
     }
 
-    public void PlayNaginataHitSFX()
+    public void playKatanaHitSFX()
     {
-        naginataSFX.PlayOneShot(naginataHitSFX);
+        katanaSFX.PlayOneShot(katanaHitSFX);
     }
 
     public void PlayDodgeSFX()
     {
-        naginataSFX.PlayOneShot(dashSFX);
+        katanaSFX.PlayOneShot(dashSFX);
     }
 
     public void PlayEnragedSFX()
     {
-        naginataSFX.PlayOneShot(enragedSFX);
+        katanaSFX.PlayOneShot(enragedSFX);
     }
 }

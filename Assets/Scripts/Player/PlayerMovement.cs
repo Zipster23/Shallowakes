@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxSegments = 4; // Point 1 to 2, 2 to 3, 3 to 4, etc.
     [SerializeField] public float temporaryScalar = 1f;
     private bool isDashing = false;
-    [HideInInspector] public float attackMovementMultiplier = 1f;
 
     [Header("Glide Settings")]
     // terminal velocity is the constant fall speed the player reaches after ~1 second of gliding
@@ -201,17 +200,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.magnitude > 0.1f)
         {
-            Vector3 targetPosition = moveDirection * baseSpeed * attackMovementMultiplier * Time.deltaTime;
+            Vector3 targetPosition = moveDirection * baseSpeed * Time.deltaTime;
             if (isSprinting) targetPosition *= SpeedScale;
 
             rb.MovePosition(rb.position + targetPosition);
 
-            // Only allow turning if not locked into attack
-            if (attackMovementMultiplier > 0.1f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
-            }
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, turnSpeed * Time.deltaTime));
 
             lockedAirDirection = moveDirection;
         }
@@ -417,13 +412,4 @@ public class PlayerMovement : MonoBehaviour
         // Ensure we land exactly at the segment node
         rb.MovePosition(to);
     }
-
-
-
-    public Rigidbody GetRigidbody()
-    {
-        return rb;
-    }
-
-
 }
