@@ -4,35 +4,27 @@ using UnityEngine;
 
 public class TenguVFXManager : MonoBehaviour
 {
-
-    [Header("Naginata VFX")]
-    [SerializeField] private TrailRenderer naginataTrail1;
-    [SerializeField] private TrailRenderer naginataTrail2;
+    [SerializeField] private TrailRenderer swordTrail1;
+    [SerializeField] private TrailRenderer swordTrail2;
     [SerializeField] private ParticleSystem parrySparks;
-
-    [Header("Misc VFX")]
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
-
-    [Header("Enraged Mode VFX")]
     [SerializeField] private ParticleSystem magicCircleEffect;
-    [SerializeField] private ParticleSystem redRayEffect;
-
-    [Header("Dash-Ability VFX")]
+    [SerializeField] private ParticleSystem redCloudEffect;
     [SerializeField] private ParticleSystem slashChargeUpEffect;
     [SerializeField] private ParticleSystem slashEffect;
     
 
     public void StartSwingEffects()
     {
-        naginataTrail1.emitting = true;
-        naginataTrail2.emitting = true;
+        swordTrail1.emitting = true;
+        swordTrail2.emitting = true;
     }
 
     public void StopSwingEffects()
     {
-        naginataTrail1.emitting = false;
-        naginataTrail2.emitting = false;
+        swordTrail1.emitting = false;
+        swordTrail2.emitting = false;
     }
 
     public void EmitSparkParticles()
@@ -60,9 +52,9 @@ public class TenguVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void PlayRedRayEffect(Vector3 position, Transform parent)
+    public void PlayRedCloudEffect(Vector3 position, Transform parent)
     {
-        ParticleSystem effect = Instantiate(redRayEffect, position, Quaternion.identity);
+        ParticleSystem effect = Instantiate(redCloudEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, effect.main.duration);
     }
