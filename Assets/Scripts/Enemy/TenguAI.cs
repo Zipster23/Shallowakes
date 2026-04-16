@@ -283,7 +283,8 @@ public class TenguAI : MonoBehaviour
                 isDoingCombo = true;
                 comboSlashCount = 0;
                 isAttacking = true;
-                animator.SetTrigger("ComboAtack");
+                animator.SetTrigger("ComboAttack");
+                Debug.Log("Combo AttacK!!!");
                 currentState = TenguState.ComboAttack;
                 return;
             }
@@ -860,7 +861,7 @@ public class TenguAI : MonoBehaviour
     // COMBO-SLASH LOGIC
     // -------------------------
 
-    public void OnComboSlash1
+    public void OnComboSlash1()
     {
 
         comboSlashCount = 1;
@@ -883,7 +884,7 @@ public class TenguAI : MonoBehaviour
 
     }
 
-    public void OnComboSlash2
+    public void OnComboSlash2()
     {
 
         comboSlashCount = 2;
@@ -906,7 +907,7 @@ public class TenguAI : MonoBehaviour
 
     }
 
-    public void OnComboSlash3
+    public void OnComboSlash3()
     {
 
         comboSlashCount = 3;
