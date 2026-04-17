@@ -12,26 +12,45 @@ public class PlayerInputHandler : MonoBehaviour
     public bool sprintInput;
     public bool dashInput;
 
+    private PauseManager pauseManager; // stored reference to PauseManager
+
+    void Start()
+    {
+        // find PauseManager once at startup instead of searching every frame
+        pauseManager = FindObjectOfType<PauseManager>();
+    }
+
     private void Update()
     {
-        MovementInput = new Vector2(
+        // Ensures not inputs can be made for movement while paused
+        if (!pauseManager.paused)
+        {
+            MovementInput = new Vector2(
             Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical")
-        );
+            );
 
-        // Attack inputs
-        attackInput = Input.GetKeyDown(KeyCode.Mouse0);
+            // Attack inputs
+            attackInput = Input.GetKeyDown(KeyCode.Mouse0);
 
-        thrustInput = Input.GetKeyDown(KeyCode.Mouse1);
+            // Thrust Input
+            thrustInput = Input.GetKeyDown(KeyCode.Mouse1);
 
-        parryInput = Input.GetKeyDown(KeyCode.F);
+            // Parry Input
+            parryInput = Input.GetKeyDown(KeyCode.F);
 
-        // Jump Input
-        jumpInput = Input.GetKeyDown(KeyCode.Space);
+            // Jump Input
+            jumpInput = Input.GetKeyDown(KeyCode.Space);
 
-        // Sprint Input
-        sprintInput = Input.GetKey(KeyCode.LeftShift);
+            // Sprint Input
+            sprintInput = Input.GetKey(KeyCode.LeftShift);
 
-        dashInput = Input.GetKeyDown(KeyCode.Q);
+            dashInput = Input.GetKeyDown(KeyCode.Q);
+        }
+
+        
+        // Pause Input
+        if (Input.GetKeyDown(KeyCode.P) && pauseManager != null)
+            pauseManager.TogglePause();
     }
 }
