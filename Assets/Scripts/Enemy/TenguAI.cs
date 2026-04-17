@@ -300,7 +300,7 @@ public class TenguAI : MonoBehaviour
                 // start combo
                 isDoingCombo = true;
                 comboSlashCount = 0;
-                player.GetComponent<PlayerParry>().parryCooldown = 0.1f; 
+                player.GetComponent<PlayerParry>().parryCooldown = 0.5f; 
                 isAttacking = true;
                 attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");
@@ -563,7 +563,7 @@ public class TenguAI : MonoBehaviour
         isDoingCombo = false;               // reset combo
         comboSlashCount = 0;                // reset combo-slash count
         comboSlashParried = false;          // reset combo-slash parry flag
-        player.GetComponent<PlayerParry>().parryCooldown = 0.1f; // restore normal parry cooldown
+        player.GetComponent<PlayerParry>().parryCooldown = 1f; // restore normal parry cooldown
         animator.SetFloat("DashSlashSpeed", 1f);  // unfreeze animation in case it was frozen
         StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
