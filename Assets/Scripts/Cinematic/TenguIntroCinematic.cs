@@ -24,6 +24,7 @@ public class TenguIntroCinematic : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] private AudioClip tenguTheme;
+    [SerializeField] private AudioClip shrineTheme;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float musicSyncTime;               // how many seconds into the cutscene the big bass hit should play
 
@@ -76,7 +77,10 @@ public class TenguIntroCinematic : MonoBehaviour
         freeLookCamera.enabled = false;
         ActivateCamera(camShrine);
 
-        // show title text
+        // show title text and play shrine music
+        musicSource.volume = 0.5f;
+        musicSource.clip = shrineTheme;
+        musicSource.Play();
         yield return StartCoroutine(fader.ShowTitle());
 
         // fade back in
@@ -96,11 +100,10 @@ public class TenguIntroCinematic : MonoBehaviour
         // wait 2.5s on the face for the tengu to look up at the camera, then play music
         // tenguAnimator.SetTrigger("LookUp");
         yield return new WaitForSeconds(2.5f);
+        musicSource.Stop();
+        musicSource.volume = 1f;
         musicSource.clip = tenguTheme;
         musicSource.Play();
-
-        // short hold after music hits
-        yield return new WaitForSeconds(afterMusicDuration);
 
         // re-enable everything
         freeLookCamera.enabled = true;
