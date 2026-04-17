@@ -64,8 +64,6 @@ public class TenguAI : MonoBehaviour
 
     public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
 
-    private bool isFirstAttack = true;      // used  to make the Tengu's first attack be the dash slash ability
-
 
     // --- RESPONSE CHANCES --- //
 
@@ -234,13 +232,6 @@ public class TenguAI : MonoBehaviour
         else
         {
             animator.SetBool("IsMoving", false);    // Close enough to attack, so stop playing the running animation
-        }
-
-        if(isFirstAttack)
-        {
-            isFirstAttack = false;
-            currentState = TenguState.DashSlash;
-            return;
         }
 
         // If Tengu is within attack range, switch to the Attack state
@@ -1001,6 +992,25 @@ public class TenguAI : MonoBehaviour
         // play dash vfx & sfx
         vfx.PlayDodgeEffect(transform.position + Vector3.up * 1f, transform);
         sfx.PlayDodgeSFX();
+
+    }
+
+
+
+
+    // -------------------------
+    // CINEMATIC LOGIC
+    // -------------------------
+
+    // Called by TenguIntroCinematic when the cutscene ends. Forces the Tengu straight into DashSlash as its opening move
+    public void TriggerOpeningDashSlash()
+    {
+        
+        // set state to DashSlash
+        currentState = TenguState.DashSlash;
+
+        // reset the dash slash flag so it executes fresh
+        isDashSlashing = false;
 
     }
 
