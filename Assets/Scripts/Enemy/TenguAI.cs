@@ -799,33 +799,28 @@ public class TenguAI : MonoBehaviour
     // continuously shakes the screen for the duration of the enrage animation by firing multiple impulses in succession
     private IEnumerator ShakeDuringEnraged(float duration)
     {
-
         // elapsed time
         float elapsed = 0f;
-        bool flip = false;
 
         // keep shaking until the full duration of the animation has finished playing
         while(elapsed < duration)
         {
-           
-            Vector3 shakeVelocity;
-            if(flip)
-            {
-                shakeVelocity = new Vector3(0.5f, 0.5f, 0f);
-            }
-            else
-            {
-                shakeVelocity = new Vector3(-0.5f, -0.5f, 0f);
-            }
+            // generate a random direction for the shake each time
+            // multiplying by 2f controls how violent the shake is
+            Vector3 randomVelocity = new Vector3
+            (
+                Random.Range(-0.5f, 0.5f),
+                Random.Range(-0.5f, 0.5f),
+                0           
+            ) * 2f; 
 
-            impulseSource.GenerateImpulseWithVelocity(shakeVelocity);
+            // fire the impulse with the random velocity
+            impulseSource.GenerateImpulseWithVelocity(randomVelocity);
 
-            flip = !flip;
+            // add 0.3s to elapsed and wait 0.3s before firing again
             elapsed += 0.3f;
             yield return new WaitForSeconds(0.3f);
-
         }
-
     }
 
 
