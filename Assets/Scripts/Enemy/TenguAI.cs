@@ -19,7 +19,7 @@ public class TenguAI : MonoBehaviour
         Dodge,      // backing off or strafing after an attack
         Enraged,    // enraged state - faster/stronger
         IsParried,  // briefly stunned after getting parried by the player
-        DashSlash,
+        DashSlash,  // long range dash into a slash that procs once the player is a certain distance away (or randomly after a dodge)
         ComboAttack // uninterruptible 3 hit combo, player must parry all 3 slashes
     }
 
@@ -54,13 +54,17 @@ public class TenguAI : MonoBehaviour
     public LayerMask playerLayer;           // used to detect only the player in the attack overlap sphere
 
     public float timeBetweenAttacks = 1.5f; // how long the Tengu waits between attacks
-    private float attackTimer = 0f;         // counts down to the next attack
-    private bool isAttacking = false;       // prevents the Tengu from moving or switching states mid-attack
+    [HideInInspector]
+    public float attackTimer = 0f;          // counts down to the next attack
+    [HideInInspector]
+    public bool isAttacking = false;        // prevents the Tengu from moving or switching states mid-attack
 
     public bool isAttackActive = false;     // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
     public float parryStunDuration = 2f;    // how long the Tengu is stunned for after getting parried
 
     public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
+
+    private bool isFirstAttack = true;      // used  to make the Tengu's first attack be the dash slash ability
 
 
     // --- RESPONSE CHANCES --- //
@@ -97,7 +101,8 @@ public class TenguAI : MonoBehaviour
     public bool isDoingCombo = false;       // true while combo is active, blocks player attacks
     private int comboSlashCount = 0;        // tracks which slash we're on (1,2, or 3)
     public int comboChance = 30;            // percentage chance of doing combo instead of regular attack
-    private bool comboSlashParried = false; // tracks if current slash was parried
+    [HideInInspector]
+    public bool comboSlashParried = false;  // tracks if current slash was parried
 
 
 
@@ -170,7 +175,13 @@ public class TenguAI : MonoBehaviour
     }
 
 
-    
+    private void LateUpdate()
+    {
+        if(isDoingCombo)
+        {
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        }
+    }
 
     
     
@@ -223,6 +234,13 @@ public class TenguAI : MonoBehaviour
         else
         {
             animator.SetBool("IsMoving", false);    // Close enough to attack, so stop playing the running animation
+        }
+
+        if(isFirstAttack)
+        {
+            isFirstAttack = false;
+            currentState = TenguState.DashSlash;
+            return;
         }
 
         // If Tengu is within attack range, switch to the Attack state
@@ -282,7 +300,9 @@ public class TenguAI : MonoBehaviour
                 // start combo
                 isDoingCombo = true;
                 comboSlashCount = 0;
+                player.GetComponent<PlayerParry>().parryCooldown = 0.1f; 
                 isAttacking = true;
+                attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");
                 Debug.Log("Combo AttacK!!!");
                 currentState = TenguState.ComboAttack;
@@ -531,12 +551,19 @@ public class TenguAI : MonoBehaviour
     public void GetParried()
     {
         
+        // during combo, only allow getting parried on the third slash
+        if(isDoingCombo && comboSlashCount < 3)
+        {
+            return;
+        }
+
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
         isDashSlashing = false;             // reset dash slash flag
         isDoingCombo = false;               // reset combo
         comboSlashCount = 0;                // reset combo-slash count
         comboSlashParried = false;          // reset combo-slash parry flag
+        player.GetComponent<PlayerParry>().parryCooldown = 0.1f; // restore normal parry cooldown
         animator.SetFloat("DashSlashSpeed", 1f);  // unfreeze animation in case it was frozen
         StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
@@ -753,6 +780,11 @@ public class TenguAI : MonoBehaviour
         vfx.PlayMagicCircleEffect(transform.position, transform);
         vfx.PlayRedRayEffect(transform.position, transform);
 
+        // knock the player back away from the tengu
+        Vector3 knockbackDir = (player.position - transform.position).normalized;
+        Vector3 knockbackForce = knockbackDir * 15f + Vector3.up * 8f;
+        player.GetComponent<PlayerMovement>().StartCoroutine(player.GetComponent<PlayerMovement>().ApplyKnockback(knockbackForce, 0.5f));
+
         // start the screen shake for the duration of the enraged animation
         StartCoroutine(ShakeDuringEnraged(7f));
 
@@ -767,28 +799,33 @@ public class TenguAI : MonoBehaviour
     // continuously shakes the screen for the duration of the enrage animation by firing multiple impulses in succession
     private IEnumerator ShakeDuringEnraged(float duration)
     {
+
         // elapsed time
         float elapsed = 0f;
+        bool flip = false;
 
         // keep shaking until the full duration of the animation has finished playing
         while(elapsed < duration)
         {
-            // generate a random direction for the shake each time
-            // multiplying by 2f controls how violent the shake is
-            Vector3 randomVelocity = new Vector3
-            (
-                Random.Range(-0.5f, 0.5f),
-                Random.Range(-0.5f, 0.5f),
-                0           
-            ) * 2f; 
+           
+            Vector3 shakeVelocity;
+            if(flip)
+            {
+                shakeVelocity = new Vector3(0.5f, 0.5f, 0f);
+            }
+            else
+            {
+                shakeVelocity = new Vector3(-0.5f, -0.5f, 0f);
+            }
 
-            // fire the impulse with the random velocity
-            impulseSource.GenerateImpulseWithVelocity(randomVelocity);
+            impulseSource.GenerateImpulseWithVelocity(shakeVelocity);
 
-            // add 0.3s to elapsed and wait 0.3s before firing again
+            flip = !flip;
             elapsed += 0.3f;
             yield return new WaitForSeconds(0.3f);
+
         }
+
     }
 
 
@@ -865,7 +902,7 @@ public class TenguAI : MonoBehaviour
     {
 
         comboSlashCount = 1;
-        TeleportToPlayer();
+        StartCoroutine(TeleportToPlayer());
 
         // check if player parried, if not deal damage
         if(!comboSlashParried)
@@ -888,7 +925,7 @@ public class TenguAI : MonoBehaviour
     {
 
         comboSlashCount = 2;
-        TeleportToPlayer();
+        StartCoroutine(TeleportToPlayer());
 
         // check if player parried, if not deal damage
         if(!comboSlashParried)
@@ -911,7 +948,7 @@ public class TenguAI : MonoBehaviour
     {
 
         comboSlashCount = 3;
-        TeleportToPlayer();
+        StartCoroutine(TeleportToPlayer());
 
         // check if player parried, if not deal damage
         if(!comboSlashParried)
@@ -928,24 +965,42 @@ public class TenguAI : MonoBehaviour
         // reset parried flag for next slash
         comboSlashParried = false;
 
-        // combo is done
-        isDoingCombo = false;
-        comboSlashCount = 0;
-        isAttacking = false;
-        currentState = TenguState.Idle;
-
     }
 
 
 
 
-    private void TeleportToPlayer()
+    public void OnComboAttackEnd()
+    {
+        isDoingCombo = false;
+        comboSlashCount = 0;
+        isAttacking = false;
+        comboSlashParried = false;
+        player.GetComponent<PlayerParry>().parryCooldown = 1f;
+        attackTimer = timeBetweenAttacks;
+        currentState = TenguState.Idle;
+    }
+
+
+
+
+    private IEnumerator TeleportToPlayer(float dashDuration = 0.12f)
     {
 
         // position Tengu directly in front of player
-        Vector3 teleportPos = player.position - (player.forward * attackRange);
-        teleportPos.y = transform.position.y;
-        transform.position = teleportPos;
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = player.position - (player.position - transform.position).normalized;
+        targetPos.y = startPos.y;
+
+        float elapsed = 0f;
+        while(elapsed < dashDuration)
+        {
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / dashDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         // play dash vfx & sfx

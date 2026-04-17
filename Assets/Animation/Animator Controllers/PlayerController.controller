@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8440881225337923232, guid: b07823e86fa27ee439c4fe15d96d1e7a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 82ba6e40c8deda142ab1a36fdba27236, type: 2}
   m_Tag: 
   m_SpeedParameter: SprintScalar
   m_MirrorParameter: 
@@ -47,7 +47,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8065676131854384368}
-    m_Position: {x: 47.381256, y: 123.21114, z: 0}
+    m_Position: {x: 50, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6425765152367932092}
     m_Position: {x: 270, y: 390, z: 0}
@@ -366,7 +366,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8793594448099602729, guid: 09cf7e770600d704db0dffcf5db53837, type: 3}
+  m_Motion: {fileID: 7400000, guid: 5ff783fc86ab16c479f8b5245eff7b26, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -440,7 +440,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -558090505737187615, guid: baedebf1c8880724a84b1e5d717a2418, type: 3}
+  m_Motion: {fileID: 7400000, guid: 4545058baeabcdb45b1deb60ff460fc7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1102,7 +1102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 5878333363342162507, guid: 31f2e2f5910af2141bdce1576f358f6a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 8b967f0d5c8065347915a7cb1b99b0c6, type: 2}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1173,7 +1173,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 218572e3c0aafd94299cab2d090b1dc4, type: 2}
+  m_Motion: {fileID: 7400000, guid: f51d9fd1d3ecbe94b8be47be50b28112, type: 2}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 

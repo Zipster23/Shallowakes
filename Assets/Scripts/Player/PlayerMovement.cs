@@ -193,6 +193,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGroundedMovement(Vector3 moveDirection, bool isSprinting, bool isDashing)
     {
+        if(isKnockedBack)
+        {
+            return;
+        }
+
         // Ends the Method if the player is dashing
         if (isDashing)
         {
@@ -423,6 +428,26 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody GetRigidbody()
     {
         return rb;
+    }
+
+
+
+
+
+
+
+
+    // knockback function for tengu enraged mode
+    public bool isKnockedBack = false;
+    
+    public IEnumerator ApplyKnockback(Vector3 force, float duration)
+    {
+        
+        isKnockedBack = true;
+        rb.velocity = force;
+        yield return new WaitForSeconds(duration);
+        isKnockedBack = false;
+
     }
 
 

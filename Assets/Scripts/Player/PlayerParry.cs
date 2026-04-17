@@ -105,8 +105,15 @@ public class PlayerParry : MonoBehaviour
         vfx.EmitParryParticles();
         sfx.playKatanaDeflectSFX();
 
-        // tell the Tengu it got parried
-        tenguAI.GetParried();
+        // tell the Tengu it got parried unless it's doing the combo attack.
+        if(tenguAI.isDoingCombo)
+        {
+            tenguAI.comboSlashParried = true;
+        }
+        else
+        {
+            tenguAI.GetParried();
+        }
 
     }
 
