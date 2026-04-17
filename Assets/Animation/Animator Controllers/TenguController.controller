@@ -67,13 +67,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 9082926123933794690, guid: 6f33060fdfc3f414bbb012a0e4256097, type: 3}
+  m_Motion: {fileID: 7400000, guid: 4e3cf9f560fe1a846a7014cfe7e7fcd9, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: DashSlashSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -242,7 +242,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 04513c6730ba08b48829a377be8b29a6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 900c8fe46be3b634098451d37d4e4bf4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -365,7 +365,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ae1ce56f210ecb24c9d420aa39630664, type: 2}
+  m_Motion: {fileID: 7400000, guid: 65305229a60c87645986007efa0eae53, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -583,6 +583,12 @@ AnimatorController:
   - m_Name: ComboAttack
     m_Type: 9
     m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: DashSlashSpeed
+    m_Type: 1
+    m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -7,51 +8,37 @@ using UnityEngine.Playables;
 public class TenguIntroCinematic : MonoBehaviour
 {
    
-    [Header("References")]
-    [SerializeField] private PlayableDirector timelineDirector;
+    [Header("Core References")]
     [SerializeField] private GameObject player;
     [SerializeField] private TenguAI tenguAI;
+    [SerializeField] private CinemachineFreeLook freeLookCamera;
+    [SerializeField] private ScreenFade fader;
+
+    [Header("Cinematic Cameras")]
+    [SerializeField] private CinemachineVirtualCamera camShrine;    // slow pan around the shrine
+    [SerializeField] private CinemachineVirtualCamera camTengu;     // medium shot of tengu kneeling
+    [SerializeField] private CinemachineVirtualCamera camTenguFace; // close up on the tengu's face
+
+    [Header("Tengu")]
+    [SerializeField] private Animator tenguAnimator;
 
     [Header("Music")]
     [SerializeField] private AudioClip tenguTheme;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float musicSyncTime;               // how many seconds into the cutscene the big bass hit should play
-    [SerializeField] private float bassHitTimeInSong = 2.5f;    // how many seconds into the SONG the bass hit occurs
+
+    [Header("Timing")]
+    [SerializeField] private float shrinePanDuration = 3f;      // how long the camera pans around the shrine
+    [SerializeField] private float tenguKneelDuration = 2f;     // how long we look at the Tengu kneeling before moving to his face
+    [SerializeField] private float faceHoldDuration = 0.25f;     // how long we look at the Tengu's face before the music plays
+    [SerializeField] private float afterMusicDuration = 0.3f;     // how long after the music plays before we fade to black
 
     private bool hasPlayed;          // true once the cinematic has been triggered so it only plays once
     private bool isPlaying;          // true while the cutscene is actively playing
-    private float elapsedTime = 0f;  // we track elapsed time manually so we know when to start the music
 
 
 
 
-    private void Update()
-    {
-        
-        if(!isPlaying)
-        {
-            return;
-        }
-
-        elapsedTime += Time.deltaTime;
-
-        // When we hit the sync point, start the music from the beginning
-        // The bass hit will land at bassHitTimeInSong seconds after this
-        if(!musicSource.isPlaying && elapsedTime >= musicSyncTime)
-        {
-            musicSource.clip = tenguTheme;
-
-            // start the music from the beginning so the full song plays
-            // the bass hit naturally arrives at 2.5 seconds in
-
-        }
-
-    }
-
-
-
-
-    // Call this from a trigger collider when the player enters the shrine arena
     public void TriggerCinematic()
     {
         
@@ -61,7 +48,6 @@ public class TenguIntroCinematic : MonoBehaviour
         }
 
         hasPlayed = true;
-
         StartCoroutine(PlayCinematic());
 
     }
@@ -72,36 +58,92 @@ public class TenguIntroCinematic : MonoBehaviour
     private IEnumerator PlayCinematic()
     {
         
-        isPlaying = true;
-        elapsedTime = 0f;
-
-        // lock player input. Disable player's controller and movement so they can't move during the cutscene
+        // disable everything
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<PlayerInputHandler>().enabled = false;
-
-        // lock tengu AI. Disable the tengu's AI so it doesn't start attacking on its own while the cutscene is playing
         tenguAI.enabled = false;
 
-        // play the timeline
-        timelineDirector.Play();
+        // force player to be idle
+        player.GetComponent<Animator>().SetBool("isMoving", false);
+        player.GetComponent<Animator>().SetFloat("SprintScalar", 1f);
 
-        // wait for the timeline to finish playingg
-        // timeline duration is set by how long you make it in the editor
-        yield return new WaitForSeconds((float)timelineDirector.duration);
+        // fade to black
+        yield return StartCoroutine(fader.FadeOut());
 
-        // cutscene over. Hand control back
-        isPlaying = false;
+        yield return new WaitForSeconds(1f);
+        // activate the first camera WHILE the screen is black
+        freeLookCamera.enabled = false;
+        ActivateCamera(camShrine);
 
-        // re-enable player controls & Tengu AI
+        // show title text
+        yield return StartCoroutine(fader.ShowTitle());
+
+        // fade back in
+        yield return StartCoroutine(fader.FadeIn());
+
+        // pan around shrine
+        yield return new WaitForSeconds(shrinePanDuration);
+
+        // cut to Tengu kneeling
+        // tenguAnimator.SetTrigger("Kneel");
+        ActivateCamera(camTengu);
+        yield return new WaitForSeconds(tenguKneelDuration);
+
+        // cut to Tengu face
+        ActivateCamera(camTenguFace);
+
+        // wait 2.5s on the face for the tengu to look up at the camera, then play music
+        // tenguAnimator.SetTrigger("LookUp");
+        yield return new WaitForSeconds(2.5f);
+        musicSource.clip = tenguTheme;
+        musicSource.Play();
+
+        // short hold after music hits
+        yield return new WaitForSeconds(afterMusicDuration);
+
+        // re-enable everything
+        freeLookCamera.enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInputHandler>().enabled = true;
         tenguAI.enabled = true;
 
-        // Tell the Tengu to immediately do the Dash Slash as its opening move
+        // deactivate all cinematic cameras so FreeLook Camera takes back over
+        DeactivateAllCinematics();
+
+        // straight into gameplay. Tengu immediately dash slashes
         tenguAI.TriggerOpeningDashSlash();
 
+    }
+
+
+
+
+    // Sets one camera to high priority so Cinemachine Brain picks it
+    private void ActivateCamera(CinemachineVirtualCamera cam)
+    {
+        
+        // deactivate all cinematic cams first
+        camShrine.Priority = 0;
+        camTengu.Priority = 0;
+        camTenguFace.Priority = 0;
+
+        // activate the one we want
+        cam.Priority = 20;
+
+    }
+
+
+
+
+    // Resets all cinematic cameras so FreeLook Camera takes back over
+    private void DeactivateAllCinematics()
+    {
+        
+        camShrine.Priority = 0;
+        camTengu.Priority = 0;
+        camTenguFace.Priority = 0;
 
     }
 
