@@ -1176,15 +1176,27 @@ PrefabInstance:
       objectReference: {fileID: 126595771}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000016176498
+      value: -0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000058634884
+      value: -0.0000000058634884
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: lungeForce
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: comboWindowStart
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749161772184848182, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4218845839420165472, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
@@ -1241,6 +1253,10 @@ PrefabInstance:
     - target: {fileID: 5461013196789228436, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584193637632585453, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8949720264475887388, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.x
