@@ -96,7 +96,7 @@ public class TenguIntroCinematic : MonoBehaviour
         yield return StartCoroutine(fader.FadeIn());
 
         // pan around shrine
-        yield return new WaitForSeconds(shrinePanDuration);
+        // yield return new WaitForSeconds(shrinePanDuration);
 
         // cut to Tengu kneeling
         // tenguAnimator.SetTrigger("Kneel");
@@ -104,7 +104,6 @@ public class TenguIntroCinematic : MonoBehaviour
         yield return new WaitForSeconds(tenguKneelDuration);
 
         // cut to Tengu face
-        SetBlendDuration(2f);
         ActivateCamera(camTenguFace);
 
         // wait 2.5s on the face for the tengu to look up at the camera, then play music
