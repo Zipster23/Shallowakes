@@ -104,6 +104,7 @@ public class TenguIntroCinematic : MonoBehaviour
         yield return new WaitForSeconds(tenguKneelDuration);
 
         // cut to Tengu face
+        SetBlendDuration(2f);
         ActivateCamera(camTenguFace);
 
         // wait 2.5s on the face for the tengu to look up at the camera, then play music
