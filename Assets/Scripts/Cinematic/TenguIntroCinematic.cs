@@ -8,6 +8,9 @@ using UnityEngine.Playables;
 public class TenguIntroCinematic : MonoBehaviour
 {
    
+    [Header("Debug")]
+    [SerializeField] private bool enableCinematic = true;   // uncheck this in the inspector to skip the cinematic during testing
+
     [Header("Core References")]
     [SerializeField] private GameObject player;
     [SerializeField] private TenguAI tenguAI;
@@ -43,6 +46,12 @@ public class TenguIntroCinematic : MonoBehaviour
     public void TriggerCinematic()
     {
         
+        // if disabled in the inspector, skip cinematic
+        if(!enableCinematic)
+        {
+            return;
+        }
+
         if(hasPlayed)
         {
             return;
@@ -149,5 +158,17 @@ public class TenguIntroCinematic : MonoBehaviour
         camTenguFace.Priority = 0;
 
     }
+
+
+
+
+    // Call this before ActivateCamera() to control how fast that specific transition is
+    // duration = 0 (instant cut), duration = 0.5 (default smooth), duration = 2 (slow cinematic drift)
+    private void SetBlendDuration(float duration)
+    {
+        
+        Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = duration;
+
+    }   
 
 }

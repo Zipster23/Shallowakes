@@ -291,7 +291,7 @@ public class TenguAI : MonoBehaviour
                 // start combo
                 isDoingCombo = true;
                 comboSlashCount = 0;
-                player.GetComponent<PlayerParry>().parryCooldown = 0.5f; 
+                player.GetComponent<PlayerParry>().parryCooldown = 0.25f; 
                 isAttacking = true;
                 attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");
