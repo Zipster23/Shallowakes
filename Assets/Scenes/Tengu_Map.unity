@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029645817, g: 0.14757386, b: 0.32560202, a: 1}
+  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756846, b: 0.32591167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1999,6 +1999,10 @@ PrefabInstance:
     - target: {fileID: 117866680507355168, guid: 1d346702b2107531e939003fb256261b, type: 3}
       propertyPath: m_Name
       value: SakuraTree_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 335499847954570198, guid: 1d346702b2107531e939003fb256261b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 2545823773444583948, guid: 1d346702b2107531e939003fb256261b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9216,11 +9220,15 @@ PrefabInstance:
       objectReference: {fileID: 126595771}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000016176498
+      value: 0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000058634884
+      value: 0.0000000058634884
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582317380386047717, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
@@ -9328,10 +9336,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1333801031}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: dashSlashSpeed
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_Name
       value: Tengu
       objectReference: {fileID: 0}
+    - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328840721501948552, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: appearSmokeEffect
+      value: 
+      objectReference: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1101.9899
@@ -9370,6 +9390,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045447900048516649, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14948,6 +14972,28 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2013712442067515796, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
   m_PrefabInstance: {fileID: 1776427560}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2028083527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5328840721501948552, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+  m_PrefabInstance: {fileID: 1776427560}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28270768bcf06ed46a9351412b3fb723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2028083528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7903891018583126115, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+  m_PrefabInstance: {fileID: 1776427560}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3d01c39621e4b4383f627559970631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2029957427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5483039503417428075, guid: 261441bc3708ec7aa8a2c288c3fab3ef, type: 3}
@@ -15620,18 +15666,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3023819712383705218, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261328942669005886, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
-      propertyPath: m_Size.x
-      value: 73.030396
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261328942669005886, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
-      propertyPath: m_Center.x
-      value: 4.4213257
-      objectReference: {fileID: 0}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: player
       value: 
@@ -15641,9 +15675,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 126595771}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
-      propertyPath: shrineTheme
+      propertyPath: tenguSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 2080e287a0a5b40499a9938c83e57215, type: 3}
+      objectReference: {fileID: 2028083528}
+    - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
+      propertyPath: tenguVFX
+      value: 
+      objectReference: {fileID: 2028083527}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: tenguAnimator
       value: 
@@ -15655,10 +15693,6 @@ PrefabInstance:
     - target: {fileID: 9122325287872382762, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: m_Name
       value: Tengu Stage Cinematic
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122325287872382762, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

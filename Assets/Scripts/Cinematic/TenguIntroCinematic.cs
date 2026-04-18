@@ -13,12 +13,15 @@ public class TenguIntroCinematic : MonoBehaviour
 
     [Header("Core References")]
     [SerializeField] private GameObject player;
+    [SerializeField] private TenguVFXManager tenguVFX;
+    [SerializeField] private TenguSFXManager tenguSFX;
     [SerializeField] private TenguAI tenguAI;
     [SerializeField] private CinemachineFreeLook freeLookCamera;
     [SerializeField] private ScreenFade fader;
 
     [Header("Cinematic Cameras")]
-    [SerializeField] private CinemachineVirtualCamera camShrine;    // slow pan around the shrine
+    private int currentPriority = 20;
+    [SerializeField] private List<CinemachineVirtualCamera> shrineCameras;
     [SerializeField] private CinemachineVirtualCamera camTengu;     // medium shot of tengu kneeling
     [SerializeField] private CinemachineVirtualCamera camTenguFace; // close up on the tengu's face
 
@@ -29,13 +32,6 @@ public class TenguIntroCinematic : MonoBehaviour
     [SerializeField] private AudioClip tenguTheme;
     [SerializeField] private AudioClip shrineTheme;
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private float musicSyncTime;               // how many seconds into the cutscene the big bass hit should play
-
-    [Header("Timing")]
-    [SerializeField] private float shrinePanDuration = 3f;      // how long the camera pans around the shrine
-    [SerializeField] private float tenguKneelDuration = 2f;     // how long we look at the Tengu kneeling before moving to his face
-    [SerializeField] private float faceHoldDuration = 0.25f;     // how long we look at the Tengu's face before the music plays
-    [SerializeField] private float afterMusicDuration = 0.3f;     // how long after the music plays before we fade to black
 
     private bool hasPlayed;          // true once the cinematic has been triggered so it only plays once
     private bool isPlaying;          // true while the cutscene is actively playing
@@ -82,9 +78,10 @@ public class TenguIntroCinematic : MonoBehaviour
         yield return StartCoroutine(fader.FadeOut());
 
         yield return new WaitForSeconds(1f);
+
         // activate the first camera WHILE the screen is black
         freeLookCamera.enabled = false;
-        ActivateCamera(camShrine);
+        ActivateCamera(shrineCameras[0]);
 
         // show title text and play shrine music
         musicSource.volume = 0.5f;
@@ -95,26 +92,36 @@ public class TenguIntroCinematic : MonoBehaviour
         // fade back in
         yield return StartCoroutine(fader.FadeIn());
 
-        // pan around shrine
-        // yield return new WaitForSeconds(shrinePanDuration);
+        // SHINE TOUR
+        SetBlendDuration(2f);
+        for(int i = 1; i < shrineCameras.Count; i++)
+        {
+            ActivateCamera(shrineCameras[i]);
+            yield return new WaitForSeconds(2f);
+        }
 
-        // cut to Tengu kneeling
-        // tenguAnimator.SetTrigger("Kneel");
-        ActivateCamera(camTengu);
-        yield return new WaitForSeconds(tenguKneelDuration);
-
-        // cut to Tengu face
-        ActivateCamera(camTenguFace);
-
-        // wait 2.5s on the face for the tengu to look up at the camera, then play music
-        // tenguAnimator.SetTrigger("LookUp");
-        yield return new WaitForSeconds(2.5f);
+        // make tengu appear
         musicSource.Stop();
         musicSource.volume = 1f;
         musicSource.clip = tenguTheme;
         musicSource.Play();
+        tenguAI.gameObject.SetActive(true);
+        Transform tenguTransform = tenguAI.transform;
+        tenguVFX.PlayDodgeEffect(tenguTransform.position + Vector3.up * 1f, tenguTransform);
+        tenguVFX.PlayAppearSmokeEffect(tenguTransform.position, tenguTransform);
+        tenguSFX.PlayDodgeSFX();
+
+        // cut to Tengu kneeling
+        // tenguAnimator.SetTrigger("Kneel");
+        ActivateCamera(camTengu);
+        yield return new WaitForSeconds(3f);
+
+        // cut to Tengu face
+        ActivateCamera(camTenguFace);
+        yield return new WaitForSeconds(3.85f);
 
         // re-enable everything
+        SetBlendDuration(0.2f);
         freeLookCamera.enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
@@ -136,13 +143,8 @@ public class TenguIntroCinematic : MonoBehaviour
     private void ActivateCamera(CinemachineVirtualCamera cam)
     {
         
-        // deactivate all cinematic cams first
-        camShrine.Priority = 0;
-        camTengu.Priority = 0;
-        camTenguFace.Priority = 0;
-
-        // activate the one we want
-        cam.Priority = 20;
+        currentPriority++;
+        cam.Priority = currentPriority;
 
     }
 
@@ -153,9 +155,14 @@ public class TenguIntroCinematic : MonoBehaviour
     private void DeactivateAllCinematics()
     {
         
-        camShrine.Priority = 0;
+        foreach(CinemachineVirtualCamera cam in shrineCameras)
+        {
+            cam.Priority = 0;
+        }
+
         camTengu.Priority = 0;
         camTenguFace.Priority = 0;
+        currentPriority = 20;
 
     }
 
