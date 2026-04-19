@@ -45,6 +45,8 @@ public class TenguIntroCinematic : MonoBehaviour
         // if disabled in the inspector, skip cinematic
         if(!enableCinematic)
         {
+            tenguAI.gameObject.SetActive(true);
+            tenguAI.TriggerOpeningDashSlash();
             return;
         }
 
