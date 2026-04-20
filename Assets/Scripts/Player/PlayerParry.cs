@@ -105,6 +105,9 @@ public class PlayerParry : MonoBehaviour
         vfx.EmitParryParticles();
         sfx.playKatanaDeflectSFX();
 
+        // knock the player back when they successfully parry
+        GetComponent<PlayerMovement>().Knockback(6f, 0.2f);
+
         // tell the Tengu it got parried unless it's doing the combo attack.
         if(tenguAI.isDoingCombo)
         {

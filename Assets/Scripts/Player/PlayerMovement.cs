@@ -451,4 +451,33 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+
+
+    // knockback for parries
+    // Knocks the player backwards — called when the player gets parried
+    public void Knockback(float force, float duration)
+    {
+        StartCoroutine(KnockbackCoroutine(force, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(float force, float duration)
+    {
+        float elapsed = 0f;
+
+        // Knock back in the opposite direction the player is facing
+        Vector3 knockbackDirection = -transform.forward;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            // Fade the force out over the duration so it feels like a stumble
+            float strength = Mathf.Lerp(force, 0f, elapsed / duration);
+            rb.MovePosition(rb.position + knockbackDirection * strength * Time.deltaTime);
+
+            yield return null;
+        }
+    }
+
+
 }

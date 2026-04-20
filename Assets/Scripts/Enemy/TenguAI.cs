@@ -559,6 +559,7 @@ public class TenguAI : MonoBehaviour
         StopAllCoroutines();                // cancel any running reposition coroutines
         animator.ResetTrigger("Attack");    // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
+
         StartCoroutine(ParryStun());        // start the stun for getting parried
 
     }
@@ -686,6 +687,36 @@ public class TenguAI : MonoBehaviour
         yield return new WaitForSeconds(parryStunDuration);     // wait for stun to finish
         currentState = TenguState.Idle;                         // go back to Idle state
 
+    }
+
+
+
+
+    // Knocks the Tengu backwards — called when the player successfully parries the Tengu
+    public void Knockback(float force, float duration)
+    {
+        StartCoroutine(KnockbackCoroutine(force, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(float force, float duration)
+    {
+        float elapsed = 0f;
+
+        // Knock back in the opposite direction the Tengu is facing
+        Vector3 knockbackDirection = -transform.forward;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            // Fade the force out so it feels like a stumble rather than a slide
+            float strength = Mathf.Lerp(force, 0f, elapsed / duration);
+            rb.MovePosition(rb.position + knockbackDirection * strength * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     
     [Header("References")]
     private Animator animator;  // controls which animations play on the player
+    [SerializeField] private TenguAI tenguAI;    // to knock tengu back when he parries player attack
 
 
     // --- TENGU PARRY --- //
@@ -97,6 +99,8 @@ public class PlayerHealth : MonoBehaviour
         playerController.enabled = false;
         playerController.isBusy = false;
         GetComponent<PlayerMovement>().attackMovementMultiplier = 1f;
+
+        tenguAI.Knockback(10f, 0.2f);
 
         // Reset base layer to Idle and body layer to Empty
         // This stops the attack animation on the body layer immediately

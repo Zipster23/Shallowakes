@@ -9235,6 +9235,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: tenguAI
+      value: 
+      objectReference: {fileID: 126595771}
+    - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
       value: 1000000
       objectReference: {fileID: 0}
