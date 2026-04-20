@@ -36,6 +36,7 @@ public class TenguAI : MonoBehaviour
     private Enemy enemy;            // reference to the Enemy script (for health)
     private TenguVFXManager vfx;    // handles hit visual effects
     private TenguSFXManager sfx;    // handles hit sound effects
+    private Rigidbody rb;           // handles Tengu rigidbody (for enraged)
 
 
     // --- MOVEMENT --- //
@@ -114,6 +115,7 @@ public class TenguAI : MonoBehaviour
         enemy = GetComponent<Enemy>();
         vfx = GetComponent<TenguVFXManager>();
         sfx = GetComponent<TenguSFXManager>();
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -394,6 +396,13 @@ public class TenguAI : MonoBehaviour
         // stop moving while enraged animation plays
         animator.SetBool("IsMoving", false);
 
+        // Lock the Tengu in place every frame by resetting to current position
+        // This prevents any coroutines or physics from moving him
+        rb.MovePosition(rb.position);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        // Log the Tengu's position every frame to see if something is moving him
+        Debug.Log($"[Enraged] Position: {rb.position} Velocity: {rb.velocity} isKinematic: {rb.isKinematic}");
         // gets what's currently playing on Animator Base Layer
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
 
@@ -401,6 +410,8 @@ public class TenguAI : MonoBehaviour
         // if the Enraged animation is playing & if the Enraged animation has fully played, go back to chasing
         if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
         {
+            // Unlock movement when enraged animation finishes
+            GetComponent<Rigidbody>().isKinematic = false;
             currentState = TenguState.Chase;
         }
 
@@ -790,6 +801,9 @@ public class TenguAI : MonoBehaviour
 
         // stop any coroutines so they can't interfere with the enrage animation
         StopAllCoroutines();
+
+        // Lock the Tengu's rigidbody so he can't physically move during the enrage animation
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         // boost all stats by their corresponding enraged multipliers
         moveSpeed *= enragedSpeedMultiplier;
