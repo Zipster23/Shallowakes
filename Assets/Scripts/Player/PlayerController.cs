@@ -18,14 +18,8 @@ public class PlayerController : MonoBehaviour
     public float attackRange = 0.5f;
     public int attackDamage = 25;
 
-    // ── Combo Settings ─────────────────────────────────────────────────
-    private const int COMBO_LENGTH = 3;
-    private int comboIndex = 0;
+    // ── Attack Settings ────────────────────────────────────────────────
     public bool isBusy = false;
-
-    // Instead of a simple bool, we track HOW MANY times the player clicked
-    // during the current animation. We only consume one click per chain step.
-    private int comboClickCount = 0;
 
     // ── Lunge Settings ─────────────────────────────────────────────────
     [SerializeField] private float lungeForce = 6f;
@@ -56,23 +50,13 @@ public class PlayerController : MonoBehaviour
             controller.PlayMovementAnimation(false, false);
 
         // ── Attack Input ───────────────────────────────────────────────
-        // We use GetKeyDown directly here instead of going through
-        // PlayerInputHandler so we get exactly one event per physical click.
-        // This is the key fix — attackInput staying true for 0.1s was causing
-        // the buffer to get set multiple times per click.
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (!isBusy)
             {
-                // Not attacking at all — start the combo
-                StartComboAttack();
-            }
-            else
-            {
-                // Mid-attack — count this click as a buffer for the next hit
-                // We use a counter instead of a bool so rapid clicks don't
-                // accidentally skip a hit in the chain
-                comboClickCount++;
+                isBusy = true;
+                controller.PlayRandomAttack();
+                StartCoroutine(AttackCoroutine());
             }
         }
 
@@ -80,7 +64,7 @@ public class PlayerController : MonoBehaviour
         if (!isBusy && input.thrustInput)
         {
             isBusy = true;
-            StartCoroutine(ComboAttackCoroutine());
+            StartCoroutine(AttackCoroutine());
             controller.PlayThrustAnimation();
         }
 
@@ -104,26 +88,14 @@ public class PlayerController : MonoBehaviour
             movement.ExitGlide();
     }
 
-    // ── Combo Logic ───────────────────────────────────────────────────
+    // ── Attack Logic ──────────────────────────────────────────────────
 
-    private void StartComboAttack()
+    private IEnumerator AttackCoroutine()
     {
-        // Double safety check — should never be called while busy
-        if (isBusy) return;
-
-        comboIndex = 0;
-        comboClickCount = 0;
-        isBusy = true;
-        controller.PlayComboAttack(comboIndex);
-        StartCoroutine(ComboAttackCoroutine());
-    }
-
-    private IEnumerator ComboAttackCoroutine()
-    {
+        // Lock movement immediately
         movement.attackMovementMultiplier = 0f;
-        StartCoroutine(AttackLunge());
 
-        // ── Wait for animator to enter the attack state ────────────────
+        // Wait for animator to enter the attack state BEFORE lunging
         float waitTimer = 0f;
         while (!controller.IsPlayingAttack() && waitTimer < 0.2f)
         {
@@ -131,49 +103,23 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
+        // If animator never entered the attack state, bail out
         if (!controller.IsPlayingAttack())
         {
-            ResetCombo();
+            ResetAttack();
             yield break;
         }
 
+        // NOW start the lunge — animation and lunge happen at the same time
+        StartCoroutine(AttackLunge());
 
-        int clickCountAtAnimStart = comboClickCount;
-        bool chained = false;
-
-        // ── Wait for animation to finish OR for a click ────────────────
-        // Every frame we check two things:
-        // 1. Did the player click? → chain immediately, don't wait for anim to finish
-        // 2. Did the animation finish? → end combo or chain if click already buffered
+        // Wait for the animation to finish
         while (controller.IsPlayingAttack() && controller.GetAttackNormalizedTime() < 0.95f)
         {
-            // Player clicked during this animation — chain right away
-            if (comboClickCount > clickCountAtAnimStart && comboIndex < COMBO_LENGTH - 1)
-            {
-                comboIndex++;
-                chained = true;
-                controller.PlayComboAttack(comboIndex);
-
-                // Don't break out yet — wait for the current animation to reach
-                // a good transition point (40%) so it doesn't look jarring
-                while (controller.GetAttackNormalizedTime() < 0.65f)
-                {
-                    yield return null;
-                }
-
-                // Now start the next hit's coroutine and exit this one
-                StartCoroutine(ComboAttackCoroutine());
-                yield break;
-            }
-
             yield return null;
         }
 
-        // ── Animation finished without a mid-anim click ────────────────
-        if (!chained)
-        {
-            StartCoroutine(RestoreMovementGradually());
-        }
+        StartCoroutine(RestoreMovementGradually());
     }
 
     private IEnumerator RestoreMovementGradually()
@@ -189,14 +135,12 @@ public class PlayerController : MonoBehaviour
         }
 
         movement.attackMovementMultiplier = 1f;
-        ResetCombo();
+        ResetAttack();
     }
 
     // Called externally by PlayerHealth when the player gets parried
-    public void ResetCombo()
+    public void ResetAttack()
     {
-        comboIndex = 0;
-        comboClickCount = 0;
         isBusy = false;
         movement.attackMovementMultiplier = 1f;
     }
@@ -248,7 +192,6 @@ public class PlayerController : MonoBehaviour
             vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
             sfx.playKatanaHitSFX();
             StartCoroutine(DoHitstop());
-
         }
     }
 
