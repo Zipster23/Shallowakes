@@ -59,7 +59,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2d624c0d2ecf4de3ab9223ca8fb39609_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 92485b27843a3924db475fe27d58f05b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_50c6ecbd1a8c4137836218c0560aceb6_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 92485b27843a3924db475fe27d58f05b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d9cf4158462d45e7a989ce41b1d51305_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 92485b27843a3924db475fe27d58f05b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -90,6 +98,12 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Layer_1_Tiling: {r: 2, g: 2, b: 0, a: 0}
+    - _Layer_2_Tiling: {r: 3, g: 3, b: 0, a: 0}
+    - _Main_Color: {r: 0.07609467, g: 0.7056828, b: 0.8490566, a: 0}
+    - _Wave_Speed_X: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _Wave_Speed_Y: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _of_Main_Normal: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4941883573550118351
 MonoBehaviour:
