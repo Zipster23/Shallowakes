@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083321307088416724}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.44916385, y: -0.044228245, z: -0.8923436, w: 0.004321783}
-  m_LocalPosition: {x: 0.231, y: 0.338, z: 0.167}
+  m_LocalRotation: {x: -0.4363662, y: 0.115277685, z: -0.834751, w: 0.31541467}
+  m_LocalPosition: {x: 0.139, y: 0.254, z: 0.302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8838824095219769934}
   - {fileID: 3031691310848680678}
   m_Father: {fileID: 7133217210755484067}
-  m_LocalEulerAnglesHint: {x: -9.701, y: 271.09302, z: 180.19}
+  m_LocalEulerAnglesHint: {x: -4.75, y: 413.513, z: 219.002}
 --- !u!64 &92013974232255115
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5034,7 +5034,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9894,7 +9894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5553510191825822702
 Transform:
   m_ObjectHideFlags: 0
@@ -10037,9 +10037,9 @@ MonoBehaviour:
   enragedDodgeSpeedMultiplier: 1.5
   impulseSource: {fileID: 0}
   dashSlashRange: 20
-  dashSlashSpeed: 80
+  dashSlashSpeed: 120
   isDoingCombo: 0
-  comboChance: 30
+  comboChance: 15
   comboSlashParried: 0
 --- !u!114 &7903891018583126115
 MonoBehaviour:
@@ -10082,6 +10082,7 @@ MonoBehaviour:
   redRayEffect: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
   slashChargeUpEffect: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   slashEffect: {fileID: 2929425121346758057, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
+  appearSmokeEffect: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
 --- !u!1 &7066017051461603540
 GameObject:
   m_ObjectHideFlags: 0

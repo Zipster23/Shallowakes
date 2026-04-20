@@ -95,11 +95,11 @@ public class TenguIntroCinematic : MonoBehaviour
         yield return StartCoroutine(fader.FadeIn());
 
         // SHINE TOUR
-        SetBlendDuration(2f);
+        SetBlendDuration(3f);
         for(int i = 1; i < shrineCameras.Count; i++)
         {
             ActivateCamera(shrineCameras[i]);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.89f);
         }
 
         // make tengu appear
