@@ -33,12 +33,11 @@ public class PlayerAnimatorController : MonoBehaviour
         return animator;
     }
 
-    // Each combo hit has its own trigger: Attack_01, Attack_02, Attack_03
-    // comboIndex 0 = first hit, 1 = second hit, 2 = third hit
-    public void PlayComboAttack(int comboIndex)
+    public void PlayRandomAttack()
     {
-        // Build the trigger name from the index, e.g. index 0 → "Attack_01"
-        string triggerName = "Attack_0" + (comboIndex + 1);
+        // Pick a random number between 1 and 3 and play that attack animation
+        int randomIndex = Random.Range(1, 4); // Range is exclusive on max so this gives 1, 2, or 3
+        string triggerName = "Attack_0" + randomIndex;
         animator.SetTrigger(triggerName);
     }
 

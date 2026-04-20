@@ -9234,6 +9234,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: maxHealth
+      value: 1000000
+      objectReference: {fileID: 0}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
       value: Player
@@ -15722,6 +15726,10 @@ PrefabInstance:
       propertyPath: freeLookCamera
       value: 
       objectReference: {fileID: 183816061}
+    - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
+      propertyPath: enableCinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7919735014575364277, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.7231445

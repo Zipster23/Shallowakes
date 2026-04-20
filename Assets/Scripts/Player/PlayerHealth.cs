@@ -93,17 +93,18 @@ public class PlayerHealth : MonoBehaviour
     public IEnumerator GetParried()
     {
         
-        // disable player controller so they can't move or attack
-        GetComponent<PlayerController>().enabled = false;
+        PlayerController playerController = GetComponent<PlayerController>();
+        playerController.enabled = false;
+        playerController.isBusy = false;
+        GetComponent<PlayerMovement>().attackMovementMultiplier = 1f;
 
-        // snap back to idle animation
-        animator.Play("Idle");
+        // Reset base layer to Idle and body layer to Empty
+        // This stops the attack animation on the body layer immediately
+        animator.Play("Idle", 0, 0f);
+        animator.Play("Empty", 1, 0f);
 
-        // wait for stun duration
         yield return new WaitForSeconds(parryStunDuration);
 
-        // re-enable player controller so the player can move and attack after the stun
-        PlayerController playerController = GetComponent<PlayerController>();
         playerController.isBusy = false;
         playerController.enabled = true;
 
