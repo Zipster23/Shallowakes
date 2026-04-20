@@ -9367,11 +9367,11 @@ PrefabInstance:
       objectReference: {fileID: 126595771}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000016176498
+      value: 0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000058634884
+      value: 0.0000000058634884
       objectReference: {fileID: 0}
     - target: {fileID: 2582317380386047717, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: playOnAwake
@@ -15987,7 +15987,7 @@ PrefabInstance:
       objectReference: {fileID: 183816061}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: enableCinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: shrineCameras.Array.size
