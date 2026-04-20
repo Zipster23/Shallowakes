@@ -29,16 +29,16 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: {x: 0, y: 0, z: 360}
-        inSlope: {x: -0, y: -0, z: 180}
+        inSlope: {x: 0, y: 0, z: 180}
         outSlope: {x: 0, y: 0, z: 180}
         tangentMode: 0
-        weightedMode: 3
+        weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -51,7 +51,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3778437053
+      path: 2349776887
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -97,17 +97,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: 0
-        inSlope: -0
+        inSlope: 0
         outSlope: 0
-        tangentMode: 69
-        weightedMode: 3
+        tangentMode: 136
+        weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -127,17 +127,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: 0
-        inSlope: -0
+        inSlope: 0
         outSlope: 0
-        tangentMode: 69
-        weightedMode: 3
+        tangentMode: 136
+        weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -159,15 +159,15 @@ AnimationClip:
         value: 360
         inSlope: 180
         outSlope: 180
-        tangentMode: 69
-        weightedMode: 3
+        tangentMode: 34
+        weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -180,7 +180,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -192,7 +192,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -204,7 +204,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/BuddhaWheelPivot
+    path: BuddhaWheelYokai_early_v03/BuddhaWheel
     classID: 4
     script: {fileID: 0}
     flags: 0
