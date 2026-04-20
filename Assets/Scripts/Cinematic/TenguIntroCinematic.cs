@@ -99,7 +99,7 @@ public class TenguIntroCinematic : MonoBehaviour
         for(int i = 1; i < shrineCameras.Count; i++)
         {
             ActivateCamera(shrineCameras[i]);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.8f);
         }
 
         // make tengu appear
