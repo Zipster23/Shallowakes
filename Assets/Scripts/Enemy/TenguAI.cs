@@ -443,6 +443,13 @@ public class TenguAI : MonoBehaviour
         // always face the player during combo
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
+        // keep moving towards player during combo so they can't run away
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if(distanceToPlayer > attackRange)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
+
     }
 
     
