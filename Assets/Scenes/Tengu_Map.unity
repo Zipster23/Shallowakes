@@ -9469,50 +9469,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1083321307088416724, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_Name
-      value: Tengu Naginata
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.019
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.145
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.324
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.66667205
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.25503805
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.2206297
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.66470045
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -2.679
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 39.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 269.212
-      objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: player
       value: 
@@ -9527,7 +9483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15957,6 +15913,10 @@ PrefabInstance:
       propertyPath: freeLookCamera
       value: 
       objectReference: {fileID: 183816061}
+    - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
+      propertyPath: enableCinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9122325287872382762, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: m_Name
       value: Tengu Stage Cinematic
