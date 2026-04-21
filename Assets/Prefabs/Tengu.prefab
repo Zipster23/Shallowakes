@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6930989546855064793}
   - component: {fileID: 1057940773211641341}
   m_Layer: 0
-  m_Name: Tengu Katana
+  m_Name: Tengu Naginata
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,16 +28,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083321307088416724}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.4363662, y: 0.115277685, z: -0.834751, w: 0.31541467}
-  m_LocalPosition: {x: 0.139, y: 0.254, z: 0.302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2565382447819316486}
   - {fileID: 8838824095219769934}
   - {fileID: 3031691310848680678}
-  m_Father: {fileID: 7133217210755484067}
-  m_LocalEulerAnglesHint: {x: -4.75, y: 413.513, z: 219.002}
+  m_Father: {fileID: 1195283276057904670}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &92013974232255115
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4953,6 +4953,38 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &1809074009170115429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195283276057904670}
+  m_Layer: 0
+  m_Name: Naginata Socket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1195283276057904670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809074009170115429}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 408559160441135853}
+  m_Father: {fileID: 7133217210755484067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3165420901587852055
 GameObject:
   m_ObjectHideFlags: 0
@@ -10512,8 +10544,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 408559160441135853}
+      insertIndex: -1
+      addedObject: {fileID: 1195283276057904670}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
 --- !u!4 &7133217210755484067 stripped
