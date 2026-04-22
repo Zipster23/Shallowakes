@@ -9474,12 +9474,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1333801031}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: tenguPrefab
+      value: 
+      objectReference: {fileID: 5069321123640539476, guid: 9393c7344ed145349857ef41aa290c50, type: 3}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: impulseSource
       value: 
       objectReference: {fileID: 966884252}
     - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_Name
       value: Tengu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
