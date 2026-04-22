@@ -9915,7 +9915,6 @@ GameObject:
   - component: {fileID: 5553510191825822702}
   - component: {fileID: 2013712442067515796}
   - component: {fileID: 7599485684159716529}
-  - component: {fileID: 2365268915613512789}
   - component: {fileID: 7903891018583126115}
   - component: {fileID: 5328840721501948552}
   - component: {fileID: 1427243492941515318}
@@ -9987,33 +9986,6 @@ CapsuleCollider:
   m_Height: 3.2944336
   m_Direction: 1
   m_Center: {x: -0.016845703, y: 1.5928955, z: -0.02205658}
---- !u!54 &2365268915613512789
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5069321123640539476}
-  serializedVersion: 4
-  m_Mass: 70
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &7903891018583126115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10055,6 +10027,7 @@ MonoBehaviour:
   redRayEffect: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
   slashChargeUpEffect: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   slashEffect: {fileID: 2929425121346758057, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
+  shadowCloneEffect: {fileID: 0}
   appearSmokeEffect: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
 --- !u!114 &1427243492941515318
 MonoBehaviour:
