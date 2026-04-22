@@ -23,6 +23,9 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem slashChargeUpEffect;
     [SerializeField] private ParticleSystem slashEffect;
 
+    [Header("Dash-Ability VFX")]
+    [SerializeField] private ParticleSystem shadowCloneEffect;
+
     [Header("Cinematic VFX")]
     [SerializeField] private ParticleSystem appearSmokeEffect;
     
@@ -75,6 +78,13 @@ public class TenguVFXManager : MonoBehaviour
     public void PlaySlashEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(slashEffect, position, slashEffect.transform.rotation);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlayShadowCloneEffect(Vector3 position, Transform parent)
+    {
+        ParticleSystem effect = Instantiate(shadowCloneEffect, position, slashEffect.transform.rotation);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, effect.main.duration);
     }
