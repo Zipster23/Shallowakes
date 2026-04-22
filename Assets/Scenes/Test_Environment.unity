@@ -1976,6 +1976,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.736
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77612740828281296, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8247238362864710800, guid: 45e2209ac33161943beacfe04af92a47, type: 3}
       propertyPath: m_Name
       value: Susanoo
