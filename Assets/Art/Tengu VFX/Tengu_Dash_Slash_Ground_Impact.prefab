@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 4941468510946354384}
   - component: {fileID: 114873338690784808}
   m_Layer: 0
-  m_Name: CFXR2 Ground Hit
+  m_Name: Tengu_Dash_Slash_Ground_Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

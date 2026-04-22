@@ -1152,7 +1152,7 @@ public class TenguAI : MonoBehaviour
             // spawn a clone at the calculated position with no rotation
             GameObject cloneObj = Instantiate(tenguPrefab, spawnPos, Quaternion.identity);
             // play a smoke appear VFX and a appear SFX at the spawn position
-            vfx.PlayAppearSmokeEffect(spawnPos + Vector3.up * 1f, cloneObj.transform);
+            vfx.PlayShadowCloneEffect(spawnPos + Vector3.up * 1f, cloneObj.transform);
             sfx.PlayDodgeSFX();
 
             // get the TenguClone script from the spawned GameObject so we can PerformThrust()
