@@ -23,7 +23,7 @@ public class TenguVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem slashChargeUpEffect;
     [SerializeField] private ParticleSystem slashEffect;
 
-    [Header("Dash-Ability VFX")]
+    [Header("Shadow Clone Ability VFX")]
     [SerializeField] private ParticleSystem shadowCloneEffect;
 
     [Header("Cinematic VFX")]

@@ -9469,54 +9469,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.20698099
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.62094116
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.44882476
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.09585665
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.28960952
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.72150797
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.621582
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 72.265
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 133.295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195283276057904670, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 281.268
-      objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1333801031}
-    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: tenguPrefab
-      value: 
-      objectReference: {fileID: 5069321123640539476, guid: 9393c7344ed145349857ef41aa290c50, type: 3}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: impulseSource
       value: 
@@ -9525,14 +9481,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tengu
       objectReference: {fileID: 0}
-    - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5328840721501948552, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
-      propertyPath: shadowCloneEffect
-      value: 
-      objectReference: {fileID: 4596544553357837919, guid: e92a03226a7cae9418fb48c2e2b1a86c, type: 3}
     - target: {fileID: 5553510191825822702, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1101.9899

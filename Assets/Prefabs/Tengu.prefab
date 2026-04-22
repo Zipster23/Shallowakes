@@ -4977,14 +4977,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809074009170115429}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2746663, y: -0.796286, z: 0.5223662, w: 0.13274246}
-  m_LocalPosition: {x: 0.246714, y: 0.39546207, z: 0.37950692}
+  m_LocalRotation: {x: 0.70078814, y: 0.37909943, z: -0.19971104, w: 0.57034653}
+  m_LocalPosition: {x: -0.654, y: 0.192, z: -0.568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 408559160441135853}
-  m_Father: {fileID: 3385158796161354340}
-  m_LocalEulerAnglesHint: {x: 64.8, y: 169.779, z: 315.441}
+  m_Father: {fileID: 1503232361753935876}
+  m_LocalEulerAnglesHint: {x: 71.953, y: 150.505, z: 101.541}
 --- !u!1 &3165420901587852055
 GameObject:
   m_ObjectHideFlags: 0
@@ -10073,6 +10073,10 @@ MonoBehaviour:
   isDoingCombo: 0
   comboChance: 15
   comboSlashParried: 0
+  tenguPrefab: {fileID: 5069321123640539476, guid: 9393c7344ed145349857ef41aa290c50, type: 3}
+  cloneCount: 5
+  cloneRadius: 6
+  shadowCloneChance: 30
 --- !u!114 &7903891018583126115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10114,6 +10118,7 @@ MonoBehaviour:
   redRayEffect: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
   slashChargeUpEffect: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   slashEffect: {fileID: 2929425121346758057, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
+  shadowCloneEffect: {fileID: 4596544553357837919, guid: e92a03226a7cae9418fb48c2e2b1a86c, type: 3}
   appearSmokeEffect: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
 --- !u!1 &7066017051461603540
 GameObject:
@@ -10461,7 +10466,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2563496969622287784, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1195283276057904670}
     m_AddedComponents: []
@@ -10471,9 +10476,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
   m_PrefabInstance: {fileID: 966339965105274828}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3385158796161354340 stripped
+--- !u!4 &1503232361753935876 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
   m_PrefabInstance: {fileID: 966339965105274828}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2598762544591518445
