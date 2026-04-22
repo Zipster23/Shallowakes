@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d45d911900b94489bb9b9fd3a524b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableCinematic: 1
+  enableCinematic: 0
   player: {fileID: 0}
   tenguVFX: {fileID: 0}
   tenguSFX: {fileID: 0}

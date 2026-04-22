@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
 
         // Disable enemy 
         this.enabled = false;
+        GetComponentInParent<TenguAI>().enabled = false;
     }
 
 }

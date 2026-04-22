@@ -20,7 +20,8 @@ public class TenguAI : MonoBehaviour
         Enraged,    // enraged state - faster/stronger
         IsParried,  // briefly stunned after getting parried by the player
         DashSlash,  // long range dash into a slash that procs once the player is a certain distance away (or randomly after a dodge)
-        ComboAttack // uninterruptible 3 hit combo, player must parry all 3 slashes
+        ComboAttack,// uninterruptible 3 hit combo, player must parry all 3 slashes
+        ShadowClone,// enraged only - spawns clones around player that all thrust 
     }
 
     [Header("States")]
@@ -103,6 +104,13 @@ public class TenguAI : MonoBehaviour
     [HideInInspector]
     public bool comboSlashParried = false;  // tracks if current slash was parried
 
+    [Header("Shadow Clone Ability")]
+    public GameObject tenguPrefab;          // the Tengu prefab used to spawn clones    
+    public int cloneCount = 5;              // how many clones to spawn
+    public float cloneRadius = 6f;          // radius of the circle the clones spawn in
+    public int shadowCloneChance = 30;      // chance of doing shadow clone in enraged mode
+    private bool isShadowCloning = false;   // prevents ability from restarting every frame
+
 
 
 
@@ -138,6 +146,13 @@ public class TenguAI : MonoBehaviour
             return;
         }
 
+        // if enraged animation is playing, only run HandleEnraged and nothing else
+        if(currentState == TenguState.Enraged)
+        {
+            HandleEnraged();
+            return;
+        }
+
         // run whichever state we're currently in
         switch(currentState)
         {
@@ -168,6 +183,9 @@ public class TenguAI : MonoBehaviour
                 break;
             case TenguState.ComboAttack:
                 HandleComboAttack();
+                break;
+            case TenguState.ShadowClone:
+                HandleShadowClone();
                 break;
 
         }
@@ -286,6 +304,18 @@ public class TenguAI : MonoBehaviour
                 return; 
             }
 
+            // in enraged mode, chance to do shadow clone ability
+            if(isEnraged)
+            {
+                int shadowRoll = Random.Range(0,100);
+                if(shadowRoll < shadowCloneChance)
+                {
+                    isAttacking = true;
+                    currentState = TenguState.ShadowClone;
+                    return;
+                }
+            }
+
             // roll for combo attack
             int comboRoll = Random.Range(0,100);
             if(comboRoll < comboChance && !isDoingCombo)
@@ -297,7 +327,7 @@ public class TenguAI : MonoBehaviour
                 isAttacking = true;
                 attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");
-                Debug.Log("Combo AttacK!!!");
+                
                 currentState = TenguState.ComboAttack;
                 return;
             }
@@ -395,14 +425,7 @@ public class TenguAI : MonoBehaviour
     {
         // stop moving while enraged animation plays
         animator.SetBool("IsMoving", false);
-
-        // Lock the Tengu in place every frame by resetting to current position
-        // This prevents any coroutines or physics from moving him
-        rb.MovePosition(rb.position);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        // Log the Tengu's position every frame to see if something is moving him
-        Debug.Log($"[Enraged] Position: {rb.position} Velocity: {rb.velocity} isKinematic: {rb.isKinematic}");
+        
         // gets what's currently playing on Animator Base Layer
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
 
@@ -410,8 +433,8 @@ public class TenguAI : MonoBehaviour
         // if the Enraged animation is playing & if the Enraged animation has fully played, go back to chasing
         if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
         {
-            // Unlock movement when enraged animation finishes
-            GetComponent<Rigidbody>().isKinematic = false;
+            // reset attack timer so Tengu attacks immediately after enraging
+            attackTimer = 0f;
             currentState = TenguState.Chase;
         }
 
@@ -448,6 +471,23 @@ public class TenguAI : MonoBehaviour
         if(distanceToPlayer > attackRange)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
+
+    }
+
+
+
+
+    private void HandleShadowClone()
+    {
+        
+        // only start the sequence if it isn't already running
+        // without this check, ShadowCloneSequence would restart every frame
+        // since HandleShadowClone runs every frame while in ShadowClone state
+        if(!isShadowCloning)
+        {
+            isShadowCloning = true;
+            StartCoroutine(ShadowCloneSequence());
         }
 
     }
@@ -809,8 +849,18 @@ public class TenguAI : MonoBehaviour
         // stop any coroutines so they can't interfere with the enrage animation
         StopAllCoroutines();
 
-        // Lock the Tengu's rigidbody so he can't physically move during the enrage animation
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        // reset ALL flags so nothing can interfere with the enraged animation
+        isAttacking = false;
+        isDashSlashing = false;
+        isShadowCloning = false;
+        isDoingCombo = false;
+        comboSlashCount = 0;
+        comboSlashParried = false;
+        dodgeStarted = false;
+        animator.SetFloat("DashSlashSpeed", 1f);
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("DashSlash");
+        animator.ResetTrigger("ComboAttack");
 
         // boost all stats by their corresponding enraged multipliers
         moveSpeed *= enragedSpeedMultiplier;
@@ -885,6 +935,11 @@ public class TenguAI : MonoBehaviour
         // we check every frame until IsName("DashSlash") returns true
         while(!animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"))
         {
+            if(isEnraged)
+            {
+                isDashSlashing = false;
+                yield break;
+            }
             yield return null;
         }
 
@@ -893,6 +948,11 @@ public class TenguAI : MonoBehaviour
         // normalizedTime goes from 0 to 1 as the animation plays, so 0.3 = 30% through
         while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
         {
+            if(isEnraged)
+            {
+                isDashSlashing = false;
+                yield break;
+            }
             // keep facing the player during the stance
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             yield return null;
@@ -907,6 +967,11 @@ public class TenguAI : MonoBehaviour
         // keep moving every frame until the Tengu is within attack range
         while(Vector3.Distance(transform.position, player.position) > attackRange)
         {
+            if(isEnraged)
+            {
+                isDashSlashing = false;
+                yield break;
+            }
             // move towards the player at dashSlashSpeed
             transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
             // keep facing the player while dashing
@@ -921,6 +986,11 @@ public class TenguAI : MonoBehaviour
         // this prevents snapping into a different animation mid-slash
         while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
         {
+            if(isEnraged)
+            {
+                isDashSlashing = false;
+                yield break;
+            }
             yield return null;
         }
 
@@ -1044,6 +1114,97 @@ public class TenguAI : MonoBehaviour
         // play dash vfx & sfx
         vfx.PlayDodgeEffect(transform.position + Vector3.up * 1f, transform);
         sfx.PlayDodgeSFX();
+
+    }
+
+
+
+
+    // -------------------------
+    // SHADOW CLONE LOGIC
+    // -------------------------
+
+    private IEnumerator ShadowCloneSequence()
+    {
+        
+        // stop the run animation since the Tengu stands still during this ability
+        animator.SetBool("IsMoving", false);
+
+        // create an empty list to keep track of all the clones we spawn so we can tell al of them to thrust at the same time later
+        List<TenguClone> clones = new List<TenguClone>();
+
+        // spawn cloneCount clones evenly spaced in a circle around the player
+        for(int i = 0; i < cloneCount; i++)
+        {
+            
+            // calculate the angle for this clone's position in the circle by dividing 360 degrees evenly by the number of clones
+            float angle = i * (360f / cloneCount);
+            float radian = angle * Mathf.Deg2Rad;
+
+            // calculate the world position for this clone
+            Vector3 spawnPos = new Vector3
+            (
+                player.position.x + cloneRadius * Mathf.Cos(radian),
+                transform.position.y,
+                player.position.z + cloneRadius * Mathf.Sin(radian)
+            );
+
+            // spawn a clone at the calculated position with no rotation
+            GameObject cloneObj = Instantiate(tenguPrefab, spawnPos, Quaternion.identity);
+            // play a smoke appear VFX and a appear SFX at the spawn position
+            vfx.PlayAppearSmokeEffect(spawnPos + Vector3.up * 1f, cloneObj.transform);
+            sfx.PlayDodgeSFX();
+
+            // get the TenguClone script from the spawned GameObject so we can PerformThrust()
+            TenguClone clone = cloneObj.GetComponent<TenguClone>();
+
+            // only add the clone to the list if it actually has a TenguClone script on it
+            if(clone != null)
+            {
+                clones.Add(clone);
+            }
+
+        }
+
+        // pause for 1 second after all clones spawn to give the player a moment to react
+        yield return new WaitForSeconds(1f);
+
+        // tell every clone in the list to thrust towards the player at the same time
+        foreach(TenguClone clone in clones)
+        {
+            clone.PerformThrust(player);
+        }
+
+        // the real Tengu also thrusts at the same time as the clones 
+        animator.SetTrigger("Attack");
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        // wait for the wind up part of the real Tengu's attack animation before checking for damage
+        yield return new WaitForSeconds(0.5f);
+
+        // check if the real Tengu's attack hit the player
+        // only deal damage if the player is on the ground — jumping dodges this ability
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        if(playerMovement != null && playerMovement.isGrounded)
+        {
+            Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+            foreach(Collider hit in hitPlayers)
+            {
+                hit.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+                vfx.PlayHitEffect(hit.transform.position + Vector3.up * 2f);
+                sfx.PlayNaginataHitSFX();
+            }
+        }
+
+        // wait for all the clone animations to finish before cleaning up
+        yield return new WaitForSeconds(1.5f);
+
+        // reset all flags so the ability can trigger again next time
+        isShadowCloning = false;
+        isAttacking = false;
+
+        // go back to chasing the player
+        currentState = TenguState.Chase;
 
     }
 

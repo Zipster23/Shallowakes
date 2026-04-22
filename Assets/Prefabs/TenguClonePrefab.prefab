@@ -5010,7 +5010,7 @@ Transform:
   m_GameObject: {fileID: 3165420901587852055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.55, z: 1.75}
+  m_LocalPosition: {x: 0, y: 0.63, z: 2.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9916,17 +9916,16 @@ GameObject:
   - component: {fileID: 2013712442067515796}
   - component: {fileID: 7599485684159716529}
   - component: {fileID: 2365268915613512789}
-  - component: {fileID: 6205098252534814106}
-  - component: {fileID: 3074629504207918626}
   - component: {fileID: 7903891018583126115}
   - component: {fileID: 5328840721501948552}
+  - component: {fileID: 1427243492941515318}
   m_Layer: 6
-  m_Name: Tengu
+  m_Name: TenguClonePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5553510191825822702
 Transform:
   m_ObjectHideFlags: 0
@@ -9954,7 +9953,7 @@ Animator:
   m_GameObject: {fileID: 5069321123640539476}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 51530b65cf3e57c489f1000eab88a7b4, type: 3}
-  m_Controller: {fileID: 9100000, guid: e40674d22d4de8740ba164fe96d1790e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c4250cf927765104595b62a62eb33b03, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10015,64 +10014,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &6205098252534814106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5069321123640539476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAnimator: {fileID: 2013712442067515796}
-  maxHealth: 100
-  currentHealth: 0
---- !u!114 &3074629504207918626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5069321123640539476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43bd366242ce01a4e96ea75ad40b2fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  player: {fileID: 0}
-  chaseRange: 15
-  moveSpeed: 10
-  attackPoint: {fileID: 9016353595084523727}
-  attackRange: 1.45
-  attackDamage: 100
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  timeBetweenAttacks: 0.4
-  attackTimer: 0
-  isAttacking: 0
-  isAttackActive: 0
-  parryStunDuration: 1.3
-  tenguParryRange: 5.5
-  normalParryChance: 65
-  normalDodgeChance: 20
-  enragedParryChance: 25
-  enragedDodgeChance: 70
-  dodgeDistance: 12
-  dodgeSpeed: 40
-  enragedSpeedMultiplier: 1.5
-  enragedAttackSpeedMultiplier: 1.5
-  enragedDodgeSpeedMultiplier: 1.5
-  impulseSource: {fileID: 0}
-  dashSlashRange: 20
-  dashSlashSpeed: 120
-  isDoingCombo: 0
-  comboChance: 15
-  comboSlashParried: 0
 --- !u!114 &7903891018583126115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10115,6 +10056,24 @@ MonoBehaviour:
   slashChargeUpEffect: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   slashEffect: {fileID: 2929425121346758057, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
   appearSmokeEffect: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+--- !u!114 &1427243492941515318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069321123640539476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44524f419626fa240888fc6d0496e032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRange: 3
+  attackDamage: 100
+  attackPoint: {fileID: 9016353595084523727}
 --- !u!1 &7066017051461603540
 GameObject:
   m_ObjectHideFlags: 0
