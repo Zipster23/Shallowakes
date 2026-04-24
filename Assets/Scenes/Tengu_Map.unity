@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756602, b: 0.32591167, a: 1}
+  m_IndirectSpecularColor: {r: 0.029645817, g: 0.14757386, b: 0.32560202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9482,9 +9482,17 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: comboChance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: impulseSource
       value: 
       objectReference: {fileID: 966884252}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: normalParryChance
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 5069321123640539476, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: m_Name
       value: Tengu
