@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1237e459aa5800e41b9f244a38a2eeaf
+guid: 83f1e75c37171434ba4de4b42892e5bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlueKOFaceSprite_early_v02_0
+      name: BlueKOFaceSprite_early_v2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6c19cfb7e7d3f441902f02a90bcfef7
-      internalID: 1236122777
+      spriteID: f5ace5d34ffac29499abeb36f16b083a
+      internalID: -1934918683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueKOFaceSprite_early_v02_1
+      name: BlueKOFaceSprite_early_v2_1
       rect:
         serializedVersion: 2
         x: 512
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5135ec5d346f826458c4f1d0d4678ac6
-      internalID: 1890130094
+      spriteID: 87fd17cb22bccc047ade4c0243ab29a8
+      internalID: 352436197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueKOFaceSprite_early_v02_2
+      name: BlueKOFaceSprite_early_v2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91e63aab8191604499682174e1ef1518
-      internalID: 1481199806
+      spriteID: 340d1e8a770b52342a851aa15d1ccc14
+      internalID: 559247519
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueKOFaceSprite_early_v02_3
+      name: BlueKOFaceSprite_early_v2_3
       rect:
         serializedVersion: 2
         x: 512
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88928c5a01611fd43a8dd5e4ad055a7a
-      internalID: -1518228315
+      spriteID: 2322e6b82fedf5b48be87c3f7164ea6a
+      internalID: -1521274057
       vertices: []
       indices: 
       edges: []
@@ -196,7 +196,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1330112b652cb9d47b73e1bb19996331
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BlueKOFaceSprite_early_v02_0: 1236122777
-      BlueKOFaceSprite_early_v02_1: 1890130094
-      BlueKOFaceSprite_early_v02_2: 1481199806
-      BlueKOFaceSprite_early_v02_3: -1518228315
+      BlueKOFaceSprite_early_v2_0: -1934918683
+      BlueKOFaceSprite_early_v2_1: 352436197
+      BlueKOFaceSprite_early_v2_2: 559247519
+      BlueKOFaceSprite_early_v2_3: -1521274057
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -52,7 +52,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: blendShape.Open
-    path: bluekasaobake_alpha_v07/UmbrellaRibs
+    path: kasaobake_alpha_v08/UmbrellaRibs
     classID: 137
     script: {fileID: 0}
     flags: 16
@@ -65,7 +65,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 603476609
+      path: 4269739492
       attribute: 71445658
       script: {fileID: 0}
       typeID: 137
@@ -130,7 +130,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: blendShape.Open
-    path: bluekasaobake_alpha_v07/UmbrellaRibs
+    path: kasaobake_alpha_v08/UmbrellaRibs
     classID: 137
     script: {fileID: 0}
     flags: 16
