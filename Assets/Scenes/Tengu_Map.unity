@@ -9490,6 +9490,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966884252}
     - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
+      propertyPath: normalDodgeChance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074629504207918626, guid: ed9e3cc1c08f7984983512d3e6cb8ff8, type: 3}
       propertyPath: normalParryChance
       value: 65
       objectReference: {fileID: 0}
