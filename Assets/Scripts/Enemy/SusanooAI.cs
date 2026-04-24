@@ -849,12 +849,9 @@ public class SusanooAI : MonoBehaviour
             Vector3 randomPos = new Vector3
             (
                 player.position.x + randomCircle.x,
-                0f,
+                player.position.y + 0.1f,
                 player.position.z + randomCircle.y
             );
-
-            // snap to ground height
-            randomPos.y = GetGroundHeight(randomPos);
 
             GameObject indicator = Instantiate(lightningIndicatorPrefab, randomPos, Quaternion.identity);
             indicators.Add(indicator);
@@ -874,7 +871,7 @@ public class SusanooAI : MonoBehaviour
 
             // check if player is standing in this indicator
             float distanceToPlayer = Vector3.Distance(indicator.transform.position, player.position);
-            if(distanceToPlayer <= 2f)
+            if(distanceToPlayer <= 3.3f)
             {
                 // player got hit by lightning
                 player.GetComponent<PlayerHealth>().TakeDamage(999);
@@ -884,7 +881,7 @@ public class SusanooAI : MonoBehaviour
             Destroy(indicator);
 
         }
-
+        sfx.PlayLightningStrikeSFX();
         // wait for lightning VFX to finish
         yield return new WaitForSeconds(1f);
 

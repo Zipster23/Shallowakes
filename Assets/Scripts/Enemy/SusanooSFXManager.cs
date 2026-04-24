@@ -16,6 +16,9 @@ public class SusanooSFXManager : MonoBehaviour
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip enragedSFX;
 
+    [Header("Ability SFX")]
+    [SerializeField] private AudioClip lightningStrikeSFX;
+
     public void PlayBladeAttackSFX()
     {
         bladeSFX.PlayOneShot(bladeAttackSFX);
@@ -40,4 +43,11 @@ public class SusanooSFXManager : MonoBehaviour
     {
         bladeSFX.PlayOneShot(enragedSFX);
     }
+
+    public void PlayLightningStrikeSFX()
+    {
+        bladeSFX.PlayOneShot(lightningStrikeSFX);
+    }
+
+
 }
