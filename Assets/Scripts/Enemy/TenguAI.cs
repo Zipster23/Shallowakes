@@ -1131,7 +1131,7 @@ public class TenguAI : MonoBehaviour
         animator.SetBool("IsMoving", false);
 
         // create an empty list to keep track of all the clones we spawn so we can tell al of them to thrust at the same time later
-        List<TenguClone> clones = new List<TenguClone>();
+        List<YokaiClone> clones = new List<YokaiClone>();
 
         // spawn cloneCount clones evenly spaced in a circle around the player
         for(int i = 0; i < cloneCount; i++)
@@ -1156,7 +1156,7 @@ public class TenguAI : MonoBehaviour
             sfx.PlayDodgeSFX();
 
             // get the TenguClone script from the spawned GameObject so we can PerformThrust()
-            TenguClone clone = cloneObj.GetComponent<TenguClone>();
+            YokaiClone clone = cloneObj.GetComponent<YokaiClone>();
 
             // only add the clone to the list if it actually has a TenguClone script on it
             if(clone != null)
@@ -1168,12 +1168,6 @@ public class TenguAI : MonoBehaviour
 
         // pause for 1 second after all clones spawn to give the player a moment to react
         yield return new WaitForSeconds(1f);
-
-        // tell every clone in the list to thrust towards the player at the same time
-        foreach(TenguClone clone in clones)
-        {
-            clone.PerformThrust(player);
-        }
 
         // the real Tengu also thrusts at the same time as the clones 
         animator.SetTrigger("Attack");

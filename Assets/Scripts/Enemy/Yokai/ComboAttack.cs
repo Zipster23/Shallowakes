@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueKasaObake : MonoBehaviour
+public class ComboAttack : MonoBehaviour
 {
     public Transform player;
     private Animator animator;
