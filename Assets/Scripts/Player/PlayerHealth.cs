@@ -96,20 +96,21 @@ public class PlayerHealth : MonoBehaviour
     {
         
         PlayerController playerController = GetComponent<PlayerController>();
+    
         playerController.enabled = false;
         playerController.isBusy = false;
         GetComponent<PlayerMovement>().attackMovementMultiplier = 1f;
 
-        tenguAI.Knockback(10f, 0.2f);
+        // only knockback if tenguAI exists
+        if(tenguAI != null)
+            tenguAI.Knockback(10f, 0.2f);
 
-        // Reset base layer to Idle and body layer to Empty
-        // This stops the attack animation on the body layer immediately
         animator.Play("Idle", 0, 0f);
         animator.Play("Empty", 1, 0f);
 
         yield return new WaitForSeconds(parryStunDuration);
 
-        playerController.isBusy = false;
+        playerController.ResetAttack();
         playerController.enabled = true;
 
     }
