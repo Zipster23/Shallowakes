@@ -47,6 +47,10 @@ public class YokaiAI : MonoBehaviour
     public float chaseRange = 15f;      // how far away the player can be before the Yokai starts chasing
     public float moveSpeed = 10f;       // how fast the Yokai moves
 
+    private Vector3 moveTarget;
+    private float currentMoveSpeed;
+    private bool isMovingThisFrame;
+
 
     // --- ATTACK --- //
 
@@ -78,7 +82,6 @@ public class YokaiAI : MonoBehaviour
     public float dodgeSpeed = 40f;          // the speed of the Yokai while repositioning
     private bool dodgeStarted = false;      // prevents VFX and SFX from playing every frame during the dash
 
-
     // --- ABILITY HOOK --- //
 
     // Registered ability scripts call NotifyAbilityComplete() when they finish.
@@ -108,20 +111,13 @@ public class YokaiAI : MonoBehaviour
         }
     }
 
-
-    // -------------------------
-    // MAIN LOOP
-    // -------------------------
+    
+    // Rigidbody Loop
 
     private void Update()
     {
-        // Stop if Yokai is dead
-        if(enemy.currentHealth <= 0)
-        {
-            return;
-        }
-
-        // Stop if player is dead
+        Debug.Log($"Current state: {currentState}");
+        if(enemy.currentHealth <= 0) return;
         if(player.GetComponent<PlayerHealth>().currentHealth <= 0)
         {
             animator.SetBool("IsMoving", false);
@@ -130,16 +126,15 @@ public class YokaiAI : MonoBehaviour
 
         switch(currentState)
         {
-            case YokaiState.Idle:       HandleIdle();       break;
-            case YokaiState.Chase:      HandleChase();      break;
-            case YokaiState.Attack:     HandleAttack();     break;
-            case YokaiState.Parry:      HandleParry();      break;
-            case YokaiState.Dodge:      HandleDodge();      break;
-            case YokaiState.IsParried:  HandleIsParried();  break;
-            case YokaiState.Ability:    /* Ability script owns this frame */ break;
+            case YokaiState.Idle:      HandleIdle();      break;
+            case YokaiState.Chase:     HandleChase();     break;
+            case YokaiState.Attack:    HandleAttack();    break;
+            case YokaiState.Parry:     HandleParry();     break;
+            case YokaiState.Dodge:     HandleDodge();     break;
+            case YokaiState.IsParried: HandleIsParried(); break;
+            case YokaiState.Ability:                      break;
         }
     }
-
 
     // -------------------------
     // STATE HANDLERS
@@ -158,14 +153,15 @@ public class YokaiAI : MonoBehaviour
 
     private void HandleChase()
     {
+        Debug.Log($"Chase - dist: {Vector3.Distance(transform.position, player.position)}, moveSpeed: {moveSpeed}");
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // rotate to face the player every frame
         FacePlayer();
 
         if(distanceToPlayer > attackRange)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            Vector3 targetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         else
@@ -173,7 +169,6 @@ public class YokaiAI : MonoBehaviour
             animator.SetBool("IsMoving", false);
         }
 
-        // within attack range — switch to Attack
         if(distanceToPlayer <= attackRange)
         {
             animator.SetBool("IsMoving", false);
@@ -185,12 +180,14 @@ public class YokaiAI : MonoBehaviour
 
     private void HandleAttack()
     {
+        Debug.Log($"isAttacking: {isAttacking}, timer: {attackTimer}, dist: {Vector3.Distance(transform.position, player.position)}");
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         animator.SetBool("IsMoving", false);
 
         // player ran out of range and Yokai isn't mid-swing
-        if(distanceToPlayer > attackRange && !isAttacking)
+        if(distanceToPlayer > attackRange * 1.5f && !isAttacking)
         {
             currentState = YokaiState.Chase;
             return;
@@ -243,7 +240,8 @@ public class YokaiAI : MonoBehaviour
                 //sfx.PlayDodgeSFX();
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dodgeSpeed * Time.deltaTime);
+            Vector3 flatDodgeTarget = new Vector3(dodgeTarget.x, transform.position.y, dodgeTarget.z);
+            transform.position = Vector3.MoveTowards(transform.position, flatDodgeTarget, dodgeSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         else
@@ -415,7 +413,7 @@ public class YokaiAI : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float strength = Mathf.Lerp(force, 0f, elapsed / duration);
-            rb.MovePosition(rb.position + knockbackDirection * strength * Time.deltaTime);
+            transform.position += knockbackDirection * strength * Time.deltaTime;
             yield return null;
         }
     }
