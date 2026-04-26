@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 1137132253454138773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.79, y: 0, z: -28.58}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -111,8 +111,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  attackRange: 3
   moveSpeed: 7.5
+  isDoingCombo: 0
+  comboChance: 30
+  comboSlashParried: 0
+  attackPoint: {fileID: 0}
+  attackRange: 3
+  attackDamage: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  timeBetweenAttacks: 1.5
+  attackTimer: 0
+  isAttacking: 0
+  isAttackActive: 0
+  parryStunDuration: 2
+  tenguParryRange: 3
 --- !u!95 &4786018446458942477
 Animator:
   serializedVersion: 5
