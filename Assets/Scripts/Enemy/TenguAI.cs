@@ -363,7 +363,6 @@ public class TenguAI : MonoBehaviour
                 dodgeStarted = true;
                 vfx.PlayDodgeEffect(transform.position, transform);
                 sfx.PlayDodgeSFX();
-                animator.SetTrigger("Dash");
             }
 
             transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dodgeSpeed * Time.deltaTime);
