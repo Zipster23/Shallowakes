@@ -146,29 +146,19 @@ public class YokaiAI : MonoBehaviour
         }
     }
 
-
     private void HandleChase()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        Vector3 flatPlayerPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        float distanceToPlayer = Vector3.Distance(transform.position, flatPlayerPos);
+
         FacePlayer();
-        
-        if(distanceToPlayer > attackRange)
+
+        if (distanceToPlayer > attackRange)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
-            direction.y = 0;
-            
-            // Bypass physics entirely for testing
-            transform.Translate(direction * moveSpeed * Time.fixedDeltaTime, Space.World);
-            
-            Debug.Log($"Translating: {direction * moveSpeed * Time.fixedDeltaTime}");
+            transform.position = Vector3.MoveTowards(transform.position, flatPlayerPos, moveSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
         else
-        {
-            animator.SetBool("IsMoving", false);
-        }
-        
-        if(distanceToPlayer <= attackRange)
         {
             animator.SetBool("IsMoving", false);
             attackTimer = 0f;

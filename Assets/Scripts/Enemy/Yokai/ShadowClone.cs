@@ -19,8 +19,9 @@ public class ShadowClone : YokaiAbility
 
     public override bool TryTrigger(YokaiAI ai)
     {
+        Debug.Log($"ShadowClone TryTrigger called, chance: {triggerChance}, isCloning: {isShadowCloning}");
         // Don't trigger if already running
-        if(isShadowCloning) return false;
+        if (isShadowCloning) return false;
 
         // Roll for chance
         if(Random.Range(0, 100) >= triggerChance) return false;
