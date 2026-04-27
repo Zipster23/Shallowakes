@@ -9380,11 +9380,11 @@ PrefabInstance:
       objectReference: {fileID: 793915913}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000016176498
+      value: -0.000000016176498
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000058634884
+      value: -0.0000000058634884
       objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: tenguAI
@@ -15793,30 +15793,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1795757126}
-    - target: {fileID: 5971979207161880524, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: timeBetweenSlashes
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5971979207161880524, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: windSlashVerticalPrefab
-      value: 
-      objectReference: {fileID: 4836956773076364260, guid: 3c721ba042f149a48b23c5ddd5400478, type: 3}
-    - target: {fileID: 5971979207161880524, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: windSlashHorizontalPrefab
-      value: 
-      objectReference: {fileID: 4836956773076364260, guid: a6d3d07194b32c9468ba6b2c1e016b86, type: 3}
-    - target: {fileID: 6046363328675413487, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: dashSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: e7f545ef2b2f28343aa4ec6d36e27bed, type: 3}
-    - target: {fileID: 6046363328675413487, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: windSlashSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 35e826b5cf954224380745d79aede748, type: 3}
-    - target: {fileID: 7713838858234441647, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: dashEffect
-      value: 
-      objectReference: {fileID: 6469354921825657977, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
