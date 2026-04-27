@@ -102,9 +102,9 @@ public class SusanooAI : MonoBehaviour
     private bool isLightningStriking = false;       // prevents ability from restarting every frame
 
     [Header("Wind-Slash Ability")]
-    public GameObject windSlashPrefab;              // the wind slash projectile prefab
+    public GameObject windSlashHorizontalPrefab;    // the wind slash horizontal projectile prefab
+    public GameObject windSlashVerticalPrefab;      // the wind slash vertical projectile prefab
     public int windSlashChance = 25;                // percentage chance of doing wind slash
-    public float windSlashSpawnOffset = 2f;         // how far in front of Susanoo the wind slash spawns
     public float timeBetweenSlashes = 0.5f;         // time between the two slashes
     private bool isWindSlashing = false;            // prevents ability from restarting every frame
 
@@ -355,12 +355,13 @@ public class SusanooAI : MonoBehaviour
         
         // stop moving while parrying
         animator.SetBool("IsMoving", false);
-
+        
         // check if the parry animation has finished
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        if(stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 0.8f)
+        
+        if(!stateInfo.IsName("Parry") || stateInfo.normalizedTime >= 0.75f)
         {
+            attackTimer = timeBetweenAttacks;
             currentState = SusanooState.Idle;
         }
 
@@ -609,9 +610,6 @@ public class SusanooAI : MonoBehaviour
             vfx.EmitSparkParticles();
             sfx.PlayBladeDeflectSFX();
 
-            // let the Tengu attack after parrying
-            attackTimer = 0f;
-
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             StartCoroutine(playerHealth.GetParried());
@@ -825,6 +823,7 @@ public class SusanooAI : MonoBehaviour
         float elapsed = 0f;
         float dashDuration = 0.3f;
         Vector3 startPos = transform.position;
+        sfx.PlayDodgeSFX();
         while(elapsed < dashDuration)
         {
             elapsed += Time.deltaTime;
@@ -920,14 +919,16 @@ public class SusanooAI : MonoBehaviour
     private IEnumerator WindSlashSequence()
     {
         
-        // stop moving during ability
+        // stop moving during ability & play wind slash animation
         animator.SetBool("IsMoving", false);
+        animator.SetTrigger("WindSlash");
 
         // dash backwards
         Vector3 dashBackTarget = GetDodgeTarget(3); // 3 = back up
         float elapsed = 0f;
         float dashDuration = 0.3f;
         Vector3 startPos = transform.position;
+        sfx.PlayDodgeSFX();
         while(elapsed < dashDuration)
         {
             elapsed += Time.deltaTime;
@@ -938,17 +939,22 @@ public class SusanooAI : MonoBehaviour
         // face the player
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
-        // fire first slash
-        FireWindSlash();
+        // wait to time it with the animation
+        yield return new WaitForSeconds(0.7f);
+
+        // fire vertical slash first - player must parry
+        sfx.PlayWindSlashSFX();
+        FireWindSlash(WindSlash.SlashType.Vertical, 1f);
 
         // wait before firing second slash
         yield return new WaitForSeconds(timeBetweenSlashes);
 
-        // fire second slash slightly offset so they don't overlap
-        FireWindSlash();
+        // fire big horizontal slash - player must jump
+        sfx.PlayWindSlashSFX();
+        FireWindSlash(WindSlash.SlashType.Horizontal, 3f);
 
         // wait for slashes to travel
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         // reset and go back to attack
         isWindSlashing = false;
@@ -960,21 +966,39 @@ public class SusanooAI : MonoBehaviour
 
 
 
-    private void FireWindSlash()
+    private void FireWindSlash(WindSlash.SlashType slashType, float scale)
     {
         
-        // calculate spawn position in front of Susanoo
-        Vector3 spawnPos = transform.position + transform.forward * windSlashSpawnOffset;
-
-        // calculate direction towards player
+        Vector3 spawnPos = transform.position + transform.forward;
         Vector3 direction = (player.position - spawnPos).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
 
-        // spawn the wind slash
-        GameObject slash = Instantiate(windSlashPrefab, spawnPos, Quaternion.LookRotation(direction));
+        // use vertical prefab for vertical slash
+        GameObject prefabToUse = slashType == WindSlash.SlashType.Vertical ? windSlashVerticalPrefab : windSlashHorizontalPrefab;
+
+        GameObject slash = Instantiate(prefabToUse, spawnPos, rotation);
+        slash.transform.localScale = Vector3.one * scale;
+
         WindSlash windSlash = slash.GetComponent<WindSlash>();
         if(windSlash != null)
         {
             windSlash.SetDirection(direction);
+            windSlash.slashType = slashType;
+
+            if(slashType == WindSlash.SlashType.Horizontal)
+            {
+                windSlash.isParriable = false;
+                Vector3 pos = slash.transform.position;
+                pos.y = player.position.y;
+                slash.transform.position = pos;
+            }
+
+            if(slashType == WindSlash.SlashType.Vertical)
+            {
+                Vector3 pos = slash.transform.position;
+                pos.y = player.position.y + 2f;
+                slash.transform.position = pos;
+            }
         }
 
     }

@@ -13,6 +13,8 @@ public class WindSlash : MonoBehaviour
     private Vector3 direction;      // direction the slash travels
     public bool isParriable = true; // can the player parry this
 
+    public enum SlashType { Vertical, Horizontal }
+    public SlashType slashType = SlashType.Vertical;
 
 
 
@@ -50,6 +52,16 @@ public class WindSlash : MonoBehaviour
             PlayerHealth playerHealth = hit.GetComponentInParent<PlayerHealth>();
             if(playerHealth != null)
             {
+               // for horizontal slash, only hit if player is grounded
+               if(slashType == SlashType.Horizontal)
+                {
+                    PlayerMovement playerMovement = hit.GetComponentInParent<PlayerMovement>();
+                    if(playerMovement != null && !playerMovement.isGrounded)
+                    {
+                        return; // player jumped over it
+                    }
+                }
+
                 playerHealth.TakeDamage(damage);
                 Destroy(gameObject);
             }

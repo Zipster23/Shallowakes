@@ -715,7 +715,7 @@ public class TenguAI : MonoBehaviour
 
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            StartCoroutine(playerHealth.GetParried());
+            playerHealth.StartCoroutine(playerHealth.GetParried());
             return true;
         }
         // 60-84 = dodge (25% chance)

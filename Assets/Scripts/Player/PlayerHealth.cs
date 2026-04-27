@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
     // called by TenguAI when the Tengu successfully parries the player's attack
     public IEnumerator GetParried()
     {
-        
+        Debug.Log("GetParried started");
         PlayerController playerController = GetComponent<PlayerController>();
     
         playerController.enabled = false;
@@ -109,7 +109,8 @@ public class PlayerHealth : MonoBehaviour
         animator.Play("Empty", 1, 0f);
 
         yield return new WaitForSeconds(parryStunDuration);
-
+        Debug.Log("GetParried finished, re-enabling controller");
+        Debug.Log("---");
         playerController.ResetAttack();
         playerController.enabled = true;
 
