@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5980461498848278471}
   - component: {fileID: 5021840115153721943}
   - component: {fileID: 1827524018675606884}
+  - component: {fileID: 2865051063513500619}
+  - component: {fileID: 5259853699729885736}
+  - component: {fileID: 8124367957855905868}
   m_Layer: 0
   m_Name: LanternYokaiClone
   m_TagString: Untagged
@@ -46,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5cefefcdcdb3a148b8197c512f25268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 5980461498848278471}
 --- !u!95 &1827524018675606884
 Animator:
   serializedVersion: 5
@@ -67,6 +71,74 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2865051063513500619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495737637717492739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b9696606baf8048b68ee4797d7fbd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yokaiAI: {fileID: 0}
+  lanternYokaiClone: {fileID: 0}
+  cloneCount: 5
+  cloneRadius: 6
+  triggerChance: 30
+  warningDuration: 1
+  cleanupDelay: 2
+--- !u!114 &5259853699729885736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495737637717492739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ff54e5ee4abd140ae6a4654be462c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  player: {fileID: 0}
+  chaseRange: 15
+  moveSpeed: 10
+  attackPoint: {fileID: 0}
+  attackRange: 3
+  attackDamage: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  timeBetweenAttacks: 1.5
+  attackTimer: 0
+  isAttacking: 0
+  isAttackActive: 0
+  parryStunDuration: 2
+  yokaiParryRange: 3
+  parryChance: 60
+  dodgeChance: 25
+  dodgeDistance: 12
+  dodgeSpeed: 40
+--- !u!114 &8124367957855905868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495737637717492739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnimator: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
+  hasEnragedPhase: 0
+  enrageHealthThreshold: 20
 --- !u!1 &8841135673023129085
 GameObject:
   m_ObjectHideFlags: 0
