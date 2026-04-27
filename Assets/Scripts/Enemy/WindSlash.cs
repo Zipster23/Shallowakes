@@ -10,6 +10,9 @@ public class WindSlash : MonoBehaviour
     public float lifetime = 5f;     // how long before it autodestroys
     public LayerMask playerLayer;   // to detect the player
 
+    [SerializeField] private SusanooVFXManager vfx;    // handles hit visual effects
+    [SerializeField] private SusanooSFXManager sfx;    // handles hit sound effects
+
     private Vector3 direction;      // direction the slash travels
     public bool isParriable = true; // can the player parry this
 
@@ -63,6 +66,8 @@ public class WindSlash : MonoBehaviour
                 }
 
                 playerHealth.TakeDamage(damage);
+                vfx.PlayHitEffect(playerHealth.transform.position + Vector3.up * 2f);
+                sfx.PlayBladeHitSFX();
                 Destroy(gameObject);
             }
         }

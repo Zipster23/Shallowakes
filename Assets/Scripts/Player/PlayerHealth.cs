@@ -109,7 +109,7 @@ public class PlayerHealth : MonoBehaviour
         animator.Play("Empty", 1, 0f);
 
         yield return new WaitForSeconds(parryStunDuration);
-        Debug.Log("GetParried finished, re-enabling controller");
+        Debug.Log("GetParried finished");
         Debug.Log("---");
         playerController.ResetAttack();
         playerController.enabled = true;

@@ -359,9 +359,8 @@ public class SusanooAI : MonoBehaviour
         // check if the parry animation has finished
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         
-        if(!stateInfo.IsName("Parry") || stateInfo.normalizedTime >= 0.75f)
+        if(stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 1f)
         {
-            attackTimer = timeBetweenAttacks;
             currentState = SusanooState.Idle;
         }
 
@@ -824,6 +823,7 @@ public class SusanooAI : MonoBehaviour
         float dashDuration = 0.3f;
         Vector3 startPos = transform.position;
         sfx.PlayDodgeSFX();
+        vfx.PlayDodgeEffect(transform.position, transform);
         while(elapsed < dashDuration)
         {
             elapsed += Time.deltaTime;
@@ -833,6 +833,9 @@ public class SusanooAI : MonoBehaviour
 
         // store all spawned indicators so we can destroy them later
         List<GameObject> indicators = new List<GameObject>();
+
+        animator.SetTrigger("LightningStrike");
+        vfx.PlayDodgeEffect(transform.position, transform);
 
         // spawn one indicator directly on the player so they're forced to move
         Vector3 playerIndicatorPos = new Vector3(player.position.x, GetGroundHeight(player.position), player.position.z);
@@ -873,6 +876,8 @@ public class SusanooAI : MonoBehaviour
             if(distanceToPlayer <= 3.3f)
             {
                 // player got hit by lightning
+                vfx.PlayHitEffect(player.transform.position + Vector3.up * 2f);
+                sfx.PlayBladeHitSFX();
                 player.GetComponent<PlayerHealth>().TakeDamage(999);
             }
 
@@ -929,6 +934,7 @@ public class SusanooAI : MonoBehaviour
         float dashDuration = 0.3f;
         Vector3 startPos = transform.position;
         sfx.PlayDodgeSFX();
+        vfx.PlayDodgeEffect(transform.position, transform);
         while(elapsed < dashDuration)
         {
             elapsed += Time.deltaTime;

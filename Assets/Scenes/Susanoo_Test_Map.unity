@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756846, b: 0.32591167, a: 1}
+  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756602, b: 0.32591167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9390,6 +9390,10 @@ PrefabInstance:
       propertyPath: tenguAI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
       value: Player
@@ -15809,6 +15813,10 @@ PrefabInstance:
       propertyPath: windSlashSFX
       value: 
       objectReference: {fileID: 8300000, guid: 35e826b5cf954224380745d79aede748, type: 3}
+    - target: {fileID: 7713838858234441647, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
+      propertyPath: dashEffect
+      value: 
+      objectReference: {fileID: 6469354921825657977, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
