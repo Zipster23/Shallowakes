@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756602, b: 0.32591167, a: 1}
+  m_IndirectSpecularColor: {r: 0.029645817, g: 0.14757386, b: 0.32560202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8620,11 +8620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 9d924868776d54642881a48ba3f76742, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 0.495
-  priority: 0
 --- !u!4 &1318746566
 Transform:
   m_ObjectHideFlags: 0
@@ -14670,11 +14665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: df2a6cd313fe3e448b9777ba05d355c6, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!1001 &1855795750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16006,6 +15996,10 @@ PrefabInstance:
       propertyPath: freeLookCamera
       value: 
       objectReference: {fileID: 183816061}
+    - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
+      propertyPath: enableCinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5185095394708937472, guid: fa902700e47fdef4cbe65c0755fcd3d5, type: 3}
       propertyPath: shrineCameras.Array.size
       value: 8
