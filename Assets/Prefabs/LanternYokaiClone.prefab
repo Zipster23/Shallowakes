@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2865051063513500619}
   - component: {fileID: 5259853699729885736}
   - component: {fileID: 8124367957855905868}
+  - component: {fileID: 2542317601332140666}
   m_Layer: 0
   m_Name: LanternYokaiClone
   m_TagString: Untagged
@@ -50,6 +51,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5980461498848278471}
+  dashSpeed: 10
+  dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &1827524018675606884
 Animator:
   serializedVersion: 5
@@ -104,14 +130,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   player: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   chaseRange: 15
   moveSpeed: 10
+  floatSpeed: 0
+  floatAmplitude: 0
+  floatBaseHeight: 0
+  isFloating: 0
   attackPoint: {fileID: 0}
   attackRange: 3
   attackDamage: 100
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   timeBetweenAttacks: 1.5
   attackTimer: 0
   isAttacking: 0
@@ -139,6 +172,33 @@ MonoBehaviour:
   currentHealth: 0
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
+--- !u!54 &2542317601332140666
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495737637717492739}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1 &8841135673023129085
 GameObject:
   m_ObjectHideFlags: 0

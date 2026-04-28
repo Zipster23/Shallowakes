@@ -9,6 +9,7 @@ public class PlayerParry : MonoBehaviour
 
     [Header("References")]
     public TenguAI tenguAI;                     // reference to TenguAI script so we can parry the Tengu
+    public List<YokaiAI> yokais = new List<YokaiAI>();
     private PlayerInputHandler inputHandler;    // reference to the input handler so we can check if the player parried
     private Animator animator;                  // controls which animations play on the player
     private PlayerVFXManager vfx;               // handles parry visual effects (sparks)
@@ -41,7 +42,10 @@ public class PlayerParry : MonoBehaviour
         
     }
 
-
+    private void Start()
+    {
+        yokais.AddRange(FindObjectsByType<YokaiAI>(FindObjectsSortMode.None));
+    }
 
 
     // --- MAIN LOOP --- //
@@ -75,6 +79,21 @@ public class PlayerParry : MonoBehaviour
             }
         }
 
+        // In Update():
+        if (isParrying)
+        {
+            foreach (YokaiAI yokai in yokais)
+            {
+                if (yokai == null) continue; // skip dead/destroyed yokais
+                float distance = Vector3.Distance(transform.position, yokai.transform.position);
+                if (yokai.isAttackActive && distance <= parryRange)
+                {
+                    SuccessfulParry();
+                    break;
+                }
+            }
+        }
+
     }
 
 
@@ -97,27 +116,30 @@ public class PlayerParry : MonoBehaviour
     // called when the player successfully parries the enemy's attack
     private void SuccessfulParry()
     {
-        
-        isParrying = false;                 // close the parry window immediately
-        parryCooldownTimer = parryCooldown; // start the cooldown so the player can't spam parry
+        isParrying = false;
+        parryCooldownTimer = parryCooldown;
 
-        // play the parry VFX and SFX
         vfx.EmitParryParticles();
         sfx.playKatanaDeflectSFX();
 
-        // knock the player back when they successfully parry
         GetComponent<PlayerMovement>().Knockback(6f, 0.2f);
 
-        // tell the Tengu it got parried unless it's doing the combo attack.
-        if(tenguAI.isDoingCombo)
+        if (tenguAI != null)
         {
-            tenguAI.comboSlashParried = true;
-        }
-        else
-        {
-            tenguAI.GetParried();
+            if (tenguAI.isDoingCombo)
+                tenguAI.comboSlashParried = true;
+            else
+                tenguAI.GetParried();
         }
 
+        foreach (YokaiAI yokai in yokais)
+        {
+            if (yokai != null && yokai.isAttackActive)
+            {
+                yokai.GetParried();
+                break;
+            }
+        }
     }
 
 }

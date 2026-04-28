@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4535095697380214414}
   - component: {fileID: 8340154582682107297}
   - component: {fileID: 7574736563820183838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FaceCutout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7811146587820734539}
   - component: {fileID: 3994908117105527519}
   - component: {fileID: 7240016615570052452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LanternYokai_early_v01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 2156324872692222158}
   - component: {fileID: 1877827715161637506}
   - component: {fileID: 7850023542678698298}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LanternYokai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,11 +250,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!65 &8939055027321095726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -290,14 +290,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   player: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   chaseRange: 15
   moveSpeed: 10
-  attackPoint: {fileID: 0}
+  floatSpeed: 5
+  floatAmplitude: 0.25
+  floatBaseHeight: 1
+  isFloating: 1
+  attackPoint: {fileID: 3008734381350689643}
   attackRange: 3
   attackDamage: 100
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   timeBetweenAttacks: 1.5
   attackTimer: 0
   isAttacking: 0
@@ -321,10 +328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yokaiAI: {fileID: 0}
-  lanternYokaiClone: {fileID: 0}
+  lanternYokaiClone: {fileID: 495737637717492739, guid: d6d85b309bbf3464e9448ac0861f21ea, type: 3}
   cloneCount: 5
   cloneRadius: 6
-  triggerChance: 30
+  triggerChance: 100
   warningDuration: 1
   cleanupDelay: 2
 --- !u!114 &7850023542678698298
@@ -339,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAnimator: {fileID: 0}
+  enemyAnimator: {fileID: 7826367254595600769}
   maxHealth: 100
   currentHealth: 0
   hasEnragedPhase: 0

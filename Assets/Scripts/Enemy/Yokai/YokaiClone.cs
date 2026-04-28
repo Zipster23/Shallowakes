@@ -12,6 +12,8 @@ public class YokaiClone : MonoBehaviour
     private Animator animator;
     public Transform attackPoint;   // assign in clone prefab Inspector, same as real Yokai
 
+    public float dashSpeed;
+    public AnimationCurve dashCurve;
 
     private void Awake()
     {
@@ -56,37 +58,62 @@ public class YokaiClone : MonoBehaviour
     }
 
 
-    // Called by ShadowClone when it's time for all clones to thrust simultaneously
-    public void PerformThrust()
+    public void PerformThrust(Vector3 targetPoint)
     {
-        StartCoroutine(ThrustSequence());
+        StartCoroutine(ThrustSequence(targetPoint));
     }
 
-
-    private IEnumerator ThrustSequence()
+    private IEnumerator ThrustSequence(Vector3 targetPoint)
     {
-        // Play the attack animation
-        if(animator != null)
-        {
+        if (animator != null)
             animator.SetTrigger("Attack");
-        }
 
-        // Wait for wind-up before checking hit
         yield return new WaitForSeconds(0.5f);
 
-        // Only deal damage if player is grounded — jumping dodges this ability
+        yield return StartCoroutine(CloneDashSequence(targetPoint));
+    }
+
+    private IEnumerator CloneDashSequence(Vector3 target)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
+
+        Vector3 dir = (target - transform.position).normalized;
+        dir.y = 0f;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(dir);
+
+        Vector3 dashStart = transform.position;
+        float distance = Vector3.Distance(dashStart, target);
+        float duration = distance / dashSpeed;
+        float elapsed = 0f;
+
+        yield return new WaitForSeconds(0.3f);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = dashCurve.Evaluate(elapsed / duration);
+            transform.position = Vector3.Lerp(dashStart, target, t);
+            yield return null;
+        }
+
+        transform.position = target;
+
+        // Only damage if player is grounded — jumping escapes this
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         bool playerIsGrounded = playerMovement == null || playerMovement.isGrounded;
 
-        if(playerIsGrounded && attackPoint != null)
+        if (playerIsGrounded)
         {
-            // Recalculate attack range from the real Yokai's attackRange value
-            // Using a fixed overlap radius here — tune to match the real Yokai's attackRange
-            Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, 3f, playerLayer);
-            foreach(Collider hit in hitPlayers)
+            Collider[] hitPlayers = Physics.OverlapSphere(transform.position, 3f, playerLayer);
+            foreach (Collider hit in hitPlayers)
             {
-                hit.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+                hit.GetComponentInParent<PlayerHealth>()?.TakeDamage(attackDamage);
             }
         }
+
+        yield return new WaitForSeconds(0.5f);
+        if (rb != null) rb.isKinematic = false;
     }
 }

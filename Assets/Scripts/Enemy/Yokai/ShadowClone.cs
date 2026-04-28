@@ -76,20 +76,22 @@ public class ShadowClone : YokaiAbility
             }
         }
 
-        // Pause to give the player a moment to react
+        // After spawning all clones, calculate their center point
+        Vector3 centerPoint = Vector3.zero;
+        foreach (YokaiClone clone in clones)
+            centerPoint += clone.transform.position;
+        centerPoint /= clones.Count;
+
         yield return new WaitForSeconds(warningDuration);
 
-        // Real Yokai also thrusts at the same time as clones
         animator.SetTrigger("Attack");
         ai.FacePlayer();
 
-        // Tell all clones to thrust simultaneously
-        foreach(YokaiClone clone in clones)
+        // Pass the fixed center point into each clone's thrust
+        foreach (YokaiClone clone in clones)
         {
-            if(clone != null)
-            {
-                clone.PerformThrust();
-            }
+            if (clone != null)
+                clone.PerformThrust(centerPoint);
         }
 
         // Wait for animations to finish then clean up clones

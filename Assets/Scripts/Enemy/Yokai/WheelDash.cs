@@ -76,6 +76,7 @@ public class WheelDash : YokaiAbility
         isDashing = false;
         ai.OnAttackEnd();
     }
+
     private void StickToGround()
     {
         if (Physics.Raycast(transform.position + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 10f, groundLayer))
