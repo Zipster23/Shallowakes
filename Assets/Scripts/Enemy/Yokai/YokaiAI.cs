@@ -44,8 +44,14 @@ public class YokaiAI : MonoBehaviour
     // --- MOVEMENT --- //
 
     [Header("Movement")]
+    public LayerMask groundLayer;
     public float chaseRange = 15f;      // how far away the player can be before the Yokai starts chasing
     public float moveSpeed = 10f;       // how fast the Yokai moves
+    public float floatSpeed;
+    public float floatAmplitude;
+    public float floatBaseHeight;
+    public bool isFloating;
+
 
     // --- ATTACK --- //
 
@@ -91,6 +97,8 @@ public class YokaiAI : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
         enemy    = GetComponent<Enemy>();
         //vfx      = GetComponent<YokaiVFXManager>();
         //sfx      = GetComponent<YokaiSFXManager>();
@@ -111,8 +119,10 @@ public class YokaiAI : MonoBehaviour
 
     private void Update()
     {
+        if (isFloating) HandleFloat();
+
         // ... your existing Update code, but REMOVE the Chase case ...
-        switch(currentState)
+        switch (currentState)
         {
             case YokaiState.Idle:      HandleIdle();      break;
             // case YokaiState.Chase:  HandleChase();     break; // ← REMOVE THIS
@@ -164,6 +174,21 @@ public class YokaiAI : MonoBehaviour
             attackTimer = 0f;
             currentState = YokaiState.Attack;
         }
+    }
+
+    private void HandleFloat()
+    {
+        float groundY = transform.position.y; // fallback
+
+        Vector3 rayOrigin = transform.position + Vector3.up * 2f; // start above the yokai
+
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 20f, groundLayer))
+        {
+            groundY = hit.point.y;
+        }
+
+        float y = groundY + floatBaseHeight + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
     private void HandleAttack()
@@ -302,6 +327,7 @@ public class YokaiAI : MonoBehaviour
     public void OnAttackEnd()
     {
         isAttacking = false;
+        currentState = YokaiState.Chase;
     }
 
 
