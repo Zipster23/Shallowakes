@@ -52,6 +52,12 @@ public class TenguIntroCinematic : MonoBehaviour
 
         if(hasPlayed)
         {
+            // cinematic already watched. Skip it, but still play fight music
+            tenguAI.gameObject.SetActive(true);
+            musicSource.clip = tenguTheme;
+            musicSource.volume = 1f;
+            musicSource.Play();
+            tenguAI.TriggerOpeningDashSlash();
             return;
         }
 

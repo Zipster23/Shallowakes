@@ -450,6 +450,7 @@ public class TenguAI : MonoBehaviour
         // Only start the sequence if we aren't already in the middle of it
         if (!isDashSlashing)
         {
+            isDashSlashing = true;
             StartCoroutine(DashSlashSequence());
         }
 
@@ -997,7 +998,7 @@ public class TenguAI : MonoBehaviour
 
         // dash slash is done, reset the flag and go back to Attack state
         isDashSlashing = false;
-        currentState = TenguState.Attack;
+        currentState = TenguState.Chase;
     }
 
 

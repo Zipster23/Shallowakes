@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("References")]
     private Animator animator;  // controls which animations play on the player
     [SerializeField] private TenguAI tenguAI;    // to knock tengu back when he parries player attack
+    [SerializeField] private RespawnManager respawnManager;
 
 
     // --- TENGU PARRY --- //
@@ -84,6 +85,12 @@ public class PlayerHealth : MonoBehaviour
 
         // disable this script since we don't need health when the player dies
         this.enabled = false;
+
+        // trigger death and respawn sequence
+        if(respawnManager != null)
+        {
+            respawnManager.OnPlayerDied();
+        }
     }
 
 
