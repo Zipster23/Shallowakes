@@ -25,7 +25,16 @@ public class PlayerVFXManager : MonoBehaviour
         swordTrail1.emitting = false;
         swordTrail2.emitting = false;
     }
-
+    
+    public void ForceStopSwingEffects()
+    {
+        swordTrail1.emitting = false;
+        swordTrail2.emitting = false;
+        // also clear any existing trail data
+        swordTrail1.Clear();
+        swordTrail2.Clear();
+    }
+    
     public void EmitParryParticles()
     {
         parrySparks.Play();

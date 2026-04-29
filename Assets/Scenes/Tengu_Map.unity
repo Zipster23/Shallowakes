@@ -8676,6 +8676,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5461013196789228436, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
   m_PrefabInstance: {fileID: 1754645776}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333801034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2846498151557633704, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1754645776}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813704951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e5b92164b60f444ad946de7b676611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1370498624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5752105476961817693, guid: 9d642dd3a2ff904da90e9417ae5cddec, type: 3}
@@ -9446,6 +9457,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.0000000058634884
       objectReference: {fileID: 0}
+    - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: vfx
+      value: 
+      objectReference: {fileID: 1333801034}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: tenguAI
       value: 

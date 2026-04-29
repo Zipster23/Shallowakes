@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("References")]
     private Animator animator;  // controls which animations play on the player
     [SerializeField] private TenguAI tenguAI;    // to knock tengu back when he parries player attack
+    [SerializeField] private PlayerVFXManager vfx;
     [SerializeField] private RespawnManager respawnManager;
 
 
@@ -52,6 +53,8 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;        // subtract the damage amount from the player's current health
 
+        vfx.ForceStopSwingEffects();
+
         animator.SetTrigger("Hurt");    // play the hurt animation
 
         // if the player's health has hit 0, the player is dead
@@ -69,6 +72,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+
+        vfx.ForceStopSwingEffects();
+
         // play the death animation
         animator.SetBool("IsDead", true);
 
@@ -101,7 +107,7 @@ public class PlayerHealth : MonoBehaviour
     // called by TenguAI when the Tengu successfully parries the player's attack
     public IEnumerator GetParried()
     {
-        
+        vfx.ForceStopSwingEffects();
         PlayerController playerController = GetComponent<PlayerController>();
         playerController.enabled = false;
         playerController.isBusy = false;
