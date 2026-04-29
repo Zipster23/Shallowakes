@@ -9,6 +9,7 @@ public class PlayerParry : MonoBehaviour
 
     [Header("References")]
     public TenguAI tenguAI;                     // reference to TenguAI script so we can parry the Tengu
+    public SusanooAI susanooAI;                 // reference to SusanooAI script so we can parry Susanoo
     private PlayerInputHandler inputHandler;    // reference to the input handler so we can check if the player parried
     private Animator animator;                  // controls which animations play on the player
     private PlayerVFXManager vfx;               // handles parry visual effects (sparks)
@@ -75,6 +76,38 @@ public class PlayerParry : MonoBehaviour
             }
         }
 
+        // if the parry window is open and Susanoo exists, check for a successful parry every frame
+        if(isParrying && susanooAI != null)
+        {
+            // calculate how far away the Tengu is
+            float distance = Vector3.Distance(transform.position, susanooAI.transform.position);
+
+            // if the Tengu is attacking and is close enough, the parry is successful
+            if(susanooAI.isAttackActive && distance <= parryRange)
+            {
+                SuccessfulParry();
+            }
+        }
+
+        // check for wind slash projectiles in parry range
+        if(isParrying)
+        {
+            Collider[] nearbyProjectiles = Physics.OverlapSphere(transform.position, parryRange);
+            foreach(Collider col in nearbyProjectiles)
+            {
+                WindSlash windSlash = col.GetComponent<WindSlash>();
+                if(windSlash != null && windSlash.isParriable)
+                {
+                    // parry the wind slash
+                    vfx.EmitParryParticles();
+                    sfx.playKatanaDeflectSFX();
+                    windSlash.GetParried();
+                    isParrying = false;
+                    parryCooldownTimer = parryCooldown;
+                    return;
+                }
+            }
+        }
     }
 
 
@@ -108,14 +141,19 @@ public class PlayerParry : MonoBehaviour
         // knock the player back when they successfully parry
         GetComponent<PlayerMovement>().Knockback(6f, 0.2f);
 
-        // tell the Tengu it got parried unless it's doing the combo attack.
-        if(tenguAI.isDoingCombo)
+        // handle Tengu parry
+        if(tenguAI != null && tenguAI.isAttackActive)
         {
-            tenguAI.comboSlashParried = true;
+            if(tenguAI.isDoingCombo)
+                tenguAI.comboSlashParried = true;
+            else
+                tenguAI.GetParried();
         }
-        else
+
+        // handle Susanoo parry
+        if(susanooAI != null && susanooAI.isAttackActive)
         {
-            tenguAI.GetParried();
+            susanooAI.GetParried();
         }
 
     }

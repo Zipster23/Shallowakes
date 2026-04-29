@@ -174,18 +174,20 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider enemy in hitEnemies)
         {
-            TenguAI tenguAI = FindObjectOfType<TenguAI>();
+            // check for TenguAI
+            TenguAI tenguAI = GetComponentInParent<TenguAI>();
 
-            if (tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+            if(tenguAI != null)
             {
-                isBusy = false;
-                return;
+                if(tenguAI.currentState == TenguAI.TenguState.Enraged) { isBusy = false; return; }
+                if(tenguAI.CheckTenguResponse()) { isBusy = false; return; }
             }
 
-            if (tenguAI != null && tenguAI.CheckTenguResponse())
+            // check for SusanooAI
+            SusanooAI susanooAI = enemy.GetComponentInParent<SusanooAI>();
+            if(susanooAI != null)
             {
-                isBusy = false;
-                return;
+                if(susanooAI.CheckSusanooResponse()) { isBusy = false; return; }
             }
 
             enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animation/Currently Used Animations/Tengu Animations/Armature_HurtSet1.anim.meta
 guid: 08d3624aa1ef20e43b5224be2dfd9bd4
+========
+guid: f7bada9f0acf44d4c9ce3a4b8e9597f2
+>>>>>>>> susanoo-ai:Assets/Animation/Not Used Animations/SusanooBasicSlash.anim.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000
