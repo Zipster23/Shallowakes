@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 6889383597944991043}
   - component: {fileID: 5520343444723408604}
   m_Layer: 0
-  m_Name: RespawnManager
+  m_Name: TenguRespawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,12 +759,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21ff59b4ad42b748b37218871eb5410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenFade: {fileID: 0}
-  tenguCinematic: {fileID: 0}
+  screenFade: {fileID: 1357045434483578353}
+  tenguCinematic: {fileID: 5185095394708937472}
   tenguAI: {fileID: 0}
   tenguEnemy: {fileID: 0}
   player: {fileID: 0}
-  deathScreen: {fileID: 0}
+  deathScreen: {fileID: 6037508133880456551}
+  sfx: {fileID: 0}
+  musicSource: {fileID: 851167893595367370}
+  cinematicTrigger: {fileID: 2987006060642672120}
   playerSpawnPosition: {x: -1115.28, y: 527.93, z: -167.02}
   tenguSpawnPosition: {x: -1101.99, y: 529, z: -223.05}
 --- !u!1 &3404868261674833772

@@ -17,6 +17,7 @@ public class CinematicTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             cinematic.TriggerCinematic();
+            GetComponent<Collider>().enabled = false;    // disable this trigger so it never fires again
         }
 
     }

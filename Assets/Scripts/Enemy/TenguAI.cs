@@ -86,7 +86,8 @@ public class TenguAI : MonoBehaviour
     public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
     public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
     public float enragedDodgeSpeedMultiplier = 1.5f;    // how much faster the Tengu dashes while enraged
-    private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
+    [HideInInspector]
+    public bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
 
@@ -323,7 +324,7 @@ public class TenguAI : MonoBehaviour
                 // start combo
                 isDoingCombo = true;
                 comboSlashCount = 0;
-                player.GetComponent<PlayerParry>().parryCooldown = 0.25f; 
+                player.GetComponent<PlayerParry>().parryCooldown = 0.15f; 
                 isAttacking = true;
                 attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");

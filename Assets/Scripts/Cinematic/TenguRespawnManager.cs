@@ -14,6 +14,7 @@ public class RespawnManager : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private TenguSFXManager sfx;
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private CinematicTrigger cinematicTrigger;
 
     [Header("Spawn Positions")]
     [SerializeField] private Vector3 playerSpawnPosition = new Vector3(-1115.28f, 527.93f, -167.02f);
@@ -82,6 +83,9 @@ public class RespawnManager : MonoBehaviour
     private void ResetEverything()
     {
         
+        // re-enable the cinematic trigger so it can fire again on respawn
+        cinematicTrigger.GetComponent<Collider>().enabled = true;
+
         // reset player position
         player.transform.position = playerSpawnPosition;
 
@@ -104,6 +108,7 @@ public class RespawnManager : MonoBehaviour
         tenguAI.transform.position = tenguSpawnPosition;
         tenguEnemy.currentHealth = tenguEnemy.maxHealth;
         tenguEnemy.enabled = true;
+        tenguAI.isEnraged = false;
 
         // reset tengu animator
         tenguAI.GetComponent<Animator>().SetBool("IsDead", false);
