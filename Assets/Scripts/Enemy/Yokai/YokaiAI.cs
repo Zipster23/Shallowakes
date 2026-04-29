@@ -89,7 +89,6 @@ public class YokaiAI : MonoBehaviour
     // This list lets YokaiAI know which abilities are available so it can ask them to trigger.
     private List<YokaiAbility> registeredAbilities = new List<YokaiAbility>();
 
-
     // -------------------------
     // SETUP
     // -------------------------
@@ -231,7 +230,7 @@ public class YokaiAI : MonoBehaviour
             }
 
             // No ability triggered — do a basic attack
-            int attackType = Random.Range(0, 2);
+            int attackType = Random.Range(0, 3);
             Debug.Log($"AttackType rolled: {attackType}");
             animator.SetInteger("AttackType", attackType);
             animator.SetTrigger("Attack");
