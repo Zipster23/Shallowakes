@@ -231,6 +231,9 @@ public class YokaiAI : MonoBehaviour
             }
 
             // No ability triggered — do a basic attack
+            int attackType = Random.Range(0, 2);
+            Debug.Log($"AttackType rolled: {attackType}");
+            animator.SetInteger("AttackType", attackType);
             animator.SetTrigger("Attack");
             attackTimer = timeBetweenAttacks;
             isAttacking = true;
