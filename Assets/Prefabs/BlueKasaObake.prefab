@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 852348480366069774}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1856001969819396545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bluekasaobake_alpha_v07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,9 @@ GameObject:
   - component: {fileID: 6808277648716146866}
   - component: {fileID: 937179324387398495}
   - component: {fileID: 5794801722516653937}
-  m_Layer: 0
+  - component: {fileID: 5484793766545931452}
+  - component: {fileID: 4774355999059171768}
+  m_Layer: 6
   m_Name: BlueKasaObake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +140,7 @@ MonoBehaviour:
   player: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   chaseRange: 15
   moveSpeed: 10
   floatSpeed: 0
@@ -146,11 +148,11 @@ MonoBehaviour:
   floatBaseHeight: 0
   isFloating: 0
   attackPoint: {fileID: 2431740052735646520}
-  attackRange: 2
+  attackRange: 1.5
   attackDamage: 100
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   timeBetweenAttacks: 1.5
   attackTimer: 0
   isAttacking: 0
@@ -185,9 +187,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &5794801722516653937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -204,11 +206,50 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.5283451, y: 7.3982024, z: 1}
   m_Center: {x: -0.011143684, y: 3.7086809, z: 0}
+--- !u!114 &5484793766545931452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137132253454138773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002d42e8c1ab3f34aa3acf5c651c0f56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yokaiAI: {fileID: 0}
+  comboChance: 0
+  moveSpeed: 7.5
+  comboSlashParried: 0
+  attackPoint: {fileID: 2431740052735646520}
+  attackRange: 3
+  attackDamage: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &4774355999059171768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137132253454138773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnimator: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
+  hasEnragedPhase: 0
+  enrageHealthThreshold: 20
 --- !u!1 &1237951870773441114
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5203495087747229190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7378683355147916132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7681560639149943415}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3194794093362124668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2410023784261309474}
   - component: {fileID: 1609915689699751225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2431740052735646520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 7444705898543838796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.64, z: 1.42}
+  m_LocalPosition: {x: 0, y: 3.1, z: 1.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -468,7 +509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8089931237640982004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1382374131894107804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3052893288619654730}
   - component: {fileID: 8134172011788615120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UmbrellaRibs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

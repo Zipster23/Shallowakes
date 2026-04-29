@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4136228166497354774}
   - component: {fileID: 6249222840585520206}
   - component: {fileID: 4656231883177759947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7385441348935949441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BuddhaWheelYokai_early_v03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 429593225589598972}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128,7 +128,8 @@ GameObject:
   - component: {fileID: 2074721157829484522}
   - component: {fileID: 625261297912574734}
   - component: {fileID: 4215082312510137645}
-  m_Layer: 0
+  - component: {fileID: 1132383002253423333}
+  m_Layer: 6
   m_Name: BuddhaWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4957076136640002388}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -202,6 +203,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1132383002253423333
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957076136640002388}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d606010f338de1a4196284178ebf3516, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5157340094867703861
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +235,7 @@ GameObject:
   - component: {fileID: 7369312937364931037}
   - component: {fileID: 3276740431376080437}
   - component: {fileID: 8585949489810506114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,9 +317,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4060309514966401504}
-  - component: {fileID: 6431362260051971300}
-  - component: {fileID: 542467324331795951}
-  m_Layer: 0
+  - component: {fileID: 7157927643730910457}
+  - component: {fileID: 6751546996330740513}
+  - component: {fileID: 263966631572666520}
+  - component: {fileID: 8362424050069479117}
+  - component: {fileID: 6347009982161263953}
+  m_Layer: 6
   m_Name: BuddhaWheelYokai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,28 +345,7 @@ Transform:
   - {fileID: 7385441348935949441}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6431362260051971300
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7433781673307960758}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d606010f338de1a4196284178ebf3516, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &542467324331795951
+--- !u!114 &7157927643730910457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,12 +354,145 @@ MonoBehaviour:
   m_GameObject: {fileID: 7433781673307960758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a45be41d7ecc12a4d8d87881e413c615, type: 3}
+  m_Script: {fileID: 11500000, guid: 96f9190781577f74abda6f9a862825c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yokaiAI: {fileID: 0}
+  triggerRange: 0
+  dashSpeed: 60
+  dashDistance: 10
+  triggerChance: 100
+  dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &6751546996330740513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnimator: {fileID: 1132383002253423333}
+  maxHealth: 100
+  currentHealth: 0
+  hasEnragedPhase: 0
+  enrageHealthThreshold: 20
+--- !u!114 &263966631572666520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ff54e5ee4abd140ae6a4654be462c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
   player: {fileID: 0}
-  attackRange: 3
-  dashSlashSpeed: 80
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  chaseRange: 15
+  moveSpeed: 7.5
+  floatSpeed: 0
+  floatAmplitude: 0
+  floatBaseHeight: 0
+  isFloating: 0
+  attackPoint: {fileID: 4060309514966401504}
+  attackRange: 2
+  attackDamage: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  timeBetweenAttacks: 0
+  attackTimer: 0
+  isAttacking: 0
+  isAttackActive: 0
+  parryStunDuration: 2
+  yokaiParryRange: 3
+  parryChance: 60
+  dodgeChance: 25
+  dodgeDistance: 12
+  dodgeSpeed: 40
+--- !u!54 &8362424050069479117
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 80
+  m_CollisionDetection: 1
+--- !u!65 &6347009982161263953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.7069435, z: 1}
+  m_Center: {x: 0, y: 0.7522812, z: 0}
 --- !u!1 &8076291500665609493
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +504,7 @@ GameObject:
   - component: {fileID: 2529211585512604537}
   - component: {fileID: 3641294184365792309}
   - component: {fileID: 4765878088407206952}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}

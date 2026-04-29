@@ -111,6 +111,8 @@ public class YokaiAI : MonoBehaviour
         {
             RegisterAbility(ability);
         }
+
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     

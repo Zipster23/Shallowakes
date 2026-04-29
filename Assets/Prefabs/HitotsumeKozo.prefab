@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 471278618954226552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.47}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalPosition: {x: 0, y: 1.54, z: 1.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6069637122018912476}
@@ -114,7 +114,7 @@ MonoBehaviour:
   floatBaseHeight: 0
   isFloating: 0
   attackPoint: {fileID: 2768130157999563953}
-  attackRange: 0.75
+  attackRange: 1.75
   attackDamage: 100
   playerLayer:
     serializedVersion: 2
@@ -172,7 +172,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &4379037131871868930
 CapsuleCollider:
   m_ObjectHideFlags: 0
