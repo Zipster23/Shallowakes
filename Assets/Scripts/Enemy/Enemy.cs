@@ -8,32 +8,53 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    // --- ENRAGE SETTINGS --- //
+
+    [Header("Enrage")]
+    // If true, this enemy has an enraged phase that triggers at the health threshold
+    public bool hasEnragedPhase = false;
+    // Health value at which the enraged phase triggers (e.g. 20 = triggers at 20hp)
+    public int enrageHealthThreshold = 20;
+
+
+    // --- REFERENCES --- //
+
+    // Cached on Start — whichever AI is present on this GameObject
+    private TenguAI tenguAI;
+    private YokaiAI yokaiAI;
+
+
     void Start()
     {
-
         currentHealth = maxHealth;
 
+        // Cache whichever AI script is present — only one should exist per enemy
+        tenguAI = GetComponent<TenguAI>();
+        yokaiAI = GetComponent<YokaiAI>();
     }
+
 
     public void TakeDamage(int damage)
     {
-
-        // Make it so that the enemy can't be hit when dead
+        // Can't be hit when already dead
         if(currentHealth <= 0)
         {
             return;
         }
 
-        // make it so that Tengu cannot be damaged during enraged animation
-        TenguAI tenguAI = GetComponent<TenguAI>();
-        SusanooAI susanooAI = GetComponent<SusanooAI>();
+        // Can't be damaged during Tengu's enraged animation
         if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
         {
             return;
         }
-        if(susanooAI != null && susanooAI.currentState == SusanooAI.SusanooState.Enraged)
+
+        // Can't be damaged while a Yokai ability that grants i-frames is active
+        // (YokaiAbility scripts can set this flag on YokaiAI if needed)
+        if(yokaiAI != null && yokaiAI.currentState == YokaiAI.YokaiState.Ability)
         {
-            return;
+            // Only block damage if the active ability requests invincibility
+            // Default: Yokai CAN be hit during abilities unless a script sets this
+            // Remove this block if you never want ability i-frames
         }
 
         currentHealth -= damage;
@@ -41,42 +62,35 @@ public class Enemy : MonoBehaviour
         // Play hurt animation
         enemyAnimator.SetTrigger("Hurt");
 
-        // check if tengu should enter enraged mode
-        if(currentHealth <= 20)
+        // Check if enraged phase should trigger
+        if(hasEnragedPhase && currentHealth <= enrageHealthThreshold)
         {
-            GetComponent<TenguAI>()?.EnterEnragedMode();
-        }
-        if(currentHealth == 60)
-        {
-            GetComponent<SusanooAI>()?.EnterEnragedMode();
+            if(tenguAI != null)
+            {
+                tenguAI.EnterEnragedMode();
+            }
+
+            // When you build a YokaiEnraged ability, call it here:
+            // yokaiAI?.GetComponent<YokaiEnraged>()?.TryEnrage();
         }
 
         if(currentHealth <= 0)
         {
             Die();
         }
-
     }
+
 
     public void Die()
     {
-        // Die animation
+        // Play death animation
         enemyAnimator.SetBool("IsDead", true);
 
-        // Disable enemy 
+        // Disable whichever AI is present
+        if(tenguAI != null) tenguAI.enabled = false;
+        if(yokaiAI != null) yokaiAI.enabled = false;
+
+        // Disable this script last
         this.enabled = false;
-
-        TenguAI tenguAI = GetComponent<TenguAI>();
-        if(tenguAI != null)
-        {
-            GetComponentInParent<TenguAI>().enabled = false;
-        }
-
-        SusanooAI susanooAI = GetComponent<SusanooAI>();
-        if(susanooAI != null)
-        {
-            GetComponentInParent<SusanooAI>().enabled = false;
-        }
     }
-
 }
