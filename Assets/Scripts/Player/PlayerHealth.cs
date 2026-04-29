@@ -63,6 +63,8 @@ public class PlayerHealth : MonoBehaviour
             Die();  
         }
 
+        
+
     }
 
 
@@ -113,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
         playerController.isBusy = false;
         GetComponent<PlayerMovement>().attackMovementMultiplier = 1f;
 
-        tenguAI.Knockback(10f, 0.2f);
+        Knockback(10f, 0.2f);
 
         // Reset base layer to Idle and body layer to Empty
         // This stops the attack animation on the body layer immediately
@@ -125,6 +127,29 @@ public class PlayerHealth : MonoBehaviour
         playerController.isBusy = false;
         playerController.enabled = true;
 
+    }
+
+    public void Knockback(float force, float duration)
+    {
+        StartCoroutine(KnockbackCoroutine(force, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(float force, float duration)
+    {
+        float elapsed = 0f;
+        
+        // Move backward from where the player is currently facing
+        Vector3 knockbackDirection = -transform.forward;
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float strength = Mathf.Lerp(force, 0f, elapsed / duration);
+            rb.MovePosition(rb.position + knockbackDirection * strength * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
 

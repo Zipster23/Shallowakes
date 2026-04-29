@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             // check for TenguAI
-            TenguAI tenguAI = GetComponentInParent<TenguAI>();
+            TenguAI tenguAI = enemy.GetComponentInParent<TenguAI>();
 
             if(tenguAI != null)
             {
