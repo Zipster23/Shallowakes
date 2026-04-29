@@ -299,7 +299,9 @@ public class SusanooAI : MonoBehaviour
             }
 
 
-            animator.SetTrigger("Attack");      // trigger the attack animation
+            // trigger attack animation
+            int randomAttack = Random.Range(1,3);
+            animator.SetTrigger("Attack_0" + randomAttack);
             
             attackTimer = timeBetweenAttacks;   // reset the timer so Tengu waits before attacking again
 
@@ -539,7 +541,8 @@ public class SusanooAI : MonoBehaviour
         isAttackActive = false;             // weapon is no longer active
         player.GetComponent<PlayerParry>().parryCooldown = 1f; // restore normal parry cooldown
         StopAllCoroutines();                // cancel any running reposition coroutines
-        animator.ResetTrigger("Attack");    // cancel the attack trigger
+        animator.ResetTrigger("Attack_01"); // cancel the attack trigger
+        animator.ResetTrigger("Attack_02"); // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
 
         StartCoroutine(ParryStun());        // start the stun for getting parried
@@ -749,7 +752,8 @@ public class SusanooAI : MonoBehaviour
         isAttacking = false;
         dodgeStarted = false;
         animator.SetFloat("DashSlashSpeed", 1f);
-        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Attack_01");
+        animator.ResetTrigger("Attack_02");
         animator.ResetTrigger("DashSlash");
         animator.ResetTrigger("ComboAttack");
 
