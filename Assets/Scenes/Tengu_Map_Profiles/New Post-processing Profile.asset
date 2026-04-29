@@ -17,7 +17,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   gradingMode:
-    overrideState: 0
+    overrideState: 1
     value: 1
   externalLut:
     overrideState: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
     overrideState: 1
     value: -10
   brightness:
-    overrideState: 0
+    overrideState: 1
     value: 0
   postExposure:
     overrideState: 0
@@ -1311,7 +1311,7 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
---- !u!114 &-522396362782998402
+--- !u!114 &-1003403259143247894
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1329,7 +1329,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 3
+    value: 1
   threshold:
     overrideState: 1
     value: 1
@@ -1379,7 +1379,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.5
   size:
     overrideState: 1
     value: 1
@@ -1401,8 +1401,9 @@ MonoBehaviour:
   settings:
   - {fileID: -2338362005223327577}
   - {fileID: -240743524292537782}
-  - {fileID: -522396362782998402}
   - {fileID: 4275012879639986766}
+  - {fileID: -1003403259143247894}
+  - {fileID: 8235144025298474339}
 --- !u!114 &4275012879639986766
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1415,7 +1416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
   m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1424,7 +1425,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 3
+    value: 1.5
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -1455,3 +1456,31 @@ MonoBehaviour:
   quality:
     overrideState: 0
     value: 2
+--- !u!114 &8235144025298474339
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  focusDistance:
+    overrideState: 1
+    value: 3
+  aperture:
+    overrideState: 0
+    value: 5.6
+  focalLength:
+    overrideState: 0
+    value: 50
+  kernelSize:
+    overrideState: 0
+    value: 1
