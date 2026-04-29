@@ -43,15 +43,6 @@ public class TenguVFXManager : MonoBehaviour
         naginataTrail2.emitting = false;
     }
 
-    public void ForceStopSwingEffects()
-    {
-        naginataTrail1.emitting = false;
-        naginataTrail2.emitting = false;
-        // also clear any existing trail data
-        naginataTrail1.Clear();
-        naginataTrail2.Clear();
-    }
-
     public void EmitSparkParticles()
     {
         parrySparks.Play();

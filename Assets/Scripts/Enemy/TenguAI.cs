@@ -86,8 +86,7 @@ public class TenguAI : MonoBehaviour
     public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
     public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
     public float enragedDodgeSpeedMultiplier = 1.5f;    // how much faster the Tengu dashes while enraged
-    [HideInInspector]
-    public bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
+    private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
 
@@ -324,7 +323,7 @@ public class TenguAI : MonoBehaviour
                 // start combo
                 isDoingCombo = true;
                 comboSlashCount = 0;
-                player.GetComponent<PlayerParry>().parryCooldown = 0.15f; 
+                player.GetComponent<PlayerParry>().parryCooldown = 0.25f; 
                 isAttacking = true;
                 attackTimer = timeBetweenAttacks;
                 animator.SetTrigger("ComboAttack");
@@ -333,8 +332,7 @@ public class TenguAI : MonoBehaviour
                 return;
             }
             
-            int randomAttack = Random.Range(1,3);
-            animator.SetTrigger("Attack_0" + randomAttack);
+            animator.SetTrigger("Attack");      // trigger the attack animation
             
             attackTimer = timeBetweenAttacks;   // reset the timer so Tengu waits before attacking again
 
@@ -365,7 +363,6 @@ public class TenguAI : MonoBehaviour
                 dodgeStarted = true;
                 vfx.PlayDodgeEffect(transform.position, transform);
                 sfx.PlayDodgeSFX();
-                animator.SetTrigger("Dash");
             }
 
             transform.position = Vector3.MoveTowards(transform.position, dodgeTarget, dodgeSpeed * Time.deltaTime);
@@ -452,7 +449,6 @@ public class TenguAI : MonoBehaviour
         // Only start the sequence if we aren't already in the middle of it
         if (!isDashSlashing)
         {
-            isDashSlashing = true;
             StartCoroutine(DashSlashSequence());
         }
 
@@ -609,7 +605,7 @@ public class TenguAI : MonoBehaviour
         {
             return;
         }
-        vfx.ForceStopSwingEffects();
+
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
         isDashSlashing = false;             // reset dash slash flag
@@ -619,8 +615,7 @@ public class TenguAI : MonoBehaviour
         player.GetComponent<PlayerParry>().parryCooldown = 1f; // restore normal parry cooldown
         animator.SetFloat("DashSlashSpeed", 1f);  // unfreeze animation in case it was frozen
         StopAllCoroutines();                // cancel any running reposition coroutines
-        animator.ResetTrigger("Attack_01"); // cancel the attack trigger
-        animator.ResetTrigger("Attack_02"); // cancel the attack trigger
+        animator.ResetTrigger("Attack");    // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
 
         StartCoroutine(ParryStun());        // start the stun for getting parried
@@ -720,7 +715,7 @@ public class TenguAI : MonoBehaviour
 
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            playerHealth.StartCoroutine(playerHealth.GetParried());
+            StartCoroutine(playerHealth.GetParried());
             return true;
         }
         // 60-84 = dodge (25% chance)
@@ -863,8 +858,7 @@ public class TenguAI : MonoBehaviour
         comboSlashParried = false;
         dodgeStarted = false;
         animator.SetFloat("DashSlashSpeed", 1f);
-        animator.ResetTrigger("Attack_01");
-        animator.ResetTrigger("Attack_02");
+        animator.ResetTrigger("Attack");
         animator.ResetTrigger("DashSlash");
         animator.ResetTrigger("ComboAttack");
 
@@ -1002,7 +996,7 @@ public class TenguAI : MonoBehaviour
 
         // dash slash is done, reset the flag and go back to Attack state
         isDashSlashing = false;
-        currentState = TenguState.Chase;
+        currentState = TenguState.Attack;
     }
 
 
@@ -1137,7 +1131,7 @@ public class TenguAI : MonoBehaviour
         animator.SetBool("IsMoving", false);
 
         // create an empty list to keep track of all the clones we spawn so we can tell al of them to thrust at the same time later
-        List<TenguClone> clones = new List<TenguClone>();
+        List<YokaiClone> clones = new List<YokaiClone>();
 
         // spawn cloneCount clones evenly spaced in a circle around the player
         for(int i = 0; i < cloneCount; i++)
@@ -1162,7 +1156,7 @@ public class TenguAI : MonoBehaviour
             sfx.PlayDodgeSFX();
 
             // get the TenguClone script from the spawned GameObject so we can PerformThrust()
-            TenguClone clone = cloneObj.GetComponent<TenguClone>();
+            YokaiClone clone = cloneObj.GetComponent<YokaiClone>();
 
             // only add the clone to the list if it actually has a TenguClone script on it
             if(clone != null)
@@ -1175,14 +1169,8 @@ public class TenguAI : MonoBehaviour
         // pause for 1 second after all clones spawn to give the player a moment to react
         yield return new WaitForSeconds(1f);
 
-        // tell every clone in the list to thrust towards the player at the same time
-        foreach(TenguClone clone in clones)
-        {
-            clone.PerformThrust(player);
-        }
-
         // the real Tengu also thrusts at the same time as the clones 
-        animator.SetTrigger("Attack_02");
+        animator.SetTrigger("Attack");
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         // wait for the wind up part of the real Tengu's attack animation before checking for damage
