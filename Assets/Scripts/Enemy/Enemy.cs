@@ -56,6 +56,18 @@ public class Enemy : MonoBehaviour
 
         // Disable enemy 
         this.enabled = false;
+
+        TenguAI tenguAI = GetComponent<TenguAI>();
+        if(tenguAI != null)
+        {
+            GetComponentInParent<TenguAI>().enabled = false;
+        }
+
+        SusanooAI susanooAI = GetComponent<SusanooAI>();
+        if(susanooAI != null)
+        {
+            GetComponentInParent<SusanooAI>().enabled = false;
+        }
     }
 
 }
