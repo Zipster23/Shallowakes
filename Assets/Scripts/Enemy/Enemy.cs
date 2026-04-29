@@ -26,7 +26,12 @@ public class Enemy : MonoBehaviour
 
         // make it so that Tengu cannot be damaged during enraged animation
         TenguAI tenguAI = GetComponent<TenguAI>();
+        SusanooAI susanooAI = GetComponent<SusanooAI>();
         if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+        {
+            return;
+        }
+        if(susanooAI != null && susanooAI.currentState == SusanooAI.SusanooState.Enraged)
         {
             return;
         }
@@ -40,6 +45,10 @@ public class Enemy : MonoBehaviour
         if(currentHealth <= 20)
         {
             GetComponent<TenguAI>()?.EnterEnragedMode();
+        }
+        if(currentHealth == 60)
+        {
+            GetComponent<SusanooAI>()?.EnterEnragedMode();
         }
 
         if(currentHealth <= 0)

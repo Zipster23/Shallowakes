@@ -173,6 +173,9 @@ public class SusanooAI : MonoBehaviour
             case SusanooState.IsParried:
                 HandleIsParried();
                 break;
+            case SusanooState.Enraged:
+                HandleEnraged();
+                break;
             case SusanooState.LightningStrike:
                 HandleLightningStrike();
                 break;
@@ -751,11 +754,8 @@ public class SusanooAI : MonoBehaviour
         // reset ALL flags so nothing can interfere with the enraged animation
         isAttacking = false;
         dodgeStarted = false;
-        animator.SetFloat("DashSlashSpeed", 1f);
         animator.ResetTrigger("Attack_01");
         animator.ResetTrigger("Attack_02");
-        animator.ResetTrigger("DashSlash");
-        animator.ResetTrigger("ComboAttack");
 
         // boost all stats by their corresponding enraged multipliers
         moveSpeed *= enragedSpeedMultiplier;
@@ -764,6 +764,8 @@ public class SusanooAI : MonoBehaviour
 
         // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
+        vfx.PlayEnragedEffect(transform.position, transform);
+        vfx.PlayLightningAuraEffect(transform.position, transform);
 
         // knock the player back away from the tengu
         Vector3 knockbackDir = (player.position - transform.position).normalized;

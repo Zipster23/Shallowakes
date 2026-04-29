@@ -46,7 +46,7 @@ public class RespawnManager : MonoBehaviour
 
         musicSource.Stop();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
 
         sfx.PlayPlayerDeathSFX();
 

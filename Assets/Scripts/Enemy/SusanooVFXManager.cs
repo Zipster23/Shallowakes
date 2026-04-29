@@ -15,6 +15,11 @@ public class SusanooVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
 
+    [Header("Enraged VFX")]
+    [SerializeField] private ParticleSystem enragedEffect;
+    [SerializeField] private ParticleSystem lightningAura;
+
+
     [Header("Dash-Ability VFX")]
     [SerializeField] private ParticleSystem slashChargeUpEffect;
     [SerializeField] private ParticleSystem slashEffect;
@@ -57,6 +62,20 @@ public class SusanooVFXManager : MonoBehaviour
     public void PlaySlashEffect(Vector3 position, Transform parent)
     {
         ParticleSystem effect = Instantiate(slashEffect, position, slashEffect.transform.rotation);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlayEnragedEffect(Vector3 position, Transform parent)
+    {
+        ParticleSystem effect = Instantiate(enragedEffect, position, Quaternion.identity);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlayLightningAuraEffect(Vector3 position, Transform parent)
+    {
+        ParticleSystem effect = Instantiate(lightningAura, position, Quaternion.identity);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, effect.main.duration);
     }
