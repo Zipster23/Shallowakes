@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] private TenguIntroCinematic tenguIntroCinematic;
+    [SerializeField] private SusanooIntroCinematic susanooIntroCinematic;
 
     // --- ENRAGE SETTINGS --- //
 
@@ -116,6 +117,7 @@ public class Enemy : MonoBehaviour
         if(susanooAI != null)
         {
             susanooAI.enabled = false;
+            StartCoroutine(SusanooDeathEnding());
         }
 
         // Disable this script last
@@ -145,4 +147,39 @@ public class Enemy : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Susanoo_Domain");
 
     }
+
+
+
+
+    private IEnumerator SusanooDeathEnding()
+    {
+        susanooIntroCinematic.musicSource.Stop();
+
+        yield return new WaitForSeconds(5f);
+
+        // fade to black
+        ScreenFade fader = FindObjectOfType<ScreenFade>();
+        yield return StartCoroutine(fader.FadeOut());
+
+        // show ending cards one by one
+        fader.SetTitleText("Susanoo has fallen.");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        fader.SetTitleText("The storms that plagued the land began to fade.");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        fader.SetTitleText("Shallo had fulfilled his oath.");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        fader.SetTitleText("Kamehime was free.");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        fader.SetTitleText("Thank you for playing.");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        // fade out one last time and quit
+        yield return StartCoroutine(fader.FadeOut());
+
+    }
+
 }

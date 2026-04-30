@@ -73,12 +73,39 @@ public class ScreenFade : MonoBehaviour
     public IEnumerator ShowTitle()
     {
         
-        if(titleTextObject != null)
+        if (titleTextObject == null) yield break;
+
+        titleTextObject.SetActive(true);
+
+        // get the text component
+        UnityEngine.UI.Text textComponent = titleTextObject.GetComponent<UnityEngine.UI.Text>();
+
+        // fade text in
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
         {
-            titleTextObject.SetActive(true);
-            yield return new WaitForSeconds(titleHoldDuration);
-            titleTextObject.SetActive(false);
+            elapsed += Time.deltaTime;
+            Color c = textComponent.color;
+            c.a = elapsed / fadeDuration;
+            textComponent.color = c;
+            yield return null;
         }
+
+        // hold
+        yield return new WaitForSeconds(titleHoldDuration);
+
+        // fade text out
+        elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            Color c = textComponent.color;
+            c.a = 1f - (elapsed / fadeDuration);
+            textComponent.color = c;
+            yield return null;
+        }
+
+        titleTextObject.SetActive(false);
 
     }
 

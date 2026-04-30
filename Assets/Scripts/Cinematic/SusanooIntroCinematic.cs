@@ -28,7 +28,8 @@ public class SusanooIntroCinematic : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] private AudioClip susanooTheme;
-    [SerializeField] private AudioSource musicSource;
+    [HideInInspector]
+    [SerializeField] public AudioSource musicSource;
 
     private bool hasPlayed;          // true once the cinematic has been triggered so it only plays once
     private bool isPlaying;          // true while the cutscene is actively playing
