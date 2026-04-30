@@ -100,4 +100,13 @@ public class ScreenFade : MonoBehaviour
     }
 
 
+
+
+    public void SetTitleText(string text)
+    {
+        if (titleTextObject != null)
+            titleTextObject.GetComponent<UnityEngine.UI.Text>().text = text;
+    }
+
+
 }

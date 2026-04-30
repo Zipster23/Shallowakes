@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     public Animator enemyAnimator;
     public int maxHealth = 100;
     public int currentHealth;
+    [SerializeField] private TenguIntroCinematic tenguIntroCinematic;
 
     // --- ENRAGE SETTINGS --- //
 
@@ -103,6 +105,7 @@ public class Enemy : MonoBehaviour
         if(tenguAI != null)
         {
             tenguAI.enabled = false;
+            StartCoroutine(TransitionToSusanooStage());
         }
 
         if(yokaiAI != null)
@@ -117,5 +120,29 @@ public class Enemy : MonoBehaviour
 
         // Disable this script last
         this.enabled = false;
+    }
+
+
+
+
+    private IEnumerator TransitionToSusanooStage()
+    {
+        
+        tenguIntroCinematic.musicSource.Stop();
+
+        // wait for death animation to finish
+        yield return new WaitForSeconds(5f);
+
+        // fade to black
+        ScreenFade fader = FindObjectOfType<ScreenFade>();
+        yield return StartCoroutine(fader.FadeOut());
+
+        // show next stage title
+        fader.SetTitleText("Okinoshima Island - The Door to Another Dimension");
+        yield return StartCoroutine(fader.ShowTitle());
+
+        // Load next scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Susanoo_Domain");
+
     }
 }

@@ -31,7 +31,8 @@ public class TenguIntroCinematic : MonoBehaviour
     [Header("Music")]
     [SerializeField] private AudioClip tenguTheme;
     [SerializeField] private AudioClip shrineTheme;
-    [SerializeField] private AudioSource musicSource;
+    [HideInInspector]
+    [SerializeField] public AudioSource musicSource;
 
     private bool hasPlayed;          // true once the cinematic has been triggered so it only plays once
     private bool isPlaying;          // true while the cutscene is actively playing

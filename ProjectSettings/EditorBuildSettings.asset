@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tengu_Map.unity
     guid: f7a09111bb97fae4c8e986c5bbeb4d27
+  - enabled: 1
+    path: Assets/Scenes/Susanoo_Domain.unity
+    guid: 4bef58b6166cc6045a6bda2c1f1160eb
   - enabled: 0
-    path: Assets/Scenes/Susanoo_Mao.unity
+    path: Assets/Scenes/Susanoo_Map.unity
     guid: 6ed3d46396966f7409f9c218fcda7703
   m_configObjects: {}
