@@ -13,6 +13,7 @@ public class SeaSplitCinematic : MonoBehaviour
     [SerializeField] private SusanooAI susanooAI;
     [SerializeField] private SusanooSFXManager sfx;
     [SerializeField] private SusanooSection1 section1;
+    [SerializeField] public GameObject windSlashVerticalPrefab;
 
 
 
@@ -22,7 +23,20 @@ public class SeaSplitCinematic : MonoBehaviour
         
         if(other.CompareTag("Player"))
         {
-            
+            // fire huge vertical wind slash
+            Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * 2f;
+            Vector3 direction = (other.transform.position - spawnPos).normalized;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            GameObject slash = Instantiate(windSlashVerticalPrefab, spawnPos, rotation);
+            WindSlash windSlash = slash.GetComponent<WindSlash>();
+            if(windSlash != null)
+            {
+                windSlash.SetDirection(direction);
+                windSlash.speed = 220f;
+                windSlash.isParriable = false;
+            }
+
             // split sea
             if(seaSplitVFX != null)
             {

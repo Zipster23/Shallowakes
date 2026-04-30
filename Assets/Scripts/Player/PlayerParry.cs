@@ -92,7 +92,7 @@ public class PlayerParry : MonoBehaviour
         // check for wind slash projectiles in parry range
         if(isParrying)
         {
-            Collider[] nearbyProjectiles = Physics.OverlapSphere(transform.position, parryRange);
+            Collider[] nearbyProjectiles = Physics.OverlapSphere(transform.position, parryRange * 2f);
             foreach(Collider col in nearbyProjectiles)
             {
                 WindSlash windSlash = col.GetComponent<WindSlash>();
