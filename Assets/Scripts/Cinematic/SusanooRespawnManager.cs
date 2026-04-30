@@ -20,7 +20,7 @@ public class SusanooRespawnManager : MonoBehaviour
     [Header("Spawn Positions")]
     [SerializeField] private Vector3 playerSpawnPositionSection1 = new Vector3(-1115.28f, 527.93f, -167.02f);
     [SerializeField] private Vector3 playerSpawnPositionSection2 = new Vector3(-1115.28f, 527.93f, -167.02f);
-    [SerializeField] private Vector3 tenguSpawnPosition = new Vector3(-1101.99f, 529f, -223.05f);
+    [SerializeField] private Vector3 susanooSpawnPosition = new Vector3(-1101.99f, 529f, -223.05f);
 
     private bool isRespawning = false;
     public bool hasPassedSection1 = false;
@@ -115,7 +115,7 @@ public class SusanooRespawnManager : MonoBehaviour
         player.GetComponent<Animator>().Play("Idle", 0, 0f);
 
         // reset tengu position and health
-        susanooAI.transform.position = tenguSpawnPosition;
+        susanooAI.transform.position = susanooSpawnPosition;
         susanooEnemy.currentHealth = susanooEnemy.maxHealth;
         susanooEnemy.enabled = true;
         susanooAI.isEnraged = false;
