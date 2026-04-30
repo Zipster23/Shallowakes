@@ -462,8 +462,26 @@ public class PlayerMovement : MonoBehaviour
     {
         
         isKnockedBack = true;
+
+        // Zero out angular velocity first so there's no existing spin
+        rb.angularVelocity = Vector3.zero;
+
         rb.velocity = force;
+
+        // Freeze Y rotation during knockback so the force can't cause spinning
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | 
+                        RigidbodyConstraints.FreezeRotationY | 
+                        RigidbodyConstraints.FreezeRotationZ;
+
         yield return new WaitForSeconds(duration);
+
+        // Restore normal constraints — Y rotation must stay frozen for normal gameplay too
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | 
+                        RigidbodyConstraints.FreezeRotationZ;
+
+        // Zero angular velocity again when knockback ends so no residual spin
+        rb.angularVelocity = Vector3.zero;
+
         isKnockedBack = false;
 
     }
