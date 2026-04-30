@@ -100,7 +100,7 @@ Material:
     - _DecalWetStrength: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Glossiness: 0.5
+    - _Glossiness: 2
     - _Height: 0.005
     - _HeightFac: 0
     - _Metallic: 0
