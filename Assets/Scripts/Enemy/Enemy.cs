@@ -100,9 +100,20 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetBool("IsDead", true);
 
         // Disable whichever AI is present
-        if(tenguAI != null) tenguAI.enabled = false;
-        if(yokaiAI != null) yokaiAI.enabled = false;
-        if(susanooAI != null) susanooAI.enabled = false;
+        if(tenguAI != null)
+        {
+            tenguAI.enabled = false;
+        }
+
+        if(yokaiAI != null)
+        {
+            yokaiAI.enabled = false;
+        }
+
+        if(susanooAI != null)
+        {
+            susanooAI.enabled = false;
+        }
 
         // Disable this script last
         this.enabled = false;
