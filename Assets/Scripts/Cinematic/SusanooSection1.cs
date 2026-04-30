@@ -7,6 +7,7 @@ public class SusanooSection1 : MonoBehaviour
 {
     
     [SerializeField] private SusanooAI susanooAI;
+    [SerializeField] private SusanooSFXManager sfx;
     [SerializeField] private Transform player;
     [SerializeField] private float timeBetweenSlashes = 5f;
     [SerializeField] private float section1SlashSpeed = 60f;
@@ -54,6 +55,7 @@ public class SusanooSection1 : MonoBehaviour
             if(!isActive) yield break;
 
             // spawn wind slash aimed at player
+            sfx.PlayWindSlashSFX();
             Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * windSlashSpawnOffset;
             Vector3 direction = (player.position - spawnPos).normalized;
             Quaternion rotation = Quaternion.LookRotation(direction);

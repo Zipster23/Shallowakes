@@ -16,6 +16,11 @@ public class SusanooRespawnManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private SusanooCinematicTrigger cinematicTrigger;
     [SerializeField] private GameObject arenaBarrier;
+    [SerializeField] private SusanooSection1 section1;
+    [SerializeField] private GameObject seaSplitVFX;
+    [SerializeField] private GameObject land;
+    [SerializeField] private Collider seaSplitTrigger;
+    [SerializeField] private Collider section1CompleteTrigger;
 
     [Header("Spawn Positions")]
     [SerializeField] private Vector3 playerSpawnPositionSection1 = new Vector3(-1115.28f, 527.93f, -167.02f);
@@ -89,51 +94,59 @@ public class SusanooRespawnManager : MonoBehaviour
         // re-enable the cinematic trigger so it can fire again on respawn
         cinematicTrigger.GetComponent<Collider>().enabled = true;
 
-        // reset player position based on what section they're on
-        if(hasPassedSection1)
-        {
-            player.transform.position = playerSpawnPositionSection2;
-        }
-        else
-        {
-            player.transform.position = playerSpawnPositionSection1;
-        }
-
-        // reset player health
+        // reset player
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth.currentHealth = playerHealth.maxHealth;
         playerHealth.enabled = true;
-
-        // re-enable player scripts
         player.GetComponent<PlayerController>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInputHandler>().enabled = true;
         player.GetComponent<PlayerParry>().enabled = true;
-
-        // reset player animations
         player.GetComponent<Animator>().SetBool("IsDead", false);
         player.GetComponent<Animator>().Play("Idle", 0, 0f);
+        player.GetComponent<PlayerController>().ResetAttack();
 
-        // reset tengu position and health
+        // reset susanoo
         susanooAI.transform.position = susanooSpawnPosition;
         susanooEnemy.currentHealth = susanooEnemy.maxHealth;
         susanooEnemy.enabled = true;
         susanooAI.isEnraged = false;
-
-        // reset tengu animator
         susanooAI.GetComponent<Animator>().SetBool("IsDead", false);
         susanooAI.GetComponent<Animator>().Play("Idle", 0, 0f);
-
-        // reset tengu AI state
         susanooAI.enabled = true;
         susanooAI.currentState = SusanooAI.SusanooState.Idle;
         susanooAI.isAttackActive = false;
         susanooAI.isAttacking = false;
 
-        // deactivate tengu so the arena trigger can reactivate him
-        susanooAI.gameObject.SetActive(false);
+        if(hasPassedSection1)
+        {
+            // respawn at arena entrance
+            player.transform.position = playerSpawnPositionSection2;
 
-        arenaBarrier.SetActive(false);
+            // barrier should already be active from section 1 completion
+            arenaBarrier.SetActive(true);
+        }
+        else
+        {
+            // respawn at hill
+            player.transform.position = playerSpawnPositionSection1;
+
+            // reset sea split
+            seaSplitVFX.SetActive(false);
+            land.SetActive(false);
+            seaSplitTrigger.enabled = true;
+
+            // reset section 1 complete trigger
+            section1CompleteTrigger.enabled = true;
+
+            // stop section 1 if it was running
+            section1.EndSection1();
+
+            // reset arena barrier
+            arenaBarrier.SetActive(false);
+        }
+
+        
 
     }
 

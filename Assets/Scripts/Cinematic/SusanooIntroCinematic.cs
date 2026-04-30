@@ -22,8 +22,6 @@ public class SusanooIntroCinematic : MonoBehaviour
     [Header("Cinematic Cameras")]
     private int currentPriority = 20;
     [SerializeField] private List<CinemachineVirtualCamera> shrineCameras;
-    [SerializeField] private CinemachineVirtualCamera camTengu;     // medium shot of tengu kneeling
-    [SerializeField] private CinemachineVirtualCamera camTenguFace; // close up on the tengu's face
 
     [Header("Tengu")]
     [SerializeField] private Animator susanooAnimator;
@@ -89,6 +87,8 @@ public class SusanooIntroCinematic : MonoBehaviour
         freeLookCamera.enabled = false;
         ActivateCamera(shrineCameras[0]);
 
+        player.transform.position = new Vector3(618.0583f, 10.39f, 817.12f);
+
         // show title text and play shrine music
         musicSource.volume = 0.5f;
         musicSource.clip = domainTheme;
@@ -99,32 +99,12 @@ public class SusanooIntroCinematic : MonoBehaviour
         yield return StartCoroutine(fader.FadeIn());
 
         // SHINE TOUR
-        SetBlendDuration(3f);
+        SetBlendDuration(0f);
         for(int i = 1; i < shrineCameras.Count; i++)
         {
             ActivateCamera(shrineCameras[i]);
-            yield return new WaitForSeconds(2.89f);
+            yield return new WaitForSeconds(3f);
         }
-
-        // make tengu appear
-        musicSource.Stop();
-        musicSource.volume = 1f;
-        musicSource.clip = susanooTheme;
-        musicSource.Play();
-        susanooAI.gameObject.SetActive(true);
-        Transform tenguTransform = susanooAI.transform;
-        susanooVFX.PlayDodgeEffect(tenguTransform.position + Vector3.up * 1f, tenguTransform);
-        // susanooVFX.PlayAppearSmokeEffect(tenguTransform.position, tenguTransform);
-        susanooSFX.PlayDodgeSFX();
-
-        // cut to Tengu kneeling
-        // tenguAnimator.SetTrigger("Kneel");
-        ActivateCamera(camTengu);
-        yield return new WaitForSeconds(3f);
-
-        // cut to Tengu face
-        ActivateCamera(camTenguFace);
-        yield return new WaitForSeconds(3.85f);
 
         // re-enable everything
         SetBlendDuration(0.2f);
@@ -163,8 +143,6 @@ public class SusanooIntroCinematic : MonoBehaviour
             cam.Priority = 0;
         }
 
-        camTengu.Priority = 0;
-        camTenguFace.Priority = 0;
         currentPriority = 20;
 
     }
