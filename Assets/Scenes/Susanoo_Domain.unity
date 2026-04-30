@@ -10794,6 +10794,10 @@ PrefabInstance:
       propertyPath: arenaBarrier
       value: 
       objectReference: {fileID: 1333930507}
+    - target: {fileID: 2357291647619575726, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: seaSplitCinematic
+      value: 
+      objectReference: {fileID: 779976744}
     - target: {fileID: 2695920119301923576, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
       propertyPath: sfx
       value: 
@@ -10834,6 +10838,10 @@ PrefabInstance:
       propertyPath: hasPassedSection1
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2695920119301923576, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: seaSplitCinematic
+      value: 
+      objectReference: {fileID: 779976744}
     - target: {fileID: 2695920119301923576, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
       propertyPath: susanooSpawnPosition.x
       value: 618.0583
@@ -10990,6 +10998,10 @@ PrefabInstance:
       propertyPath: shrineCameras.Array.data[4]
       value: 
       objectReference: {fileID: 1653056209}
+    - target: {fileID: 4518892668500461453, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: m_Text
+      value: The Final Showdown
+      objectReference: {fileID: 0}
     - target: {fileID: 4758095596198965839, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
       propertyPath: m_Name
       value: Susanoo Stage Cinematic
@@ -11073,6 +11085,18 @@ PrefabInstance:
     - target: {fileID: 6748490370272055423, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183434927982799520, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: m_Size.z
+      value: 54.367676
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183434927982799520, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: m_Center.y
+      value: -1.9312118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183434927982799520, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
+      propertyPath: m_Center.z
+      value: 26.683838
       objectReference: {fileID: 0}
     - target: {fileID: 8356051842435797572, guid: 7b7447cb8ed1354479163fb99178f8a0, type: 3}
       propertyPath: m_IsActive

@@ -19,6 +19,7 @@ public class SusanooRespawnManager : MonoBehaviour
     [SerializeField] private SusanooSection1 section1;
     [SerializeField] private GameObject seaSplitVFX;
     [SerializeField] private GameObject land;
+    [SerializeField] private SeaSplitCinematic seaSplitCinematic;
     [SerializeField] private Collider seaSplitTrigger;
     [SerializeField] private Collider section1CompleteTrigger;
 
@@ -53,6 +54,7 @@ public class SusanooRespawnManager : MonoBehaviour
         isRespawning = true;
 
         musicSource.Stop();
+        seaSplitCinematic.musicSource.Stop();
         section1.EndSection1();
 
         yield return new WaitForSeconds(0.75f);

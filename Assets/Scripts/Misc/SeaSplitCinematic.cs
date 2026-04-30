@@ -7,7 +7,8 @@ public class SeaSplitCinematic : MonoBehaviour
     
     [SerializeField] private GameObject seaSplitVFX;
     [SerializeField] private GameObject land;
-    [SerializeField] private AudioSource musicSource;
+    [HideInInspector]
+    [SerializeField] public AudioSource musicSource;
     [SerializeField] private AudioClip section1Music;
     [SerializeField] private SusanooAI susanooAI;
     [SerializeField] private SusanooSFXManager sfx;
