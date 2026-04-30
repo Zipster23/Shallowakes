@@ -6,8 +6,8 @@ public class YokaiSFXManager : MonoBehaviour
 {
     [Header("Weapon SFX")]
     [SerializeField] private AudioSource yokaiAudioSource;
-    [SerializeField] private AudioClip weaponAttackSFX;
-    [SerializeField] private AudioClip weaponDeflectSFX;
+    [SerializeField] private AudioClip AttackSFX;
+    [SerializeField] private AudioClip DeflectSFX;
     [SerializeField] private AudioClip weaponHitSFX;
     [SerializeField] private float weaponDeflectVolume = 0.7f;
 
@@ -19,12 +19,12 @@ public class YokaiSFXManager : MonoBehaviour
 
     public void PlayWeaponAttackSFX()
     {
-        yokaiAudioSource.PlayOneShot(weaponAttackSFX);
+        yokaiAudioSource.PlayOneShot(AttackSFX);
     }
 
     public void PlayWeaponDeflectSFX()
     {
-        yokaiAudioSource.PlayOneShot(weaponDeflectSFX, weaponDeflectVolume);
+        yokaiAudioSource.PlayOneShot(weaponHitSFX, weaponDeflectVolume);
     }
 
     public void PlayWeaponHitSFX()
