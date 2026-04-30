@@ -56,7 +56,7 @@ public class SusanooSection1 : MonoBehaviour
 
             // spawn wind slash aimed at player
             sfx.PlayWindSlashSFX();
-            Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * windSlashSpawnOffset;
+            Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * windSlashSpawnOffset + susanooAI.transform.up * 10f;
             Vector3 direction = (player.position - spawnPos).normalized;
             Quaternion rotation = Quaternion.LookRotation(direction);
 
