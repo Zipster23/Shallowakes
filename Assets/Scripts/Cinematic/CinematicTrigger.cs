@@ -6,6 +6,7 @@ public class CinematicTrigger : MonoBehaviour
 {
     
     [SerializeField] private TenguIntroCinematic cinematic;
+    [SerializeField] private GameObject arenaBarrier;
 
 
 
@@ -17,6 +18,7 @@ public class CinematicTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             cinematic.TriggerCinematic();
+            arenaBarrier.SetActive(true);
             GetComponent<Collider>().enabled = false;    // disable this trigger so it never fires again
         }
 

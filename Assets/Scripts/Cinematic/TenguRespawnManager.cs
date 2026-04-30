@@ -15,6 +15,7 @@ public class TenguRespawnManager : MonoBehaviour
     [SerializeField] private TenguSFXManager sfx;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private CinematicTrigger cinematicTrigger;
+    [SerializeField] private GameObject arenaBarrier;
 
     [Header("Spawn Positions")]
     [SerializeField] private Vector3 playerSpawnPosition = new Vector3(-1115.28f, 527.93f, -167.02f);
@@ -122,6 +123,8 @@ public class TenguRespawnManager : MonoBehaviour
 
         // deactivate tengu so the arena trigger can reactivate him
         tenguAI.gameObject.SetActive(false);
+
+        arenaBarrier.SetActive(false);
 
         // since cinematic already played, just trigger opening dash slash directly
         tenguAI.TriggerOpeningDashSlash();
