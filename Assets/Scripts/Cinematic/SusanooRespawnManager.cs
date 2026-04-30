@@ -53,6 +53,7 @@ public class SusanooRespawnManager : MonoBehaviour
         isRespawning = true;
 
         musicSource.Stop();
+        section1.EndSection1();
 
         yield return new WaitForSeconds(0.75f);
 

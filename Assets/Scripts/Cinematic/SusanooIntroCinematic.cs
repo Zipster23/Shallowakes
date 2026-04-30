@@ -28,7 +28,6 @@ public class SusanooIntroCinematic : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] private AudioClip susanooTheme;
-    [SerializeField] private AudioClip domainTheme;
     [SerializeField] private AudioSource musicSource;
 
     private bool hasPlayed;          // true once the cinematic has been triggered so it only plays once
@@ -91,7 +90,7 @@ public class SusanooIntroCinematic : MonoBehaviour
 
         // show title text and play shrine music
         musicSource.volume = 0.5f;
-        musicSource.clip = domainTheme;
+        musicSource.clip = susanooTheme;
         musicSource.Play();
         yield return StartCoroutine(fader.ShowTitle());
 

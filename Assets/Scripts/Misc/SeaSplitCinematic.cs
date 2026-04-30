@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SeaSplitCinematic : MonoBehaviour
@@ -9,6 +10,7 @@ public class SeaSplitCinematic : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip section1Music;
     [SerializeField] private SusanooAI susanooAI;
+    [SerializeField] private SusanooSFXManager sfx;
     [SerializeField] private SusanooSection1 section1;
 
 
@@ -28,6 +30,7 @@ public class SeaSplitCinematic : MonoBehaviour
             } 
 
             // play section 1 music
+            sfx.PlayWindSlashSFX();
             musicSource.clip = section1Music;
             musicSource.Play();
 
