@@ -36,8 +36,8 @@ public class YokaiAI : MonoBehaviour
     public Transform player;            // reference to the player's transform
     private Animator animator;          // controls the Yokai's animations
     private Enemy enemy;                // reference to the Enemy script (for health)
-    //private YokaiVFXManager vfx;        // handles hit visual effects
-    //private YokaiSFXManager sfx;        // handles hit sound effects
+    private YokaiVFXManager vfx;        // handles hit visual effects
+    private YokaiSFXManager sfx;        // handles hit sound effects
     private Rigidbody rb;               // handles Yokai's rigidbody
 
 
@@ -99,8 +99,8 @@ public class YokaiAI : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
         enemy    = GetComponent<Enemy>();
-        //vfx      = GetComponent<YokaiVFXManager>();
-        //sfx      = GetComponent<YokaiSFXManager>();
+        vfx      = GetComponent<YokaiVFXManager>();
+        sfx      = GetComponent<YokaiSFXManager>();
         rb       = GetComponent<Rigidbody>();
     }
 
