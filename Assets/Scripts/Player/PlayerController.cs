@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             controller.PlayJumpingAnimation();
 
         // ── Dash ──────────────────────────────────────────────────────
-        if (input.dashInput)
+        if (input.dashInput && movement.CanDash())
         {
             controller.PlayDashAnimation();
             movement.DashOutput(input.MovementInput);

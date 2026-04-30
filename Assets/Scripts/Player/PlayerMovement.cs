@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float temporaryScalar = 1f;
     private bool isDashing = false;
     [HideInInspector] public float attackMovementMultiplier = 1f;
+    [SerializeField] private float dashCooldown = 2f;
+    private float dashCooldownTimer;
 
     [Header("Glide Settings")]
     // terminal velocity is the constant fall speed the player reaches after ~1 second of gliding
@@ -104,6 +106,11 @@ public class PlayerMovement : MonoBehaviour
                 // ONLY reset jumps the moment the player touches the ground, not every frame
                 jumpsRemaining = maxJumps;
             }
+        }
+
+        if(dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
         }
 
         // Countdown the air control window
@@ -323,7 +330,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void DashOutput(Vector2 input)
     {
-        if (!isDashing) StartCoroutine(ExecuteSegmentedDash(input));
+        if(dashCooldownTimer > 0) return;
+
+        if (!isDashing)
+        {
+            dashCooldownTimer = dashCooldown;
+            StartCoroutine(ExecuteSegmentedDash(input));
+        }
+    }
+
+    public bool CanDash()
+    {
+        return dashCooldownTimer <= 0 && !isDashing;
     }
 
     private IEnumerator ExecuteSegmentedDash(Vector2 input)
