@@ -87,7 +87,8 @@ public class SusanooAI : MonoBehaviour
     public float enragedAttackSpeedMultiplier = 2f;   // how much faster the Tengu attacks while enraged
     public float enragedDodgeSpeedMultiplier = 2f;    // how much faster the Tengu dashes while enraged
     public float enragedAttackRangeMultiplier = 1.15f;    // how much faster the Tengu dashes while enraged
-    private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
+    [HideInInspector]
+    public bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
 
@@ -108,6 +109,7 @@ public class SusanooAI : MonoBehaviour
     public int windSlashChance = 25;                // percentage chance of doing wind slash
     public float timeBetweenSlashes = 0.5f;         // time between the two slashes
     private bool isWindSlashing = false;            // prevents ability from restarting every frame
+    public float section1WindSlashSpeed = 60f;      // how fast the wind slash is during the first section of susanoo
 
 
 

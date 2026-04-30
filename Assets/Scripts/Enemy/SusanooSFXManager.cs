@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SusanooSFXManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class SusanooSFXManager : MonoBehaviour
     [Header("Misc SFX")]
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip enragedSFX;
+    [SerializeField] private AudioClip playerDeathSFX;
 
     [Header("Ability SFX")]
     [SerializeField] private AudioClip lightningStrikeSFX;
@@ -53,6 +55,11 @@ public class SusanooSFXManager : MonoBehaviour
     public void PlayWindSlashSFX()
     {
         bladeSFX.PlayOneShot(windSlashSFX);
+    }
+
+    public void PlayerPlayerDeathSFX()
+    {
+        bladeSFX.PlayOneShot(playerDeathSFX);
     }
 
 
