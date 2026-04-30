@@ -15,6 +15,7 @@ public class TenguSFXManager : MonoBehaviour
     [Header("Misc SFX")]
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip enragedSFX;
+    [SerializeField] private AudioClip playerDeathSFX;
 
     public void PlayNaginataAttackSFX()
     {
@@ -39,5 +40,10 @@ public class TenguSFXManager : MonoBehaviour
     public void PlayEnragedSFX()
     {
         naginataSFX.PlayOneShot(enragedSFX);
+    }
+
+    public void PlayPlayerDeathSFX()
+    {
+        naginataSFX.PlayOneShot(playerDeathSFX);
     }
 }
