@@ -124,6 +124,10 @@ public class Enemy : MonoBehaviour
         this.enabled = false;
     }
 
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
 
 
 

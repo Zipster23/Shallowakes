@@ -56,7 +56,12 @@ public class ComboAttack : YokaiAbility
             ai.FacePlayer();
             float dist = Vector3.Distance(transform.position, player.position);
             if (dist > attackRange)
-                transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            {
+                Vector3 nextPos = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                if (Physics.Raycast(nextPos + Vector3.up * 1f, Vector3.down, out RaycastHit hit, 3f, ~playerLayer))
+                    nextPos.y = hit.point.y;
+                transform.position = nextPos;
+            }
             yield return null;
         }
     }
@@ -110,17 +115,29 @@ public class ComboAttack : YokaiAbility
     {
         Vector3 startPos = transform.position;
         Vector3 targetPos = player.position - (player.position - transform.position).normalized;
-        targetPos.y = startPos.y;
 
+        // Don't lock Y — let the raycast track the slope instead
         float elapsed = 0f;
         while (elapsed < dashDuration)
         {
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / dashDuration);
+            float t = elapsed / dashDuration;
+            Vector3 lerpedPos = Vector3.Lerp(startPos, targetPos, t);
+
+            // Raycast downward to snap to terrain surface
+            if (Physics.Raycast(lerpedPos + Vector3.up * 1f, Vector3.down, out RaycastHit hit, 3f, ~playerLayer))
+                lerpedPos.y = hit.point.y;
+
+            transform.position = lerpedPos;
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPos;
+        // Final snap at destination
+        Vector3 finalPos = targetPos;
+        if (Physics.Raycast(finalPos + Vector3.up * 1f, Vector3.down, out RaycastHit finalHit, 3f, ~playerLayer))
+            finalPos.y = finalHit.point.y;
+
+        transform.position = finalPos;
         yokaiAI.FacePlayer();
     }
 }

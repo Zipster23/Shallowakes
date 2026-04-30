@@ -15,7 +15,8 @@ public class WheelDash : YokaiAbility
 
     private void Update()
     {
-        StickToGround();
+        if (!isDashing)
+            StickToGround();
     }
 
     public override bool TryTrigger(YokaiAI ai)
@@ -43,35 +44,40 @@ public class WheelDash : YokaiAbility
         isDashing = true;
 
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true; // disable physics during dash
-        }
+        Collider col = GetComponent<Collider>();
+
+        if (rb != null) rb.isKinematic = true;
+        if (col != null) col.isTrigger = true; // Pass through player during dash
 
         ai.FacePlayer();
-        Vector3 dashStart = transform.position;
-        Vector3 dashTarget = transform.position + transform.forward * dashDistance;
+
+        Vector3 flatForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
         yield return new WaitForSeconds(0.3f);
 
         float elapsed = 0f;
         float duration = dashDistance / dashSpeed;
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = dashCurve.Evaluate(elapsed / duration);
-            transform.position = Vector3.Lerp(dashStart, dashTarget, t);
-            StickToGround();
-            yield return null;
+
+            Vector3 horizontalPos = transform.position + flatForward * (dashSpeed * Time.deltaTime);
+
+            Vector3 rayOrigin = new Vector3(horizontalPos.x, transform.position.y + 3f, horizontalPos.z);
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 10f, groundLayer))
+            {
+                horizontalPos.y = hit.point.y + 0.05f;
+            }
+
+            rb.MovePosition(horizontalPos);
+            yield return new WaitForFixedUpdate();
         }
 
-        transform.position = dashTarget;
         yield return new WaitForSeconds(0.5f);
 
-        if (rb != null)
-        {
-            rb.isKinematic = false; // re-enable physics after dash
-        }
+        if (col != null) col.isTrigger = false; // Restore collider
+        if (rb != null) rb.isKinematic = false;
 
         isDashing = false;
         ai.OnAttackEnd();
@@ -79,9 +85,11 @@ public class WheelDash : YokaiAbility
 
     private void StickToGround()
     {
-        if (Physics.Raycast(transform.position + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 10f, groundLayer))
+        float radius = 0.3f; // Match roughly to your enemy's collider radius
+
+        if (Physics.SphereCast(transform.position + Vector3.up * 2f, radius, Vector3.down, out RaycastHit hit, 10f, groundLayer))
         {
-            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, hit.point.y + 0.05f, transform.position.z);
         }
     }
 }
