@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     // Cached on Start — whichever AI is present on this GameObject
     private TenguAI tenguAI;
     private YokaiAI yokaiAI;
+    private SusanooAI susanooAI;
 
 
     void Start()
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
         // Cache whichever AI script is present — only one should exist per enemy
         tenguAI = GetComponent<TenguAI>();
         yokaiAI = GetComponent<YokaiAI>();
+        susanooAI = GetComponent<SusanooAI>();
     }
 
 
@@ -44,6 +46,12 @@ public class Enemy : MonoBehaviour
 
         // Can't be damaged during Tengu's enraged animation
         if(tenguAI != null && tenguAI.currentState == TenguAI.TenguState.Enraged)
+        {
+            return;
+        }
+
+        // Can't be damaged during Susanoo's enraged animation
+        if(susanooAI != null && susanooAI.currentState == SusanooAI.SusanooState.Enraged)
         {
             return;
         }
@@ -70,6 +78,11 @@ public class Enemy : MonoBehaviour
                 tenguAI.EnterEnragedMode();
             }
 
+            if(susanooAI != null)
+            {
+                susanooAI.EnterEnragedMode();
+            }
+
             // When you build a YokaiEnraged ability, call it here:
             // yokaiAI?.GetComponent<YokaiEnraged>()?.TryEnrage();
         }
@@ -89,6 +102,7 @@ public class Enemy : MonoBehaviour
         // Disable whichever AI is present
         if(tenguAI != null) tenguAI.enabled = false;
         if(yokaiAI != null) yokaiAI.enabled = false;
+        if(susanooAI != null) susanooAI.enabled = false;
 
         // Disable this script last
         this.enabled = false;

@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: -7545762965820161845, guid: 008442e6e720e493fae457b9f5af72d7, type: 3}
     - target: {fileID: 2716378320081370250, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: lengthInSec
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2716378320081370250, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2716378320081370250, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4549875823380027968, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -86,15 +86,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8984696894303364342, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: lengthInSec
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8984696894303364342, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8984696894303364342, guid: d19c960e2f0c14a7ca1ebd345700afdd, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -121,7 +121,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8832423471170266235}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 7
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0

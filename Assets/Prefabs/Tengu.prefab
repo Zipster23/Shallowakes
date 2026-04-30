@@ -10030,6 +10030,8 @@ MonoBehaviour:
   enemyAnimator: {fileID: 2013712442067515796}
   maxHealth: 100
   currentHealth: 0
+  hasEnragedPhase: 0
+  enrageHealthThreshold: 20
 --- !u!114 &3074629504207918626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10067,6 +10069,7 @@ MonoBehaviour:
   enragedSpeedMultiplier: 1.5
   enragedAttackSpeedMultiplier: 1.5
   enragedDodgeSpeedMultiplier: 1.5
+  isEnraged: 0
   impulseSource: {fileID: 0}
   dashSlashRange: 20
   dashSlashSpeed: 120
@@ -10074,8 +10077,8 @@ MonoBehaviour:
   comboChance: 15
   comboSlashParried: 0
   tenguPrefab: {fileID: 5069321123640539476, guid: 9393c7344ed145349857ef41aa290c50, type: 3}
-  cloneCount: 5
-  cloneRadius: 6
+  cloneCount: 20
+  cloneRadius: 25
   shadowCloneChance: 30
 --- !u!114 &7903891018583126115
 MonoBehaviour:
@@ -10096,6 +10099,7 @@ MonoBehaviour:
   naginataDeflectVolume: 0.7
   dashSFX: {fileID: 8300000, guid: 41c925da46e75914f93731959c3a3f4c, type: 3}
   enragedSFX: {fileID: 8300000, guid: 26e4461fe9c99194195ef49d8e1d3c37, type: 3}
+  playerDeathSFX: {fileID: 8300000, guid: 76650fa21a9f66340b12886b8fae839e, type: 3}
 --- !u!114 &5328840721501948552
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,9 +83,10 @@ public class SusanooAI : MonoBehaviour
     // --- ENRAGED --- //
 
     [Header("Enraged")]
-    public float enragedSpeedMultiplier = 1.5f;         // how much faster the Tengu moves while enraged
-    public float enragedAttackSpeedMultiplier = 1.5f;   // how much faster the Tengu attacks while enraged
-    public float enragedDodgeSpeedMultiplier = 1.5f;    // how much faster the Tengu dashes while enraged
+    public float enragedSpeedMultiplier = 2f;         // how much faster the Tengu moves while enraged
+    public float enragedAttackSpeedMultiplier = 2f;   // how much faster the Tengu attacks while enraged
+    public float enragedDodgeSpeedMultiplier = 2f;    // how much faster the Tengu dashes while enraged
+    public float enragedAttackRangeMultiplier = 1.15f;    // how much faster the Tengu dashes while enraged
     private bool isEnraged = false;                     // bool to prevent Tengu from enraging multiple times
     public CinemachineImpulseSource impulseSource;      // reference to Cinemachine Impulse Source on MainCamera to generate screen shake
 
@@ -761,9 +762,11 @@ public class SusanooAI : MonoBehaviour
         moveSpeed *= enragedSpeedMultiplier;
         timeBetweenAttacks /= enragedAttackSpeedMultiplier;
         dodgeSpeed *= enragedDodgeSpeedMultiplier;
+        attackRange *= enragedAttackRangeMultiplier;
 
         // play animation, sfx, and vfx
         animator.SetTrigger("Enraged");
+        sfx.PlayEnragedSFX();
         vfx.PlayEnragedEffect(transform.position, transform);
         vfx.PlayLightningAuraEffect(transform.position, transform);
 

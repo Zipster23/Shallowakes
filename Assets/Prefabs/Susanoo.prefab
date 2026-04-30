@@ -136,13 +136,14 @@ MonoBehaviour:
   tenguParryRange: 3
   normalParryChance: 60
   normalDodgeChance: 25
-  enragedParryChance: 20
-  enragedDodgeChance: 65
+  enragedParryChance: 90
+  enragedDodgeChance: 8
   dodgeDistance: 12
   dodgeSpeed: 40
   enragedSpeedMultiplier: 1.5
   enragedAttackSpeedMultiplier: 1.5
   enragedDodgeSpeedMultiplier: 1.5
+  enragedAttackRangeMultiplier: 1.15
   impulseSource: {fileID: 0}
   lightningIndicatorPrefab: {fileID: 8370517985524241813, guid: cf4008eb6dc8e8b44b42cad4d2b08ef5, type: 3}
   lightningVFXPrefab: {fileID: 3958596659431381315, guid: c50f9e2c685970e4c8ebcd5fc8c7b3e4, type: 3}
@@ -240,6 +241,8 @@ MonoBehaviour:
   enemyAnimator: {fileID: 6226345319071661092}
   maxHealth: 100
   currentHealth: 0
+  hasEnragedPhase: 1
+  enrageHealthThreshold: 20
 --- !u!114 &7713838858234441647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +261,8 @@ MonoBehaviour:
   swingBurst: {fileID: 7411589978688959530}
   hitEffect: {fileID: 3642160410948286680, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
   dashEffect: {fileID: 6469354921825657977, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
+  enragedEffect: {fileID: 3023673345979492938, guid: e17e6c134492ec947bf53539d13ff178, type: 3}
+  lightningAura: {fileID: 6469354921825657977, guid: 04065f872c4f87747844fc01efbf45a0, type: 3}
   slashChargeUpEffect: {fileID: 4271093393614929224, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   slashEffect: {fileID: 2929425121346758057, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
   appearSmokeEffect: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
@@ -279,7 +284,7 @@ MonoBehaviour:
   bladeHitSFX: {fileID: 8300000, guid: c2c9dbf4287e31949b2a2e19af5566a4, type: 3}
   bladeDeflectVolume: 0.7
   dashSFX: {fileID: 8300000, guid: e7f545ef2b2f28343aa4ec6d36e27bed, type: 3}
-  enragedSFX: {fileID: 8300000, guid: 26e4461fe9c99194195ef49d8e1d3c37, type: 3}
+  enragedSFX: {fileID: 8300000, guid: 37b80e197f4b77747ae18ebc9adc81ba, type: 3}
   lightningStrikeSFX: {fileID: 8300000, guid: 6e19761eab83290439058b1f4909ffdc, type: 3}
   windSlashSFX: {fileID: 8300000, guid: 35e826b5cf954224380745d79aede748, type: 3}
 --- !u!1 &3006881585623932335
@@ -5341,7 +5346,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8499142, g: 0.8349056, b: 1, a: 1}
+      key0: {r: 0.56961703, g: 0.5259024, b: 0.98490566, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -10374,7 +10379,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7746084, g: 0.936991, b: 0.9716981, a: 1}
+      key0: {r: 0, g: 0.8199997, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

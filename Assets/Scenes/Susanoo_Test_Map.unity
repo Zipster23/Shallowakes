@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756602, b: 0.32591167, a: 1}
+  m_IndirectSpecularColor: {r: 0.029760303, g: 0.14756846, b: 0.32591167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9378,6 +9378,14 @@ PrefabInstance:
       propertyPath: susanooAI
       value: 
       objectReference: {fileID: 793915913}
+    - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.000000016176498
@@ -15812,38 +15820,6 @@ PrefabInstance:
       propertyPath: impulseSource
       value: 
       objectReference: {fileID: 966884252}
-    - target: {fileID: 7713838858234441647, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: enragedEffect
-      value: 
-      objectReference: {fileID: 3023673345979492938, guid: e17e6c134492ec947bf53539d13ff178, type: 3}
-    - target: {fileID: 7713838858234441647, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: lightningAura
-      value: 
-      objectReference: {fileID: 6469354921825657977, guid: 04065f872c4f87747844fc01efbf45a0, type: 3}
-    - target: {fileID: 9146843261696921838, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9146843261696921838, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.8199997
-      objectReference: {fileID: 0}
-    - target: {fileID: 9146843261696921838, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171178974688580311, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.98490566
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171178974688580311, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.5259024
-      objectReference: {fileID: 0}
-    - target: {fileID: 9171178974688580311, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.56961703
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
