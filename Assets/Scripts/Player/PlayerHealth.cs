@@ -24,7 +24,9 @@ public class PlayerHealth : MonoBehaviour
 
     // --- TENGU PARRY --- //
     [Header("Tengu Parry Logic")]
-    public float parryStunDuration = 0.5f;   // how long the player is frozen when their attack gets parried
+    public float parryStunDuration = 1.1f;
+    private bool isStunned = false; // true while player is stunned from getting parried
+    private float stunTimer = 0; // counts down every frame, player is re-enabled when it hits 0
 
 
 
@@ -36,6 +38,28 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;              // set current health to max when the game starts
         animator = GetComponent<Animator>();    // grab the Animator component on this GameObject
     }
+
+
+
+
+    private void Update()
+    {
+        
+        if(isStunned)
+        {
+            stunTimer -= Time.deltaTime;
+
+            if(stunTimer <= 0f)
+            {
+                isStunned = false;
+                PlayerController playerController = GetComponent<PlayerController>();
+                playerController.isBusy = false;
+                playerController.enabled = true;
+            }
+        }
+
+    }
+
 
 
 
@@ -107,7 +131,7 @@ public class PlayerHealth : MonoBehaviour
     // --- TENGU PARRY LOGIC --- //
     
     // called by TenguAI when the Tengu successfully parries the player's attack
-    public IEnumerator GetParried()
+    public void GetParried()
     {
         vfx.ForceStopSwingEffects();
         PlayerController playerController = GetComponent<PlayerController>();
@@ -122,10 +146,8 @@ public class PlayerHealth : MonoBehaviour
         animator.Play("Idle", 0, 0f);
         animator.Play("Empty", 1, 0f);
 
-        yield return new WaitForSeconds(parryStunDuration);
-
-        playerController.isBusy = false;
-        playerController.enabled = true;
+        isStunned = true;
+        stunTimer = parryStunDuration;
 
     }
 

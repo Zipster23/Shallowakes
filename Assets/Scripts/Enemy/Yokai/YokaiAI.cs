@@ -368,7 +368,7 @@ public class YokaiAI : MonoBehaviour
             attackTimer = 0f; // Yokai can attack immediately after parrying
 
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            StartCoroutine(playerHealth.GetParried());
+            playerHealth.GetParried();
             return true;
         }
         // Dodge

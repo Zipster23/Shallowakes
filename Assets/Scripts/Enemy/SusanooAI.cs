@@ -617,7 +617,7 @@ public class SusanooAI : MonoBehaviour
 
             // start the player stun
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            StartCoroutine(playerHealth.GetParried());
+            playerHealth.GetParried();
             return true;
         }
         // 60-84 = dodge (25% chance)
