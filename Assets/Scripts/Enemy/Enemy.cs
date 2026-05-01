@@ -145,7 +145,6 @@ public class Enemy : MonoBehaviour
         yield return StartCoroutine(fader.FadeOut());
 
         // show next stage title
-        mapImage.SetActive(true);
         fader.SetTitleText("Okinoshima Island - The Door to Another Dimension");
         yield return StartCoroutine(fader.ShowTitle());
 
