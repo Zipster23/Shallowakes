@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Credits_Scroller : MonoBehaviour
@@ -18,5 +19,10 @@ public class Credits_Scroller : MonoBehaviour
     void Update()
     {
         rectTransform.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
+    } 
+    
+    public void ClickToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
