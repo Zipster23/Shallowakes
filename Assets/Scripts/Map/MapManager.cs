@@ -42,6 +42,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private AudioClip checkmarkSFX;        // brushstroke sound
     [SerializeField] private AudioClip newObjectivesSFX;    // sound when new objectives appear
     [SerializeField] private AudioClip sketchAppearSFX;     // sound when new sketch appears
+    [SerializeField] private AudioSource mapMusic;
 
     [Header("Fade Settings")]
     [SerializeField] private Image fadePanel;
@@ -60,6 +61,8 @@ public class MapManager : MonoBehaviour
     private void OnEnable()
     {
         
+        // fade music in when map becomes active
+        StartCoroutine(FadeInMapMusic());
         StartCoroutine(ShowMap());
 
     }
@@ -301,6 +304,26 @@ public class MapManager : MonoBehaviour
         {
             audioSource.PlayOneShot(clip);
         }
+
+    }
+
+
+
+
+    private IEnumerator FadeInMapMusic()
+    {
+
+        mapMusic.volume = 0f;
+        mapMusic.Play();
+        float elapsed = 0f;
+        float duration = 1.5f;
+        while(elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            mapMusic.volume = Mathf.Lerp(0f, 1f, elapsed / duration);
+            yield return null;
+        }
+        mapMusic.volume = 0.75f;
 
     }
 

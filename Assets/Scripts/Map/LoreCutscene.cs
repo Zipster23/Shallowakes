@@ -10,7 +10,11 @@ public class LoreCutscene : MonoBehaviour
     [SerializeField] private Text loreText;
     [SerializeField] private GameObject mapScreen;
     [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioSource loreMusicSource;
+    [SerializeField] private AudioSource mapMusicSource;
+    [SerializeField] private float musicFadeDuration = 1.5f;
+
     [SerializeField] private AudioClip startCutsceneSFX;
 
     // all the lore lines that will appear one after another
@@ -85,12 +89,19 @@ public class LoreCutscene : MonoBehaviour
         // fade to black one final time
         yield return StartCoroutine(Fade(0f, 1f));
 
+        // crossfade music
+        StartCoroutine(FadeOutMusic(loreMusicSource));
+
         // show the map
-        gameObject.SetActive(false);
         mapScreen.SetActive(true);
+
+        // NOW start fading in map music since it's active
+        StartCoroutine(FadeInMusic(mapMusicSource));
 
         // fade back in on the map
         yield return StartCoroutine(Fade(1f, 0f));
+
+        gameObject.SetActive(false);
 
     }
 
@@ -129,12 +140,48 @@ public class LoreCutscene : MonoBehaviour
 
 
 
+    private IEnumerator FadeOutMusic(AudioSource source)
+    {
+
+        float startVolume = source.volume;
+        float elapsed = 0f;
+        while(elapsed < musicFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, 0f, elapsed / musicFadeDuration);
+            yield return null;
+        }
+        source.Stop();
+        source.volume = startVolume;
+
+    }
+
+
+
+
+    private IEnumerator FadeInMusic(AudioSource source)
+    {
+        source.volume = 0f;
+        source.Play();
+        float elapsed = 0f;
+        while(elapsed < musicFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(0f, 1f, elapsed / musicFadeDuration);
+            yield return null;
+        }
+        source.volume = 1f;
+    }
+
+
+
+
     private void PlaySFX(AudioClip clip)
     {
 
-        if(audioSource != null && clip != null)
+        if(loreMusicSource != null && clip != null)
         {
-            audioSource.PlayOneShot(clip);
+            loreMusicSource.PlayOneShot(clip);
         }
 
     }

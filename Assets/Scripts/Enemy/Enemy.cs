@@ -141,6 +141,10 @@ public class Enemy : MonoBehaviour
             StageProgress.CompleteSusanoo();
         }
 
+        // tell main menu to skip straight to map
+        PlayerPrefs.SetInt("ReturnToMap", 1);
+        PlayerPrefs.Save();
+
         // fade to black and then go back to main menu
         ScreenFade fader = FindObjectOfType<ScreenFade>();
         if(fader != null)
@@ -149,29 +153,6 @@ public class Enemy : MonoBehaviour
         }
 
         SceneManager.LoadScene("Main_Menu");
-
-    }
-
-
-
-    private IEnumerator TransitionToSusanooStage()
-    {
-        
-        tenguIntroCinematic.musicSource.Stop();
-
-        // wait for death animation to finish
-        yield return new WaitForSeconds(5f);
-
-        // fade to black
-        ScreenFade fader = FindObjectOfType<ScreenFade>();
-        yield return StartCoroutine(fader.FadeOut());
-
-        // show next stage title
-        fader.SetTitleText("Okinoshima Island - The Door to Another Dimension");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        // Load next scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Susanoo_Domain");
 
     }
 
@@ -206,6 +187,13 @@ public class Enemy : MonoBehaviour
 
         // fade out one last time and quit
         yield return StartCoroutine(fader.FadeOut());
+
+        // mark susanoo as complete and go back to map
+        StageProgress.CompleteSusanoo();
+        PlayerPrefs.SetInt("ReturnToMap", 1);
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("MainMenu");
 
     }
 
