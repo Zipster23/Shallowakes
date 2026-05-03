@@ -5,38 +5,54 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
+    public float groupSpread = 3f;      // How tightly clustered the yokai spawn
+    public float waveInterval = 5f;     // Delay before next wave after all are defeated
 
-    public float spawnRangeX = 20;
-    public float spawnPosY = 10;
-    public float spawnPosZ = 20;
-
-    public float startDelay = 2;
-    public float recheckInterval = 0.5f; // How often to check if an enemy needs respawning
-
-    // Tracks the live instance of each enemy type
     private GameObject[] activeEnemies;
+    private bool waveInProgress = false;
 
-    private void Start()
+    private void Update()
     {
-        activeEnemies = new GameObject[enemyPrefabs.Length];
-        InvokeRepeating("CheckAndSpawnEnemies", startDelay, recheckInterval);
-    }
-
-    private void CheckAndSpawnEnemies()
-    {
-        for (int i = 0; i < enemyPrefabs.Length; i++)
+        if (waveInProgress && AllEnemiesDefeated())
         {
-            // If the slot is empty (never spawned, or was destroyed), spawn a new one
-            if (activeEnemies[i] == null)
-            {
-                activeEnemies[i] = SpawnEnemy(i);
-            }
+            waveInProgress = false;
+            Invoke("SpawnWave", waveInterval);
         }
     }
 
-    private GameObject SpawnEnemy(int index)
+    public void TriggerFirstWave()
     {
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), spawnPosY, spawnPosZ);
-        return Instantiate(enemyPrefabs[index], spawnPos, enemyPrefabs[index].transform.rotation);
+        if (!waveInProgress)
+            SpawnWave();
+    }
+
+    private bool AllEnemiesDefeated()
+    {
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null) return false;
+        }
+        return true;
+    }
+
+    private void SpawnWave()
+    {
+        activeEnemies = new GameObject[enemyPrefabs.Length];
+
+        for (int i = 0; i < enemyPrefabs.Length; i++)
+        {
+            Vector3 offset = new Vector3(
+                Random.Range(-groupSpread, groupSpread),
+                0f,
+                Random.Range(-groupSpread, groupSpread)
+            );
+
+            Vector3 spawnPos = transform.position + offset;
+            Quaternion spawnRot = enemyPrefabs[i].transform.rotation;
+
+            activeEnemies[i] = Instantiate(enemyPrefabs[i], spawnPos, spawnRot);
+        }
+
+        waveInProgress = true;
     }
 }
