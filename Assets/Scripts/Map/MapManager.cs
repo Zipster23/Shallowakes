@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MapProgress : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
     
     [Header("Stage Sketches")]
