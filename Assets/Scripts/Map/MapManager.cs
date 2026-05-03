@@ -320,10 +320,10 @@ public class MapManager : MonoBehaviour
         while(elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            mapMusic.volume = Mathf.Lerp(0f, 1f, elapsed / duration);
+            mapMusic.volume = Mathf.Lerp(0f, 0.3f, elapsed / duration);
             yield return null;
         }
-        mapMusic.volume = 0.75f;
+        mapMusic.volume = 0.3f;
 
     }
 

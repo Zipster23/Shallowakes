@@ -52,7 +52,7 @@ public class LoreCutscene : MonoBehaviour
         SetAlpha(1f);
         loreText.text = "";
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         // fade in
         yield return StartCoroutine(Fade(1f, 0f));
