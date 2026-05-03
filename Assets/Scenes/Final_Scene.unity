@@ -1008,7 +1008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 222, y: -387}
+  m_AnchoredPosition: {x: 300, y: -387}
   m_SizeDelta: {x: 470.1451, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1441737158
@@ -1044,16 +1044,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Programmers\r\n\nJoan Lazo-Fiallo\r\nKayrat Sarypbekov\r\n\nModels\r\n\nKayrat
-    Sarybekov\r\nAntonio Qunitanal\r\n\nGame Design\r\n\nJuanpablo Maldonado\r\n
-    Derwin Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\nAnimation & Art\r\n\nAlain
-    Roman\r\n\nAssets\r\n\nTanuki Digital-Pagodas\r\nHovl Studio \r\nJean Moreno\r\nFlexUnit
-    \r\nGabrielAguiarProductions\r\nSadouzz\nH I P E R N T\nKevin Iglesias\r\nNickLadd\r
-    \nJonathan Rodriguez (Deus Ludus)\n\r\nSounds\n\nfreesounds.org\n\nPlay testers\r\n\nLuciano
-    Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian Paul\n\nMusic\r\n\nRed
+  m_text: "Research and Development\nMr. Gonzalez\n\n\nProgrammers\r\n\nJoan Lazo-Fiallo\r\nKayrat
+    Sarypbekov\r\n\nModels\r\n\nKayrat Sarybekov\r\nAntonio Qunitanal\r\n\nGame Design\r\n\nJuanpablo
+    Maldonado\r\nDerwin Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\nAnimation
+    & Art\r\n\nAlain Roman\r\n\nAssets\r\n\nTanuki Digital-Pagodas\r\nHovl Studio
+    \r\nJean Moreno\r\nFlexUnit \r\nGabrielAguiarProductions\r\nSadouzz\nH I P E
+    R N T\nKevin Iglesias\r\nNickLadd\r \nJonathan Rodriguez (Deus Ludus)\n\r\nSounds\n\nfreesounds.org\n\nPlay
+    testers\r\n\nLuciano Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian Paul\n\nMusic\r\n\nRed
     Horizon TAO\r\n\u6C88\u9ED9Silence of the Warrior\r\nWar Drums Music\r\n\u96F7\u7687
-    \u2014RAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau of Lyrailie\n\n\n\n\n\n\nTHANKS
-    FOR PLAYING\nFrom Nothing Else Matters Studios"
+    \u2014RAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau of Lyrailie\n\nSPECIAL
+    THANKS TO MR. G and our MLEC IT ACADEMY\n\n\n\n\nTHANKS FOR PLAYING\nFrom Nothing
+    Else Matters Studios"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
   m_sharedMaterial: {fileID: -3765264216765690048, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
@@ -1344,8 +1345,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
-    m_HighlightedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
     m_PressedColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1392,7 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9811321, g: 0.0509078, b: 0.0509078, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
