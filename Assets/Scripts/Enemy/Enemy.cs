@@ -131,6 +131,7 @@ public class Enemy : MonoBehaviour
         // figure out which boss this is and save progress
         TenguAI tengu = GetComponent<TenguAI>();
         SusanooAI susanoo = GetComponent<SusanooAI>();
+        YokaiAI yokai = GetComponent<YokaiAI>();
 
         if(tengu != null)
         {
@@ -139,6 +140,11 @@ public class Enemy : MonoBehaviour
         else if(susanoo != null)
         {
             StageProgress.CompleteSusanoo();
+        }
+        // JUST FOR TESTING IDK WHAT TO CHANGE THIS TO SINCE WE DON"T HAVE A BOSS FOR THE WHISPERING FOREST
+        else if(yokai != null)
+        {
+            StageProgress.CompleteWhisperingForest();
         }
 
         // tell main menu to skip straight to map
