@@ -136,10 +136,23 @@ public class Enemy : MonoBehaviour
         if(tengu != null)
         {
             StageProgress.CompleteTenguShrine();
+            PlayerPrefs.SetInt("ReturnToMap", 1);
+            PlayerPrefs.Save();
+            ScreenFade fade = FindObjectOfType<ScreenFade>();
+            if(fade != null)
+            {
+                yield return StartCoroutine(fade.FadeOut());
+            }
+            SceneManager.LoadScene("Main_Menu");
         }
         else if(susanoo != null)
         {
-            StageProgress.CompleteSusanoo();
+            // find susanoodeathsequecne script and call it
+            SusanooDeathSequence deathSequence = FindObjectOfType<SusanooDeathSequence>();
+            if(deathSequence != null)
+            {
+                deathSequence.StartDeathEnding();
+            }
         }
         // JUST FOR TESTING IDK WHAT TO CHANGE THIS TO SINCE WE DON"T HAVE A BOSS FOR THE WHISPERING FOREST
         else if(yokai != null)
@@ -162,45 +175,5 @@ public class Enemy : MonoBehaviour
 
     }
 
-
-
-
-    private IEnumerator SusanooDeathEnding()
-    {
-        susanooIntroCinematic.musicSource.Stop();
-
-        yield return new WaitForSeconds(5f);
-
-        // fade to black
-        ScreenFade fader = FindObjectOfType<ScreenFade>();
-        yield return StartCoroutine(fader.FadeOut());
-
-        // show ending cards one by one
-        fader.SetTitleText("Susanoo has fallen.");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        fader.SetTitleText("The storms that plagued the land began to fade.");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        fader.SetTitleText("Shallo had fulfilled his oath.");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        fader.SetTitleText("Kamehime was free.");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        fader.SetTitleText("Thank you for playing.");
-        yield return StartCoroutine(fader.ShowTitle());
-
-        // fade out one last time and quit
-        yield return StartCoroutine(fader.FadeOut());
-
-        // mark susanoo as complete and go back to map
-        StageProgress.CompleteSusanoo();
-        PlayerPrefs.SetInt("ReturnToMap", 1);
-        PlayerPrefs.Save();
-
-        SceneManager.LoadScene("MainMenu");
-
-    }
 
 }
