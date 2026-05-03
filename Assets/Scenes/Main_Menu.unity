@@ -1466,6 +1466,8 @@ GameObject:
   - component: {fileID: 580942752}
   - component: {fileID: 580942754}
   - component: {fileID: 580942753}
+  - component: {fileID: 580942756}
+  - component: {fileID: 580942755}
   m_Layer: 5
   m_Name: SusanooDomainSketch
   m_TagString: Untagged
@@ -1531,6 +1533,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580942751}
   m_CullTransparentMesh: 1
+--- !u!114 &580942755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580942751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5081af964d1abf2479cef407a17dfc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 580942756}
+  glowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
+--- !u!114 &580942756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580942751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &636894981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,6 +2024,8 @@ GameObject:
   - component: {fileID: 807084491}
   - component: {fileID: 807084493}
   - component: {fileID: 807084492}
+  - component: {fileID: 807084495}
+  - component: {fileID: 807084494}
   m_Layer: 5
   m_Name: TenguShrineSketch
   m_TagString: Untagged
@@ -2058,6 +2091,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807084490}
   m_CullTransparentMesh: 1
+--- !u!114 &807084494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807084490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5081af964d1abf2479cef407a17dfc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 807084495}
+  glowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
+--- !u!114 &807084495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807084490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &836353017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4419,6 +4481,8 @@ GameObject:
   - component: {fileID: 1769085875}
   - component: {fileID: 1769085877}
   - component: {fileID: 1769085876}
+  - component: {fileID: 1769085879}
+  - component: {fileID: 1769085878}
   m_Layer: 5
   m_Name: WhisperingForestSketch
   m_TagString: Untagged
@@ -4484,6 +4548,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769085874}
   m_CullTransparentMesh: 1
+--- !u!114 &1769085878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769085874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5081af964d1abf2479cef407a17dfc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 1769085879}
+  glowColor: {r: 1, g: 0.9, b: 0.5, a: 1}
+--- !u!114 &1769085879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769085874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1971268464
 GameObject:
   m_ObjectHideFlags: 0
