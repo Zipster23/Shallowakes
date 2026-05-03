@@ -5,15 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+
+    [SerializeField] private GameObject mainMenuUI;
+    [SerializeField] private GameObject loreCutscene;
+    [SerializeField] private GameObject mapScreen;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SaveManager.LoadProgress());
+        string lastScene = SaveManager.LoadProgress();
+
+        // if there's a saved scene, skip lore and go straight to map
+        if(PlayerPrefs.HasKey("LastScene"))
+        {
+            mainMenuUI.SetActive(false);
+            mapScreen.SetActive(true);
+        }
+        else
+        {
+            // first time playing, show lore cutscene
+            mainMenuUI.SetActive(false);
+            loreCutscene.SetActive(true);
+        }
     }
 
     public void NewGame()
     {
         SaveManager.DeleteProgress();
-        SceneManager.LoadScene("Tengu_Map");
+        StageProgress.ResetAllProgress();
+        mainMenuUI.SetActive(false);
+        loreCutscene.SetActive(true);
     }
 
     public void QuitGame()
