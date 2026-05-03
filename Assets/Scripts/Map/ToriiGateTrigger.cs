@@ -7,12 +7,18 @@ public class ToriiGateTrigger : MonoBehaviour
     public float fadeDuration = 2f;
     public string playerTag = "Player";
 
+    public SpawnManager spawnManager;    // Drag your SpawnManager object here
+
     private bool _triggered = false;
 
     void OnTriggerEnter(Collider other)
     {
         if (_triggered || !other.CompareTag(playerTag)) return;
         _triggered = true;
+
+        // Kick off the first wave
+        if (spawnManager != null)
+            spawnManager.TriggerFirstWave();
 
         foreach (GameObject obj in paradeObjects)
         {
@@ -29,7 +35,6 @@ public class ToriiGateTrigger : MonoBehaviour
         Color c = mat.color;
         c.a = 0f;
         mat.color = c;
-
         float elapsed = 0f;
         while (elapsed < fadeDuration)
         {
