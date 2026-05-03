@@ -10,6 +10,8 @@ public class LoreCutscene : MonoBehaviour
     [SerializeField] private Text loreText;
     [SerializeField] private GameObject mapScreen;
     [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip startCutsceneSFX;
 
     // all the lore lines that will appear one after another
     private string[] loreLines = new string[]
@@ -40,6 +42,8 @@ public class LoreCutscene : MonoBehaviour
     private IEnumerator PlayLoreCutscene()
     {
         
+        PlaySFX(startCutsceneSFX);
+
         // start fully black
         SetAlpha(1f);
         loreText.text = "";
@@ -49,16 +53,33 @@ public class LoreCutscene : MonoBehaviour
         // fade in
         yield return StartCoroutine(Fade(1f, 0f));
 
-        // show each lore line one by one
+        // fade text in
         foreach(string line in loreLines)
         {
             loreText.text = line;
-            yield return new WaitForSeconds(2.5f);
+            float elapsed = 0f;
+            while(elapsed < fadeDuration)
+            {
+                elapsed += Time.deltaTime;
+                Color c = loreText.color;
+                c.a = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
+                loreText.color = c;
+                yield return null;
+            }
 
-            // fade to black between lines
-            yield return StartCoroutine(Fade(0f, 1f));
-            yield return new WaitForSeconds(0.3f);
-            yield return StartCoroutine(Fade(1f, 0f));
+            // hold
+            yield return new WaitForSeconds(2f);
+
+            // fade text out
+            elapsed = 0f;
+            while(elapsed < fadeDuration)
+            {
+                elapsed += Time.deltaTime;
+                Color c = loreText.color;
+                c.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+                loreText.color = c;
+                yield return null;
+            }
         }
 
         // fade to black one final time
@@ -102,6 +123,19 @@ public class LoreCutscene : MonoBehaviour
         Color c = fadePanel.color;
         c.a = alpha;
         fadePanel.color = c;
+
+    }
+
+
+
+
+    private void PlaySFX(AudioClip clip)
+    {
+
+        if(audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
 
     }
 

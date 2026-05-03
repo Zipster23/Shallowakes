@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public bool hasEnragedPhase = false;
     // Health value at which the enraged phase triggers (e.g. 20 = triggers at 20hp)
     public int enrageHealthThreshold = 20;
+    // check this in the inspector for boss enemies. Used to send player back to the map picture so they can move from stage to stage
+    public bool isBoss = false;
 
 
     // --- REFERENCES --- //
@@ -103,31 +105,51 @@ public class Enemy : MonoBehaviour
         // Play death animation
         enemyAnimator.SetBool("IsDead", true);
 
-        // Disable whichever AI is present
-        if(tenguAI != null)
-        {
-            tenguAI.enabled = false;
-            StartCoroutine(TransitionToSusanooStage());
-        }
-
-        if(yokaiAI != null)
-        {
-            yokaiAI.enabled = false;
-        }
-
-        if(susanooAI != null)
-        {
-            susanooAI.enabled = false;
-            StartCoroutine(SusanooDeathEnding());
-        }
-
         // Disable this script last
         this.enabled = false;
+
+        if(isBoss)
+        {
+            StartCoroutine(BossDefeated());
+        }
     }
 
     public void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+
+
+
+    private IEnumerator BossDefeated()
+    {
+        
+        // wait for death anim to play
+        yield return new WaitForSeconds(5f);
+
+        // figure out which boss this is and save progress
+        TenguAI tengu = GetComponent<TenguAI>();
+        SusanooAI susanoo = GetComponent<SusanooAI>();
+
+        if(tengu != null)
+        {
+            StageProgress.CompleteTenguShrine();
+        }
+        else if(susanoo != null)
+        {
+            StageProgress.CompleteSusanoo();
+        }
+
+        // fade to black and then go back to main menu
+        ScreenFade fader = FindObjectOfType<ScreenFade>();
+        if(fader != null)
+        {
+            yield return StartCoroutine(fader.FadeOut());
+        }
+
+        SceneManager.LoadScene("Main_Menu");
+
     }
 
 
