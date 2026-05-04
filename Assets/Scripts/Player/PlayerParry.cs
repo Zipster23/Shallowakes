@@ -10,6 +10,7 @@ public class PlayerParry : MonoBehaviour
     [Header("References")]
     public TenguAI tenguAI;                     // reference to TenguAI script so we can parry the Tengu
     public SusanooAI susanooAI;                 // reference to SusanooAI script so we can parry Susanoo
+    public List<YokaiAI> yokaiAIs;
     private PlayerInputHandler inputHandler;    // reference to the input handler so we can check if the player parried
     private Animator animator;                  // controls which animations play on the player
     private PlayerVFXManager vfx;               // handles parry visual effects (sparks)
@@ -89,8 +90,22 @@ public class PlayerParry : MonoBehaviour
             }
         }
 
+        if (isParrying)
+        {
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, parryRange);
+            foreach (Collider col in nearbyEnemies)
+            {
+                YokaiAI yokai = col.GetComponent<YokaiAI>();
+                if (yokai != null && yokai.isAttackActive)
+                {
+                    SuccessfulParry();
+                    break;
+                }
+            }
+        }
+
         // check for wind slash projectiles in parry range
-        if(isParrying)
+        if (isParrying)
         {
             Collider[] nearbyProjectiles = Physics.OverlapSphere(transform.position, parryRange * 2f);
             foreach(Collider col in nearbyProjectiles)
@@ -154,6 +169,17 @@ public class PlayerParry : MonoBehaviour
         if(susanooAI != null && susanooAI.isAttackActive)
         {
             susanooAI.GetParried();
+        }
+
+        Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, parryRange);
+        foreach (Collider col in nearbyEnemies)
+        {
+            YokaiAI yokai = col.GetComponent<YokaiAI>();
+            if (yokai != null && yokai.isAttackActive)
+            {
+                yokai.GetParried();
+                break;
+            }
         }
 
     }

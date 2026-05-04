@@ -166,6 +166,17 @@ public class YokaiAI : MonoBehaviour
 
         if (distanceToPlayer > attackRange)
         {
+            // Check if any ability wants to trigger at range before closing in
+            foreach (YokaiAbility ability in registeredAbilities)
+            {
+                if (ability.TryTrigger(this))
+                {
+                    isAttacking = true;
+                    currentState = YokaiState.Ability;
+                    return;
+                }
+            }
+
             transform.position = Vector3.MoveTowards(transform.position, flatPlayerPos, moveSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }

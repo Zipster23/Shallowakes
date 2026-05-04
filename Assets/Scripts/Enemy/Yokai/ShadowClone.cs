@@ -19,12 +19,13 @@ public class ShadowClone : YokaiAbility
 
     public override bool TryTrigger(YokaiAI ai)
     {
-        Debug.Log($"ShadowClone TryTrigger called, chance: {triggerChance}, isCloning: {isShadowCloning}");
-        // Don't trigger if already running
         if (isShadowCloning) return false;
 
-        // Roll for chance
-        if(Random.Range(0, 100) >= triggerChance) return false;
+        // Only trigger from attack range, not during chase
+        float distance = Vector3.Distance(transform.position, ai.player.position);
+        if (distance > ai.attackRange) return false;
+
+        if (Random.Range(0, 100) >= triggerChance) return false;
 
         StartCoroutine(ShadowCloneSequence(ai));
         return true;
