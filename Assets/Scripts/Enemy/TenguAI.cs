@@ -437,7 +437,8 @@ public class TenguAI : MonoBehaviour
         if(stateInfo.IsName("Enraged") && stateInfo.normalizedTime >= 1f)
         {
             // reset attack timer so Tengu attacks immediately after enraging
-            attackTimer = 0f;
+            isDashSlashing = false;
+            attackTimer = timeBetweenAttacks;
             currentState = TenguState.Chase;
         }
 
