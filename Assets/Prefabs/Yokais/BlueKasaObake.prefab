@@ -151,7 +151,7 @@ MonoBehaviour:
   isFloating: 0
   attackPoint: {fileID: 2431740052735646520}
   attackRange: 1.5
-  attackDamage: 100
+  attackDamage: 20
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -231,7 +231,7 @@ MonoBehaviour:
   comboSlashParried: 0
   attackPoint: {fileID: 2431740052735646520}
   attackRange: 3
-  attackDamage: 100
+  attackDamage: 20
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

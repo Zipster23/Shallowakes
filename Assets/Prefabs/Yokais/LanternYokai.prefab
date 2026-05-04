@@ -400,7 +400,7 @@ MonoBehaviour:
   isFloating: 1
   attackPoint: {fileID: 3008734381350689643}
   attackRange: 3
-  attackDamage: 100
+  attackDamage: 20
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

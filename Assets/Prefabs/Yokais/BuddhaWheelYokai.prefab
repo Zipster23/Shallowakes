@@ -391,7 +391,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackDamage: 100
+  attackDamage: 20
   attackRadius: 1.5
   playerLayer:
     serializedVersion: 2
@@ -443,7 +443,7 @@ MonoBehaviour:
   isFloating: 0
   attackPoint: {fileID: 4060309514966401504}
   attackRange: 2
-  attackDamage: 100
+  attackDamage: 20
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
