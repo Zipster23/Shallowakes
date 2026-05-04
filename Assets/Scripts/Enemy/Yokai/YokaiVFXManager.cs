@@ -19,6 +19,7 @@ public class YokaiVFXManager : MonoBehaviour
 
     [Header("Cinematic VFX")]
     [SerializeField] private ParticleSystem appearSmokeEffect;
+    [SerializeField] private ParticleSystem deathEffect;
 
 
     // --- Weapon Trail & Swing ---
@@ -83,6 +84,14 @@ public class YokaiVFXManager : MonoBehaviour
     {
         if(appearSmokeEffect == null) return;
         ParticleSystem effect = Instantiate(appearSmokeEffect, position, Quaternion.identity);
+        effect.transform.SetParent(parent);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
+
+    public void PlayDeathEffect(Vector3 position, Transform parent)
+    {
+        if (deathEffect == null) return;
+        ParticleSystem effect = Instantiate(deathEffect, position, Quaternion.identity);
         effect.transform.SetParent(parent);
         Destroy(effect.gameObject, effect.main.duration);
     }

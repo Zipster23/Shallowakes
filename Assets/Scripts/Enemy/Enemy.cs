@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private TenguIntroCinematic tenguIntroCinematic;
     [SerializeField] private SusanooIntroCinematic susanooIntroCinematic;
     [SerializeField] private GameObject mapImage;
+    [SerializeField] private YokaiVFXManager yokaiVFXManager;
 
     // --- ENRAGE SETTINGS --- //
 
@@ -39,6 +40,11 @@ public class Enemy : MonoBehaviour
         tenguAI = GetComponent<TenguAI>();
         yokaiAI = GetComponent<YokaiAI>();
         susanooAI = GetComponent<SusanooAI>();
+
+        if (yokaiAI != null)
+        {
+            yokaiVFXManager = GetComponent<YokaiVFXManager>();
+        }
     }
 
 
@@ -102,16 +108,22 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        // Play death animation
         enemyAnimator.SetBool("IsDead", true);
 
-        // Disable this script last
-        this.enabled = false;
+        YokaiAI yokai = GetComponent<YokaiAI>();
+        if (yokai != null)
+        {
+            // Spawn effect BEFORE destroying, and don't parent to this transform
+            yokaiVFXManager.PlayDeathEffect(transform.position, null); // null = world space
+        }
 
-        if(isBoss)
+        if (isBoss)
         {
             StartCoroutine(BossDefeated());
-        } 
+        }
+
+        this.enabled = false;
+        GameObject.Destroy(gameObject); // Or add a delay: Destroy(gameObject, 1f)
     }
 
     public void DestroyEnemy()

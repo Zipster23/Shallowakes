@@ -451,6 +451,7 @@ MonoBehaviour:
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
   mapImage: {fileID: 0}
+  yokaiVFXManager: {fileID: 0}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
   isBoss: 0
@@ -494,6 +495,7 @@ MonoBehaviour:
   dashEffect: {fileID: 0}
   shadowCloneEffect: {fileID: 0}
   appearSmokeEffect: {fileID: 0}
+  deathEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
 --- !u!82 &2740741181176970317
 AudioSource:
   m_ObjectHideFlags: 0
