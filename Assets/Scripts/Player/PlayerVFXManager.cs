@@ -18,10 +18,16 @@ public class PlayerVFXManager : MonoBehaviour
 
     [SerializeField] private TrailRenderer sprintTrail; // assign in Inspector
 
-    public void SetSprintTrail(bool isActive)
+    public void PlaySprintEffect()
     {
         if (sprintTrail != null)
-            sprintTrail.emitting = isActive;
+            sprintTrail.emitting = true;
+    }
+
+    public void StopSprintEffect()
+    {
+        if (sprintTrail != null)
+            sprintTrail.emitting = false;
     }
 
     public void StartSwingEffects()

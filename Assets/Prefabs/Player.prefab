@@ -854,7 +854,7 @@ MonoBehaviour:
   doubleJumpControlDuration: 0.3
   groundDeceleration: 15
   animationSmoothSpeed: 10
-  vfxManager: {fileID: 0}
+  vfxManager: {fileID: 2846498151557633704}
   isKnockedBack: 0
 --- !u!114 &5533234199793440723
 MonoBehaviour:
@@ -6720,13 +6720,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7738087198778369230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.33, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.04, y: 1.1019998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5461013196789228436}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!96 &7388404525347228803
 TrailRenderer:
   serializedVersion: 3
@@ -6748,7 +6748,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b834f72fc5588142ac70f6eabfddf64, type: 2}
+  - {fileID: 2100000, guid: 07b87f6e3d7e53c41a1377fa7150cf25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6769,7 +6769,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.35
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -6778,17 +6778,17 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0.08249827
-        outSlope: 0.08249827
+        time: 0.0057373047
+        value: 0.3016529
+        inSlope: -0.21613584
+        outSlope: -0.21613584
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.26940638
+        outWeight: 0.0956023
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.08677673
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -6816,7 +6816,7 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 49151
+      atime0: 0
       atime1: 65535
       atime2: 0
       atime3: 0

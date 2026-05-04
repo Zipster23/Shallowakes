@@ -182,16 +182,14 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeed = moveDirection.magnitude * baseSpeed;
         if (isSprinting && moveDirection.magnitude > 0.1f)
         {
-            bool shouldShowTrail = isSprinting && moveDirection.magnitude > 0.1f && isGrounded;
-            if (shouldShowTrail != wasSprinting)
-            {
-                vfxManager.SetSprintTrail(shouldShowTrail);
-                wasSprinting = shouldShowTrail;
-            }
+            vfxManager.PlaySprintEffect();
             targetSpeed = moveDirection.magnitude * maxSprintSpeed;
+        } else
+        {
+            vfxManager.StopSprintEffect();
         }
 
-        CurrentSpeed = Mathf.Lerp(CurrentSpeed, targetSpeed, Time.deltaTime * animationSmoothSpeed);
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, targetSpeed, Time.deltaTime * animationSmoothSpeed);
         SpeedScale = CurrentSpeed / baseSpeed;
 
         if (isGrounded)
