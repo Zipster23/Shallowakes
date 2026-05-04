@@ -6,6 +6,8 @@ public class ToriiGateTrigger : MonoBehaviour
     public GameObject[] paradeObjects;
     public float fadeDuration = 2f;
     public string playerTag = "Player";
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioClip paradeMusic;
 
     public SpawnManager spawnManager;    // Drag your SpawnManager object here
 
@@ -15,6 +17,10 @@ public class ToriiGateTrigger : MonoBehaviour
     {
         if (_triggered || !other.CompareTag(playerTag)) return;
         _triggered = true;
+
+        backgroundMusic.Stop();
+        backgroundMusic.clip = paradeMusic;
+        backgroundMusic.Play();
 
         // Kick off the first wave
         if (spawnManager != null)
