@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yokaiAI: {fileID: 0}
-  triggerRange: 5
+  triggerRange: 3
   dashSpeed: 20
   dashDistance: 10
   triggerChance: 100

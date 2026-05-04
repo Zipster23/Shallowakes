@@ -80,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;        // subtract the damage amount from the player's current health
 
         vfx.ForceStopSwingEffects();
+        vfx.PlayGetHitVFX(transform.position);
 
         animator.SetTrigger("Hurt");    // play the hurt animation
 

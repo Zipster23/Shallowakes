@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerVFXManager : MonoBehaviour
 {
@@ -10,8 +11,18 @@ public class PlayerVFXManager : MonoBehaviour
     [SerializeField] private ParticleSystem parrySparks;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private ParticleSystem dashEffect;
-    
+    [SerializeField] private ParticleSystem getHitEffect;
 
+    [Header("Scene Settings")]
+    [SerializeField] private string tutorialSceneName = "Tutorial";
+
+    [SerializeField] private TrailRenderer sprintTrail; // assign in Inspector
+
+    public void SetSprintTrail(bool isActive)
+    {
+        if (sprintTrail != null)
+            sprintTrail.emitting = isActive;
+    }
 
     public void StartSwingEffects()
     {
@@ -53,5 +64,17 @@ public class PlayerVFXManager : MonoBehaviour
         Destroy(effect.gameObject, effect.main.duration);
     }
 
-    
+    public void PlayGetHitVFX(Vector3 position)
+    {
+        if (SceneManager.GetActiveScene().name != tutorialSceneName) return;
+
+        if (getHitEffect == null)
+        {
+            Debug.LogWarning("PlayerVFXManager: getHitEffect is not assigned.");
+            return;
+        }
+
+        ParticleSystem effect = Instantiate(getHitEffect, position, Quaternion.identity);
+        Destroy(effect.gameObject, effect.main.duration);
+    }
 }

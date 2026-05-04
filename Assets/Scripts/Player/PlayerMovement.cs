@@ -74,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
     public float CurrentSpeed { get; private set; }
     public float SpeedScale { get; private set; }
 
+    [SerializeField] private PlayerVFXManager vfxManager;
+    private bool wasSprinting = false;
+
     private Transform camTransform;
     private Rigidbody rb;
 
@@ -179,6 +182,12 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeed = moveDirection.magnitude * baseSpeed;
         if (isSprinting && moveDirection.magnitude > 0.1f)
         {
+            bool shouldShowTrail = isSprinting && moveDirection.magnitude > 0.1f && isGrounded;
+            if (shouldShowTrail != wasSprinting)
+            {
+                vfxManager.SetSprintTrail(shouldShowTrail);
+                wasSprinting = shouldShowTrail;
+            }
             targetSpeed = moveDirection.magnitude * maxSprintSpeed;
         }
 
