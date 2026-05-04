@@ -1544,6 +1544,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6737293006120263934, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
+      propertyPath: m_Height
+      value: 6.5276127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737293006120263934, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
+      propertyPath: m_Radius
+      value: 3.2638056
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737293006120263934, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5319774
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737293006120263934, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
+      propertyPath: m_Center.z
+      value: 2.2318292
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737293006120263934, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -1712,18 +1728,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 964267458}
   lines:
-  - 'KO: "They marched right out of the puddles and into the dust, and when the moisture
-    left my paper,'
-  - 'KO: the life left my spirit. They don''t want a Yokai who crinkles when he moves.
-    They want the roar, the splash, the drama! They don''t want a ''clack'' in a
-    silent world."'
-  - "KO: \"I'm still wearing the parade's colors, but I'm the only one left in the
-    uniform. It\u2019s a cruel joke, isn't it? To be part of a 'Hundred Demons' when
-    there\u2019s only one left to count.\""
-  - 'KO: "The God of Storms didn''t just stop the rain; he broke my invitation. You
-    can''t march in the Night Parade if you''re too brittle to dance."'
+  - "KO:  \"They marched out of the puddles and left me in the dust \u2014 crinkled,
+    brittle, and uninvited. You can't march in the Night Parade if you're too brittle
+    to dance, and the God of Storms made sure of that.\" \"A Hundred Demons... and
+    now there's only one left to count.\" [E]"
+  - "KO: \"Since you're wandering into this mess with me, you'd better learn how
+    to move.\" \"Walk with [WASD], leap with [Space], sprint with [Shift], dash with
+    [Q].\" \"Glide if you're feeling bold \u2014 [G] \u2014 and pause [P] if your
+    nerves get the better of you.\" \"For fighting... a slash with [LMB], a thrust
+    with [RMB].\" \"And if you've got any dignity left \u2014 parry with [F].\" \"I
+    never could. No arms, you see.\" [E]"
+  - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014\" \"and
+    I'll show you where an old shrine sleeps, forgotten past the treeline.\" \"Something
+    rests there. A blade. The kind that doesn't forgive the hand that holds it.\"
+    [E]"
   textSpeed: 0.02
   icon: {fileID: 92079352}
+  kasaObakeOnShallo: {fileID: 1768598681}
 --- !u!1 &1013426731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,6 +1923,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.16424686
       objectReference: {fileID: 0}
+    - target: {fileID: 2699623413604412145, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
       value: 1000000
@@ -1962,6 +1987,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5560363179030098411, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: kasaObakeAnimator
+      value: 
+      objectReference: {fileID: 1768598684}
     - target: {fileID: 5858951631688805222, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3784266
@@ -1985,6 +2014,14 @@ PrefabInstance:
     - target: {fileID: 6044417593333557980, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.z
       value: 37.283813
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464831437554785387, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464831437554785387, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.235
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3119,6 +3156,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.000002, y: 2, z: 10.000004}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1768598681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2699623413604412145, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1768598684 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5678963559163436910, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1795088126
 GameObject:
   m_ObjectHideFlags: 0

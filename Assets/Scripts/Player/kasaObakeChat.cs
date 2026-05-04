@@ -9,6 +9,7 @@ public class kasaObakeChat : MonoBehaviour
     [SerializeField] private string[] lines;
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject kasaObakeOnShallo;
 
     private int index;
     private Collider koColider;
@@ -71,6 +72,9 @@ public class kasaObakeChat : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            icon.SetActive(false);
+            textComponent.text= string.Empty;
+            kasaObakeOnShallo.SetActive(true);
         }
     }
 }

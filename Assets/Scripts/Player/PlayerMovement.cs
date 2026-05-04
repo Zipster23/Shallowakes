@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Animator kasaObakeAnimator;
+
     // Speed values for the player's base speed and the scale by which sprinting is faster
     [SerializeField] public float baseSpeed = 10f;
     [SerializeField] public float sprintScalar = 1.5f;
@@ -261,6 +263,8 @@ public class PlayerMovement : MonoBehaviour
         // can't glide if grounded, dashing, or waiting on cooldown
         if (isGrounded || isDashing || glideCooldownTimer > 0) return;
 
+        kasaObakeAnimator.SetBool("IsGliding", true);
+
         // on the first frame of glide, disable gravity so we can manually control descent
         // seed glideDirection from lockedAirDirection so the player doesn't snap on entry
         if (!isGliding)
@@ -319,6 +323,8 @@ public class PlayerMovement : MonoBehaviour
     public void ExitGlide()
     {
         if (!isGliding) return;
+
+        kasaObakeAnimator.SetBool("IsGliding", false);
 
         isGliding = false;
         rb.useGravity = true;   // restore normal gravity
