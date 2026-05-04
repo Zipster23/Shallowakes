@@ -77,6 +77,8 @@ GameObject:
   - component: {fileID: 6727344350029367634}
   - component: {fileID: 8975852824684828518}
   - component: {fileID: 4379037131871868930}
+  - component: {fileID: 3111039459181755235}
+  - component: {fileID: 3053832124507803035}
   m_Layer: 6
   m_Name: HitotsumeKozo
   m_TagString: Untagged
@@ -233,6 +235,47 @@ CapsuleCollider:
   m_Height: 3.8346386
   m_Direction: 1
   m_Center: {x: 0, y: 1.8169317, z: 0}
+--- !u!114 &3111039459181755235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161288335395625914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badf080f478ff97499e9476212791065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yokaiAudioSource: {fileID: 0}
+  AttackSFX: {fileID: 0}
+  DeflectSFX: {fileID: 0}
+  weaponHitSFX: {fileID: 0}
+  weaponDeflectVolume: 0.7
+  dashSFX: {fileID: 0}
+  appearSFX: {fileID: 0}
+  playerDeathSFX: {fileID: 0}
+--- !u!114 &3053832124507803035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161288335395625914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97f9bcbc5a5f044a8af85934787c54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponTrail1: {fileID: 0}
+  weaponTrail2: {fileID: 0}
+  parrySparks: {fileID: 0}
+  swingBurst: {fileID: 0}
+  hitEffect: {fileID: 0}
+  dashEffect: {fileID: 0}
+  shadowCloneEffect: {fileID: 0}
+  appearSmokeEffect: {fileID: 0}
+  deathEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
 --- !u!1 &5492937129307474927
 GameObject:
   m_ObjectHideFlags: 0

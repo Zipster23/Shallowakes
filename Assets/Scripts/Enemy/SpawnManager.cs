@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Wave
@@ -71,7 +72,22 @@ public class SpawnManager : MonoBehaviour
 
     private void OnAllWavesComplete()
     {
-        Debug.Log("All waves complete.");
-        
+        StartCoroutine(AllWavesCompleteSequence());
+    }
+
+    private IEnumerator AllWavesCompleteSequence()
+    {
+        yield return new WaitForSeconds(2f); // brief pause before transitioning
+
+        StageProgress.CompleteWhisperingForest();
+
+        PlayerPrefs.SetInt("ReturnToMap", 1);
+        PlayerPrefs.Save();
+
+        ScreenFade fader = FindObjectOfType<ScreenFade>();
+        if (fader != null)
+            yield return StartCoroutine(fader.FadeOut());
+
+        SceneManager.LoadScene("Main_Menu");
     }
 }

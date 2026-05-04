@@ -31,16 +31,28 @@ public class ShadowClone : YokaiAbility
         return true;
     }
 
-    public override bool OnYokaiParried()
-    {
-        // Default parry stun applies — ability doesn't intercept it
-        return false;
-    }
+    private List<YokaiClone> activeClones = new List<YokaiClone>();
 
     public override void OnInterrupted()
     {
         isShadowCloning = false;
         StopAllCoroutines();
+        CleanUpClones();
+    }
+
+    public override bool OnYokaiParried()
+    {
+        return false;
+    }
+
+    private void CleanUpClones()
+    {
+        foreach (YokaiClone clone in activeClones)
+        {
+            if (clone != null)
+                clone.CleanUp();
+        }
+        activeClones.Clear();
     }
 
 
@@ -49,64 +61,45 @@ public class ShadowClone : YokaiAbility
     private IEnumerator ShadowCloneSequence(YokaiAI ai)
     {
         isShadowCloning = true;
-
+        activeClones.Clear();
         animator.SetBool("IsMoving", false);
 
-        // Keep a list of spawned clones so we can tell them all to thrust at once
-        List<YokaiClone> clones = new List<YokaiClone>();
-
-        // Spawn clones evenly spaced in a circle around the player
-        for(int i = 0; i < cloneCount; i++)
+        for (int i = 0; i < cloneCount; i++)
         {
-            float angle  = i * (360f / cloneCount);
+            float angle = i * (360f / cloneCount);
             float radian = angle * Mathf.Deg2Rad;
-
             Vector3 spawnPos = new Vector3(
                 ai.player.position.x + cloneRadius * Mathf.Cos(radian),
                 transform.position.y,
                 ai.player.position.z + cloneRadius * Mathf.Sin(radian)
             );
-
             GameObject cloneObj = Instantiate(lanternYokaiClone, spawnPos, Quaternion.identity);
-
             YokaiClone clone = cloneObj.GetComponent<YokaiClone>();
-            if(clone != null)
+            if (clone != null)
             {
                 clone.Initialize(ai.player, ai.attackDamage, ai.playerLayer);
-                clones.Add(clone);
+                activeClones.Add(clone); // track it
             }
         }
 
-        // After spawning all clones, calculate their center point
         Vector3 centerPoint = Vector3.zero;
-        foreach (YokaiClone clone in clones)
+        foreach (YokaiClone clone in activeClones)
             centerPoint += clone.transform.position;
-        centerPoint /= clones.Count;
+        centerPoint /= activeClones.Count;
 
         yield return new WaitForSeconds(warningDuration);
-
         animator.SetTrigger("Attack");
         ai.FacePlayer();
 
-        // Pass the fixed center point into each clone's thrust
-        foreach (YokaiClone clone in clones)
+        foreach (YokaiClone clone in activeClones)
         {
             if (clone != null)
                 clone.PerformThrust(centerPoint);
         }
 
-        // Wait for animations to finish then clean up clones
         yield return new WaitForSeconds(cleanupDelay);
+        CleanUpClones();
 
-        foreach(YokaiClone clone in clones)
-        {
-            if(clone != null)
-            {
-                Destroy(clone.gameObject);
-            }
-        }
-
-        // Done — hand control back to YokaiAI
         isShadowCloning = false;
         ai.NotifyAbilityComplete();
     }
