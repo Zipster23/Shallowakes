@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Susanoo_Domain.unity
     guid: 4bef58b6166cc6045a6bda2c1f1160eb
+  - enabled: 1
+    path: Assets/Scenes/Final_Scene.unity
+    guid: ef508b0dc2399524b9bc1f4fdf364b45
   m_configObjects: {}
