@@ -90,4 +90,32 @@ public class SpawnManager : MonoBehaviour
 
         SceneManager.LoadScene("Main_Menu");
     }
+
+    public void CleanUpAndReset()
+    {
+        CancelInvoke("SpawnWave");
+        if (activeEnemies != null)
+        {
+            foreach (GameObject enemy in activeEnemies)
+            {
+                if (enemy != null)
+                {
+                    // Tell the yokai to clean up its clones before destroying
+                    YokaiAI yokai = enemy.GetComponent<YokaiAI>();
+                    if (yokai != null)
+                        yokai.InterruptAllAbilities();
+
+                    Destroy(enemy);
+                }
+            }
+        }
+
+        // Catch any stray clones that might still be in the scene
+        foreach (YokaiClone clone in FindObjectsByType<YokaiClone>(FindObjectsSortMode.None))
+            clone.CleanUp();
+
+        activeEnemies = new GameObject[0];
+        waveInProgress = false;
+        currentWave = 0;
+    }
 }

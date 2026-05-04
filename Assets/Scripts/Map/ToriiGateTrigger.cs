@@ -50,4 +50,17 @@ public class ToriiGateTrigger : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ResetTrigger()
+    {
+        _triggered = false;
+        GetComponent<Collider>().enabled = true;
+
+        // Stop parade music and fade out parade objects
+        foreach (GameObject obj in paradeObjects)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+    }
 }

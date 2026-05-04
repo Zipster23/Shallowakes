@@ -592,6 +592,7 @@ MonoBehaviour:
   maxSegments: 4
   temporaryScalar: 1
   attackMovementMultiplier: 1
+  dashCooldown: 2
   glideTerminalVelocity: 3
   glideHorizontalSpeed: 8
   glideTurnSpeed: 3
@@ -762,7 +763,9 @@ MonoBehaviour:
   currentHealth: 0
   tenguAI: {fileID: 0}
   vfx: {fileID: 2846498151557633704}
-  respawnManager: {fileID: 0}
+  tenguRespawnManager: {fileID: 0}
+  susanooRespawnManager: {fileID: 0}
+  whisperingForestRespawnManager: {fileID: 0}
   parryStunDuration: 1.1
 --- !u!114 &602382185360954258
 MonoBehaviour:
@@ -778,6 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tenguAI: {fileID: 0}
   susanooAI: {fileID: 0}
+  yokaiAIs: []
   parryWindow: 0.5
   parryCooldown: 1
   parryRange: 4
@@ -952,7 +956,7 @@ Transform:
   m_GameObject: {fileID: 5647469623256474386}
   serializedVersion: 2
   m_LocalRotation: {x: -1e-45, y: -0.9438236, z: -0.3304498, w: 1e-45}
-  m_LocalPosition: {x: 0, y: -37.499996, z: -17.99849}
+  m_LocalPosition: {x: 25.338276, y: -37.499992, z: 37.27526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1031,7 +1035,7 @@ Transform:
   m_GameObject: {fileID: 6262786965526214851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 4}
+  m_LocalPosition: {x: -3.3784266, y: 5.0000005, z: -2.1415493}
   m_LocalScale: {x: 0.13333334, y: 0.13333334, z: 0.11111112}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6186,7 +6190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7913549960619908997}
   serializedVersion: 2
-  m_LocalRotation: {x: 1e-45, y: -0.9398538, z: 0.34157702, w: 1e-45}
+  m_LocalRotation: {x: 0.2992849, y: 0.45299202, z: -0.16463469, w: 0.8234818}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11153,7 +11157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527386071564571407}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000005863487, y: -0.94014525, z: 0.34077406, w: -0.000000016176497}
+  m_LocalRotation: {x: 0.29857987, y: 0.45313278, z: -0.16424686, w: 0.8237377}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11602,7 +11606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911529485303877632, guid: 9f1720c4bd3e86a448ec875a6422704c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

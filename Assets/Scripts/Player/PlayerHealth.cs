@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private PlayerVFXManager vfx;
     [SerializeField] private TenguRespawnManager tenguRespawnManager;
     [SerializeField] private SusanooRespawnManager susanooRespawnManager;
+    [SerializeField] private WhisperingForestRespawnManager whisperingForestRespawnManager;
 
 
     // --- TENGU PARRY --- //
@@ -129,6 +130,9 @@ public class PlayerHealth : MonoBehaviour
         {
             susanooRespawnManager.OnPlayerDied();
         }
+
+        if (whisperingForestRespawnManager != null)
+            whisperingForestRespawnManager.OnPlayerDied();
     }
 
 
