@@ -1083,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.600006, y: -19.599976}
+  m_AnchoredPosition: {x: 80, y: -20}
   m_SizeDelta: {x: 513.748, y: 104.03299}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336869518
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1320,11 +1320,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1843233775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 178.99998, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 184, y: 0}
   m_SizeDelta: {x: 500, y: 250}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1351222236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,7 +1411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128, y: -387}
+  m_AnchoredPosition: {x: 190, y: -387}
   m_SizeDelta: {x: 470.1451, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1441737158
@@ -1447,17 +1447,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Research and Development\nMr. Gonzalez\n\n\nProgrammers\r\n\nJoan Lazo-Fiallo\r\nKayrat
-    Sarypbekov\r\n\nModels\r\n\nKayrat Sarybekov\r\nAntonio Qunitanal\r\n\nGame Design\r\n\nJuanpablo
-    Maldonado\r\nDerwin Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\nAnimation
-    & Art\r\n\nAlain Roman\r\n\nAssets\r\n\nTanuki Digital-Pagodas\r\nHovl Studio
-    \r\nJean Moreno\r\nFlexUnit \r\nGabrielAguiarProductions\r\nSadouzz\nH I P E
-    R N T\nKevin Iglesias\r\nNickLadd\r \nJonathan Rodriguez (Deus Ludus)\n\r\nSounds\n\nfreesounds.org\n\nPlay
-    testers\r\n\nLuciano Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian Paul\n\nMusic\r\n\nRed
-    Horizon TAO\r\n\u6C88\u9ED9Silence of the Warrior\r\nWar Drums Music\r\n\u96F7\u7687
-    \u2014RAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau of Lyrailie\n\nSPECIAL
-    THANKS TO MR. G and our CLASS OF 2026 IT ACADEMY\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
-    FOR PLAYING\nFrom Nothing Else Matters Studios"
+  m_text: "<u>Research and Development Guidance</u>\nMr. Gonzalez\n\n<u>Programmers\r</u>\nJoan
+    Lazo-Fiallo\r\nKayrat Sarypbekov\r\nAntonio Quintanal\n\n<u>Models</u>\r\nKayrat
+    Sarybekov\r\nAntonio Qunitanal\r\n\n<u>Game Design</u>\r\nJuanpablo Maldonado\r\nDerwin
+    Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\n<u>Animation & Art</u>\r\nAlain
+    Roman\r\n\n<u>Assets</u>\r\nTanuki Digital-Pagodas\r\nHovl Studio \r\nJean Moreno\r\nFlexUnit
+    \r\nGabrielAguiarProductions\r\nSadouzz\nH I P E R N T\nKevin Iglesias\r\nNickLadd\r
+    \nJonathan Rodriguez (Deus Ludus)\n\r\n<u>Sounds</u>\nfreesounds.org\n\n<u>Play
+    testers\r</u>\nLuciano Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian
+    Paul\n\n<u>Music</u>\nRed Horizon TAO\r\nSilence of the Warrior\r\nWar Drums
+    Music\r\nRAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau of
+    Lyrailie\n\nSPECIAL THANKS TO MR. G and our CLASS OF 2026 IT ACADEMY\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
+    FOR PLAYING!\n\nFrom Nothing Else Matters Studios"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
   m_sharedMaterial: {fileID: -3765264216765690048, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
