@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1100619537649934457}
   - component: {fileID: 2274103522031601860}
-  - component: {fileID: 8911951817749791377}
   - component: {fileID: 728648864897975468}
   - component: {fileID: 8745227470060703242}
   - component: {fileID: -4899332413828857893}
+  - component: {fileID: 4032508320373996002}
   m_Layer: 0
   m_Name: WindSlashDiagonalPrefab
   m_TagString: Untagged
@@ -59,27 +59,6 @@ MonoBehaviour:
   sfx: {fileID: 728648864897975468}
   isParriable: 1
   slashType: 0
---- !u!135 &8911951817749791377
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836956773076364260}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &728648864897975468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +200,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &4032508320373996002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836956773076364260}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 129.57178, y: 5.102295, z: 62.069168}
+  m_Center: {x: 1.1931152, y: 0.6813965, z: 30.534584}
 --- !u!1001 &3681929031224906449
 PrefabInstance:
   m_ObjectHideFlags: 0

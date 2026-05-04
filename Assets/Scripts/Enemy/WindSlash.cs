@@ -45,30 +45,27 @@ public class WindSlash : MonoBehaviour
     private void Update()
     {
         
-        // move forward every frame
         transform.position += direction * speed * Time.deltaTime;
 
-        // check if player is hit
-        Collider[] hitPlayers = Physics.OverlapSphere(transform.position, 3.5f, playerLayer);
+        // use OverlapBox instead of OverlapSphere to cover the full slash width
+        Collider[] hitPlayers = Physics.OverlapBox(
+            transform.position,
+            transform.localScale / 2f, // half extents based on slash scale
+            transform.rotation,
+            playerLayer
+        );
+
         foreach(Collider hit in hitPlayers)
         {
             PlayerHealth playerHealth = hit.GetComponentInParent<PlayerHealth>();
             if(playerHealth != null)
             {
-
-               // for horizontal slash, only hit if player is grounded
-               if(slashType == SlashType.Horizontal)
+                if(slashType == WindSlash.SlashType.Horizontal)
                 {
-                    PlayerMovement playerMovement = hit.GetComponentInParent<PlayerMovement>();
-                    if(playerMovement != null && !playerMovement.isGrounded)
-                    {
-                        return; // player jumped over it
-                    }
+                    PlayerMovement pm = hit.GetComponentInParent<PlayerMovement>();
+                    if(pm != null && !pm.isGrounded) return;
                 }
-
                 playerHealth.TakeDamage(damage);
-                vfx.PlayHitEffect(playerHealth.transform.position + Vector3.up * 2f);
-                sfx.PlayBladeHitSFX();
                 Destroy(gameObject);
             }
 
@@ -82,6 +79,8 @@ public class WindSlash : MonoBehaviour
         }
 
     }
+
+    
 
 
 
