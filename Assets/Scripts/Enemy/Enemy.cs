@@ -139,10 +139,8 @@ public class Enemy : MonoBehaviour
     private IEnumerator BossDefeated()
     {
         
-        // wait for death anim to play
         yield return new WaitForSeconds(5f);
 
-        // figure out which boss this is and save progress
         TenguAI tengu = GetComponent<TenguAI>();
         SusanooAI susanoo = GetComponent<SusanooAI>();
         YokaiAI yokai = GetComponent<YokaiAI>();
@@ -153,47 +151,23 @@ public class Enemy : MonoBehaviour
             PlayerPrefs.SetInt("ReturnToMap", 1);
             PlayerPrefs.Save();
             ScreenFade fade = FindObjectOfType<ScreenFade>();
-            if(fade != null)
-            {
-                yield return StartCoroutine(fade.FadeOut());
-            }
+            if(fade != null) yield return StartCoroutine(fade.FadeOut());
             SceneManager.LoadScene("Main_Menu");
         }
         else if(susanoo != null)
         {
-            // find susanoodeathsequecne script and call it
             SusanooDeathSequence deathSequence = FindObjectOfType<SusanooDeathSequence>();
-            if(deathSequence != null)
-            {
-                deathSequence.StartDeathEnding();
-            }
+            if(deathSequence != null) deathSequence.StartDeathEnding();
         }
-        // JUST FOR TESTING IDK WHAT TO CHANGE THIS TO SINCE WE DON"T HAVE A BOSS FOR THE WHISPERING FOREST
         else if(yokai != null)
         {
             StageProgress.CompleteWhisperingForest();
             PlayerPrefs.SetInt("ReturnToMap", 1);
             PlayerPrefs.Save();
             ScreenFade fade = FindObjectOfType<ScreenFade>();
-            if (fade != null)
-            {
-                yield return StartCoroutine(fade.FadeOut());
-            }
+            if(fade != null) yield return StartCoroutine(fade.FadeOut());
             SceneManager.LoadScene("Main_Menu");
         }
-
-        // tell main menu to skip straight to map
-        PlayerPrefs.SetInt("ReturnToMap", 1);
-        PlayerPrefs.Save();
-
-        // fade to black and then go back to main menu
-        ScreenFade fader = FindObjectOfType<ScreenFade>();
-        if(fader != null)
-        {
-            yield return StartCoroutine(fader.FadeOut());
-        }
-
-        SceneManager.LoadScene("Main_Menu");
 
     }
 
