@@ -111,16 +111,13 @@ public class Enemy : MonoBehaviour
         if(isBoss)
         {
             StartCoroutine(BossDefeated());
-        }
+        } 
     }
 
     public void DestroyEnemy()
     {
         Destroy(gameObject);
     }
-
-
-
 
     private IEnumerator BossDefeated()
     {

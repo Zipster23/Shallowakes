@@ -86,7 +86,7 @@ Animator:
   m_GameObject: {fileID: 495737637717492739}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ce859b2c82f62614e8f0ac59be6f80df, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -170,8 +170,12 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
+  tenguIntroCinematic: {fileID: 0}
+  susanooIntroCinematic: {fileID: 0}
+  mapImage: {fileID: 0}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
+  isBoss: 0
 --- !u!54 &2542317601332140666
 Rigidbody:
   m_ObjectHideFlags: 0
