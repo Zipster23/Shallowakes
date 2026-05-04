@@ -322,6 +322,8 @@ GameObject:
   - component: {fileID: 263966631572666520}
   - component: {fileID: 8362424050069479117}
   - component: {fileID: 8880873894465987115}
+  - component: {fileID: 9119725251380266715}
+  - component: {fileID: 7561699919835089057}
   m_Layer: 6
   m_Name: BuddhaWheelYokai
   m_TagString: Untagged
@@ -503,6 +505,47 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &9119725251380266715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badf080f478ff97499e9476212791065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yokaiAudioSource: {fileID: 0}
+  AttackSFX: {fileID: 0}
+  DeflectSFX: {fileID: 0}
+  weaponHitSFX: {fileID: 0}
+  weaponDeflectVolume: 0.7
+  dashSFX: {fileID: 0}
+  appearSFX: {fileID: 0}
+  playerDeathSFX: {fileID: 0}
+--- !u!114 &7561699919835089057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433781673307960758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97f9bcbc5a5f044a8af85934787c54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponTrail1: {fileID: 0}
+  weaponTrail2: {fileID: 0}
+  parrySparks: {fileID: 0}
+  swingBurst: {fileID: 0}
+  hitEffect: {fileID: 0}
+  dashEffect: {fileID: 0}
+  shadowCloneEffect: {fileID: 0}
+  appearSmokeEffect: {fileID: 0}
+  deathEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
 --- !u!1 &8076291500665609493
 GameObject:
   m_ObjectHideFlags: 0

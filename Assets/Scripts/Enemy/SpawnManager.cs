@@ -2,21 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+[System.Serializable]
+public class Wave
 {
     public GameObject[] enemyPrefabs;
-    public float groupSpread = 3f;      // How tightly clustered the yokai spawn
-    public float waveInterval = 5f;     // Delay before next wave after all are defeated
+}
+
+public class SpawnManager : MonoBehaviour
+{
+    public Wave[] waves;
+    public float groupSpread = 3f;
+    public float waveInterval = 5f;
 
     private GameObject[] activeEnemies;
     private bool waveInProgress = false;
+    private int currentWave = 0;
 
     private void Update()
     {
         if (waveInProgress && AllEnemiesDefeated())
         {
             waveInProgress = false;
-            Invoke("SpawnWave", waveInterval);
+
+            if (currentWave < waves.Length)
+                Invoke("SpawnWave", waveInterval);
+            else
+                OnAllWavesComplete();
         }
     }
 
@@ -37,22 +48,30 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnWave()
     {
-        activeEnemies = new GameObject[enemyPrefabs.Length];
+        if (currentWave >= waves.Length) return;
 
-        for (int i = 0; i < enemyPrefabs.Length; i++)
+        GameObject[] prefabs = waves[currentWave].enemyPrefabs;
+        activeEnemies = new GameObject[prefabs.Length];
+
+        for (int i = 0; i < prefabs.Length; i++)
         {
             Vector3 offset = new Vector3(
                 Random.Range(-groupSpread, groupSpread),
                 0f,
                 Random.Range(-groupSpread, groupSpread)
             );
-
             Vector3 spawnPos = transform.position + offset;
-            Quaternion spawnRot = enemyPrefabs[i].transform.rotation;
-
-            activeEnemies[i] = Instantiate(enemyPrefabs[i], spawnPos, spawnRot);
+            Quaternion spawnRot = prefabs[i].transform.rotation;
+            activeEnemies[i] = Instantiate(prefabs[i], spawnPos, spawnRot);
         }
 
+        currentWave++;
         waveInProgress = true;
+    }
+
+    private void OnAllWavesComplete()
+    {
+        Debug.Log("All waves complete.");
+        
     }
 }

@@ -113,6 +113,10 @@ public class Enemy : MonoBehaviour
         YokaiAI yokai = GetComponent<YokaiAI>();
         if (yokai != null)
         {
+            if(GameObject.FindGameObjectWithTag("Cyclops"))
+            {
+                StartCoroutine(BossDefeated());
+            }
             // Spawn effect BEFORE destroying, and don't parent to this transform
             yokaiVFXManager.PlayDeathEffect(transform.position, null); // null = world space
             GameObject.Destroy(gameObject); // Or add a delay: Destroy(gameObject, 1f)
@@ -168,6 +172,14 @@ public class Enemy : MonoBehaviour
         else if(yokai != null)
         {
             StageProgress.CompleteWhisperingForest();
+            PlayerPrefs.SetInt("ReturnToMap", 1);
+            PlayerPrefs.Save();
+            ScreenFade fade = FindObjectOfType<ScreenFade>();
+            if (fade != null)
+            {
+                yield return StartCoroutine(fade.FadeOut());
+            }
+            SceneManager.LoadScene("Main_Menu");
         }
 
         // tell main menu to skip straight to map
