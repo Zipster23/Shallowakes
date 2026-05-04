@@ -563,6 +563,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7164257506373192386, guid: 4711dc52989a54f68b94d88982177a5a, type: 3}
+      propertyPath: freeLookCam
+      value: 
+      objectReference: {fileID: 353496279}
     - target: {fileID: 7358044707258379954, guid: 4711dc52989a54f68b94d88982177a5a, type: 3}
       propertyPath: m_text
       value: '1: Whispering Forest'
@@ -588,6 +592,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4711dc52989a54f68b94d88982177a5a, type: 3}
+--- !u!114 &353496279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1327766897094961819, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &483192638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,18 +1745,20 @@ MonoBehaviour:
   lines:
   - "KO:  \"They marched out of the puddles and left me in the dust \u2014 crinkled,
     brittle, and uninvited. You can't march in the Night Parade if you're too brittle
-    to dance, and the God of Storms made sure of that.\" \"A Hundred Demons... and
-    now there's only one left to count.\" [E]"
-  - "KO: \"Since you're wandering into this mess with me, you'd better learn how
-    to move.\" \"Walk with [WASD], leap with [Space], sprint with [Shift], dash with
-    [Q].\" \"Glide if you're feeling bold \u2014 [G] \u2014 and pause [P] if your
-    nerves get the better of you.\" \"For fighting... a slash with [LMB], a thrust
-    with [RMB].\" \"And if you've got any dignity left \u2014 parry with [F].\" \"I
-    never could. No arms, you see.\" [E]"
+    to dance [E]"
+  - 'KO: , and the God of Storms made sure of that." "A Hundred Demons... and now
+    there''s only one left to count." [E]'
+  - 'KO: "Since you''re wandering into this mess with me, you''d better learn how
+    to move." "Walk with [WASD], leap with [Space], sprint with [Shift], dash with
+    [Q]." [E]'
+  - "KO: \"Glide if you're feeling bold \u2014 [G] For fighting... a slash with [LMB],
+    a thrust with [RMB].\" [E]"
+  - "KO: \"And if you've got any dignity left \u2014 parry with [F].\" \"I never
+    could. No arms, you see.\" [E]"
   - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014\" \"and
-    I'll show you where an old shrine sleeps, forgotten past the treeline.\" \"Something
-    rests there. A blade. The kind that doesn't forgive the hand that holds it.\"
-    [E]"
+    I'll show you where an old shrine sleeps, forgotten past the treeline.\" [E]"
+  - 'KO: "Something rests there. A blade. The kind that doesn''t forgive the hand
+    that holds it." [E]'
   textSpeed: 0.02
   icon: {fileID: 92079352}
   kasaObakeOnShallo: {fileID: 1768598681}
@@ -1897,7 +1914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1646347
+      value: -0.16463469
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1929,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: maxHealth
-      value: 1000000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: currentHealth
@@ -3347,7 +3364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795088126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157875, y: 0.000000028009811, z: -0.000000010179841, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157875, y: 0.000000022456575, z: -0.000000008161581, w: 0.9398532}
   m_LocalPosition: {x: 387, y: 10.645, z: -378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
