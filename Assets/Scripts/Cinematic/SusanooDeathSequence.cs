@@ -44,7 +44,7 @@ public class SusanooDeathSequence : MonoBehaviour
         PlayerPrefs.SetInt("ReturnToMap", 1);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main_Menu");
     }
 
 }
