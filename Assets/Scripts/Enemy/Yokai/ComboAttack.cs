@@ -68,40 +68,22 @@ public class ComboAttack : YokaiAbility
 
     // --- Animation events (same as before) ---
 
-    public void OnComboSlash1()
-    {
-        StartCoroutine(TeleportToPlayer());
-        if (!comboSlashParried)
-        {
-            Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
-            foreach (Collider hit in hits)
-                hit.GetComponentInParent<PlayerHealth>()?.TakeDamage(attackDamage);
-        }
-        comboSlashParried = false;
-    }
+    // Called by Animation Event on each slash frame
+    public void OnComboSlash1() => DealComboDamage();
+    public void OnComboSlash2() => DealComboDamage();
+    public void OnComboSlash3() => DealComboDamage();
 
-    public void OnComboSlash2()
+    private void DealComboDamage()
     {
-        StartCoroutine(TeleportToPlayer());
-        if (!comboSlashParried)
+        if (comboSlashParried)
         {
-            Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
-            foreach (Collider hit in hits)
-                hit.GetComponentInParent<PlayerHealth>()?.TakeDamage(attackDamage);
+            comboSlashParried = false;
+            return;
         }
-        comboSlashParried = false;
-    }
 
-    public void OnComboSlash3()
-    {
-        StartCoroutine(TeleportToPlayer());
-        if (!comboSlashParried)
-        {
-            Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
-            foreach (Collider hit in hits)
-                hit.GetComponentInParent<PlayerHealth>()?.TakeDamage(attackDamage);
-        }
-        comboSlashParried = false;
+        Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
+        foreach (Collider hit in hits)
+            hit.GetComponentInParent<PlayerHealth>()?.TakeDamage(attackDamage);
     }
 
     public void OnComboAttackEnd()
@@ -109,35 +91,5 @@ public class ComboAttack : YokaiAbility
         isDoingCombo = false;
         comboSlashParried = false;
         yokaiAI.NotifyAbilityComplete();
-    }
-
-    private IEnumerator TeleportToPlayer(float dashDuration = 0.12f)
-    {
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = player.position - (player.position - transform.position).normalized;
-
-        // Don't lock Y — let the raycast track the slope instead
-        float elapsed = 0f;
-        while (elapsed < dashDuration)
-        {
-            float t = elapsed / dashDuration;
-            Vector3 lerpedPos = Vector3.Lerp(startPos, targetPos, t);
-
-            // Raycast downward to snap to terrain surface
-            if (Physics.Raycast(lerpedPos + Vector3.up * 1f, Vector3.down, out RaycastHit hit, 3f, ~playerLayer))
-                lerpedPos.y = hit.point.y;
-
-            transform.position = lerpedPos;
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Final snap at destination
-        Vector3 finalPos = targetPos;
-        if (Physics.Raycast(finalPos + Vector3.up * 1f, Vector3.down, out RaycastHit finalHit, 3f, ~playerLayer))
-            finalPos.y = finalHit.point.y;
-
-        transform.position = finalPos;
-        yokaiAI.FacePlayer();
     }
 }

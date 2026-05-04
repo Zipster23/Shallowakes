@@ -151,8 +151,8 @@ MonoBehaviour:
   isAttackActive: 0
   parryStunDuration: 2
   yokaiParryRange: 3
-  parryChance: 60
-  dodgeChance: 25
+  parryChance: 0
+  dodgeChance: 0
   dodgeDistance: 12
   dodgeSpeed: 40
 --- !u!114 &8124367957855905868
@@ -173,6 +173,7 @@ MonoBehaviour:
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
   mapImage: {fileID: 0}
+  yokaiVFXManager: {fileID: 0}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
   isBoss: 0

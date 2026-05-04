@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yokaiAI: {fileID: 0}
-  triggerRange: 0
-  dashSpeed: 60
+  triggerRange: 5
+  dashSpeed: 20
   dashDistance: 10
   triggerChance: 100
   dashCurve:
@@ -389,6 +389,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  attackDamage: 100
+  attackRadius: 1.5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6751546996330740513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,8 +411,11 @@ MonoBehaviour:
   currentHealth: 0
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
+  mapImage: {fileID: 0}
+  yokaiVFXManager: {fileID: 0}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
+  isBoss: 0
 --- !u!114 &263966631572666520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,8 +451,8 @@ MonoBehaviour:
   isAttackActive: 0
   parryStunDuration: 2
   yokaiParryRange: 3
-  parryChance: 60
-  dodgeChance: 25
+  parryChance: 0
+  dodgeChance: 0
   dodgeDistance: 12
   dodgeSpeed: 40
 --- !u!54 &8362424050069479117

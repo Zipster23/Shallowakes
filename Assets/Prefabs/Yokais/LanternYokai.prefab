@@ -410,8 +410,8 @@ MonoBehaviour:
   isAttackActive: 0
   parryStunDuration: 2
   yokaiParryRange: 3
-  parryChance: 60
-  dodgeChance: 25
+  parryChance: 0
+  dodgeChance: 0
   dodgeDistance: 12
   dodgeSpeed: 40
 --- !u!114 &1877827715161637506

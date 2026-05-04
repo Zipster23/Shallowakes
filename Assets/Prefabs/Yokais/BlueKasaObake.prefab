@@ -159,8 +159,8 @@ MonoBehaviour:
   isAttackActive: 0
   parryStunDuration: 2
   yokaiParryRange: 3
-  parryChance: 60
-  dodgeChance: 25
+  parryChance: 0
+  dodgeChance: 0
   dodgeDistance: 12
   dodgeSpeed: 40
 --- !u!54 &937179324387398495
@@ -232,7 +232,7 @@ MonoBehaviour:
   attackDamage: 100
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!114 &4774355999059171768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,8 +248,13 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
+  tenguIntroCinematic: {fileID: 0}
+  susanooIntroCinematic: {fileID: 0}
+  mapImage: {fileID: 0}
+  yokaiVFXManager: {fileID: 0}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
+  isBoss: 0
 --- !u!1 &1237951870773441114
 GameObject:
   m_ObjectHideFlags: 0
