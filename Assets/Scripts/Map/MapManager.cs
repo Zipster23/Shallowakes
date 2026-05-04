@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class MapManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject whisperingForestSketch;
     [SerializeField] private GameObject tenguShrineSketch;
     [SerializeField] private GameObject susanooSketch;
+    [SerializeField] private GameObject sharroKamehimeSketch;
+    [SerializeField] private GameObject thankYouText;
 
     [Header("Arrows")]
     [SerializeField] private GameObject arrowForestToTengu;
@@ -54,6 +57,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private string whisperingForestScene = "Whispering_Forest";
     [SerializeField] private string tenguShrineScene = "Tengu_Map";
     [SerializeField] private string susanooScene = "Susanoo_Domain";
+    [SerializeField] private string secretEndingScene = "Final_Scene";
 
 
 
@@ -141,12 +145,8 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            // everything done - show full map with all completed
-            whisperingForestSketch.SetActive(true);
-            arrowForestToTengu.SetActive(true);
-            tenguShrineSketch.SetActive(true);
-            arrowTenguToSusanoo.SetActive(true);
-            susanooSketch.SetActive(true);
+            // susanoo beaten - show ending sequence on map
+            yield return StartCoroutine(SusanooBeatenMapSequence());
         }
 
     }
@@ -210,6 +210,30 @@ public class MapManager : MonoBehaviour
 
 
 
+    private IEnumerator ShowCompletedStage3()
+    {
+        
+        stage3Objectives.SetActive(true);
+        stage3Objective1Box.SetActive(true);
+        stage3Objective2Box.SetActive(true);
+        stage3Objective1Checkmark.SetActive(false);
+        stage3Objective2Checkmark.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        PlaySFX(checkmarkSFX);
+        stage3Objective1Checkmark.SetActive(true);
+        yield return new WaitForSeconds(checkmarkDelay);
+
+        PlaySFX(checkmarkSFX);
+        stage3Objective2Checkmark.SetActive(true);
+        yield return new WaitForSeconds(checkmarkDelay);
+
+    }
+
+
+
+
     private void HideAll()
     {
         
@@ -234,6 +258,53 @@ public class MapManager : MonoBehaviour
         stage2Objective2Checkmark.SetActive(false);
         stage3Objective1Checkmark.SetActive(false);
         stage3Objective2Checkmark.SetActive(false);
+
+    }
+
+
+
+
+    private IEnumerator SusanooBeatenMapSequence()
+    {   
+        
+        // show all three completed stages briefly
+        whisperingForestSketch.SetActive(true);
+        arrowForestToTengu.SetActive(true);
+        tenguShrineSketch.SetActive(true);
+        arrowTenguToSusanoo.SetActive(true);
+        susanooSketch.SetActive(true);
+
+        // show susanoo objectives with checkmarks
+        yield return StartCoroutine(ShowCompletedStage3());
+        yield return new WaitForSeconds(1f);
+        
+        // fade out susanoo objectives
+        yield return StartCoroutine(FadeOutGameObject(stage3Objectives));
+        yield return new WaitForSeconds(0.5f);
+
+        // fade out everything one by one
+        yield return StartCoroutine(FadeOutGameObject(susanooSketch));
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeOutGameObject(arrowTenguToSusanoo));
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeOutGameObject(tenguShrineSketch));
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeOutGameObject(arrowForestToTengu));
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(FadeOutGameObject(whisperingForestSketch));
+        yield return new WaitForSeconds(1f);
+
+        // show thank you text
+        yield return StartCoroutine(FadeInGameObject(thankYouText));
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(FadeOutGameObject(thankYouText));
+        yield return new WaitForSeconds(0.5f);
+
+        // show secret ending sketch in center
+        PlaySFX(sketchAppearSFX);
+        yield return StartCoroutine(FadeInGameObject(sharroKamehimeSketch));
+        yield return new WaitForSeconds(1f);
+
 
     }
 
@@ -357,6 +428,17 @@ public class MapManager : MonoBehaviour
         {
             StartCoroutine(LoadScene(susanooScene));
         }
+
+    }
+
+
+
+
+    // called by button on SharoKamehime sketch
+    public void OnSharroKamehimeClicked()
+    {
+        
+        StartCoroutine(LoadScene(secretEndingScene));
 
     }
 
