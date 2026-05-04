@@ -115,6 +115,7 @@ public class Enemy : MonoBehaviour
         {
             // Spawn effect BEFORE destroying, and don't parent to this transform
             yokaiVFXManager.PlayDeathEffect(transform.position, null); // null = world space
+            GameObject.Destroy(gameObject); // Or add a delay: Destroy(gameObject, 1f)
         }
 
         if (isBoss)
@@ -123,7 +124,7 @@ public class Enemy : MonoBehaviour
         }
 
         this.enabled = false;
-        GameObject.Destroy(gameObject); // Or add a delay: Destroy(gameObject, 1f)
+    
     }
 
     public void DestroyEnemy()
