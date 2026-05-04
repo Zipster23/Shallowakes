@@ -113,22 +113,15 @@ public class Enemy : MonoBehaviour
         YokaiAI yokai = GetComponent<YokaiAI>();
         if (yokai != null)
         {
-            if(GameObject.FindGameObjectWithTag("Cyclops"))
-            {
-                StartCoroutine(BossDefeated());
-            }
-            // Spawn effect BEFORE destroying, and don't parent to this transform
-            yokaiVFXManager.PlayDeathEffect(transform.position, null); // null = world space
-            GameObject.Destroy(gameObject); // Or add a delay: Destroy(gameObject, 1f)
+            yokai.InterruptAllAbilities(); // cleans up clones instantly
+            yokaiVFXManager.PlayDeathEffect(transform.position, null);
+            GameObject.Destroy(gameObject);
         }
 
         if (isBoss)
-        {
             StartCoroutine(BossDefeated());
-        }
 
         this.enabled = false;
-    
     }
 
     public void DestroyEnemy()

@@ -116,4 +116,10 @@ public class YokaiClone : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (rb != null) rb.isKinematic = false;
     }
+
+    public void CleanUp()
+    {
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
 }
