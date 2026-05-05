@@ -279,6 +279,7 @@ MonoBehaviour:
   dashSFX: {fileID: 0}
   appearSFX: {fileID: 0}
   deathSFX: {fileID: 8300000, guid: cafb44bd71e27794abb798a484444687, type: 3}
+  deathSFXVolume: 0.5
 --- !u!114 &3299192307568611360
 MonoBehaviour:
   m_ObjectHideFlags: 0
