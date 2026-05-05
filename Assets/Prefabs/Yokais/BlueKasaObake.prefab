@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 4786018446458942477}
-  maxHealth: 100
+  maxHealth: 40
   currentHealth: 0
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
