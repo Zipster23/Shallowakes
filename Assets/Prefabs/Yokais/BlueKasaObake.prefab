@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 4774355999059171768}
   - component: {fileID: 2055432490020318721}
   - component: {fileID: 3299192307568611360}
+  - component: {fileID: 238183680268635835}
   m_Layer: 6
   m_Name: BlueKasaObake
   m_TagString: Untagged
@@ -253,7 +254,8 @@ MonoBehaviour:
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
   mapImage: {fileID: 0}
-  yokaiVFXManager: {fileID: 0}
+  yokaiVFXManager: {fileID: 3299192307568611360}
+  yokaiSFXManager: {fileID: 2055432490020318721}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
   isBoss: 0
@@ -269,14 +271,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badf080f478ff97499e9476212791065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yokaiAudioSource: {fileID: 0}
+  yokaiAudioSource: {fileID: 238183680268635835}
   AttackSFX: {fileID: 0}
   DeflectSFX: {fileID: 0}
   weaponHitSFX: {fileID: 0}
   weaponDeflectVolume: 0.7
   dashSFX: {fileID: 0}
   appearSFX: {fileID: 0}
-  playerDeathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: cafb44bd71e27794abb798a484444687, type: 3}
 --- !u!114 &3299192307568611360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +300,102 @@ MonoBehaviour:
   shadowCloneEffect: {fileID: 0}
   appearSmokeEffect: {fileID: 0}
   deathEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
+--- !u!82 &238183680268635835
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137132253454138773}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 75b7984da9eafcb4e810c6fc6134edba, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1237951870773441114
 GameObject:
   m_ObjectHideFlags: 0

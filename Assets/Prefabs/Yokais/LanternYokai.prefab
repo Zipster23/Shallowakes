@@ -451,7 +451,8 @@ MonoBehaviour:
   tenguIntroCinematic: {fileID: 0}
   susanooIntroCinematic: {fileID: 0}
   mapImage: {fileID: 0}
-  yokaiVFXManager: {fileID: 0}
+  yokaiVFXManager: {fileID: 6797588222155665203}
+  yokaiSFXManager: {fileID: 6908206344128331076}
   hasEnragedPhase: 0
   enrageHealthThreshold: 20
   isBoss: 0
@@ -474,7 +475,7 @@ MonoBehaviour:
   weaponDeflectVolume: 0.7
   dashSFX: {fileID: 0}
   appearSFX: {fileID: 8300000, guid: 75b7984da9eafcb4e810c6fc6134edba, type: 3}
-  playerDeathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: cafb44bd71e27794abb798a484444687, type: 3}
 --- !u!114 &6797588222155665203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +507,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 75b7984da9eafcb4e810c6fc6134edba, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

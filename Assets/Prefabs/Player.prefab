@@ -976,7 +976,7 @@ MonoBehaviour:
   katanaDeflectSFX: {fileID: 8300000, guid: 9731eb91e3139124a8ba8b3a539ecf07, type: 3}
   katanaHitSFX: {fileID: 8300000, guid: c2c9dbf4287e31949b2a2e19af5566a4, type: 3}
   dashSFX: {fileID: 8300000, guid: d23d1f621f0f0d741954eb47414dfbff, type: 3}
-  getHitSFX: {fileID: 0}
+  getHitSFX: {fileID: 8300000, guid: 9e8a505c705118a40b0f6dd956e7225f, type: 3}
   katanaDeflectVolume: 0.7
 --- !u!114 &2846498151557633704
 MonoBehaviour:
@@ -1015,6 +1015,7 @@ MonoBehaviour:
   currentHealth: 0
   tenguAI: {fileID: 0}
   vfx: {fileID: 2846498151557633704}
+  sfx: {fileID: 404390135254177611}
   tenguRespawnManager: {fileID: 0}
   susanooRespawnManager: {fileID: 0}
   whisperingForestRespawnManager: {fileID: 0}
@@ -6865,7 +6866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7913549960619908997}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157702, y: 3e-45, z: -1e-45, w: 0.9398538}
+  m_LocalRotation: {x: 0.34157702, y: -1e-45, z: 1e-45, w: 0.9398538}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11832,7 +11833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527386071564571407}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34077412, y: -0.000000016176498, z: 0.0000000058634884, w: 0.94014525}
+  m_LocalRotation: {x: 0.34077412, y: 0.000000016176498, z: -0.0000000058634884, w: 0.94014525}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

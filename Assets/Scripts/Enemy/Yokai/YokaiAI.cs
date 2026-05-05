@@ -205,7 +205,6 @@ public class YokaiAI : MonoBehaviour
 
     private void HandleAttack()
     {
-        Debug.Log($"HandleAttack | isAttacking: {isAttacking} | animState: {animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")}"); ;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -244,7 +243,6 @@ public class YokaiAI : MonoBehaviour
 
             // No ability triggered — do a basic attack
             int attackType = Random.Range(0, 3);
-            Debug.Log($"AttackType rolled: {attackType}");
             animator.SetInteger("AttackType", attackType);
             animator.SetTrigger("Attack");
             attackTimer = timeBetweenAttacks;

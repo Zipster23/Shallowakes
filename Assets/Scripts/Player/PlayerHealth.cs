@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator animator;  // controls which animations play on the player
     [SerializeField] private TenguAI tenguAI;    // to knock tengu back when he parries player attack
     [SerializeField] private PlayerVFXManager vfx;
+    [SerializeField] private PlayerSFXManager sfx;
     [SerializeField] private TenguRespawnManager tenguRespawnManager;
     [SerializeField] private SusanooRespawnManager susanooRespawnManager;
     [SerializeField] private WhisperingForestRespawnManager whisperingForestRespawnManager;
@@ -81,6 +82,7 @@ public class PlayerHealth : MonoBehaviour
 
         vfx.ForceStopSwingEffects();
         vfx.PlayGetHitVFX(transform.position);
+        sfx.PlayGetHitSFX();
 
         animator.SetTrigger("Hurt");    // play the hurt animation
 
