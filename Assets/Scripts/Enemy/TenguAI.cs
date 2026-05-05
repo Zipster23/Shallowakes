@@ -916,7 +916,7 @@ public class TenguAI : MonoBehaviour
 
         // knock the player back away from the tengu
         Vector3 knockbackDir = (player.position - transform.position).normalized;
-        Vector3 knockbackForce = knockbackDir * 15f + Vector3.up * 8f;
+        Vector3 knockbackForce = knockbackDir * 20f;
         player.GetComponent<PlayerMovement>().StartCoroutine(player.GetComponent<PlayerMovement>().ApplyKnockback(knockbackForce, 0.5f));
 
         // start the screen shake for the duration of the enraged animation
