@@ -5,7 +5,7 @@ using UnityEngine;
 public class YokaiSFXManager : MonoBehaviour
 {
     [Header("Weapon SFX")]
-    [SerializeField] private AudioSource yokaiAudioSource;
+    [SerializeField] public AudioSource yokaiAudioSource;
     [SerializeField] private AudioClip AttackSFX;
     [SerializeField] private AudioClip DeflectSFX;
     [SerializeField] private AudioClip weaponHitSFX;
@@ -14,7 +14,8 @@ public class YokaiSFXManager : MonoBehaviour
     [Header("Misc SFX")]
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip appearSFX;
-    [SerializeField] private AudioClip playerDeathSFX;
+    [SerializeField] public AudioClip deathSFX;
+    [SerializeField] private float deathSFXVolume = 0.5f;
 
 
     public void PlayWeaponAttackSFX()
@@ -42,8 +43,8 @@ public class YokaiSFXManager : MonoBehaviour
         yokaiAudioSource.PlayOneShot(appearSFX);
     }
 
-    public void PlayPlayerDeathSFX()
+    public void PlayDeathSFX()
     {
-        yokaiAudioSource.PlayOneShot(playerDeathSFX);
+        AudioSource.PlayClipAtPoint(deathSFX, transform.position, deathSFXVolume);
     }
 }

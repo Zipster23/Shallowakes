@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SusanooIntroCinematic susanooIntroCinematic;
     [SerializeField] private GameObject mapImage;
     [SerializeField] private YokaiVFXManager yokaiVFXManager;
+    [SerializeField] private YokaiSFXManager yokaiSFXManager;
 
     // --- ENRAGE SETTINGS --- //
 
@@ -111,15 +112,18 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetBool("IsDead", true);
 
         YokaiAI yokai = GetComponent<YokaiAI>();
-        if (yokai != null)
+
+        if (isBoss)
+        {
+            StartCoroutine(BossDefeated());
+        }
+        else if (yokai != null)
         {
             yokai.InterruptAllAbilities(); // cleans up clones instantly
             yokaiVFXManager.PlayDeathEffect(transform.position, null);
+            yokaiSFXManager.PlayDeathSFX();
             GameObject.Destroy(gameObject);
         }
-
-        if (isBoss)
-            StartCoroutine(BossDefeated());
 
         this.enabled = false;
     }

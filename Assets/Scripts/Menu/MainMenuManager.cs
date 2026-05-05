@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,14 +6,28 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject loreCutscene;
     [SerializeField] private GameObject mapScreen;
-    [SerializeField] private GameObject startButton; // Assign the Start button in Inspector
+    [SerializeField] private GameObject startButton; // The "Continue" button
 
     private void Start()
     {
-        // Hide Start button if the player has never completed New Game before
-        if (startButton != null)
-            startButton.SetActive(PlayerPrefs.HasKey("HasPlayedBefore"));
+        // Show Continue button if the player has played before OR escaped back mid-game
+        bool hasPlayed = PlayerPrefs.HasKey("HasPlayedBefore");
+        bool returnedMidGame = PlayerPrefs.HasKey("ReturnToMenu");
 
+        if (startButton != null)
+            startButton.SetActive(hasPlayed || returnedMidGame);
+
+        // If they escaped back mid-game, stay on the main menu (don't jump to map)
+        if (returnedMidGame)
+        {
+            PlayerPrefs.DeleteKey("ReturnToMenu");
+            PlayerPrefs.Save();
+            SetActiveUI(mainMenuUI, true);
+            SetActiveUI(mapScreen, false);
+            return;
+        }
+
+        // If they quit from the map screen previously, jump straight back to map
         if (PlayerPrefs.HasKey("ReturnToMap"))
         {
             PlayerPrefs.DeleteKey("ReturnToMap");
@@ -35,7 +47,6 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
 
-            // Hide Start button again after full reset
             if (startButton != null)
                 startButton.SetActive(false);
 
@@ -64,6 +75,7 @@ public class MainMenuManager : MonoBehaviour
         StageProgress.ResetAllProgress();
         PlayerPrefs.DeleteKey("HasPlayedBefore");
         PlayerPrefs.DeleteKey("ReturnToMap");
+        PlayerPrefs.DeleteKey("ReturnToMenu");
         PlayerPrefs.DeleteKey("LastScene");
         PlayerPrefs.Save();
 

@@ -63,6 +63,7 @@ public class TenguAI : MonoBehaviour
 
     public bool isAttackActive = false;     // true while Tengu is mid-swing, used by parry system to detect if attack can be parried
     public float parryStunDuration = 2f;    // how long the Tengu is stunned for after getting parried
+    private float parryEntryTimer = 0f;
 
     public float tenguParryRange = 3f;      // how close the player needs to be for the Tengu to parry
 
@@ -261,6 +262,7 @@ public class TenguAI : MonoBehaviour
             animator.SetBool("IsMoving", false);    // make run animation stops playing
             attackTimer = 0f; // set timer to 0 so the Tengu attacks immediately instead of waiting
             currentState = TenguState.Attack;   // switch to Attack state
+            return;
         }
 
         // if player is too far away, do a dash slash instead of a regular chase
@@ -283,6 +285,15 @@ public class TenguAI : MonoBehaviour
 
         // stop run animation so Tengu stands still while attacking
         animator.SetBool("IsMoving", false); 
+
+        // SAFETY: if we're in Attack state but the animator isn't playing an attack 
+        // animation, it means the attack got interrupted - reset isAttacking
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if(isAttacking && !stateInfo.IsName("Attack_01") && !stateInfo.IsName("Attack_02") && 
+        !stateInfo.IsName("DashSlash") && !stateInfo.IsName("ComboAttack"))
+        {
+            isAttacking = false;
+        }
 
         // if the player ran out of range and the Tengu isn't mid-swing, go back to chasing
         if(distanceToPlayer > attackRange && !isAttacking)
@@ -399,12 +410,18 @@ public class TenguAI : MonoBehaviour
         
         // stop moving while parrying
         animator.SetBool("IsMoving", false);
+        parryEntryTimer += Time.deltaTime;
+
+        if(parryEntryTimer < 0.15f) return; // wait for animation to actually start
 
         // check if the parry animation has finished
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         
-        if(stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 1f)
+        // exit parry when animation is 75% done OR when animator already moved on
+        if((stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 0.75f) || !stateInfo.IsName("Parry"))
         {
+            parryEntryTimer = 0f;
+            attackTimer = timeBetweenAttacks;
             currentState = TenguState.Idle;
         }
 
@@ -438,8 +455,18 @@ public class TenguAI : MonoBehaviour
         {
             // reset attack timer so Tengu attacks immediately after enraging
             isDashSlashing = false;
-            attackTimer = timeBetweenAttacks;
-            currentState = TenguState.Chase;
+            attackTimer = 0f;
+
+            // check distance before deciding which state to go
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if(distanceToPlayer <= attackRange)
+            {
+                currentState = TenguState.Attack;
+            }
+            else
+            {
+                currentState = TenguState.Chase;
+            }
         }
 
     }
@@ -450,9 +477,16 @@ public class TenguAI : MonoBehaviour
     private void HandleDashSlash()
     {
         
+        // safety - if animator speed got stuck at 0, reset it
+        if(animator.GetFloat("DashSlashSpeed") <= 0f && !isDashSlashing)
+        {
+            animator.SetFloat("DashSlashSpeed", 1f);
+        }
+
         // Only start the sequence if we aren't already in the middle of it
         if (!isDashSlashing)
         {
+            isDashSlashing = true;
             StartCoroutine(DashSlashSequence());
         }
 
@@ -622,6 +656,7 @@ public class TenguAI : MonoBehaviour
         animator.ResetTrigger("Attack_01"); // cancel the attack trigger
         animator.ResetTrigger("Attack_02"); // cancel the attack trigger
         animator.Play("Idle");              // snap back to idle animation 
+        parryEntryTimer = 0f;
 
         StartCoroutine(ParryStun());        // start the stun for getting parried
 
@@ -881,7 +916,7 @@ public class TenguAI : MonoBehaviour
 
         // knock the player back away from the tengu
         Vector3 knockbackDir = (player.position - transform.position).normalized;
-        Vector3 knockbackForce = knockbackDir * 15f + Vector3.up * 8f;
+        Vector3 knockbackForce = knockbackDir * 20f;
         player.GetComponent<PlayerMovement>().StartCoroutine(player.GetComponent<PlayerMovement>().ApplyKnockback(knockbackForce, 0.5f));
 
         // start the screen shake for the duration of the enraged animation
@@ -941,11 +976,6 @@ public class TenguAI : MonoBehaviour
         // we check every frame until IsName("DashSlash") returns true
         while(!animator.GetCurrentAnimatorStateInfo(0).IsName("DashSlash"))
         {
-            if(isEnraged)
-            {
-                isDashSlashing = false;
-                yield break;
-            }
             yield return null;
         }
 
@@ -954,11 +984,6 @@ public class TenguAI : MonoBehaviour
         // normalizedTime goes from 0 to 1 as the animation plays, so 0.3 = 30% through
         while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
         {
-            if(isEnraged)
-            {
-                isDashSlashing = false;
-                yield break;
-            }
             // keep facing the player during the stance
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
             yield return null;
@@ -973,11 +998,6 @@ public class TenguAI : MonoBehaviour
         // keep moving every frame until the Tengu is within attack range
         while(Vector3.Distance(transform.position, player.position) > attackRange)
         {
-            if(isEnraged)
-            {
-                isDashSlashing = false;
-                yield break;
-            }
             // move towards the player at dashSlashSpeed
             transform.position = Vector3.MoveTowards(transform.position, player.position, dashSlashSpeed * Time.deltaTime);
             // keep facing the player while dashing
@@ -992,16 +1012,13 @@ public class TenguAI : MonoBehaviour
         // this prevents snapping into a different animation mid-slash
         while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
         {
-            if(isEnraged)
-            {
-                isDashSlashing = false;
-                yield break;
-            }
             yield return null;
         }
 
         // dash slash is done, reset the flag and go back to Attack state
         isDashSlashing = false;
+        isAttacking = false;
+        attackTimer = timeBetweenAttacks;
         currentState = TenguState.Attack;
     }
 
