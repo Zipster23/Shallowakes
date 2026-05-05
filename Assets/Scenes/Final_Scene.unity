@@ -1447,7 +1447,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>Research and Development Guidance</u>\nMr. Gonzalez\n\n<u>Programmers\r</u>\nJoan
+  m_text: "<u>Research and Development</u>\nMr. Gonzalez\nJuanpablo Maldonado\nAntonio
+    Quintanal\nDerwin Alexis\nJoan Lazo-Fiallo\nKayrat Sarypbekov\nAlain Roman\n\n\n\n<u>Programmers\r</u>\nJoan
     Lazo-Fiallo\r\nKayrat Sarypbekov\r\nAntonio Quintanal\n\n<u>Models</u>\r\nKayrat
     Sarybekov\r\nAntonio Qunitanal\r\n\n<u>Game Design</u>\r\nJuanpablo Maldonado\r\nDerwin
     Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\n<u>Animation & Art</u>\r\nAlain
@@ -1569,7 +1570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2545823773444583948, guid: fa4bbcd1df0484c0eb7f4c05dc4a2ea5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.47
+      value: 38.8
       objectReference: {fileID: 0}
     - target: {fileID: 2545823773444583948, guid: fa4bbcd1df0484c0eb7f4c05dc4a2ea5, type: 3}
       propertyPath: m_LocalPosition.y
