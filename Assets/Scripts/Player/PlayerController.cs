@@ -190,6 +190,13 @@ public class PlayerController : MonoBehaviour
                 if(susanooAI.CheckSusanooResponse()) { isBusy = false; return; }
             }
 
+            // check for YokaiAI
+            YokaiAI yokaiAI = enemy.GetComponentInParent<YokaiAI>();
+            if (yokaiAI != null)
+            {
+                if (yokaiAI.CheckYokaiResponse()) { isBusy = false; return; }
+            }
+
             enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
             vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
             sfx.playKatanaHitSFX();

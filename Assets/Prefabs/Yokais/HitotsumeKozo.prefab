@@ -153,13 +153,13 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  timeBetweenAttacks: 1.5
+  timeBetweenAttacks: 2
   attackTimer: 0
   isAttacking: 0
   isAttackActive: 0
-  parryStunDuration: 2
+  parryStunDuration: 1
   yokaiParryRange: 3
-  parryChance: 60
+  parryChance: 25
   dodgeChance: 0
   dodgeDistance: 12
   dodgeSpeed: 40

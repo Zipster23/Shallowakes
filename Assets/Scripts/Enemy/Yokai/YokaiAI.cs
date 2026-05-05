@@ -205,7 +205,7 @@ public class YokaiAI : MonoBehaviour
 
     private void HandleAttack()
     {
-        Debug.Log($"isAttacking: {isAttacking}, timer: {attackTimer}, dist: {Vector3.Distance(transform.position, player.position)}");
+        Debug.Log($"HandleAttack | isAttacking: {isAttacking} | animState: {animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")}"); ;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -284,18 +284,20 @@ public class YokaiAI : MonoBehaviour
         }
     }
 
-
     private void HandleParry()
     {
+        isAttacking = false;      // ← add this
+        isAttackActive = false;   // ← and this
+        animator.ResetTrigger("Attack");  // ← clear any queued triggers
+
         animator.SetBool("IsMoving", false);
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if(stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 1f)
+        if (stateInfo.IsName("Parry") && stateInfo.normalizedTime >= 1f)
         {
             currentState = YokaiState.Idle;
         }
     }
-
 
     private void HandleIsParried()
     {
@@ -342,6 +344,9 @@ public class YokaiAI : MonoBehaviour
     public void OnAttackEnd()
     {
         isAttacking = false;
+        isAttackActive = false;
+        attackTimer = timeBetweenAttacks;
+        animator.ResetTrigger("Attack"); // ← clear any queued triggers
         currentState = YokaiState.Chase;
     }
 
@@ -369,7 +374,8 @@ public class YokaiAI : MonoBehaviour
         int responseRoll = Random.Range(0, 100);
 
         // Parry
-        if(responseRoll < parryChance)
+        // Parry
+        if (responseRoll < parryChance)
         {
             currentState = YokaiState.Parry;
             animator.SetTrigger("Parry");
