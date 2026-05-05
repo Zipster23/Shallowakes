@@ -9936,6 +9936,10 @@ PrefabInstance:
       propertyPath: pauseManager
       value: 
       objectReference: {fileID: 1972356635}
+    - target: {fileID: 5560363179030098411, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: metKasaObake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5858951631688805222, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

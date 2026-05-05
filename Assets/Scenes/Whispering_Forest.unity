@@ -1771,8 +1771,8 @@ MonoBehaviour:
   textSpeed: 0.02
   icon: {fileID: 92079352}
   bubble: {fileID: 1517659416}
-  kasaObakeOnShallo: {fileID: 1768598681}
   lightBeam: {fileID: 191723408}
+  playerMovement: {fileID: 1581345127}
 --- !u!1 &1013426731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,7 +1905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1646347
+      value: -0.16463469
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1925,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2699623413604412145, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2846498151557633704, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: getHitEffect
@@ -1935,6 +1935,10 @@ PrefabInstance:
       propertyPath: whisperingForestRespawnManager
       value: 
       objectReference: {fileID: 36694917}
+    - target: {fileID: 4517794145346459436, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2922,6 +2926,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
   m_PrefabInstance: {fileID: 1033265819}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1581345127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5560363179030098411, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581345116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407b7b3c04f9c1545ae2cda4e782c368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1685573785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,11 +3226,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.000002, y: 2, z: 10.000004}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1768598681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2699623413604412145, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
-  m_PrefabInstance: {fileID: 1033265819}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1795088126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3397,7 +3407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795088126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157875, y: 0.000000028009811, z: -0.000000010179841, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157875, y: 0.000000022456575, z: -0.000000008161581, w: 0.9398532}
   m_LocalPosition: {x: 387, y: 10.645, z: -378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

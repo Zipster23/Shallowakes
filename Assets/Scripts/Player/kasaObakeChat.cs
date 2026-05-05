@@ -10,8 +10,8 @@ public class kasaObakeChat : MonoBehaviour
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject icon;
     [SerializeField] private GameObject bubble;
-    [SerializeField] private GameObject kasaObakeOnShallo;
     [SerializeField] private GameObject lightBeam;
+    [SerializeField] private PlayerMovement playerMovement;
 
     private int index;
     private Collider koColider;
@@ -82,7 +82,7 @@ public class kasaObakeChat : MonoBehaviour
             icon.SetActive(false);
             bubble.SetActive(false);
             textComponent.text= string.Empty;
-            kasaObakeOnShallo.SetActive(true);
+            playerMovement.metKasaObake = true;
         }
     }
 }

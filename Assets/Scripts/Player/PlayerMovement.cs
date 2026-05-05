@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float glideHorizontalSpeed = 8f;       // the target horizontal speed the player steers toward while gliding
     [SerializeField] private float glideTurnSpeed = 3f;             // how quickly the player can steer their glide direction (higher = snappier turns)
     [SerializeField] private float glideHorizontalDrag = 2f;        // drag coefficient applied horizontally so momentum bleeds off when changing direction
+    [SerializeField] public bool metKasaObake;
 
     // TODO: replace glideCooldownTimer with a reference to the global cooldown system when implemented
     // e.g. if (GlobalCooldownManager.CanUse(AbilityType.Glide)) { ... }
@@ -268,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
     public void Glide(Vector2 input)
     {
         // can't glide if grounded, dashing, or waiting on cooldown
-        if (isGrounded || isDashing || glideCooldownTimer > 0) return;
+        if (isGrounded || isDashing || glideCooldownTimer > 0 || !metKasaObake) return;
 
         kasaObakeAnimator.SetBool("IsGliding", true);
 
