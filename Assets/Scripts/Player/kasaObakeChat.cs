@@ -9,7 +9,11 @@ public class kasaObakeChat : MonoBehaviour
     [SerializeField] private string[] lines;
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject bubble;
     [SerializeField] private GameObject kasaObakeOnShallo;
+    [SerializeField] private GameObject lightBeam;
+
+    public GameObject lightBeamTwo;
 
     private int index;
     private Collider koColider;
@@ -20,6 +24,10 @@ public class kasaObakeChat : MonoBehaviour
         koColider.isTrigger = false;
         textComponent.text = string.Empty;
         icon.SetActive(false);
+        bubble.SetActive(false);
+        lightBeam.SetActive(true);
+        lightBeamTwo.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -43,6 +51,8 @@ public class kasaObakeChat : MonoBehaviour
     {
         koColider.isTrigger = true;
         icon.SetActive(true);
+        bubble.SetActive(true);
+        lightBeam.SetActive(false);
         StartDialogue();
     }
 
@@ -73,8 +83,10 @@ public class kasaObakeChat : MonoBehaviour
         {
             gameObject.SetActive(false);
             icon.SetActive(false);
+            bubble.SetActive(false);
             textComponent.text= string.Empty;
             kasaObakeOnShallo.SetActive(true);
+            lightBeamTwo.SetActive(true);
         }
     }
 }
