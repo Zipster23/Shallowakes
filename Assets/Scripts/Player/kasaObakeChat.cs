@@ -13,8 +13,6 @@ public class kasaObakeChat : MonoBehaviour
     [SerializeField] private GameObject kasaObakeOnShallo;
     [SerializeField] private GameObject lightBeam;
 
-    public GameObject lightBeamTwo;
-
     private int index;
     private Collider koColider;
     // Start is called before the first frame update
@@ -26,7 +24,6 @@ public class kasaObakeChat : MonoBehaviour
         icon.SetActive(false);
         bubble.SetActive(false);
         lightBeam.SetActive(true);
-        lightBeamTwo.SetActive(false);
 
     }
 
@@ -86,7 +83,6 @@ public class kasaObakeChat : MonoBehaviour
             bubble.SetActive(false);
             textComponent.text= string.Empty;
             kasaObakeOnShallo.SetActive(true);
-            lightBeamTwo.SetActive(true);
         }
     }
 }

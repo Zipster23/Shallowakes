@@ -12,14 +12,11 @@ public class ToriiGateTrigger : MonoBehaviour
     public SpawnManager spawnManager;    // Drag your SpawnManager object here
 
     private bool _triggered = false;
-    [SerializeField]private GameObject lightStop;
 
     void OnTriggerEnter(Collider other)
     {
         if (_triggered || !other.CompareTag(playerTag)) return;
         _triggered = true;
-
-        lightStop.SetActive(false);
 
         backgroundMusic.Stop();
         backgroundMusic.clip = paradeMusic;
