@@ -27,7 +27,7 @@ public class LoreCutscene : MonoBehaviour
         "Guided by the light of Amaterasu...",
         "Sharro set forth on a journey through the cursed lands.",
         "His path now leads through the Whispering Forest...",
-        "Where the Demon Parade marches under Susanoo's command."
+        "Where the Demon Parade marches."
     };
 
 

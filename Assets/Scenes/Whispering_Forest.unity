@@ -1759,13 +1759,12 @@ MonoBehaviour:
   - 'KO: , and the God of Storms made sure of that." "A Hundred Demons... and now
     there''s only one left to count." [E]'
   - 'KO: "Since you''re wandering into this mess with me, you''d better learn how
-    to move." "Walk with [WASD], leap with [Space], sprint with [Shift], dash with
+    to move. Walk with [WASD], leap with [Space], sprint with [Shift], dash with
     [Q]." [E]'
   - "KO: \"Glide if you're feeling bold \u2014 [G] For fighting... a slash with [LMB],
-    a thrust with [RMB].\" [E]"
-  - "KO: \"And if you've got any dignity left \u2014 parry with [F].\" \"I never
-    could. No arms, you see.\" [E]"
-  - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014\" \"and
+    a thrust with [RMB]. And if you've got any dignity left \u2014 parry with [F].
+    I never could. No arms, you see.\" [E]"
+  - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014 and
     I'll show you where an old shrine sleeps, forgotten past the treeline.\" [E]"
   - 'KO: "Something rests there. A blade. The kind that doesn''t forgive the hand
     that holds it." [E]'
