@@ -7,11 +7,15 @@ public class SeaSplitCinematic : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
 
     [Header("Platform Movement")]
-    [SerializeField] public float platformVelocity = 5f; // Speed of movement
-    [SerializeField] public float moveDuration = 5f;    // How long it moves
+    [SerializeField] public float platformVelocity = 5f;
+    [SerializeField] public float moveDuration = 5f;
 
-    [HideInInspector]
-    [SerializeField] public AudioSource musicSource;
+    [Header("Particle Settings")]
+    [SerializeField] private bool useParticles = true; // The toggle
+    [SerializeField] private GameObject seaParticles;   // The assigned GameObject
+
+    [Header("References")]
+    [HideInInspector][SerializeField] public AudioSource musicSource;
     [SerializeField] private AudioClip section1Music;
     [SerializeField] private SusanooAI susanooAI;
     [SerializeField] private SusanooSFXManager sfx;
@@ -36,7 +40,7 @@ public class SeaSplitCinematic : MonoBehaviour
                 windSlash.isParriable = false;
             }
 
-            // 2. Start Platform Movement
+            // 2 & 7. Start Platform Movement and Particles
             if (land != null)
             {
                 StartCoroutine(MovePlatform());
@@ -46,6 +50,12 @@ public class SeaSplitCinematic : MonoBehaviour
             if (waveManager != null)
             {
                 waveManager.TriggerAllScaleIn();
+
+                // Handle Particles at the same time the wave animation starts
+                if (useParticles && seaParticles != null)
+                {
+                    StartCoroutine(HandleParticleDuration());
+                }
             }
 
             // 4. Play section 1 music
@@ -53,7 +63,7 @@ public class SeaSplitCinematic : MonoBehaviour
             musicSource.clip = section1Music;
             musicSource.Play();
 
-            // 5. Start section 1 - susanoo throws slashes
+            // 5. Start section 1
             section1.StartSection1();
 
             // 6. Disable this trigger
@@ -64,14 +74,22 @@ public class SeaSplitCinematic : MonoBehaviour
     private IEnumerator MovePlatform()
     {
         float elapsed = 0f;
-
         while (elapsed < moveDuration)
         {
-            // Moves the land in the Positive Z direction (Vector3.forward)
             land.transform.Translate(Vector3.back * platformVelocity * Time.deltaTime, Space.World);
-
             elapsed += Time.deltaTime;
-            yield return null; // Wait until next frame
+            yield return null;
         }
+    }
+
+    // New Coroutine to handle the particles
+    private IEnumerator HandleParticleDuration()
+    {
+        seaParticles.SetActive(true);
+
+        // Wait for the same duration as the platform movement/wave split
+        yield return new WaitForSeconds(moveDuration);
+
+        seaParticles.SetActive(false);
     }
 }
