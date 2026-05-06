@@ -358,7 +358,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92079352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,8 +366,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199, y: 284}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -147, y: 23}
+  m_SizeDelta: {x: 25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92079354
 MonoBehaviour:
@@ -1639,7 +1639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.33, y: 252}
+  m_AnchoredPosition: {x: -53.33, y: 2}
   m_SizeDelta: {x: 305.19, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964267458
@@ -1671,8 +1671,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278232575
-  m_fontColor: {r: 1, g: 0.6472527, b: 0, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1689,8 +1689,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -30.482475, y: 0, z: -137.9471, w: -154.51814}
+  m_margin: {x: 31.965012, y: 0, z: -54.68741, w: -20.669312}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1754,16 +1754,17 @@ MonoBehaviour:
   textComponent: {fileID: 964267458}
   lines:
   - "KO:  \"They marched out of the puddles and left me in the dust \u2014 crinkled,
-    brittle, and uninvited. You can't march in the Night Parade if you're too brittle
-    to dance [E]"
-  - 'KO: , and the God of Storms made sure of that." "A Hundred Demons... and now
-    there''s only one left to count." [E]'
-  - 'KO: "Since you''re wandering into this mess with me, you''d better learn how
-    to move. Walk with [WASD], leap with [Space], sprint with [Shift], dash with
-    [Q]." [E]'
+    brittle, and uninvited.  [E]"
+  - 'KO: You can''t march in the Night Parade if you''re too brittle to dance, and
+    the God of Storms made sure of that. [E]'
+  - 'KO:  "A Hundred Demons... and now there''s only one left to count." [E]'
+  - 'KO: "Since you''re wandering into this mess with me, you''d [E]'
+  - 'KO: Walk with [WASD], leap with [Space], sprint with [Shift], dash with [Q]."
+    [E]'
   - "KO: \"Glide if you're feeling bold \u2014 [G] For fighting... a slash with [LMB],
-    a thrust with [RMB]. And if you've got any dignity left \u2014 parry with [F].
-    I never could. No arms, you see.\" [E]"
+    a thrust with [RMB]. [E]"
+  - "KO: And if you've got any dignity left \u2014 parry with [F]. I never could.
+    No arms, you see.\" [E]"
   - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014 and
     I'll show you where an old shrine sleeps, forgotten past the treeline.\" [E]"
   - 'KO: "Something rests there. A blade. The kind that doesn''t forgive the hand
@@ -1901,7 +1902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16463469
+      value: -0.1646347
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2727,8 +2728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 132.8}
-  m_SizeDelta: {x: 850, y: 700}
+  m_AnchoredPosition: {x: 0, y: -14}
+  m_SizeDelta: {x: 550, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1517659418
 MonoBehaviour:
@@ -3419,7 +3420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795088126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157875, y: 0.000000022456573, z: -0.000000008161581, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157875, y: 0.000000028009813, z: -0.000000010179842, w: 0.9398532}
   m_LocalPosition: {x: 387, y: 10.645, z: -378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4038,7 +4039,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -85.011, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 182.4, y: 7.46}
+  m_AnchoredPosition: {x: 182.4, y: 7.09}
   m_SizeDelta: {x: 474, y: 267}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055756392
@@ -4518,7 +4519,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.2638056
+  m_Radius: 13.41
   m_Height: 6.5276127
   m_Direction: 1
   m_Center: {x: 0.5319774, y: 0.01820612, z: 2.2318292}
