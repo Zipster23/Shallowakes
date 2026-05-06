@@ -1374,19 +1374,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>Research and Development</u>\nMr. Gonzalez\nJuanpablo Maldonado\nAntonio
-    Quintanal\nDerwin Alexis\nJoan Lazo-Fiallo\nKayrat Sarypbekov\nAlain Roman\n\n\n\n<u>Programmers\r</u>\nJoan
-    Lazo-Fiallo\r\nKayrat Sarypbekov\r\nAntonio Quintanal\n\n<u>Models</u>\r\nKayrat
-    Sarybekov\r\nAntonio Qunitanal\r\n\n<u>Game Design</u>\r\nJuanpablo Maldonado\r\nDerwin
-    Alexis\r\nAntonio Quintanal\r\nMr. Gonzalez\r\n\n<u>Animation & Art</u>\r\nAlain
+  m_text: "<u>Research and Development</u>\nJuanpablo Maldonado\nAntonio Quintanal\nDerwin
+    Alexis\nJoan Lazo-Fiallo\nKayrat Sarypbekov\nAlain Roman\nLeonardo Gonzalez\n\n\n<u>Programmers\r</u>\nJoan
+    Lazo-Fiallo\r\nKayrat Sarypbekov\r\nAntonio Quintanal\n\n\n<u>Models</u>\r\nKayrat
+    Sarybekov\r\nAntonio Qunitanal\r\n\n\n<u>Game Design</u>\r\nJuanpablo Maldonado\r\nDerwin
+    Alexis\r\nAntonio Quintanal\r\nLeonardo Gonzalez\r\n\n\n<u>Animation & Art</u>\r\nAlain
     Roman\r\n\n<u>Assets</u>\r\nTanuki Digital-Pagodas\r\nHovl Studio \r\nJean Moreno\r\nFlexUnit
     \r\nGabrielAguiarProductions\r\nSadouzz\nH I P E R N T\nKevin Iglesias\r\nNickLadd\r
-    \nJonathan Rodriguez (Deus Ludus)\n\r\n<u>Sounds</u>\nfreesounds.org\n\n<u>Play
+    \nJonathan Rodriguez (Deus Ludus)\n\r\n\n<u>Sounds</u>\nfreesounds.org\n\n\n<u>Play
     testers\r</u>\nLuciano Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian
-    Paul\nRobert Morera\n\n<u>Music</u>\nRed Horizon TAO\r\nSilence of the Warrior\r\nWar
+    Paul\nRobert Morera\n\n\n<u>Music</u>\nRed Horizon TAO\r\nSilence of the Warrior\r\nWar
     Drums Music\r\nRAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau
-    of Lyrailie\n\nSPECIAL THANKS TO MR. G and our CLASS OF 2026 IT ACADEMY\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
-    FOR PLAYING!\n\nFrom Nothing Else Matters Studios"
+    of Lyrailie\n\n\nSPECIAL THANKS TO:\nLeonardo Gonzalez (Mr. G)\nMiami Lakes Educational
+    Center (MLEC)\nMLEC Academy of Information Technology\nMLEC Game Design Class
+    of 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTHANKS FOR PLAYING!\n\n\n\nFrom
+    Nothing Else Matters Studios"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
   m_sharedMaterial: {fileID: -3765264216765690048, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
