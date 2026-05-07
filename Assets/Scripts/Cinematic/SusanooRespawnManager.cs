@@ -17,7 +17,6 @@ public class SusanooRespawnManager : MonoBehaviour
     [SerializeField] private SusanooCinematicTrigger cinematicTrigger;
     [SerializeField] private GameObject arenaBarrier;
     [SerializeField] private SusanooSection1 section1;
-    [SerializeField] private GameObject seaSplitVFX;
     [SerializeField] private GameObject land;
     [SerializeField] private SeaSplitCinematic seaSplitCinematic;
     [SerializeField] private Collider seaSplitTrigger;
@@ -135,8 +134,6 @@ public class SusanooRespawnManager : MonoBehaviour
             player.transform.position = playerSpawnPositionSection1;
 
             // reset sea split
-            seaSplitVFX.SetActive(false);
-            land.SetActive(false);
             seaSplitTrigger.enabled = true;
 
             // reset section 1 complete trigger
