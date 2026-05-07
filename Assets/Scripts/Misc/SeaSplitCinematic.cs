@@ -65,9 +65,6 @@ public class SeaSplitCinematic : MonoBehaviour
 
             // 5. Start section 1
             section1.StartSection1();
-
-            // 6. Disable this trigger
-            GetComponent<Collider>().enabled = false;
         }
     }
 
@@ -80,6 +77,8 @@ public class SeaSplitCinematic : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        gameObject.SetActive(false);
     }
 
     // New Coroutine to handle the particles
