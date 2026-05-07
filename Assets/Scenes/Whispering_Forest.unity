@@ -1758,8 +1758,9 @@ MonoBehaviour:
   - 'KO: You can''t march in the Night Parade if you''re too brittle to dance, and
     the God of Storms made sure of that. [E]'
   - 'KO:  "A Hundred Demons... and now there''s only one left to count." [E]'
-  - 'KO: "Since you''re wandering into this mess with me, you''d [E]'
-  - 'KO: Walk with [WASD], leap with [Space], sprint with [Shift], dash with [Q]."
+  - 'KO: "Since you''re wandering into this mess with me, you''d better learn how
+    to move."[E]'
+  - 'KO: "Walk with [WASD], leap with [Space], sprint with [Shift], dash with [Q]."
     [E]'
   - "KO: \"Glide if you're feeling bold \u2014 [G] For fighting... a slash with [LMB],
     a thrust with [RMB]. [E]"
@@ -1773,7 +1774,10 @@ MonoBehaviour:
   icon: {fileID: 92079352}
   bubble: {fileID: 1517659416}
   lightBeam: {fileID: 191723408}
+  kasaObakeOnShallo: {fileID: 1721597274}
+  kasaObakeDisappearDelay: 2.5
   playerMovement: {fileID: 1581345127}
+  playerVFXManager: {fileID: 1581345128}
 --- !u!1 &1013426731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,7 +1906,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1646347
+      value: -0.16463469
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478226073662156754, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478226073662156754, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478226073662156754, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1914,7 +1930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.45313275
+      value: 0.45313278
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1990,6 +2006,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5560363179030098411, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: metKasaObake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678963559163436910, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5678963559163436910, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
@@ -2019,6 +2039,18 @@ PrefabInstance:
     - target: {fileID: 6044417593333557980, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalPosition.z
       value: 37.284653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464831437554785387, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464831437554785387, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464831437554785387, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2950,6 +2982,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407b7b3c04f9c1545ae2cda4e782c368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1581345128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2846498151557633704, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581345116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e5b92164b60f444ad946de7b676611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1685573785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,6 +3177,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2, z: 10.000004}
   m_Center: {x: 0, y: 0.0000009536743, z: 0}
+--- !u!1 &1721597274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2699623413604412145, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+  m_PrefabInstance: {fileID: 1033265819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742333681
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,7 +3468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795088126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157875, y: 0.000000028009813, z: -0.000000010179842, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157875, y: 0.000000022456573, z: -0.000000008161581, w: 0.9398532}
   m_LocalPosition: {x: 387, y: 10.645, z: -378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4127,27 +4175,6 @@ Transform:
   - {fileID: 7346886579477789376}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!95 &1158932190810524198
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911529486217002937}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 64271d1be8c31c641bad3056237c753a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1751265179076618577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4640,7 +4667,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 535172009977366819}
-  - component: {fileID: 1158932190810524198}
   - component: {fileID: 6737293006465044295}
   - component: {fileID: 971168730}
   m_Layer: 0

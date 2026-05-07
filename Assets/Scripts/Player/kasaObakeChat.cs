@@ -11,8 +11,12 @@ public class kasaObakeChat : MonoBehaviour
     [SerializeField] private GameObject icon;
     [SerializeField] private GameObject bubble;
     [SerializeField] private GameObject lightBeam;
+    [SerializeField] private GameObject kasaObakeOnShallo;
+    [SerializeField] private float kasaObakeDisappearDelay;
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] PlayerVFXManager playerVFXManager;
 
+    private bool dialogueActive = false;
     private int index;
     private Collider koColider;
     // Start is called before the first frame update
@@ -27,9 +31,10 @@ public class kasaObakeChat : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (!dialogueActive) return;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (textComponent.text == lines[index])
@@ -55,6 +60,7 @@ public class kasaObakeChat : MonoBehaviour
 
     void StartDialogue()
     {
+        dialogueActive = true;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -74,15 +80,37 @@ public class kasaObakeChat : MonoBehaviour
         {
             index++;
             textComponent.text = string.Empty;
+            StopAllCoroutines();
             StartCoroutine(TypeLine());
         }
         else
         {
-            gameObject.SetActive(false);
+            dialogueActive = false;    // stop listening before coroutine runs
             icon.SetActive(false);
             bubble.SetActive(false);
-            textComponent.text= string.Empty;
-            playerMovement.metKasaObake = true;
+            textComponent.text = string.Empty;
+            StopAllCoroutines();
+            StartCoroutine(EnableKasaObake());
         }
+    }
+
+    IEnumerator EnableKasaObake()
+    {
+        Debug.Log("Coroutine started");
+        playerVFXManager.PlayGetHitVFX(transform.position);
+        transform.GetChild(0).gameObject.SetActive(false);
+
+        Animator koAnimator = kasaObakeOnShallo.GetComponent<Animator>();
+        koAnimator.enabled = false;
+        kasaObakeOnShallo.transform.GetChild(0).gameObject.SetActive(true);
+
+        Debug.Log("Shoulder KO enabled");
+        yield return new WaitForSeconds(kasaObakeDisappearDelay);
+        Debug.Log("Delay finished");
+
+        playerVFXManager.PlayGetHitVFX(kasaObakeOnShallo.transform.position);
+        kasaObakeOnShallo.transform.GetChild(0).gameObject.SetActive(false);
+        koAnimator.enabled = true;
+        playerMovement.metKasaObake = true;
     }
 }
