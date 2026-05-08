@@ -430,6 +430,9 @@ public class YokaiAI : MonoBehaviour
     {
         currentState = YokaiState.IsParried;
         yield return new WaitForSeconds(parryStunDuration);
+
+        if (enemy == null || enemy.currentHealth <= 0) yield break;
+
         currentState = YokaiState.Idle;
     }
 

@@ -27270,7 +27270,7 @@ PrefabInstance:
       objectReference: {fileID: 1447338743}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9393061
+      value: -0.939306
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.x
@@ -27278,7 +27278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.03206514
+      value: 0.032065134
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
@@ -32156,6 +32156,10 @@ PrefabInstance:
       propertyPath: playerDeathSFX
       value: 
       objectReference: {fileID: 8300000, guid: 76650fa21a9f66340b12886b8fae839e, type: 3}
+    - target: {fileID: 7713838858234441647, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 3642160410948286680, guid: 6f5bbaa87f7880147a5e6146ccc27953, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
