@@ -11,61 +11,81 @@ public class SeaSplitCinematic : MonoBehaviour
     [SerializeField] public float moveDuration = 5f;
 
     [Header("Particle Settings")]
-    [SerializeField] private bool useParticles = true; // The toggle
-    [SerializeField] private GameObject seaParticles;   // The assigned GameObject
+    [SerializeField] private bool useParticles = true;
+    [SerializeField] private GameObject seaParticles;
 
     [Header("References")]
-    [HideInInspector][SerializeField] public AudioSource musicSource;
+    [HideInInspector] [SerializeField] public AudioSource musicSource;
     [SerializeField] private AudioClip section1Music;
     [SerializeField] private SusanooAI susanooAI;
     [SerializeField] private SusanooSFXManager sfx;
     [SerializeField] private SusanooSection1 section1;
     [SerializeField] public GameObject windSlashVerticalPrefab;
 
+    private Vector3 _initialPlatformPosition;
+    private Coroutine _moveCoroutine;
+    private Coroutine _particleCoroutine;
+
+    private void Awake()
+    {
+        // Store the starting position so we can return to it later
+        if (land != null)
+        {
+            _initialPlatformPosition = land.transform.position;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // 1. Fire huge vertical wind slash
-            Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * 2f;
-            Vector3 direction = (other.transform.position - spawnPos).normalized;
-            Quaternion rotation = Quaternion.LookRotation(direction);
-
-            GameObject slash = Instantiate(windSlashVerticalPrefab, spawnPos, rotation);
-            WindSlash windSlash = slash.GetComponent<WindSlash>();
-            if (windSlash != null)
-            {
-                windSlash.SetDirection(direction);
-                windSlash.speed = 220f;
-                windSlash.isParriable = false;
-            }
-
-            // 2 & 7. Start Platform Movement and Particles
-            if (land != null)
-            {
-                StartCoroutine(MovePlatform());
-            }
-
-            // 3. Split sea
-            if (waveManager != null)
-            {
-                waveManager.TriggerAllScaleIn();
-
-                // Handle Particles at the same time the wave animation starts
-                if (useParticles && seaParticles != null)
-                {
-                    StartCoroutine(HandleParticleDuration());
-                }
-            }
-
-            // 4. Play section 1 music
-            sfx.PlayWindSlashSFX();
-            musicSource.clip = section1Music;
-            musicSource.Play();
-
-            // 5. Start section 1
-            section1.StartSection1();
+            TriggerCinematic(other.transform);
         }
+    }
+
+    private void TriggerCinematic(Transform playerTransform)
+    {
+        // 1. Fire huge vertical wind slash
+        Vector3 spawnPos = susanooAI.transform.position + susanooAI.transform.forward * 2f;
+        Vector3 direction = (playerTransform.position - spawnPos).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject slash = Instantiate(windSlashVerticalPrefab, spawnPos, rotation);
+        WindSlash windSlash = slash.GetComponent<WindSlash>();
+        if (windSlash != null)
+        {
+            windSlash.SetDirection(direction);
+            windSlash.speed = 220f;
+            windSlash.isParriable = false;
+        }
+
+        // 2. Start Platform Movement
+        if (land != null)
+        {
+            _moveCoroutine = StartCoroutine(MovePlatform());
+        }
+
+        // 3. Split sea & Particles
+        if (waveManager != null)
+        {
+            waveManager.TriggerAllScaleIn();
+
+            if (useParticles && seaParticles != null)
+            {
+                _particleCoroutine = StartCoroutine(HandleParticleDuration());
+            }
+        }
+
+        // 4. Audio
+        sfx.PlayWindSlashSFX();
+        musicSource.clip = section1Music;
+        musicSource.Play();
+
+        // 5. Start section logic
+        section1.StartSection1();
+
+        // Disable the trigger so it doesn't fire again until reset
+        GetComponent<Collider>().enabled = false;
     }
 
     private IEnumerator MovePlatform()
@@ -78,17 +98,48 @@ public class SeaSplitCinematic : MonoBehaviour
             yield return null;
         }
 
-        gameObject.SetActive(false);
+        // Sequence complete
+        _moveCoroutine = null;
     }
 
-    // New Coroutine to handle the particles
     private IEnumerator HandleParticleDuration()
     {
         seaParticles.SetActive(true);
 
-        // Wait for the same duration as the platform movement/wave split
+        // Wait for the movement to finish
         yield return new WaitForSeconds(moveDuration);
 
         seaParticles.SetActive(false);
+        _particleCoroutine = null;
+    }
+
+    /// <summary>
+    /// Resets the cinematic state for player respawn.
+    /// Call this from your Respawn Manager.
+    /// </summary>
+    public void ResetCinematic()
+    {
+        // Stop any active movement or particle timers
+        if (_moveCoroutine != null) StopCoroutine(_moveCoroutine);
+        if (_particleCoroutine != null) StopCoroutine(_particleCoroutine);
+
+        // Reset Platform Position
+        if (land != null)
+        {
+            land.transform.position = _initialPlatformPosition;
+        }
+
+        // Reset Particles
+        if (seaParticles != null)
+        {
+            seaParticles.SetActive(false);
+        }
+
+        // Re-enable the trigger and the GameObject
+        GetComponent<Collider>().enabled = true;
+        gameObject.SetActive(true);
+
+        // Optional: Reset WaveManager state if it has a Reset method
+        // waveManager.ResetWaves(); 
     }
 }
