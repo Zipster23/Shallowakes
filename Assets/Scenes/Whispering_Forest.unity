@@ -359,14 +359,14 @@ RectTransform:
   m_GameObject: {fileID: 92079352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 972896321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -420.9, y: -133}
+  m_AnchoredPosition: {x: -361, y: -191.99998}
   m_SizeDelta: {x: 25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92079354
@@ -1639,7 +1639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -286.3, y: -139}
+  m_AnchoredPosition: {x: -217, y: -191}
   m_SizeDelta: {x: 305.19, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964267458
@@ -1753,23 +1753,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 964267458}
   lines:
-  - "KO:  \"They marched out of the puddles and left me in the dust \u2014 crinkled,
-    brittle, and uninvited.  [E]"
-  - 'KO: You can''t march in the Night Parade if you''re too brittle to dance, and
-    the God of Storms made sure of that. [E]'
-  - 'KO:  "A Hundred Demons... and now there''s only one left to count." [E]'
-  - 'KO: "Since you''re wandering into this mess with me, you''d better learn how
-    to move."[E]'
-  - 'KO: "Walk with [WASD], leap with [Space], sprint with [Shift], dash with [Q]."
-    [E]'
-  - "KO: \"Glide if you're feeling bold \u2014 [G] For fighting... a slash with [LMB],
-    a thrust with [RMB]. [E]"
-  - "KO: And if you've got any dignity left \u2014 parry with [F]. I never could.
-    No arms, you see.\" [E]"
-  - "KO: \"Help me crash their parade \u2014 the one that threw me out \u2014 and
-    I'll show you where an old shrine sleeps, forgotten past the treeline.\" [E]"
-  - 'KO: "Something rests there. A blade. The kind that doesn''t forgive the hand
-    that holds it." [E]'
+  - 'KO: "Hey you, if you help me crash the Demon Parade- [E]'
+  - 'KO: I''ll help you out with anything you need!" [E]'
+  - 'KO: "Here are the basic controls." [E]'
+  - 'KO: "Walk with [WASD], sprint with [Shift], [E]'
+  - 'KO: leap with [Space], and dash with [Q].'
+  - "KO: \"Glide if you're feeling bold \u2014 [G].\" [E]"
+  - 'KO: "For fighting... [E]'
+  - 'KO: a slash with [LMB], and a thrust with [RMB]." [E]'
+  - "KO: \"And if you've got any dignity left \u2014 parry with [F].\" [E]"
+  - 'KO: "Now let''s go crash that parade!" [E]'
   textSpeed: 0.02
   icon: {fileID: 92079352}
   bubble: {fileID: 1703677364}
@@ -1826,7 +1819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3128,15 +3121,15 @@ RectTransform:
   m_GameObject: {fileID: 1703677364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.65, y: 0.3, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 972896321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -260.43817, y: -141.44453}
-  m_SizeDelta: {x: -185.7527, y: -253.7976}
+  m_AnchoredPosition: {x: -182, y: -187.52}
+  m_SizeDelta: {x: -185.7527, y: -303.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703677366
 MonoBehaviour:
@@ -3158,7 +3151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
