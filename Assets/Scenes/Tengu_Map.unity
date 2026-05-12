@@ -9884,6 +9884,14 @@ PrefabInstance:
       propertyPath: tenguRespawnManager
       value: 
       objectReference: {fileID: 100630649}
+    - target: {fileID: 3794973717363691843, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ded8b5b336e5f7b439924bfcf9dafc33, type: 2}
+    - target: {fileID: 4218845839420165472, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ded8b5b336e5f7b439924bfcf9dafc33, type: 2}
     - target: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_Name
       value: Player
