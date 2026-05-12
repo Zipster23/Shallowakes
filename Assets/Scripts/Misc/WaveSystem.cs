@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class WaveManager : MonoBehaviour
+public class WaveSystem : MonoBehaviour
 {
     [Header("Row Parents")]
     public GameObject rowA;
@@ -45,6 +45,13 @@ public class WaveManager : MonoBehaviour
     public void TriggerAllScaleIn()
     {
         StartCoroutine(CascadeIn());
+    }
+
+    public void ResetWaves()
+    {
+        StopAllCoroutines();
+        foreach (var w in wavesA) w.ResetToInitial();
+        foreach (var w in wavesB) w.ResetToInitial();
     }
 
     IEnumerator CascadeIn()

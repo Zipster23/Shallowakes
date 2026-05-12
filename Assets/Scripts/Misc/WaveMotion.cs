@@ -5,7 +5,7 @@ public class WaveMotion : MonoBehaviour
     public enum ScaleState { Idle, ScalingIn, Looping, ScalingOut }
     public ScaleState state = ScaleState.Idle;
 
-    [HideInInspector] public WaveManager manager;
+    [HideInInspector] public WaveSystem manager;
     [HideInInspector] public bool isMirrored = false;
 
     private Vector3 startPos;
@@ -27,6 +27,12 @@ public class WaveMotion : MonoBehaviour
         state = ScaleState.ScalingIn;
         stateStartTime = Time.time;
         waveStartTime = Time.time;
+    }
+
+    public void ResetToInitial()
+    {
+        StopAllCoroutines();
+        transform.localScale = Vector3.zero; // or whatever the "hidden" scale is pre-cinematic
     }
 
     void Update()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SeaSplitCinematic : MonoBehaviour
 {
     [SerializeField] private GameObject land;
-    [SerializeField] private WaveManager waveManager;
+    [SerializeField] private WaveSystem waveManager;
 
     [Header("Platform Movement")]
     [SerializeField] public float platformVelocity = 5f;
@@ -140,6 +140,6 @@ public class SeaSplitCinematic : MonoBehaviour
         gameObject.SetActive(true);
 
         // Optional: Reset WaveManager state if it has a Reset method
-        // waveManager.ResetWaves(); 
+        waveManager.ResetWaves(); 
     }
 }

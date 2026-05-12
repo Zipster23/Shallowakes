@@ -144,6 +144,9 @@ public class SusanooRespawnManager : MonoBehaviour
 
             // reset arena barrier
             arenaBarrier.SetActive(false);
+
+            // reset seasplit cinematic
+            seaSplitCinematic.ResetCinematic();
         }
 
         
