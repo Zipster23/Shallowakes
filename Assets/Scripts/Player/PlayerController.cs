@@ -28,6 +28,16 @@ public class PlayerController : MonoBehaviour
     // ── Hitstop Settings ───────────────────────────────────────────────
     [SerializeField] private float hitstopDuration = 0.04f;
 
+    [Header("Muramasa Abilities")]
+    public GameObject playerSlashPrefab;
+    public float playerSlashSpeed = 25f;        // how fast the slash travels
+    public float playerSlashCooldown = 15f;     // cooldown between uses
+    private float playerSlashCooldownTimer = 0f;
+    public KeyCode slashAbilityKey = KeyCode.Alpha1;
+
+
+
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -86,7 +96,23 @@ public class PlayerController : MonoBehaviour
             movement.Glide(input.MovementInput);
         else if (movement.isGliding)
             movement.ExitGlide();
+
+
+        // ── Slash Projectile ──────────────────────────────────────────
+        playerSlashCooldownTimer -= Time.deltaTime;
+
+        // fire horizontal slash on "1" Press
+        if(Input.GetKeyDown(slashAbilityKey) && playerSlashCooldownTimer <= 0f && !isBusy)
+        {
+            FireHorizontalSlash();
+            controller.PlayProjectileSlashAnimation();
+            playerSlashCooldownTimer = playerSlashCooldown;
+        }
+
     }
+
+
+
 
     // ── Attack Logic ──────────────────────────────────────────────────
 
@@ -122,6 +148,42 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(RestoreMovementGradually());
     }
 
+
+
+    //── Projectile Slash Logic ──────────────────────────────────────────────────
+
+    private void FireHorizontalSlash()
+    {
+        
+        // spawn in front of the player at chest height
+        Vector3 spawnPos = transform.position + transform.forward * 0.5f;
+        spawnPos.y = transform.position.y + 1f;
+
+        Vector3 direction = transform.forward;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject slash = Instantiate(playerSlashPrefab, spawnPos, rotation);
+        slash.transform.localScale = Vector3.one * 2f;
+        slash.tag = "PlayerProjectile";
+
+        WindSlash windSlash = slash.GetComponent<WindSlash>();
+        if(windSlash != null)
+        {
+            windSlash.SetDirection(direction);
+            windSlash.speed = playerSlashSpeed;
+            windSlash.slashType = WindSlash.SlashType.Horizontal;
+            windSlash.isParriable = false;  // susanoo handles this differently
+            windSlash.damage = attackDamage;
+        }
+
+        // play attack sfx
+        sfx.PlayProjectileSlashSFX();
+
+    }
+
+
+
+
     private IEnumerator RestoreMovementGradually()
     {
         float elapsed = 0f;
@@ -138,12 +200,18 @@ public class PlayerController : MonoBehaviour
         ResetAttack();
     }
 
+
+
+
     // Called externally by PlayerHealth when the player gets parried
     public void ResetAttack()
     {
         isBusy = false;
         movement.attackMovementMultiplier = 1f;
     }
+
+
+
 
     // ── Lunge ─────────────────────────────────────────────────────────
 
@@ -162,6 +230,9 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
+
+
+
 
     // ── Hit Detection ─────────────────────────────────────────────────
 
@@ -204,6 +275,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
+
     // ── Hitstop ───────────────────────────────────────────────────────
 
     private IEnumerator DoHitstop()
@@ -212,6 +286,16 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(hitstopDuration);
         Time.timeScale = 1f;
     }
+
+
+
+
+
+
+
+
+
+
 
     public void OnDrawGizmosSelected()
     {

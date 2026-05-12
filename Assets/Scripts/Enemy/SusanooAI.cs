@@ -113,6 +113,15 @@ public class SusanooAI : MonoBehaviour
 
 
 
+    // --- PLAYER ABILITY PARRY DETECTION --- //
+
+    [Header("Projectile Parry")]
+    public float projectileParryRange = 8f;         // how far Susanoo can detect projectiles
+    public int projectileParryChance = 70;          // % chance to parry incoming projectile slash
+    private float projectileParryCheckTimer = 0f;
+
+
+
 
 
     // --- SETUP --- //
@@ -152,6 +161,13 @@ public class SusanooAI : MonoBehaviour
         {
             HandleEnraged();
             return;
+        }
+
+        projectileParryCheckTimer -= Time.deltaTime;
+        if(projectileParryCheckTimer <= 0f)
+        {
+            projectileParryCheckTimer = 0.2f;
+            CheckForIncomingProjectile();
         }
 
         // run whichever state we're currently in
@@ -680,6 +696,47 @@ public class SusanooAI : MonoBehaviour
 
             yield return null;
         }
+    }
+
+
+
+
+    private void CheckForIncomingProjectile()
+    {
+        
+        // dont parry if already in a special state
+        if((currentState == SusanooState.IsParried || currentState == SusanooState.Enraged || currentState == SusanooState.LightningStrike))
+        {
+            return;
+        }
+
+        // find all player projectiles nearby
+        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("PlayerProjectile");
+        foreach(GameObject proj in projectiles)
+        {
+            float distance = Vector3.Distance(transform.position, proj.transform.position);
+            if(distance <= projectileParryRange)
+            {
+                // check if its heading towards susanoo
+                WindSlash ws = proj.GetComponent<WindSlash>();
+                if(ws != null)
+                {
+                    int roll = Random.Range(0, 100);
+                    if(roll < projectileParryChance)
+                    {
+                        // susanoo parries the projectile
+                        currentState = SusanooState.Parry;
+                        animator.SetTrigger("Parry");
+                        vfx.EmitSparkParticles();
+                        sfx.PlayBladeDeflectSFX();
+                        attackTimer = timeBetweenAttacks;
+                        Destroy(proj);
+                    }
+                }
+                break;  // only parry one projectile at a time
+            }
+        }
+
     }
 
 

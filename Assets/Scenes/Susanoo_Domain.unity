@@ -19350,7 +19350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941269937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157872, y: -0.000000017073427, z: 0.000000006205139, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157872, y: 0.000000014792927, z: -0.000000005376317, w: 0.9398532}
   m_LocalPosition: {x: 618.115, y: 14.72, z: 353}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27260,6 +27260,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 404390135254177611, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: projectileSlashSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d21b7f9755716b4eabd9378edb8ed66, type: 3}
     - target: {fileID: 602382185360954258, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: tenguAI
       value: 
@@ -27278,11 +27282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.032065134
+      value: 0.0320651
       objectReference: {fileID: 0}
     - target: {fileID: 1188893767579576051, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.011653702
+      value: -0.01165369
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27294,11 +27298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.032075062
+      value: 0.032075096
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.011626235
+      value: -0.011626247
       objectReference: {fileID: 0}
     - target: {fileID: 2582317380386047717, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -27336,6 +27340,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: playerSlashSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812942811184965366, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
+      propertyPath: playerSlashPrefab
+      value: 
+      objectReference: {fileID: 4836956773076364260, guid: f30a4827282931c43b6a144b7339d8d0, type: 3}
     - target: {fileID: 2985658943992954772, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: vfx
       value: 
