@@ -31975,6 +31975,14 @@ PrefabInstance:
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 3642160410948286680, guid: 6f5bbaa87f7880147a5e6146ccc27953, type: 3}
+    - target: {fileID: 9146843261696921838, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b479bcfa005e7a949a3f20a0940daacd, type: 2}
+    - target: {fileID: 9171178974688580311, guid: 2df227439ed8c3a48af74caa0ea7f650, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b479bcfa005e7a949a3f20a0940daacd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerSwordSlashRed
+  m_Name: SusanooSwordSlash
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: b479bcfa005e7a949a3f20a0940daacd, type: 2}
+  m_Parent: {fileID: 2100000, guid: 8282659bf7c432b4aa944d7231d06085, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -27,5 +27,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _TintColor: {r: 1, g: 0, b: 0, a: 0.5}
+    - _TintColor: {r: 0.016202211, g: 1, b: 0, a: 0.5}
   m_BuildTextureStacks: []
