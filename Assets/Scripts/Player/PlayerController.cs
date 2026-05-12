@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float hitstopDuration = 0.04f;
 
     [Header("Muramasa Abilities")]
+    [SerializeField] private bool hasMuramasaBlade = false;
     public GameObject playerSlashPrefab;
     public float playerSlashSpeed = 25f;        // how fast the slash travels
     public float playerSlashCooldown = 15f;     // cooldown between uses
@@ -99,15 +100,21 @@ public class PlayerController : MonoBehaviour
 
 
         // ── Slash Projectile ──────────────────────────────────────────
-        playerSlashCooldownTimer -= Time.deltaTime;
-
-        // fire horizontal slash on "1" Press
-        if(Input.GetKeyDown(slashAbilityKey) && playerSlashCooldownTimer <= 0f && !isBusy)
+        if(hasMuramasaBlade)
         {
-            FireHorizontalSlash();
-            controller.PlayProjectileSlashAnimation();
-            playerSlashCooldownTimer = playerSlashCooldown;
+            
+            playerSlashCooldownTimer -= Time.deltaTime;
+
+            // fire horizontal slash on "1" Press
+            if(Input.GetKeyDown(slashAbilityKey) && playerSlashCooldownTimer <= 0f && !isBusy)
+            {
+                FireHorizontalSlash();
+                controller.PlayProjectileSlashAnimation();
+                playerSlashCooldownTimer = playerSlashCooldown;
+            }
+
         }
+        
 
     }
 
