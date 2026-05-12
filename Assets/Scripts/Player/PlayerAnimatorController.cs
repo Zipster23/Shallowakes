@@ -66,6 +66,11 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetTrigger("ProjectileSlash");
     }
 
+    public void PlayDashSlashAnimation()
+    {
+        animator.SetTrigger("DashSlash");
+    }
+
     // Checks if the animator is currently in an attack state on layer 1 (body layer)
     // We use IsTag instead of IsName because IsName breaks inside sub-state machines
     public bool IsPlayingAttack()

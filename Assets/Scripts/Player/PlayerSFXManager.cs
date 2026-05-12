@@ -11,6 +11,7 @@ public class PlayerSFXManager : MonoBehaviour
     [SerializeField] private AudioClip dashSFX;
     [SerializeField] private AudioClip getHitSFX;
     [SerializeField] private AudioClip projectileSlashSFX;
+    [SerializeField] private AudioClip dashSlashSFX;
     [SerializeField] private float katanaDeflectVolume = 0.7f;
 
     public void playKatanaAttackSFX()
@@ -41,5 +42,10 @@ public class PlayerSFXManager : MonoBehaviour
     public void PlayProjectileSlashSFX()
     {
         katanaSFX.PlayOneShot(projectileSlashSFX);
+    }
+
+    public void PlayDashSlashSFX()
+    {
+        katanaSFX.PlayOneShot(dashSlashSFX);
     }
 }

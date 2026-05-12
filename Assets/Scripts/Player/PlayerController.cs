@@ -28,13 +28,23 @@ public class PlayerController : MonoBehaviour
     // ── Hitstop Settings ───────────────────────────────────────────────
     [SerializeField] private float hitstopDuration = 0.04f;
 
-    [Header("Muramasa Abilities")]
+    [Header("Projectile Ability")]
     [SerializeField] private bool hasMuramasaBlade = false;
     public GameObject playerSlashPrefab;
     public float playerSlashSpeed = 25f;        // how fast the slash travels
     public float playerSlashCooldown = 15f;     // cooldown between uses
     private float playerSlashCooldownTimer = 0f;
     public KeyCode slashAbilityKey = KeyCode.Alpha1;
+
+    [Header("Dash Ability")]
+    public float playerDashSlashSpeed = 20f;    // how fast the dash moves the player forward
+    public float playerDashSlashRange = 8f;     // max distance of the dash
+    public float playerDashSlashCooldown = 10f; // cooldown
+    private float playerDashSlashTimer = 0f;
+    private bool isDashSlashing = false;
+    public KeyCode dashSlashKey = KeyCode.Alpha2;
+
+
 
 
 
@@ -113,6 +123,13 @@ public class PlayerController : MonoBehaviour
                 playerSlashCooldownTimer = playerSlashCooldown;
             }
 
+            playerDashSlashTimer -= Time.deltaTime;
+            if(Input.GetKeyDown(dashSlashKey) && playerDashSlashTimer <= 0f && !isBusy && !isDashSlashing)
+            {
+                StartCoroutine(PlayerDashSlash());
+                playerDashSlashTimer = playerDashSlashCooldown;
+            }
+
         }
         
 
@@ -185,6 +202,60 @@ public class PlayerController : MonoBehaviour
 
         // play attack sfx
         sfx.PlayProjectileSlashSFX();
+
+    }
+
+
+
+
+    //── Dash Slash Logic ──────────────────────────────────────────────────
+
+    private IEnumerator PlayerDashSlash()
+    {
+        
+        isDashSlashing = true;
+        isBusy = true;
+
+        // play attack animation
+        controller.PlayDashSlashAnimation();
+
+        // play dash vfx
+        vfx.PlayDashEffect(transform.position + Vector3.up * 0.5f, transform);
+        sfx.PlayDashSFX();
+
+        // brief pause before dash
+        yield return new WaitForSeconds(0.1f);
+
+        // dash forward with slight aim assist
+        Vector3 dashDirection = transform.forward;
+        Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, playerDashSlashRange * 1.5f, enemyLayers);
+        if (nearbyEnemies.Length > 0)
+        {
+            Vector3 dirToEnemy = (nearbyEnemies[0].transform.position - transform.position).normalized;
+            dashDirection = Vector3.Lerp(transform.forward, dirToEnemy, 0.3f).normalized;
+        }
+
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = transform.position + dashDirection * playerDashSlashRange;
+        targetPos.y = transform.position.y;
+
+        float elapsed = 0f;
+        float dashDuration = 0.3f;
+        while (elapsed < dashDuration)
+        {
+            elapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / dashDuration);
+            yield return null;
+        }
+
+        sfx.PlayDashSlashSFX();
+
+        // wait for attack animation event to fire Attack()
+        // then isBusy and isDashSlashing get reset in Attack() when it finishes
+        yield return new WaitForSeconds(0.5f);
+
+        isDashSlashing = false;
+        isBusy = false;
 
     }
 
@@ -273,6 +344,35 @@ public class PlayerController : MonoBehaviour
             if (yokaiAI != null)
             {
                 if (yokaiAI.CheckYokaiResponse()) { isBusy = false; return; }
+            }
+
+            enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
+            vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
+            sfx.playKatanaHitSFX();
+            StartCoroutine(DoHitstop());
+        }
+    }
+
+
+
+
+    // Called by Animation Event on the dash slash animation specifically
+    // Uses a larger hit radius than normal Attack() since the player just dashed
+    public void DashSlashAttack()
+    {
+        if (GetComponent<PlayerHealth>().currentHealth <= 0) return;
+
+        // larger sphere than normal Attack() to account for dash momentum
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange * 3f, enemyLayers);
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            SusanooAI susanooAI = enemy.GetComponentInParent<SusanooAI>();
+            if (susanooAI != null && susanooAI.CheckSusanooResponse())
+            {
+                isBusy = false;
+                isDashSlashing = false;
+                return;
             }
 
             enemy.GetComponentInParent<Enemy>().TakeDamage(attackDamage);
