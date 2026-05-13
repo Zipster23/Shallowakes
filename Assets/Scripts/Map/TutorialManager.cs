@@ -26,7 +26,7 @@ public class TutorialManager : MonoBehaviour
     [Header("Tutorial Dialogue")]
     [SerializeField] private string[] introLines;
     [SerializeField] private string[] parryInstructionLines;
-    [SerializeField] private string[] attackInstructionLines;
+    [SerializeField] private string[] DodgeInstructionLines;
     [SerializeField] private string[] completionLines;
 
     private int currentStep = 0;
@@ -54,8 +54,8 @@ public class TutorialManager : MonoBehaviour
 
         if (attackDummy != null)
         {
-            attackDummy.SetActive(false);
-            Debug.Log("Attack dummy found and disabled");
+            attackDummy.SetActive(true);
+            Debug.Log("Attack dummy found and enabled");
         }
         else
         {
@@ -184,7 +184,7 @@ public class TutorialManager : MonoBehaviour
 
             case 2:
                 Debug.Log("Starting attack setup");
-                StartCoroutine(DelayedAttackSetup());
+                StartCoroutine(DelayedDodgeSetup());
                 break;
 
             case 3:
@@ -278,22 +278,22 @@ public class TutorialManager : MonoBehaviour
         SpawnParryDummy();
     }
 
-    IEnumerator DelayedAttackSetup()
+    IEnumerator DelayedDodgeSetup()
     {
         Debug.Log("DelayedAttackSetup coroutine started");
         yield return new WaitForSeconds(1f);
 
-        if (attackInstructionLines == null || attackInstructionLines.Length == 0)
+        if (DodgeInstructionLines == null || DodgeInstructionLines.Length == 0)
         {
-            Debug.LogError("Attack instruction lines are empty!");
+            Debug.LogError("Dodge instruction lines are empty!");
             yield break;
         }
 
-        ShowDialogueSequence(attackInstructionLines);
+        ShowDialogueSequence(DodgeInstructionLines);
         yield return new WaitUntil(() => !dialogueActive);
-        Debug.Log("Attack instructions finished, spawning dummy in 0.5s");
+        Debug.Log("Dodge instructions finished, spawning dummy in 0.5s");
         yield return new WaitForSeconds(0.5f);
-        SpawnAttackDummy();
+        SpawnDodgeDummy();
     }
 
     IEnumerator DelayedCompletion()
@@ -337,30 +337,11 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void SpawnAttackDummy()
+    private void SpawnDodgeDummy()
     {
-        Debug.Log("SpawnAttackDummy() called");
 
-        if (attackDummy == null)
-        {
-            Debug.LogError("Attack dummy is NULL! Assign Dummy2 in inspector!");
-            return;
-        }
-
-        Debug.Log($"Enabling attack dummy: {attackDummy.name}");
-        attackDummy.SetActive(true);
-
-        TutorialDummy dummyScript = attackDummy.GetComponent<TutorialDummy>();
-        if (dummyScript != null)
-        {
-            Debug.Log("Initializing attack dummy script");
-            dummyScript.Initialize(TutorialDummy.TutorialAction.Attack, OnAttackCompleted);
-        }
-        else
-        {
-            Debug.LogError("TutorialDummy script not found on attack dummy!");
-        }
     }
+
 
     private void OnParryCompleted()
     {
@@ -373,6 +354,5 @@ public class TutorialManager : MonoBehaviour
     {
         Debug.Log("OnAttackCompleted() callback triggered!");
         attackDummy.SetActive(false);
-        ProceedToNextStep();
     }
 }
