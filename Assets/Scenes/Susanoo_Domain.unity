@@ -13426,8 +13426,8 @@ PrefabInstance:
       value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1492397577603916663, guid: 158e426725463794cae0a836b2491d0b, type: 3}
-      propertyPath: InitialModule.startColor.maxGradient.ctime1
-      value: 14456
+      propertyPath: prewarm
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1492397577603916663, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key0.b
@@ -13482,6 +13482,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1492397577801183602, guid: 158e426725463794cae0a836b2491d0b, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492397577801183602, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
@@ -13495,7 +13499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1492397577801183602, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1492397577801183602, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: InitialModule.startSize.scalar
