@@ -323,20 +323,34 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider enemy in hitEnemies)
         {
+            // ADD THIS: Check for tutorial dummy FIRST
+            if (enemy.CompareTag("TutorialDummy"))
+            {
+                TutorialDummy dummy = enemy.GetComponent<TutorialDummy>();
+                if (dummy != null)
+                {
+                    dummy.OnHitByPlayer();
+                    vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
+                    sfx.playKatanaHitSFX();
+                    StartCoroutine(DoHitstop());
+                }
+                continue; // Skip to next enemy, don't process regular damage
+            }
+
             // check for TenguAI
             TenguAI tenguAI = enemy.GetComponentInParent<TenguAI>();
 
-            if(tenguAI != null)
+            if (tenguAI != null)
             {
-                if(tenguAI.currentState == TenguAI.TenguState.Enraged) { isBusy = false; return; }
-                if(tenguAI.CheckTenguResponse()) { isBusy = false; return; }
+                if (tenguAI.currentState == TenguAI.TenguState.Enraged) { isBusy = false; return; }
+                if (tenguAI.CheckTenguResponse()) { isBusy = false; return; }
             }
 
             // check for SusanooAI
             SusanooAI susanooAI = enemy.GetComponentInParent<SusanooAI>();
-            if(susanooAI != null)
+            if (susanooAI != null)
             {
-                if(susanooAI.CheckSusanooResponse()) { isBusy = false; return; }
+                if (susanooAI.CheckSusanooResponse()) { isBusy = false; return; }
             }
 
             // check for YokaiAI
@@ -362,11 +376,24 @@ public class PlayerController : MonoBehaviour
     {
         if (GetComponent<PlayerHealth>().currentHealth <= 0) return;
 
-        // larger sphere than normal Attack() to account for dash momentum
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange * 3f, enemyLayers);
 
         foreach (Collider enemy in hitEnemies)
         {
+            // ADD THIS: Check for tutorial dummy FIRST
+            if (enemy.CompareTag("TutorialDummy"))
+            {
+                TutorialDummy dummy = enemy.GetComponent<TutorialDummy>();
+                if (dummy != null)
+                {
+                    dummy.OnHitByPlayer();
+                    vfx.PlayHitEffect(enemy.transform.position + Vector3.up * 2f);
+                    sfx.playKatanaHitSFX();
+                    StartCoroutine(DoHitstop());
+                }
+                continue;
+            }
+
             SusanooAI susanooAI = enemy.GetComponentInParent<SusanooAI>();
             if (susanooAI != null && susanooAI.CheckSusanooResponse())
             {

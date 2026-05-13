@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'KO:'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
   m_sharedMaterial: {fileID: -3765264216765690048, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
@@ -1739,38 +1739,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964267456}
   m_CullTransparentMesh: 1
---- !u!114 &971168730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911529486217002937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4a9b616020e1249b78da5a34facf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 964267458}
-  lines:
-  - 'KO: "Hey you, if you help me crash the Demon Parade- [E]'
-  - 'KO: I''ll help you out with anything you need!" [E]'
-  - 'KO: "Here are the basic controls." [E]'
-  - 'KO: "Walk with [WASD], sprint with [Shift], [E]'
-  - 'KO: leap with [Space], and dash with [Q].'
-  - "KO: \"Glide if you're feeling bold \u2014 [G].\" [E]"
-  - 'KO: "For fighting... [E]'
-  - 'KO: a slash with [LMB], and a thrust with [RMB]." [E]'
-  - "KO: \"And if you've got any dignity left \u2014 parry with [F].\" [E]"
-  - 'KO: "Now let''s go crash that parade!" [E]'
-  textSpeed: 0.02
-  icon: {fileID: 92079352}
-  bubble: {fileID: 1703677364}
-  lightBeam: {fileID: 191723408}
-  kasaObakeOnShallo: {fileID: 1721597274}
-  kasaObakeDisappearDelay: 2.5
-  playerMovement: {fileID: 1581345127}
-  playerVFXManager: {fileID: 1581345128}
 --- !u!1 &972896316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +1995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.45313278
+      value: 0.45313275
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2831,6 +2799,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1423185377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1423185379}
+  - component: {fileID: 1423185378}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1423185378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423185377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fdaea844c801c5458f2204620921fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 1703677364}
+  dialogueText: {fileID: 964267458}
+  icon: {fileID: 92079352}
+  textSpeed: 0.02
+  kasaObakeNPC: {fileID: 8911529486217002937}
+  kasaObakeOnShallo: {fileID: 1721597274}
+  kasaObakeDisappearDelay: 2.5
+  parryDummy: {fileID: 1622356529}
+  attackDummy: {fileID: 1847487438}
+  playerMovement: {fileID: 1581345127}
+  playerVFXManager: {fileID: 1581345128}
+  introLines:
+  - 'KO: "Hey you, if you help me crash the Demon Parade- [E]'
+  - 'KO: I''ll help you out with anything you need!" [E]'
+  - 'KO: "Here are the basic controls." [E]'
+  - 'KO: "Walk with [WASD], sprint with [Shift], [E]'
+  - 'KO: leap with [Space], and dash with [Q].'
+  - 'KO: "For fighting... [E]'
+  parryInstructionLines:
+  - 'KO: "Parry with [F]." [E]'
+  attackInstructionLines:
+  - 'KO: a slash with [LMB], and a thrust with [RMB]." [E]'
+  completionLines:
+  - "KO: \"Glide if you're feeling bold \u2014 [G].\" [E]"
+  - 'KO: "Now let''s go crash that parade!" [E]'
+--- !u!4 &1423185379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423185377}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1523209846
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2996,6 +3033,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.60931945, y: 2, z: 2}
   m_Center: {x: -0.1953409, y: 1, z: -0.000000015153905}
+--- !u!1001 &1542726317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 184.67044
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -181.13301
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.104564816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9945181
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 167.996
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_Name
+      value: Dummy2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
 --- !u!1 &1581345116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4636359778061210521, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
@@ -3023,6 +3117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e5b92164b60f444ad946de7b676611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1622356529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+  m_PrefabInstance: {fileID: 1806129227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1685573785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,13 +3672,79 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795088126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34157875, y: 0.000000028009813, z: -0.000000010179841, w: 0.9398532}
+  m_LocalRotation: {x: 0.34157875, y: 0.000000028009813, z: -0.000000010179842, w: 0.9398532}
   m_LocalPosition: {x: 387, y: 10.645, z: -378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 41.18, y: 13.635, z: 2.606}
+--- !u!1001 &1806129227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 184.34401
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -179.1732
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.104564816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9945181
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 167.996
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_Name
+      value: Dummy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+--- !u!1 &1847487438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+  m_PrefabInstance: {fileID: 1542726317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1917587944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4655,7 +4820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535172009977366819}
   - component: {fileID: 6737293006465044295}
-  - component: {fileID: 971168730}
+  - component: {fileID: 8911529486217002938}
   m_Layer: 0
   m_Name: KasaObake
   m_TagString: Untagged
@@ -4663,6 +4828,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8911529486217002938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911529486217002937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b9ccc596f38b645bf9a3c1e3de2e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialManager: {fileID: 1423185378}
+  icon: {fileID: 92079352}
+  bubble: {fileID: 1703677364}
+  lightBeam: {fileID: 191723408}
 --- !u!4 &9098397560211121072
 Transform:
   m_ObjectHideFlags: 0
@@ -4698,3 +4879,6 @@ SceneRoots:
   - {fileID: 697301937}
   - {fileID: 191723413}
   - {fileID: 972896321}
+  - {fileID: 1423185379}
+  - {fileID: 1806129227}
+  - {fileID: 1542726317}
