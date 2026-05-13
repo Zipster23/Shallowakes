@@ -528,6 +528,35 @@ MonoBehaviour:
   shadowCloneEffect: {fileID: 0}
   appearSmokeEffect: {fileID: 0}
   deathEffect: {fileID: 1375353507806458937, guid: bfd016bff164dfc4aac33a0563922772, type: 3}
+--- !u!95 &282461821 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 767373384300866736, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+  m_PrefabInstance: {fileID: 2139314470}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &282461823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282461805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e40e22ba74dc9d4f965d174268fb235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnimator: {fileID: 282461821}
+  maxHealth: 20
+  currentHealth: 0
+  tenguIntroCinematic: {fileID: 0}
+  susanooIntroCinematic: {fileID: 0}
+  mapImage: {fileID: 0}
+  yokaiVFXManager: {fileID: 0}
+  yokaiSFXManager: {fileID: 0}
+  isInvincible: 0
+  hasEnragedPhase: 0
+  enrageHealthThreshold: 20
+  isBoss: 0
 --- !u!4 &328462595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2545823773444583948, guid: fa4bbcd1df0484c0eb7f4c05dc4a2ea5, type: 3}
@@ -2033,11 +2062,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4531328
+      value: 0.45313278
       objectReference: {fileID: 0}
     - target: {fileID: 1732062249050902442, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16424689
+      value: -0.16424687
       objectReference: {fileID: 0}
     - target: {fileID: 2290192993034581352, guid: c489fcba6c3bf0d49ab2cf709a3abf37, type: 3}
       propertyPath: m_IsActive
@@ -2886,12 +2915,13 @@ MonoBehaviour:
   kasaObakeOnShallo: {fileID: 1721597274}
   kasaObakeDisappearDelay: 2.5
   parryDummy: {fileID: 1622356529}
-  attackDummy: {fileID: 0}
+  firstDummy: {fileID: 282461805}
+  dodgeDummy: {fileID: 4836956773076364260, guid: a6d3d07194b32c9468ba6b2c1e016b86, type: 3}
   playerMovement: {fileID: 1581345127}
   playerVFXManager: {fileID: 1581345128}
   introLines:
   - 'KO: "Hey, Help me! [Press M1]" [E]'
-  - 'KO: '
+  - 'KO: "Thank you for saving me!" [E]'
   - 'KO: "Here are the basic controls." [E]'
   - 'KO: "Walk with [WASD], sprint with [Shift], [E]'
   - 'KO: leap with [Space] and double jump [Space + Space], and dash with [Q].'
@@ -2904,6 +2934,9 @@ MonoBehaviour:
   - 'KO: "Try slashing with [LMB], or thrust attacking with [RMB]" [E]'
   - "KO: \"Glide if you're feeling bold \u2014 [G].\" [E]"
   - 'KO: "Now let''s go crash that parade!" [E]'
+  playerPrefab: {fileID: 1581345116}
+  windSlashPrefab: {fileID: 4836956773076364260, guid: a6d3d07194b32c9468ba6b2c1e016b86, type: 3}
+  windSlashSpeed: 0
 --- !u!4 &1423185379
 Transform:
   m_ObjectHideFlags: 0
@@ -3743,7 +3776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_Name
-      value: Dummy1
+      value: ParryDummy
       objectReference: {fileID: 0}
     - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_IsActive
@@ -4358,11 +4391,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_Name
-      value: Dummy2
+      value: StartDummy
       objectReference: {fileID: 0}
     - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8672782946617103676, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_UseGravity
@@ -4385,6 +4422,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       insertIndex: -1
       addedObject: {fileID: 282461818}
+    - targetCorrespondingSourceObject: {fileID: 7817049150285586843, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 282461823}
   m_SourcePrefab: {fileID: 100100000, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
 --- !u!137 &363043172882718497
 SkinnedMeshRenderer:

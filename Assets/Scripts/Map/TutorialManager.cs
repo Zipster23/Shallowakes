@@ -17,7 +17,8 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Tutorial Dummies")]
     [SerializeField] private GameObject parryDummy;
-    [SerializeField] private GameObject attackDummy;
+    [SerializeField] private GameObject firstDummy;
+    [SerializeField] private GameObject dodgeDummy;
 
     [Header("Player References")]
     [SerializeField] private PlayerMovement playerMovement;
@@ -34,6 +35,10 @@ public class TutorialManager : MonoBehaviour
     private bool dialogueActive = false;
     private string[] currentLines;
     private Coroutine typingCoroutine;
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject windSlashPrefab;
+    [SerializeField] private float windSlashSpeed;
+
 
     private void Start()
     {
@@ -52,14 +57,14 @@ public class TutorialManager : MonoBehaviour
             Debug.LogError("PARRY DUMMY IS NULL! Assign it in inspector!");
         }
 
-        if (attackDummy != null)
+        if (dodgeDummy != null)
         {
-            attackDummy.SetActive(true);
-            Debug.Log("Attack dummy found and enabled");
+            dodgeDummy.SetActive(true);
+            Debug.Log("dodge dummy found and enabled");
         }
         else
         {
-            Debug.LogError("ATTACK DUMMY IS NULL! Assign it in inspector!");
+            Debug.LogError("DODGE DUMMY IS NULL! Assign it in inspector!");
         }
 
         if (kasaObakeOnShallo != null)
@@ -82,6 +87,8 @@ public class TutorialManager : MonoBehaviour
     private void Update()
     {
         if (!dialogueActive) return;
+
+        if (!firstDummy.activeSelf) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -339,7 +346,19 @@ public class TutorialManager : MonoBehaviour
 
     private void SpawnDodgeDummy()
     {
+        // spawn wind slash aimed at player
+        Vector3 spawnPos = transform.position + transform.forward + transform.up * 10f;
+        Vector3 direction = (playerPrefab.transform.position - spawnPos).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
 
+        GameObject slash = Instantiate(windSlashPrefab, spawnPos, rotation);
+        WindSlash windSlash = slash.GetComponent<WindSlash>();
+        if (windSlash != null)
+        {
+            windSlash.SetDirection(direction);
+            windSlash.speed = windSlashSpeed;
+            windSlash.isParriable = true;
+        }
     }
 
 
@@ -348,11 +367,5 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("OnParryCompleted() callback triggered!");
         parryDummy.SetActive(false);
         ProceedToNextStep();
-    }
-
-    private void OnAttackCompleted()
-    {
-        Debug.Log("OnAttackCompleted() callback triggered!");
-        attackDummy.SetActive(false);
     }
 }
