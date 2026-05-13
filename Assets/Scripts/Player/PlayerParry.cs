@@ -159,16 +159,15 @@ public class PlayerParry : MonoBehaviour
         Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, parryRange);
         foreach (Collider col in nearbyEnemies)
         {
-            TutorialDummy dummy = GameObject.FindGameObjectWithTag("TutorialDummy").GetComponent<TutorialDummy>();
-
-            if (dummy != null)
-            {
-                dummy.OnParried();
-            }
-
             YokaiAI yokai = col.GetComponent<YokaiAI>();
             if (yokai != null && yokai.isAttackActive)
             {
+                TutorialDummy dummy = GameObject.FindGameObjectWithTag("TutorialDummy").GetComponent<TutorialDummy>();
+
+                if (dummy != null)
+                {
+                    dummy.OnParried();
+                }
                 yokai.GetParried();
                 break;
             }
