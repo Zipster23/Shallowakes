@@ -16,8 +16,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private float kasaObakeDisappearDelay = 3f;
 
     [Header("Tutorial Dummies")]
-    [SerializeField] private GameObject parryDummy;          // Drag Dummy1 here
-    [SerializeField] private GameObject attackDummy;         // Drag Dummy2 here
+    [SerializeField] private GameObject parryDummy;
+    [SerializeField] private GameObject attackDummy;
 
     [Header("Player References")]
     [SerializeField] private PlayerMovement playerMovement;
@@ -34,25 +34,40 @@ public class TutorialManager : MonoBehaviour
     private bool dialogueActive = false;
     private string[] currentLines;
     private Coroutine typingCoroutine;
+
     private void Start()
     {
+        Debug.Log("TutorialManager Start() called");
+
         dialoguePanel.SetActive(false);
         icon.SetActive(false);
 
-        // Make sure dummies are disabled
         if (parryDummy != null)
+        {
             parryDummy.SetActive(false);
-        if (attackDummy != null)
-            attackDummy.SetActive(false);
+            Debug.Log("Parry dummy found and disabled");
+        }
+        else
+        {
+            Debug.LogError("PARRY DUMMY IS NULL! Assign it in inspector!");
+        }
 
-        // Kasa Obake shoulder setup
+        if (attackDummy != null)
+        {
+            attackDummy.SetActive(false);
+            Debug.Log("Attack dummy found and disabled");
+        }
+        else
+        {
+            Debug.LogError("ATTACK DUMMY IS NULL! Assign it in inspector!");
+        }
+
         if (kasaObakeOnShallo != null)
         {
             Animator koAnimator = kasaObakeOnShallo.GetComponent<Animator>();
             if (koAnimator != null)
                 koAnimator.enabled = true;
 
-            // Make sure shoulder Kasa Obake visual is hidden initially
             if (kasaObakeOnShallo.transform.childCount > 0)
                 kasaObakeOnShallo.transform.GetChild(0).gameObject.SetActive(false);
         }
@@ -60,6 +75,7 @@ public class TutorialManager : MonoBehaviour
 
     public void OnPlayerMeetKasaObake()
     {
+        Debug.Log("OnPlayerMeetKasaObake() called - starting tutorial");
         StartTutorial();
     }
 
@@ -69,17 +85,20 @@ public class TutorialManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("E pressed during dialogue");
+
             if (dialogueText.text == currentLines[lineIndex])
             {
+                Debug.Log("Line complete, moving to next");
                 NextLine();
             }
             else
             {
+                Debug.Log("Skipping typing animation");
                 if (typingCoroutine != null)
                 {
                     StopCoroutine(typingCoroutine);
                 }
-
                 dialogueText.text = currentLines[lineIndex];
             }
         }
@@ -87,28 +106,42 @@ public class TutorialManager : MonoBehaviour
 
     private void StartTutorial()
     {
+        Debug.Log("StartTutorial() called");
         currentStep = 0;
+
+        if (introLines == null || introLines.Length == 0)
+        {
+            Debug.LogError("Intro lines are empty! Add dialogue in inspector!");
+            return;
+        }
+
         ShowDialogueSequence(introLines);
     }
 
     private void ShowDialogueSequence(string[] lines)
     {
+        Debug.Log($"ShowDialogueSequence called with {lines.Length} lines");
+
         currentLines = lines;
         lineIndex = 0;
         dialogueActive = true;
         dialoguePanel.SetActive(true);
         icon.SetActive(true);
         dialogueText.text = string.Empty;
-        typingCoroutine = StartCoroutine(TypeLine());
+        typingCoroutine = StartCoroutine(TypeLine()); ;
     }
 
     IEnumerator TypeLine()
     {
+        Debug.Log($"Typing line {lineIndex}: {currentLines[lineIndex]}");
+
         foreach (char c in currentLines[lineIndex].ToCharArray())
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        Debug.Log("Line typing complete");
     }
 
     private void NextLine()
@@ -123,14 +156,15 @@ public class TutorialManager : MonoBehaviour
             }
 
             typingCoroutine = StartCoroutine(TypeLine());
+            Debug.Log($"Moving to line {lineIndex}");
         }
         else
         {
+            Debug.Log("Dialogue sequence complete!");
             dialogueActive = false;
             icon.SetActive(false);
             dialoguePanel.SetActive(false);
             dialogueText.text = string.Empty;
-            StopAllCoroutines();
 
             ProceedToNextStep();
         }
@@ -139,49 +173,53 @@ public class TutorialManager : MonoBehaviour
     private void ProceedToNextStep()
     {
         currentStep++;
+        Debug.Log($"ProceedToNextStep called - currentStep is now {currentStep}");
 
         switch (currentStep)
         {
             case 1:
-                // After intro, Kasa Obake jumps on shoulder then leaves
+                Debug.Log("Starting Kasa Obake appearance");
                 StartCoroutine(KasaObakeTemporaryAppearance());
                 break;
 
             case 2:
-                // After parry success, show attack instructions
+                Debug.Log("Starting attack setup");
                 StartCoroutine(DelayedAttackSetup());
                 break;
 
             case 3:
-                // After attack success, show completion
+                Debug.Log("Starting completion");
                 StartCoroutine(DelayedCompletion());
+                break;
+
+            default:
+                Debug.LogWarning($"Unexpected step: {currentStep}");
                 break;
         }
     }
 
-    // Kasa Obake appears briefly then disappears (enables glide)
     IEnumerator KasaObakeTemporaryAppearance()
     {
+        Debug.Log("Kasa Obake appearance coroutine started");
         yield return new WaitForSeconds(0.5f);
 
-        // VFX at world Kasa Obake position
         if (kasaObakeNPC != null && playerVFXManager != null)
         {
             playerVFXManager.PlayGetHitVFX(kasaObakeNPC.transform.position);
+            Debug.Log("Played VFX at Kasa Obake NPC");
         }
 
-        // Hide world Kasa Obake
         if (kasaObakeNPC != null && kasaObakeNPC.transform.childCount > 0)
         {
             kasaObakeNPC.transform.GetChild(0).gameObject.SetActive(false);
+            Debug.Log("Hid world Kasa Obake");
         }
 
-        // Show shoulder Kasa Obake
         if (kasaObakeOnShallo != null)
         {
             Animator koAnimator = kasaObakeOnShallo.GetComponent<Animator>();
             if (koAnimator != null)
-                koAnimator.enabled = false;  // Disable animator temporarily
+                koAnimator.enabled = false;
 
             if (kasaObakeOnShallo.transform.childCount > 0)
                 kasaObakeOnShallo.transform.GetChild(0).gameObject.SetActive(true);
@@ -189,16 +227,15 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("Shoulder Kasa Obake enabled");
         }
 
-        // Wait for the disappear delay
         yield return new WaitForSeconds(kasaObakeDisappearDelay);
+        Debug.Log("Disappear delay finished");
 
-        // VFX at shoulder position
         if (kasaObakeOnShallo != null && playerVFXManager != null)
         {
             playerVFXManager.PlayGetHitVFX(kasaObakeOnShallo.transform.position);
+            Debug.Log("Played VFX at shoulder");
         }
 
-        // CRITICAL: Hide shoulder Kasa Obake visual again
         if (kasaObakeOnShallo != null)
         {
             if (kasaObakeOnShallo.transform.childCount > 0)
@@ -206,12 +243,11 @@ public class TutorialManager : MonoBehaviour
 
             Animator koAnimator = kasaObakeOnShallo.GetComponent<Animator>();
             if (koAnimator != null)
-                koAnimator.enabled = true;  // Re-enable animator for glide events
+                koAnimator.enabled = true;
 
             Debug.Log("Shoulder Kasa Obake hidden - animator re-enabled");
         }
 
-        // Set glide flag
         if (playerMovement != null)
         {
             playerMovement.metKasaObake = true;
@@ -220,70 +256,90 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        // Now start the parry training
+        Debug.Log("Starting parry setup after Kasa Obake sequence");
         StartCoroutine(DelayedParrySetup());
     }
 
     IEnumerator DelayedParrySetup()
     {
+        Debug.Log("DelayedParrySetup coroutine started");
         yield return new WaitForSeconds(0.5f);
+
+        if (parryInstructionLines == null || parryInstructionLines.Length == 0)
+        {
+            Debug.LogError("Parry instruction lines are empty!");
+            yield break;
+        }
+
         ShowDialogueSequence(parryInstructionLines);
         yield return new WaitUntil(() => !dialogueActive);
+        Debug.Log("Parry instructions finished, spawning dummy in 0.5s");
         yield return new WaitForSeconds(0.5f);
         SpawnParryDummy();
     }
 
     IEnumerator DelayedAttackSetup()
     {
+        Debug.Log("DelayedAttackSetup coroutine started");
         yield return new WaitForSeconds(1f);
+
+        if (attackInstructionLines == null || attackInstructionLines.Length == 0)
+        {
+            Debug.LogError("Attack instruction lines are empty!");
+            yield break;
+        }
+
         ShowDialogueSequence(attackInstructionLines);
         yield return new WaitUntil(() => !dialogueActive);
+        Debug.Log("Attack instructions finished, spawning dummy in 0.5s");
         yield return new WaitForSeconds(0.5f);
         SpawnAttackDummy();
     }
 
     IEnumerator DelayedCompletion()
     {
+        Debug.Log("DelayedCompletion coroutine started");
         yield return new WaitForSeconds(1f);
+
+        if (completionLines == null || completionLines.Length == 0)
+        {
+            Debug.LogError("Completion lines are empty!");
+            yield break;
+        }
+
         ShowDialogueSequence(completionLines);
         yield return new WaitUntil(() => !dialogueActive);
         yield return new WaitForSeconds(2f);
-        EndTutorial();
     }
 
     private void SpawnParryDummy()
     {
-        Debug.Log("SpawnParryDummy called");
+        Debug.Log("SpawnParryDummy() called");
 
         if (parryDummy == null)
         {
-            Debug.LogError("Parry dummy NULL");
+            Debug.LogError("Parry dummy is NULL! Assign Dummy1 in inspector!");
             return;
         }
 
-        Debug.Log("Before enable: " + parryDummy.activeSelf);
-
+        Debug.Log($"Enabling parry dummy: {parryDummy.name}");
         parryDummy.SetActive(true);
 
-        Debug.Log("After enable self: " + parryDummy.activeSelf);
-        Debug.Log("After enable hierarchy: " + parryDummy.activeInHierarchy);
-
         TutorialDummy dummyScript = parryDummy.GetComponent<TutorialDummy>();
-
-        Debug.Log("Dummy script: " + dummyScript);
-
         if (dummyScript != null)
         {
-            dummyScript.Initialize(
-                TutorialDummy.TutorialAction.Parry,
-                OnParryCompleted
-            );
+            Debug.Log("Initializing parry dummy script");
+            dummyScript.Initialize(TutorialDummy.TutorialAction.Parry, OnParryCompleted);
+        }
+        else
+        {
+            Debug.LogError("TutorialDummy script not found on parry dummy!");
         }
     }
 
     private void SpawnAttackDummy()
     {
-        Debug.Log("Spawning attack dummy");
+        Debug.Log("SpawnAttackDummy() called");
 
         if (attackDummy == null)
         {
@@ -291,11 +347,13 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Enabling attack dummy: {attackDummy.name}");
         attackDummy.SetActive(true);
 
         TutorialDummy dummyScript = attackDummy.GetComponent<TutorialDummy>();
         if (dummyScript != null)
         {
+            Debug.Log("Initializing attack dummy script");
             dummyScript.Initialize(TutorialDummy.TutorialAction.Attack, OnAttackCompleted);
         }
         else
@@ -306,22 +364,15 @@ public class TutorialManager : MonoBehaviour
 
     private void OnParryCompleted()
     {
-        Debug.Log("Parry completed!");
+        Debug.Log("OnParryCompleted() callback triggered!");
         parryDummy.SetActive(false);
         ProceedToNextStep();
     }
 
     private void OnAttackCompleted()
     {
-        Debug.Log("Attack completed!");
+        Debug.Log("OnAttackCompleted() callback triggered!");
         attackDummy.SetActive(false);
         ProceedToNextStep();
-    }
-
-    private void EndTutorial()
-    {
-        Debug.Log("Tutorial complete!");
-        // Load your next scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("YourNextSceneName");
     }
 }

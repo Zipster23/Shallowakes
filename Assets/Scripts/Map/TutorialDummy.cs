@@ -58,7 +58,7 @@ public class TutorialDummy : MonoBehaviour
         if (requiredAction == TutorialAction.Parry)
         {
             actionCompleted = true;
-            onActionCompleted?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 
@@ -70,7 +70,7 @@ public class TutorialDummy : MonoBehaviour
         if (requiredAction == TutorialAction.Attack)
         {
             actionCompleted = true;
-            onActionCompleted?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

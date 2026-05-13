@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private YokaiSFXManager yokaiSFXManager;
 
     // --- INVINCIBILITY --- //
-    [HideInInspector] public bool isInvincible = false;
+    [SerializeField] public bool isInvincible = false;
 
     // --- ENRAGE SETTINGS --- //
 
