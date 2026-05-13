@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction);
 
         GameObject slash = Instantiate(playerSlashPrefab, spawnPos, rotation);
-        slash.transform.localScale = Vector3.one * 2f;
+        // slash.transform.localScale = Vector3.one * 2f;
         slash.tag = "PlayerProjectile";
 
         WindSlash windSlash = slash.GetComponent<WindSlash>();
