@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ public class LoreCutscene : MonoBehaviour
     [SerializeField] private Text loreText;
     [SerializeField] private GameObject mapScreen;
     [SerializeField] private float fadeDuration = 1f;
+
+    [SerializeField] private GameObject skipButton;
+    private bool skipped = false;
 
     [SerializeField] private AudioSource loreMusicSource;
     [SerializeField] private AudioSource mapMusicSource;
@@ -36,6 +40,7 @@ public class LoreCutscene : MonoBehaviour
     private void Start()
     {
         
+        skipButton.SetActive(true);
         StartCoroutine(PlayLoreCutscene());
 
     }
@@ -47,6 +52,8 @@ public class LoreCutscene : MonoBehaviour
     {
         
         PlaySFX(startCutsceneSFX);
+
+        skipped = false;
 
         // start fully black
         SetAlpha(1f);
@@ -60,10 +67,13 @@ public class LoreCutscene : MonoBehaviour
         // fade text in
         foreach(string line in loreLines)
         {
+            if(skipped) yield break;
+
             loreText.text = line;
             float elapsed = 0f;
             while(elapsed < fadeDuration)
             {
+                if(skipped) yield break;
                 elapsed += Time.deltaTime;
                 Color c = loreText.color;
                 c.a = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
@@ -78,6 +88,7 @@ public class LoreCutscene : MonoBehaviour
             elapsed = 0f;
             while(elapsed < fadeDuration)
             {
+                if(skipped) yield break;
                 elapsed += Time.deltaTime;
                 Color c = loreText.color;
                 c.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
@@ -85,6 +96,8 @@ public class LoreCutscene : MonoBehaviour
                 yield return null;
             }
         }
+
+        if(skipped) yield break;
 
         // fade to black one final time
         yield return StartCoroutine(Fade(0f, 1f));
@@ -102,6 +115,31 @@ public class LoreCutscene : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f));
 
         gameObject.SetActive(false);
+
+    }
+
+
+
+    public void SkipCutscene()
+    {
+        
+        if(skipped)
+        {
+            return;
+        }
+
+        skipped = true;
+        
+        StopAllCoroutines();
+
+        // fade out lore music
+        StartCoroutine(FadeOutMusic(loreMusicSource));
+
+        // go straight to map
+        StartCoroutine(FadeInMusic(mapMusicSource));
+        gameObject.SetActive(false);
+        skipButton.SetActive(false);
+        mapScreen.SetActive(true);
 
     }
 
