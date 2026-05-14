@@ -216,6 +216,11 @@ public class PlayerController : MonoBehaviour
         isDashSlashing = true;
         isBusy = true;
 
+        // lock rigidbody so physics doesn't' fight the dash
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         // play attack animation
         controller.PlayDashSlashAnimation();
 
@@ -244,9 +249,13 @@ public class PlayerController : MonoBehaviour
         while (elapsed < dashDuration)
         {
             elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / dashDuration);
+            rb.MovePosition(Vector3.Lerp(startPos, targetPos, elapsed / dashDuration));
             yield return null;
         }
+
+        // zero out velocity after dash so no leftover momentum causes spinning
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         sfx.PlayDashSlashSFX();
 
