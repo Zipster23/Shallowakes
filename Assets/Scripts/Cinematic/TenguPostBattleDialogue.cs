@@ -1,30 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class TenguPostBattleDialogue : MonoBehaviour
 {
-    
     [Header("Dialogue UI")]
     [SerializeField] private TextMeshProUGUI textComponent;
-    [SerializeField] private GameObject icon;           // kasa obake face image
-    [SerializeField] private GameObject bubble;         // white dialogue box panel
-    [SerializeField] private GameObject continuePrompt; // "Press E to continue" text
+    [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject bubble;
 
     [Header("Dialogue Lines")]
     [SerializeField] private string[] lines = new string[]
     {
-        "Shallo! You've done it! The Tengu has fallen!",
-        "Inside the shrine lies the Muramasa blade. Its power has been sealed away for centuries...",
-        "The blade will grant you two abilities. Press 1 to unleash a wind slash forward!",
-        "And press 2 to dash forward and strike! You will need these to face Susanoo.",
-        "Our journey continues. Susanoo's domain awaits. Let us go."
+        "Shallo! You've done it! The Tengu has fallen! [E]",
+        "Inside the shrine lies the Muramasa blade. Its power has been sealed for centuries... [E]",
+        "The blade grants you two abilities. Press 1 to fire a wind slash forward! [E]",
+        "And press 2 to dash forward and strike! You will need these to face Susanoo. [E]",
+        "Our journey continues. Susanoo's domain awaits. Let us go. [E]"
     };
 
     [SerializeField] private float textSpeed = 0.05f;
+
+    [Header("Shrine Waypoint")]
+    [SerializeField] private GameObject shrineWaypoint;     // your red beam/waypoint object
+    [SerializeField] private Collider shrineEntranceTrigger; // trigger collider at shrine entrance
 
     [Header("References")]
     [SerializeField] private Enemy tenguEnemy;
@@ -32,14 +32,24 @@ public class TenguPostBattleDialogue : MonoBehaviour
 
     private bool dialogueActive = false;
     private bool dialogueStarted = false;
+    private bool dialogueFinished = false;
     private int index = 0;
+
+
+
+
+    private void Start()
+    {
+        // make sure waypoint starts hidden
+        if(shrineWaypoint != null) shrineWaypoint.SetActive(false);
+        if(shrineEntranceTrigger != null) shrineEntranceTrigger.enabled = false;
+    }
 
 
 
 
     private void Update()
     {
-        
         // check if tengu is dead and dialogue hasn't started yet
         if(!dialogueStarted && tenguEnemy != null && tenguEnemy.currentHealth <= 0)
         {
@@ -56,13 +66,22 @@ public class TenguPostBattleDialogue : MonoBehaviour
             }
             else
             {
-                // skip typing and show full line
                 StopAllCoroutines();
                 textComponent.text = lines[index];
-                StartCoroutine(ShowContinuePrompt());
             }
         }
+    }
 
+
+
+
+    // called by shrine entrance trigger when player walks in
+    public void OnPlayerReachedShrine()
+    {
+        if(dialogueFinished)
+        {
+            StartCoroutine(TransitionToMap());
+        }
     }
 
 
@@ -70,23 +89,16 @@ public class TenguPostBattleDialogue : MonoBehaviour
 
     private IEnumerator StartDialogueAfterDelay()
     {
-        
-        // wait for death anim to play
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
-        // show dialogue UI
         icon.SetActive(true);
         bubble.SetActive(true);
-        if(continuePrompt != null)
-        {
-            continuePrompt.SetActive(false);
-        }
+        textComponent.gameObject.SetActive(true);
 
         dialogueActive = true;
         index = 0;
         textComponent.text = string.Empty;
         StartCoroutine(TypeLine());
-
     }
 
 
@@ -94,36 +106,13 @@ public class TenguPostBattleDialogue : MonoBehaviour
 
     private IEnumerator TypeLine()
     {
-        
         textComponent.text = string.Empty;
-        if(continuePrompt != null)
-        {
-            continuePrompt.SetActive(false);
-        }
 
         foreach(char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
-
-        // show continue prompt when line finishes typing
-        StartCoroutine(ShowContinuePrompt());
-
-    }
-
-
-
-
-    private IEnumerator ShowContinuePrompt()
-    {
-        
-        yield return new WaitForSeconds(0.3f);
-        if(continuePrompt != null)
-        {
-            continuePrompt.SetActive(true);
-        }
-
     }
 
 
@@ -131,12 +120,6 @@ public class TenguPostBattleDialogue : MonoBehaviour
 
     private void NextLine()
     {
-        
-        if(continuePrompt != null)
-        {
-            continuePrompt.SetActive(false);
-        }
-
         if(index < lines.Length - 1)
         {
             index++;
@@ -146,41 +129,38 @@ public class TenguPostBattleDialogue : MonoBehaviour
         }
         else
         {
-            // all lines done - hide dialogue and go to map
-            StartCoroutine(EndDialogue());
-        }
+            // all lines done
+            dialogueActive = false;
+            dialogueFinished = true;
+            icon.SetActive(false);
+            bubble.SetActive(false);
+            textComponent.gameObject.SetActive(false);
+            textComponent.text = string.Empty;
+            StopAllCoroutines();
 
+            // show shrine waypoint and enable entrance trigger
+            if(shrineWaypoint != null) shrineWaypoint.SetActive(true);
+            if(shrineEntranceTrigger != null) shrineEntranceTrigger.enabled = true;
+        }
     }
 
 
 
 
-    private IEnumerator EndDialogue()
+    private IEnumerator TransitionToMap()
     {
-        
-        dialogueActive = false;
-        icon.SetActive(false);
-        bubble.SetActive(false);
-        if(continuePrompt != null)
-        {
-            continuePrompt.SetActive(false);
-        }
-        textComponent.text = string.Empty;
+        // hide waypoint
+        if(shrineWaypoint != null) shrineWaypoint.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
-        // save progress and go to map
+        if(screenFade != null)
+            yield return StartCoroutine(screenFade.FadeOut());
+
         StageProgress.CompleteTenguShrine();
         PlayerPrefs.SetInt("ReturnToMap", 1);
         PlayerPrefs.Save();
 
-        if(screenFade != null)
-        {
-            yield return StartCoroutine(screenFade.FadeOut());   
-        }
-
         SceneManager.LoadScene("Main_Menu");
-
     }
-
 }
