@@ -141,12 +141,8 @@ public class Enemy : MonoBehaviour
 
         if (tengu != null)
         {
-            StageProgress.CompleteTenguShrine();
-            PlayerPrefs.SetInt("ReturnToMap", 1);
-            PlayerPrefs.Save();
-            ScreenFade fade = FindObjectOfType<ScreenFade>();
-            if (fade != null) yield return StartCoroutine(fade.FadeOut());
-            SceneManager.LoadScene("Main_Menu");
+            // do nothing -  TenguPostBattleDialogue handles transition
+            yield break;
         }
         else if (susanoo != null)
         {
