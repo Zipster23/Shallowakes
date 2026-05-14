@@ -13534,12 +13534,16 @@ PrefabInstance:
       value: Dark Lvl 3
       objectReference: {fileID: 0}
     - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.714
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: m_LocalScale.z
       value: 5.4593
       objectReference: {fileID: 0}
     - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.018207
       objectReference: {fileID: 0}
     - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13547,7 +13551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: -0.0000004112
       objectReference: {fileID: 0}
     - target: {fileID: 6911587736581598695, guid: 158e426725463794cae0a836b2491d0b, type: 3}
       propertyPath: m_LocalRotation.w

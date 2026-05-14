@@ -13,7 +13,7 @@ public class TenguPostBattleDialogue : MonoBehaviour
     [Header("Dialogue Lines")]
     [SerializeField] private string[] lines = new string[]
     {
-        "Shallo! You've done it! The Tengu has fallen! [E]",
+        "Sharro! You've done it! The Tengu has fallen! [E]",
         "Inside the shrine lies the Muramasa blade. Its power has been sealed for centuries... [E]",
         "The blade grants you two abilities. Press 1 to fire a wind slash forward! [E]",
         "And press 2 to dash forward and strike! You will need these to face Susanoo. [E]",
