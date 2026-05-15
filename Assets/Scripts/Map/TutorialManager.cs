@@ -36,10 +36,6 @@ public class TutorialManager : MonoBehaviour
     private string[] currentLines;
     private Coroutine typingCoroutine;
     [SerializeField] GameObject playerPrefab;
-    [SerializeField] GameObject windSlashPrefab;
-    [SerializeField] private float windSlashSpeed;
-    [SerializeField] Transform windSlashSpawnPoint;
-
 
     private void Start()
     {
@@ -295,12 +291,12 @@ public class TutorialManager : MonoBehaviour
         }
 
         playerMovement.metKasaObake = true;
+        playerMovement.maxJumps = 2;
         Debug.Log("metKasaObake = TRUE - Glide enabled!");
         ShowDialogueSequence(DodgeInstructionLines);
         yield return new WaitUntil(() => !dialogueActive);
         Debug.Log("Dodge instructions finished, spawning dummy in 0.5s");
         yield return new WaitForSeconds(0.5f);
-        SpawnDodgeDummy();
     }
 
     IEnumerator DelayedCompletion()
@@ -343,24 +339,6 @@ public class TutorialManager : MonoBehaviour
             Debug.LogError("TutorialDummy script not found on parry dummy!");
         }
     }
-
-    private void SpawnDodgeDummy()
-    {
-        // spawn wind slash aimed at player
-        Vector3 spawnPos = windSlashSpawnPoint.transform.position;
-        Vector3 direction = (playerPrefab.transform.position - spawnPos).normalized;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-
-        GameObject slash = Instantiate(windSlashPrefab, spawnPos, rotation);
-        WindSlash windSlash = slash.GetComponent<WindSlash>();
-        if (windSlash != null)
-        {
-            windSlash.SetDirection(direction);
-            windSlash.speed = windSlashSpeed;
-            windSlash.isParriable = false;
-        }
-    }
-
 
     private void OnParryCompleted()
     {

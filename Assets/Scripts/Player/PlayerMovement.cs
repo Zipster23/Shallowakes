@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Variables to be used for jumping logic
     private int jumpsRemaining;
-    private int maxJumps = 2;
+    [SerializeField] public int maxJumps = 2;
     public bool isGrounded { get; private set; }
 
     // Variables to track speed and scale for animations
@@ -150,8 +150,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDoubleJump)
         {
-            if (!metKasaObake) return;
-
             rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
 
             if (lockedAirDirection.magnitude > 0.1f)
