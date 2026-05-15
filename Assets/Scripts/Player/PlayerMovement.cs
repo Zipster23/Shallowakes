@@ -150,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDoubleJump)
         {
+            if (!metKasaObake) return;
+
             rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
 
             if (lockedAirDirection.magnitude > 0.1f)
@@ -355,6 +357,11 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanDash()
     {
+        if (!metKasaObake)
+        {
+            return false;
+        }
+
         return dashCooldownTimer <= 0 && !isDashing;
     }
 

@@ -88,8 +88,6 @@ public class TutorialManager : MonoBehaviour
     {
         if (!dialogueActive) return;
 
-        if (!firstDummy.activeSelf) return;
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E pressed during dialogue");
@@ -257,8 +255,7 @@ public class TutorialManager : MonoBehaviour
 
         if (playerMovement != null)
         {
-            playerMovement.metKasaObake = true;
-            Debug.Log("metKasaObake = TRUE - Glide enabled!");
+
         }
 
         yield return new WaitForSeconds(1f);
@@ -296,6 +293,8 @@ public class TutorialManager : MonoBehaviour
             yield break;
         }
 
+        playerMovement.metKasaObake = true;
+        Debug.Log("metKasaObake = TRUE - Glide enabled!");
         ShowDialogueSequence(DodgeInstructionLines);
         yield return new WaitUntil(() => !dialogueActive);
         Debug.Log("Dodge instructions finished, spawning dummy in 0.5s");

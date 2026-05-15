@@ -5,14 +5,16 @@ using UnityEngine;
 public class AttackDummy : MonoBehaviour
 {
     private YokaiVFXManager vfx;
+    private Enemy enemy;
     private void Start()
     {
         vfx = GetComponent<YokaiVFXManager>();
+        enemy = GetComponent<Enemy>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (enemy.currentHealth <= 0)
         {
             vfx.PlayDeathEffect(transform.position, gameObject.transform);
             gameObject.SetActive(false);
