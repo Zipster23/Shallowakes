@@ -1896,6 +1896,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 74645296}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1014224713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1014224714}
+  m_Layer: 0
+  m_Name: WindSlashSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1014224714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014224713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.3557271, z: -0, w: 0.9345899}
+  m_LocalPosition: {x: 178.31, y: 7.462016, z: -169.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 41.676, z: 0}
 --- !u!1 &1017303554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,6 +2905,7 @@ MonoBehaviour:
   - 'KO: "Parry with [F]." [E]'
   - 'KO: "Here test it out on this enemy" [E]'
   DodgeInstructionLines:
+  - 'KO: "Try parrying with [F]." [E]'
   - 'KO: "With me, you are lighter than air, and as fast as the wind" [E]'
   - 'KO: "Double jump [Space + Space], and dash with [Q]." [E]'
   - "KO: \"Glide if you're feeling bold \u2014 [G].\" [E]"
@@ -2881,8 +2913,9 @@ MonoBehaviour:
   completionLines:
   - 'KO: "Now let''s go crash that parade!" [E]'
   playerPrefab: {fileID: 1581345116}
-  windSlashPrefab: {fileID: 4836956773076364260, guid: a6d3d07194b32c9468ba6b2c1e016b86, type: 3}
-  windSlashSpeed: 0
+  windSlashPrefab: {fileID: 7796633545601850682, guid: 460fe9d080f856849a127a2252c637e6, type: 3}
+  windSlashSpeed: 20
+  windSlashSpawnPoint: {fileID: 1014224714}
 --- !u!4 &1423185379
 Transform:
   m_ObjectHideFlags: 0
@@ -3670,7 +3703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 184.34401
+      value: 180.83
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3678,11 +3711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -179.1732
+      value: -172.19
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.104564816
+      value: 0.45881647
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3690,7 +3723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9945181
+      value: 0.8885311
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3702,7 +3735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 167.996
+      value: 125.378
       objectReference: {fileID: 0}
     - target: {fileID: 2055422994243271770, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3728,6 +3761,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8985632452445164333, guid: cc61714725da36d4bbbfab0b6638dd99, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0088e1fd7cec7da4f854bc29457c727e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4936,3 +4973,4 @@ SceneRoots:
   - {fileID: 1423185379}
   - {fileID: 1806129227}
   - {fileID: 3036632698090896479}
+  - {fileID: 1014224714}

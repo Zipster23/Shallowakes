@@ -38,6 +38,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject windSlashPrefab;
     [SerializeField] private float windSlashSpeed;
+    [SerializeField] Transform windSlashSpawnPoint;
 
 
     private void Start()
@@ -346,7 +347,7 @@ public class TutorialManager : MonoBehaviour
     private void SpawnDodgeDummy()
     {
         // spawn wind slash aimed at player
-        Vector3 spawnPos = transform.position + transform.forward + transform.up * 10f;
+        Vector3 spawnPos = windSlashSpawnPoint.transform.position;
         Vector3 direction = (playerPrefab.transform.position - spawnPos).normalized;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
@@ -356,7 +357,7 @@ public class TutorialManager : MonoBehaviour
         {
             windSlash.SetDirection(direction);
             windSlash.speed = windSlashSpeed;
-            windSlash.isParriable = true;
+            windSlash.isParriable = false;
         }
     }
 
