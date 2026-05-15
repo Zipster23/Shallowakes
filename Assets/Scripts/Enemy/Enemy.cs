@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     private YokaiAI yokaiAI;
     private SusanooAI susanooAI;
 
+    // arena barrier
+    [SerializeField] private GameObject arenaBarrier;
+
 
     void Start()
     {
@@ -142,6 +145,7 @@ public class Enemy : MonoBehaviour
         if (tengu != null)
         {
             // do nothing -  TenguPostBattleDialogue handles transition
+            arenaBarrier.SetActive(false);
             yield break;
         }
         else if (susanoo != null)

@@ -59,6 +59,8 @@ public class TenguRespawnManager : MonoBehaviour
         // show death screen
         deathScreen.SetActive(true);
 
+        yield return new WaitForSeconds(1f);
+
         // wait for player to press R
         while(!Input.GetKeyDown(KeyCode.R))
         {

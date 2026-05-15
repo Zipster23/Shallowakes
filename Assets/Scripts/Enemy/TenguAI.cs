@@ -644,6 +644,11 @@ public class TenguAI : MonoBehaviour
             return;
         }
 
+        if(currentState == TenguState.ShadowClone)
+        {
+            return;
+        }
+
         isAttacking = false;                // cancel the current attack
         isAttackActive = false;             // weapon is no longer active
         isDashSlashing = false;             // reset dash slash flag
