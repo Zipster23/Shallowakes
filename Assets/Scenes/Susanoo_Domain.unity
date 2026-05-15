@@ -53003,6 +53003,26 @@ PrefabInstance:
       propertyPath: susanooRespawnManager
       value: 
       objectReference: {fileID: 6889383596352794377}
+    - target: {fileID: 3398079734279518119, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398079734279518119, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398079734279518119, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337681498904044072, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4987330110926546031, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5144540433972839234, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
       propertyPath: dashSlashSFX
       value: 
@@ -53054,6 +53074,18 @@ PrefabInstance:
     - target: {fileID: 6300957646994032332, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
       propertyPath: m_Name
       value: Player (S)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7668480723437204514, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.154
+      objectReference: {fileID: 0}
+    - target: {fileID: 7668480723437204514, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 7668480723437204514, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.514
       objectReference: {fileID: 0}
     - target: {fileID: 7737596327341478261, guid: 1284f63f5a2a6244f8d6a11030c3651a, type: 3}
       propertyPath: m_LocalRotation.y
