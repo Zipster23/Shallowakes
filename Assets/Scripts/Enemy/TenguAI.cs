@@ -565,6 +565,11 @@ public class TenguAI : MonoBehaviour
             return;
         }
 
+        if(currentState == TenguState.ShadowClone)
+        {
+            if(isAttackActive == false) return;
+        }
+
         // create a sphere at the attack point and detect every collider on the player layer inside of it
         Collider[] hitPlayers = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayer);
 
@@ -646,6 +651,9 @@ public class TenguAI : MonoBehaviour
 
         if(currentState == TenguState.ShadowClone)
         {
+            isAttackActive = false;
+            vfx.EmitSparkParticles();
+            sfx.PlayNaginataDeflectSFX();
             return;
         }
 

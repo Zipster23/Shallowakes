@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.93067956, g: 0.6179868, b: 0.5274604, a: 1}
+  m_IndirectSpecularColor: {r: 0.93067956, g: 0.61798674, b: 0.5274604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1385,10 +1385,10 @@ MonoBehaviour:
     testers\r</u>\nLuciano Bermudez\r\nRyan Stewart\r\nBrandon Saintol\nChristian
     Paul\nRobert Morera\n\n\n<u>Music</u>\nRed Horizon TAO\r\nSilence of the Warrior\r\nWar
     Drums Music\r\nRAIK\u014C \r\nHigh quality, royalty free: elevator music -Nassau
-    of Lyrailie\n\n\nSPECIAL THANKS TO:\nLeonardo Gonzalez (Mr. G)\nMiami Lakes Educational
-    Center (MLEC)\nMLEC Academy of Information Technology\nMLEC Game Design Class
-    of 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTHANKS FOR PLAYING!\n\n\n\nFrom
-    Nothing Else Matters Studios"
+    of Lyrailie\n\n\nSPECIAL THANKS TO:\nLeonardo Gonzalez (Mr. G) & Fahad GOAT\nMiami
+    Lakes Educational Center (MLEC)\nMLEC Academy of Information Technology\nMLEC
+    Game Design Class of 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
+    FOR PLAYING!\n\n\n\nFrom Nothing Else Matters Studios"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
   m_sharedMaterial: {fileID: -3765264216765690048, guid: b006c7776152446c6bc56bad9eaf22fd, type: 2}
