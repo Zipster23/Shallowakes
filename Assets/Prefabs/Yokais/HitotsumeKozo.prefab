@@ -158,7 +158,7 @@ MonoBehaviour:
   attackTimer: 0
   isAttacking: 0
   isAttackActive: 0
-  parryStunDuration: 1.3
+  parryStunDuration: 1.5
   yokaiParryRange: 3
   parryChance: 25
   dodgeChance: 0

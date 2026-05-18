@@ -162,12 +162,16 @@ public class PlayerParry : MonoBehaviour
             YokaiAI yokai = col.GetComponent<YokaiAI>();
             if (yokai != null && yokai.isAttackActive)
             {
-                TutorialDummy dummy = GameObject.FindGameObjectWithTag("TutorialDummy").GetComponent<TutorialDummy>();
-
-                if (dummy != null)
+                if (col.CompareTag("TutorialDummy")) 
                 {
-                    dummy.OnParried();
+                    TutorialDummy dummy = GameObject.FindGameObjectWithTag("TutorialDummy").GetComponent<TutorialDummy>();
+
+                    if (dummy != null)
+                    {
+                        dummy.OnParried();
+                    }
                 }
+
                 yokai.GetParried();
                 break;
             }
