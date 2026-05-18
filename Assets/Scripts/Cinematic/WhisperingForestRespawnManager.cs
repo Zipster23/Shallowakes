@@ -33,6 +33,8 @@ public class WhisperingForestRespawnManager : MonoBehaviour
 
         deathScreen.SetActive(true);
 
+        yield return new WaitForSeconds(1f);
+
         while (!Input.GetKeyDown(KeyCode.R))
             yield return null;
 
