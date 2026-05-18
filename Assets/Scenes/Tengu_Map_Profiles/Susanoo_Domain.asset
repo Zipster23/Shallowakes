@@ -65,7 +65,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: -20
+    value: -10
   brightness:
     overrideState: 1
     value: 0
@@ -76,13 +76,13 @@ MonoBehaviour:
     overrideState: 1
     value: -20
   mixerRedOutRedIn:
-    overrideState: 0
-    value: 100
+    overrideState: 1
+    value: 110
   mixerRedOutGreenIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 10
   mixerRedOutBlueIn:
-    overrideState: 0
+    overrideState: 1
     value: 0
   mixerGreenOutRedIn:
     overrideState: 1
@@ -1376,16 +1376,16 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 4
+    value: 3.5
   aperture:
     overrideState: 0
     value: 5.6
   focalLength:
-    overrideState: 0
+    overrideState: 1
     value: 50
   kernelSize:
     overrideState: 1
-    value: 1
+    value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
