@@ -10,6 +10,7 @@ public class SusanooCinematicTrigger : MonoBehaviour
     [SerializeField] private SeaSplitCinematic seaSplitCinematic;
     [SerializeField] private GameObject bigSusanoo;
     [SerializeField] private GameObject smallSusanoo;
+    [SerializeField] private GameObject smallSusanooBuddhaWheel;
 
 
 
@@ -22,6 +23,7 @@ public class SusanooCinematicTrigger : MonoBehaviour
         {
             bigSusanoo.SetActive(false);
             smallSusanoo.SetActive(true);
+            smallSusanooBuddhaWheel.SetActive(true);
             seaSplitCinematic.musicSource.Stop();
             cinematic.TriggerCinematic();
             arenaBarrier.SetActive(true);
